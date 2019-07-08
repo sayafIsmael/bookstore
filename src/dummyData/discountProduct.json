@@ -1,0 +1,98 @@
+[
+    {
+        "discount": "25%",
+        "name":"হিমু সমগ্র",
+        "price": "35",
+        "oldPrice": "20",
+        "image": "images/product/book1.jpg",
+        "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "25%",
+        "name":"হিমু রিমান্ডে",
+        "price": "35",
+        "oldPrice": "20",
+        "image": "images/product/book2.jpg",
+        "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "25%",
+        "name":"হিমু সমগ্র",
+        "price": "35",
+        "oldPrice": "20",
+        "image": "images/product/book1.jpg",
+        "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "25%",
+        "name":"হিমু রিমান্ডে",
+        "price": "35",
+        "oldPrice": "20",
+        "image": "images/product/book2.jpg",
+        "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "25%",
+        "name":"হিমু সমগ্র",
+        "price": "35",
+        "oldPrice": "20",
+        "image": "images/product/book1.jpg",
+        "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "25%",
+        "name":"হিমু রিমান্ডে",
+        "price": "35",
+        "oldPrice": "20",
+        "image": "images/product/book2.jpg",
+        "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "25%",
+        "name":"হিমু সমগ্র",
+        "price": "35",
+        "oldPrice": "20",
+        "image": "images/product/book1.jpg",
+        "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "25%",
+        "name":"হিমু রিমান্ডে",
+        "price": "35",
+        "oldPrice": "20",
+        "image": "images/product/book2.jpg",
+        "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "25%",
+        "name":"হিমু সমগ্র",
+        "price": "35",
+        "oldPrice": "20",
+        "image": "images/product/book1.jpg",
+        "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "25%",
+        "name":"হিমু রিমান্ডে",
+        "price": "35",
+        "oldPrice": "20",
+        "image": "images/product/book2.jpg",
+        "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "25%",
+        "name":"হিমু সমগ্র",
+        "price": "35",
+        "oldPrice": "20",
+        "image": "images/product/book1.jpg",
+        "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "25%",
+        "name":"হিমু রিমান্ডে",
+        "price": "35",
+        "oldPrice": "20",
+        "image": "images/product/book2.jpg",
+        "image2": "images/product/harryporter.jpg"
+    }
+]
