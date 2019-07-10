@@ -3,107 +3,11 @@ import Product from "./../components/product";
 
 import discountProduct from "./../dummyData/discountProduct";
 import publishers from "./../dummyData/publishers";
+import FontAwesome from "react-fontawesome";
+import Footer from "./../components/footer";
 
 class Home extends Component {
-  footer = () => {
-    return (
-      <footer id="wn__footer" class="footer__area bg__cat--8 brown--color">
-        <div class="footer-static-top">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="footer__widget footer__menu">
-                  <div class="ft__logo">
-                    <a href="index.html">
-                      <img src="images/logo/logoText.png" alt="logo" />
-                    </a>
-                    <p>
-                      There are many variations of passages of Lorem Ipsum
-                      available, but the majority have suffered duskam
-                      alteration variations of passages
-                    </p>
-                  </div>
-                  <div class="footer__content">
-                    <ul class="social__net social__net--2 d-flex justify-content-center">
-                      <li>
-                        <a href="#">
-                          <i class="bi bi-facebook" />
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="bi bi-google" />
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="bi bi-twitter" />
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="bi bi-linkedin" />
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="bi bi-youtube" />
-                        </a>
-                      </li>
-                    </ul>
-                    <ul class="mainmenu d-flex justify-content-center">
-                      <li>
-                        <a href="index.html">Trending</a>
-                      </li>
-                      <li>
-                        <a href="index.html">Best Seller</a>
-                      </li>
-                      <li>
-                        <a href="index.html">All Product</a>
-                      </li>
-                      <li>
-                        <a href="index.html">Wishlist</a>
-                      </li>
-                      <li>
-                        <a href="index.html">Blog</a>
-                      </li>
-                      <li>
-                        <a href="index.html">Contact</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="copyright__wrapper">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="copyright">
-                  <div class="copy__right__inner text-left">
-                    <p>
-                      Copyright <i class="fa fa-copyright" />{" "}
-                      <a href="https://freethemescloud.com/">
-                        Free themes Cloud.
-                      </a>{" "}
-                      All Rights Reserved
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="payment text-right">
-                  <img src="images/icons/payment.png" alt="" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-    );
-  };
+ 
 
   firstRow = () => {
     return (
@@ -145,14 +49,30 @@ class Home extends Component {
           </div>
         </div>
 
-        <div class="containerx itemx-wrapper">
-          {publishers.map((item, index) => {
-            return (
-              <div class="itemx">
-                <img src={item.image} alt="" />
-              </div>
-            );
-          })}
+        <div>
+          <div
+            class="d-flex justify-content-between pl-2 pr-2"
+            style={{ zIndex: 1, position: "relative", top: 115 }}
+          >
+            <div class="publisher-icon pLeft d-flex justify-content-center">
+              <i class="zmdi zmdi-chevron-left pubIcon" />
+            </div>
+            <div class="publisher-icon p d-flex justify-content-center">
+              <i class="zmdi zmdi-chevron-right pubIcon" />
+            </div>
+          </div>
+          <div
+            class="containerx itemx-wrapper"
+            style={{ zIndex: -1, marginLeft: 70 }}
+          >
+            {publishers.map((item, index) => {
+              return (
+                <div class="itemx">
+                  <img src={item.image} alt="" />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
     );
@@ -576,24 +496,48 @@ class Home extends Component {
   slider = () => {
     return (
       <div id="wowslider-container1">
-	<div class="ws_images mt-3"><ul>
-		<li><img src="data1/images/angry2880_2400_2400.jpg" alt="angry2880_2400_2400" title="angry2880_2400_2400" id="wows1_0"/></li>
-		<li><a><img src="data1/images/bookad.jpg" alt="slider html" title="book-ad" id="wows1_1"/></a></li>
-		<li><img src="data1/images/cdreissadinsert1.jpg" alt="cdreissadinsert-1" title="cdreissadinsert-1" id="wows1_2"/></li>
-	</ul></div>
-<div class="ws_script" style={{left:"-99%"}}><a>responsive slider</a> by WOWSlider.com v8.8</div>
-	<div class="ws_shadow"></div>
-	</div>
+        <div class="ws_images mt-3">
+          <ul>
+            <li>
+              <img
+                src="data1/images/angry2880_2400_2400.jpg"
+                alt="angry2880_2400_2400"
+                title="angry2880_2400_2400"
+                id="wows1_0"
+              />
+            </li>
+            <li>
+              <a>
+                <img
+                  src="data1/images/bookad.jpg"
+                  alt="slider html"
+                  title="book-ad"
+                  id="wows1_1"
+                />
+              </a>
+            </li>
+            <li>
+              <img
+                src="data1/images/cdreissadinsert1.jpg"
+                alt="cdreissadinsert-1"
+                title="cdreissadinsert-1"
+                id="wows1_2"
+              />
+            </li>
+          </ul>
+        </div>
+        <div class="ws_script" style={{ left: "-99%" }}>
+          <a>responsive slider</a> by WOWSlider.com v8.8
+        </div>
+        <div class="ws_shadow" />
+      </div>
     );
   };
 
   render() {
     return (
       <div class="wrapper" id="wrapper">
-        <header
-          id="wn__header"
-          class="header__area sticky__header"
-        >
+        <header id="wn__header" class="header__area sticky__header">
           {this.navBar()}
         </header>
 
@@ -624,7 +568,7 @@ class Home extends Component {
 
         {this.sellers()}
 
-        {this.footer()}
+        <Footer/>
       </div>
     );
   }
