@@ -1,31 +1,39 @@
 import React, { Component } from "react";
+import {
+  HashRouter as Router,
+  Route,
+  Link,
+  NavLink,
+  Redirect,
+  Prompt
+} from "react-router-dom";
 
 class Product extends Component {
    constructor(props){
        super(props);
    }
-
+  
   render() {
     return (
       <div class="product product__style--3">
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-          <div class="product__thumb" style={{height: 339}}>
-            <a class="first__img" href="single-product.html">
+          <div class="product__thumb">
+            <Link to={"product"} class="first__img" style={{height: 300}}>
               <img src={this.props.image} alt="product image" />
-            </a>
-            <a class="second__img animation1" href="single-product.html">
+            </Link>
+            <Link to={"product"} class="second__img animation1">
               <img src={this.props.image2} alt="product image" />
-            </a>
+            </Link>
             <div class="hot__box">
               <p class="hot-label mt-2">{this.props.discount}</p>
             </div>
-            <div class="hot__box1">
+            <div class="hot__box1 read_little">
               <span class="hot-label">একটু পড়ে দেখুন</span>
             </div>
           </div>
           <div class="product__content content--center">
             <h4>
-              <a href="single-product.html">{this.props.name}</a>
+              <Link to={"product"}>{this.props.name}</Link>
             </h4>
             <ul class="prize d-flex">
               <li>৳{this.props.price}</li>

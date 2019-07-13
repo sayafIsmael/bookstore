@@ -77,8 +77,10 @@
                   var windowpos = $(window).scrollTop();
                   if (windowpos > pos.top + 250) {
                     sticky_menu.addClass('is-sticky');
+                    $('#siteLogo').attr('src','images/logo/logo2.png');
                   } else {
                     sticky_menu.removeClass('is-sticky');
+                    $('#siteLogo').attr('src','images/logo/logoText.png');
                   }
             });
           }
