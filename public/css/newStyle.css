@@ -64,60 +64,91 @@ footer, .h6 , .dark-grey-text{
     height: 80%;
 }
 
-/* carousel */
-.media-carousel 
-{
-  margin-bottom: 0;
-  padding: 0 40px 30px 40px;
-  margin-top: 30px;
-}
-/* Previous button  */
-.media-carousel .carousel-control.left 
-{
-  left: -12px;
-  background-image: none;
-  background: none repeat scroll 0 0 #222222;
-  border: 4px solid #FFFFFF;
-  border-radius: 23px 23px 23px 23px;
-  height: 40px;
-  width : 40px;
-  margin-top: 30px
-}
-/* Next button  */
-.media-carousel .carousel-control.right 
-{
-  right: -12px !important;
-  background-image: none;
-  background: none repeat scroll 0 0 #222222;
-  border: 4px solid #FFFFFF;
-  border-radius: 23px 23px 23px 23px;
-  height: 40px;
-  width : 40px;
-  margin-top: 30px
-}
-/* Changes the position of the indicators */
-.media-carousel .carousel-indicators 
-{
-  right: 50%;
-  top: auto;
-  bottom: 0px;
-  margin-right: -19px;
-}
-/* Changes the colour of the indicators */
-.media-carousel .carousel-indicators li 
-{
-  background: #c0c0c0;
-}
-.media-carousel .carousel-indicators .active 
-{
-  background: #333333;
-}
-.media-carousel img
-{
-  width: 250px;
-  height: 100px
-}
 /* End carousel */
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+/*================================================*/
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+
+
+@media (min-width: 768px) {
+
+  /* show 3 items */
+  .carousel-innerx .active,
+  .carousel-innerx .active + .carousel-itemx,
+  .carousel-innerx .active + .carousel-itemx + .carousel-itemx,
+  .carousel-innerx .active + .carousel-itemx + .carousel-itemx + .carousel-itemx  {
+      display: block;
+  }
+  
+  .carousel-innerx .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+  .carousel-innerx .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-itemx,
+  .carousel-innerx .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-itemx + .carousel-itemx,
+  .carousel-innerx .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-itemx + .carousel-itemx + .carousel-itemx {
+      transition: none;
+  }
+  
+  .carousel-innerx .carousel-item-next,
+  .carousel-innerx .carousel-item-prev {
+    position: relative;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  .carousel-innerx .active.carousel-itemx + .carousel-itemx + .carousel-itemx + .carousel-itemx + .carousel-itemx {
+      position: absolute;
+      top: 0;
+      right: -25%;
+      z-index: -1;
+      display: block;
+      visibility: visible;
+  }
+  
+  /* left or forward direction */
+  .publisher-slider .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+  .carousel-item-next.carousel-item-left + .carousel-itemx,
+  .carousel-item-next.carousel-item-left + .carousel-itemx + .carousel-itemx,
+  .carousel-item-next.carousel-item-left + .carousel-itemx + .carousel-itemx + .carousel-itemx,
+  .carousel-item-next.carousel-item-left + .carousel-itemx + .carousel-itemx + .carousel-itemx + .carousel-itemx {
+      position: relative;
+      transform: translate3d(-100%, 0, 0);
+      visibility: visible;
+  }
+  
+  /* farthest right hidden item must be abso position for animations */
+  .carousel-innerx .carousel-item-prev.carousel-item-right {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      display: block;
+      visibility: visible;
+  }
+  
+  /* right or prev direction */
+  .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+  .carousel-item-prev.carousel-item-right + .carousel-itemx,
+  .carousel-item-prev.carousel-item-right + .carousel-itemx + .carousel-itemx,
+  .carousel-item-prev.carousel-item-right + .carousel-itemx + .carousel-itemx + .carousel-itemx,
+  .carousel-item-prev.carousel-item-right + .carousel-itemx + .carousel-itemx + .carousel-itemx + .carousel-itemx {
+      position: relative;
+      transform: translate3d(100%, 0, 0);
+      visibility: visible;
+      display: block;
+      visibility: visible;
+  }
+
+}
+
+/* Bootstrap Lightbox using Modal */
+
+#profile-grid { overflow: auto; white-space: normal; } 
+#profile-grid .profile { padding-bottom: 40px; }
+#profile-grid .panel { padding: 0 }
+#profile-grid .panel-body { padding: 15px }
+#profile-grid .profile-name { font-weight: bold; }
+#profile-grid .thumbnail {margin-bottom:6px;}
+#profile-grid .panel-thumbnail { overflow: hidden; }
+#profile-grid .img-rounded { border-radius: 4px 4px 0 0;}
 
 
 /* Just because ;) */
@@ -126,3 +157,4 @@ footer, .h6 , .dark-grey-text{
         display: none;
     }
 }
+
