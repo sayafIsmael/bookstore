@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import {
-  HashRouter as Router,
-  Route,
   Link,
-  NavLink,
-  Redirect,
-  Prompt
 } from "react-router-dom";
 
 class ProductExtra extends Component {
@@ -17,19 +12,19 @@ class ProductExtra extends Component {
     return (
       <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
       <div class="product__thumb">
-        <a class="first__img" href="product" style={{height: 350}}>
+        <Link class="first__img" to={"product"} style={{height: 350}}>
           <img src={this.props.image} alt="product image" />
-        </a>
-        <a class="second__img animation1" href="product" style={{height: 350}}>
+        </Link>
+        <Link class="second__img animation1" to={"product"} style={{height: 350}}>
           <img src={this.props.scndimage} alt="product image" />
-        </a>
+        </Link>
         <div class="hot__box">
           <span class="hot-label">{this.props.tag}</span>
         </div>
       </div>
       <div class="product__content content--center">
         <h4>
-          <a href="product">{this.props.name}</a>
+          <Link to={"product"}>{this.props.name}</Link>
         </h4>
         <ul class="prize d-flex">
           <li>৳{this.props.price}</li>
@@ -39,29 +34,29 @@ class ProductExtra extends Component {
           <div class="actions_inner">
             <ul class="add_to_links">
               <li>
-                <a class="cart" href="cart.html">
+                <Link class="cart" to={"cart.html"}>
                   <i class="bi bi-shopping-bag4" />
-                </a>
+                </Link>
               </li>
               <li>
-                <a class="wishlist" href="wishlist.html">
+                <Link class="wishlist" to={"wishlist.html"}>
                   <i class="bi bi-shopping-cart-full" />
-                </a>
+                </Link>
               </li>
               <li>
-                <a class="compare" href="#">
+                <Link class="compare" to={"#"}>
                   <i class="bi bi-heart-beat" />
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   data-toggle="modal"
                   title="Quick View"
                   class="quickview modal-view detail-link"
-                  href="#productmodal"
+                  to={"#productmodal"}
                 >
                   <i class="bi bi-search" />
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

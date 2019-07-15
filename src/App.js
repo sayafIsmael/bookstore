@@ -17,6 +17,7 @@ import MainSlider from "./components/mainSlider";
 import SingleProduct from "./components/singleProduct";
 import ShopGrid from "./components/shopGrid";
 import Signin from "./components/signin";
+import Shopingcart from "./components/shopingcart";
 
 class App extends Component {
   render() {
@@ -55,6 +56,14 @@ class App extends Component {
             exact
             strict
             render={props => <Signin />}
+          />
+
+          <Route
+            exact
+            path="/cart"
+            exact
+            strict
+            render={props => <Shopingcart />}
           />
 
           <Footer />

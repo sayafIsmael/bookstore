@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import loadjs from "loadjs";
+
 import {
   HashRouter as Router,
   Route,
@@ -12,9 +14,27 @@ class navbar extends Component {
    constructor(props){
        super(props);
        this.state={
-        logedIn: false
+        logedIn: false,
+        cart: false,
+        setting: false
        }
    }
+
+   componentWillMount() {
+    loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
+      loadjs("js/vendor/jquery-3.2.1.min.js", function() {
+        loadjs("js/popper.min.js", function() {
+          loadjs("js/plugins.js", function() {
+            loadjs("js/bootstrap.min.js", function() {
+              loadjs("js/active.js", function() {
+                loadjs("js/main.js");
+              });
+            });
+          });
+        });
+      });
+    });
+  }
 
    logedIn = () =>{
      if(this.state.logedIn===true){
@@ -39,10 +59,10 @@ class navbar extends Component {
       return(
         <React.Fragment>
         <span>
-        <a href="/signin">Sign In</a>
+        <Link to={"signin"}>Sign In</Link>
       </span>
       <span>
-        <a href="#">Create An Account</a>
+        <Link to={"signin"}>Create An Account</Link>
       </span>
       </React.Fragment>
       )
@@ -172,13 +192,16 @@ class navbar extends Component {
                   <a href="#" />
                 </li>
                 <li class="shopcart">
-                  <a class="cartbox_active" href="#">
+               
+                <a class="cartbox_active" href="#" onClick={()=> this.setState({cart: !this.state.cart})}>
                     <span class="product_qun">3</span>
                   </a>
+               
+                  
 
-                  <div class="block-minicart minicart__active">
+                  <div class={this.state.cart===true?"block-minicart minicart__active is-visible ":"block-minicart minicart__active  "}>
                     <div class="minicart-content-wrapper">
-                      <div class="micart__close">
+                      <div class="micart__close"  onClick={()=> this.setState({cart: !this.state.cart})}>
                         <span>close</span>
                       </div>
                       <div class="items-total d-flex justify-content-between">
@@ -189,7 +212,7 @@ class navbar extends Component {
                         <span>$66.00</span>
                       </div>
                       <div class="mini_action checkout">
-                        <a class="checkout__btn" href="cart.html">
+                        <a class="checkout__btn" href="cart">
                           Go to Checkout
                         </a>
                       </div>
@@ -293,16 +316,16 @@ class navbar extends Component {
                         </div>
                       </div>
                       <div class="mini_action cart">
-                        <a class="cart__btn" href="cart.html">
+                        <Link class="cart__btn" to={"cart"}>
                           View and edit cart
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
                 </li>
-                <li class="setting__bar__icon">
-                  <a class="setting__active" href="#" />
-                  <div class="searchbar__content setting__block">
+                <li class="setting__bar__icon" onClick={()=> this.setState({setting: !this.state.setting})}>
+                  <a class="setting__active is-visible" href="#" />
+                  <div class={this.state.setting===true?"searchbar__content setting__block is-visible":"searchbar__content setting__block"}>
                     <div class="content-inner">
                       <div class="switcher-currency">
                         <div class="switcher-options">

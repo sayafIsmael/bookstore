@@ -1,10 +1,27 @@
 import React, { Component } from "react";
 import FontAwesome from "react-fontawesome";
+import loadjs from "loadjs";
 
 class Footer extends Component {
    constructor(props){
        super(props);
    }
+
+   componentWillMount() {
+    loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
+      loadjs("js/vendor/jquery-3.2.1.min.js", function() {
+        loadjs("js/popper.min.js", function() {
+          loadjs("js/plugins.js", function() {
+            loadjs("js/bootstrap.min.js", function() {
+              loadjs("js/active.js", function() {
+                loadjs("js/main.js");
+              });
+            });
+          });
+        });
+      });
+    });
+  }
 
   render() {
     return (

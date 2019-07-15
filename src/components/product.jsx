@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import {
   HashRouter as Router,
-  Route,
-  Link,
-  NavLink,
-  Redirect,
-  Prompt
+  Link,  
 } from "react-router-dom";
+import { createStore } from 'redux'
+
+
 
 class Product extends Component {
    constructor(props){
        super(props);
    }
+
   
   render() {
     return (
@@ -43,12 +43,12 @@ class Product extends Component {
               <div class="actions_inner">
                 <ul class="add_to_links">
                   <li>
-                    <a class="cart" href="cart.html">
+                    <a class="cart" href="#">
                       <i class="bi bi-shopping-bag4" />
                     </a>
                   </li>
                   <li>
-                    <a class="wishlist" href="wishlist.html">
+                    <a class="wishlist" href="#">
                       <i class="bi bi-shopping-cart-full" />
                     </a>
                   </li>
@@ -92,6 +92,8 @@ class Product extends Component {
           </div>
         </div>
       </div>
+
+      
     );
   }
 }

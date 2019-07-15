@@ -10,14 +10,17 @@ import FontAwesome from "react-fontawesome";
 import loadjs from "loadjs";
 
 
-function counter(state = 0, action) {
+function counter(state = [], action) {
   switch (action.type) {
     case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
-    default:
+      state.push({id: 1, name: "xxx"})
       return state
+    case 'DECREMENT':
+    state.push({id: 2, name: "zzzz"})
+    return state
+    default:
+    state.push({id: 0, name: "yyyy"})
+    return state
   }
 }
 
@@ -33,11 +36,11 @@ store.subscribe(() => console.log("Redux consoling",store.getState()))
 
 // The only way to mutate the internal state is to dispatch an action.
 // The actions can be serialized, logged or stored and later replayed.
-store.dispatch({ type: 'INCREMENT' })
-// 1
-store.dispatch({ type: 'INCREMENT' })
-// 2
-store.dispatch({ type: 'DECREMENT' })
+// store.dispatch({ type: 'INCREMENT' })
+// // 1
+// store.dispatch({ type: 'INCREMENT' })
+// // 2
+// store.dispatch({ type: 'DECREMENT' })
 // 1
 class Home extends Component {
   
@@ -226,6 +229,82 @@ class Home extends Component {
         </section>
 
         {this.sellers()}
+
+        <div class="modal fade" id="productmodal" tabindex="-1" role="dialog">
+		        <div class="modal-dialog modal__container" role="document">
+		            <div class="modal-content">
+		                <div class="modal-header modal__header">
+		                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		                </div>
+		                <div class="modal-body">
+		                    <div class="modal-product">
+		                        <div class="product-images">
+		                            <div class="main-image images">
+		                                <img alt="big images" src="images/product/big-img/1.jpg"/>
+		                            </div>
+		                        </div>
+		                        <div class="product-info">
+		                            <h1>Simple Fabric Bags</h1>
+		                            <div class="rating__and__review">
+		                                <ul class="rating">
+		                                    <li><span class="ti-star"></span></li>
+		                                    <li><span class="ti-star"></span></li>
+		                                    <li><span class="ti-star"></span></li>
+		                                    <li><span class="ti-star"></span></li>
+		                                    <li><span class="ti-star"></span></li>
+		                                </ul>
+		                                <div class="review">
+		                                    <a href="#">4 customer reviews</a>
+		                                </div>
+		                            </div>
+		                            <div class="price-box-3">
+		                                <div class="s-price-box">
+		                                    <span class="new-price">$17.20</span>
+		                                    <span class="old-price">$45.00</span>
+		                                </div>
+		                            </div>
+		                            <div class="quick-desc">
+		                                Designed for simplicity and made from high quality materials. Its sleek geometry and material combinations creates a modern look.
+		                            </div>
+		                            <div class="select__color">
+		                                <h2>Select color</h2>
+		                                <ul class="color__list">
+		                                    <li class="red"><a title="Red" href="#">Red</a></li>
+		                                    <li class="gold"><a title="Gold" href="#">Gold</a></li>
+		                                    <li class="orange"><a title="Orange" href="#">Orange</a></li>
+		                                    <li class="orange"><a title="Orange" href="#">Orange</a></li>
+		                                </ul>
+		                            </div>
+		                            <div class="select__size">
+		                                <h2>Select size</h2>
+		                                <ul class="color__list">
+		                                    <li class="l__size"><a title="L" href="#">L</a></li>
+		                                    <li class="m__size"><a title="M" href="#">M</a></li>
+		                                    <li class="s__size"><a title="S" href="#">S</a></li>
+		                                    <li class="xl__size"><a title="XL" href="#">XL</a></li>
+		                                    <li class="xxl__size"><a title="XXL" href="#">XXL</a></li>
+		                                </ul>
+		                            </div>
+		                            <div class="social-sharing">
+		                                <div class="widget widget_socialsharing_widget">
+		                                    <h3 class="widget-title-modal">Share this product</h3>
+		                                    <ul class="social__net social__net--2 d-flex justify-content-start">
+		                                        <li class="facebook"><a href="#" class="rss social-icon"><i class="zmdi zmdi-rss"></i></a></li>
+		                                        <li class="linkedin"><a href="#" class="linkedin social-icon"><i class="zmdi zmdi-linkedin"></i></a></li>
+		                                        <li class="pinterest"><a href="#" class="pinterest social-icon"><i class="zmdi zmdi-pinterest"></i></a></li>
+		                                        <li class="tumblr"><a href="#" class="tumblr social-icon"><i class="zmdi zmdi-tumblr"></i></a></li>
+		                                    </ul>
+		                                </div>
+		                            </div>
+		                            <div class="addtocart-btn">
+		                                <a href="#">Add to cart</a>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
       </div>
     );
   }
