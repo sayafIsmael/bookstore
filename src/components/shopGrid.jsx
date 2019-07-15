@@ -1,14 +1,6 @@
 import React, { Component } from "react";
 import loadjs from "loadjs";
 
-import {
-  HashRouter as Router,
-  Route,
-  Link
-  // NavLink,
-  // Redirect,
-  // Prompt
-} from "react-router-dom";
 import ProductExtra from "./../components/productextra";
 import ListBook from "./../components/listbook";
 import productexData from "./../dummyData/productex";

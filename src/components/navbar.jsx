@@ -11,7 +11,43 @@ import {
 class navbar extends Component {
    constructor(props){
        super(props);
+       this.state={
+        logedIn: false
+       }
    }
+
+   logedIn = () =>{
+     if(this.state.logedIn===true){
+       return(
+         <React.Fragment>
+         <strong class="label switcher-label">
+                          <span>My Account</span>
+                        </strong>
+                <span>
+                  <a href="#">My Wishlist</a>
+                </span>
+                <span>
+                  <a href="#">Logout</a>
+                </span>
+         </React.Fragment>
+       )
+     }
+   }
+
+   logIn = () => {
+    if(this.state.logedIn === false){
+      return(
+        <React.Fragment>
+        <span>
+        <a href="/signin">Sign In</a>
+      </span>
+      <span>
+        <a href="#">Create An Account</a>
+      </span>
+      </React.Fragment>
+      )
+    }
+  }
 
   render() {
     return (
@@ -97,20 +133,20 @@ class navbar extends Component {
                   
 
                   <li class="drop">
-                    <a href="blog.html">প্রকাশনী</a>
+                    <a href="#">প্রকাশনী</a>
                     <div class="megamenu dropdown">
                       <ul class="item item01">
                         <li>
-                          <a href="blog.html">বাতিঘর প্রকাশনী</a>
+                          <a href="#">বাতিঘর প্রকাশনী</a>
                         </li>
                         <li>
-                          <a href="blog-details.html">জ্ঞান আলো প্রকাশনী</a>
+                          <a href="#">জ্ঞান আলো প্রকাশনী</a>
                         </li>
                       </ul>
                     </div>
                   </li>
                   <li>
-                    <a href="contact.html">লেখক</a>
+                    <a href="#">লেখক</a>
                   </li>
                 </ul>
               </nav>
@@ -269,24 +305,11 @@ class navbar extends Component {
                   <div class="searchbar__content setting__block">
                     <div class="content-inner">
                       <div class="switcher-currency">
-                        <strong class="label switcher-label">
-                          <span>My Account</span>
-                        </strong>
                         <div class="switcher-options">
                           <div class="switcher-currency-trigger">
                             <div class="setting__menu">
-                              <span>
-                                <a href="#">My Account</a>
-                              </span>
-                              <span>
-                                <a href="#">My Wishlist</a>
-                              </span>
-                              <span>
-                                <a href="#">Sign In</a>
-                              </span>
-                              <span>
-                                <a href="#">Create An Account</a>
-                              </span>
+                              {this.logedIn()}
+                              {this.logIn()}
                             </div>
                           </div>
                         </div>
