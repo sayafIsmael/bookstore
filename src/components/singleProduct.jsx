@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import loadjs from "loadjs";
+import ProductEx  from "./../components/productex"
+import productexData from "./../dummyData/productex"
 // import {
 //   HashRouter as Router,
 //   Route,
@@ -45,35 +47,32 @@ class Product extends Component {
                         data-nav="thumbs"
                       >
                         <a href="1.jpg">
-                          <img src="images/product/1.jpg" alt="" />
+                          <img src="images/product/book2.jpg" alt="" />
                         </a>
                         <a href="2.jpg">
-                          <img src="images/product/2.jpg" alt="" />
+                          <img src="images/publishers/1.png" alt="" />
                         </a>
                         <a href="3.jpg">
-                          <img src="images/product/3.jpg" alt="" />
+                          <img src="images/product/book2.jpg" alt="" />
                         </a>
                         <a href="4.jpg">
-                          <img src="images/product/4.jpg" alt="" />
+                          <img src="images/product/harryporter.jpg" alt="" />
                         </a>
                         <a href="5.jpg">
-                          <img src="images/product/5.jpg" alt="" />
+                          <img src="images/product/book2.jpg" alt="" />
                         </a>
                         <a href="6.jpg">
-                          <img src="images/product/6.jpg" alt="" />
+                          <img src="images/publishers/1.png" alt="" />
                         </a>
                         <a href="7.jpg">
-                          <img src="images/product/7.jpg" alt="" />
-                        </a>
-                        <a href="8.jpg">
-                          <img src="images/product/8.jpg" alt="" />
+                          <img src="images/product/harryporter.jpg" alt="" />
                         </a>
                       </div>
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="product__info__main">
-                      <h1>Chaz Kangeroo Hoodie</h1>
+                      <h1>হিমু রিমান্ডে</h1>
                       <div class="product-reviews-summary d-flex">
                         <ul class="rating-summary d-flex">
                           <li>
@@ -94,7 +93,7 @@ class Product extends Component {
                         </ul>
                       </div>
                       <div class="price-box">
-                        <span>$52.00</span>
+                        <span>৳১৫২.০০</span>
                       </div>
                       <div class="product__overview">
                         <p>
@@ -399,929 +398,45 @@ class Product extends Component {
               </div>
               <div class="wn__related__product pt--80 pb--50">
                 <div class="section__title text-center">
-                  <h2 class="title__be--2">Related Products</h2>
+                  <h2 class="title__be--2">সম্পর্কিত বই সমূহ</h2>
                 </div>
                 <div class="row mt--60">
                   <div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
-                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                      <div class="product__thumb">
-                        <a class="first__img" href="product">
-                          <img src="images/books/1.jpg" alt="product image" />
-                        </a>
-                        <a
-                          class="second__img animation1"
-                          href="product"
-                        >
-                          <img src="images/books/2.jpg" alt="product image" />
-                        </a>
-                        <div class="hot__box">
-                          <span class="hot-label">BEST SALLER</span>
-                        </div>
-                      </div>
-                      <div class="product__content content--center">
-                        <h4>
-                          <a href="product">robin parrish</a>
-                        </h4>
-                        <ul class="prize d-flex">
-                          <li>$35.00</li>
-                          <li class="old_prize">$35.00</li>
-                        </ul>
-                        <div class="action">
-                          <div class="actions_inner">
-                            <ul class="add_to_links">
-                              <li>
-                                <a class="cart" href="cart.html">
-                                  <i class="bi bi-shopping-bag4" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="wishlist" href="wishlist.html">
-                                  <i class="bi bi-shopping-cart-full" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="compare" href="#">
-                                  <i class="bi bi-heart-beat" />
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  data-toggle="modal"
-                                  title="Quick View"
-                                  class="quickview modal-view detail-link"
-                                  href="#productmodal"
-                                >
-                                  <i class="bi bi-search" />
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="product__hover--content">
-                          <ul class="rating d-flex">
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                      <div class="product__thumb">
-                        <a class="first__img" href="product">
-                          <img src="images/books/3.jpg" alt="product image" />
-                        </a>
-                        <a
-                          class="second__img animation1"
-                          href="product"
-                        >
-                          <img src="images/books/4.jpg" alt="product image" />
-                        </a>
-                        <div class="hot__box color--2">
-                          <span class="hot-label">HOT</span>
-                        </div>
-                      </div>
-                      <div class="product__content content--center">
-                        <h4>
-                          <a href="product">The Remainng</a>
-                        </h4>
-                        <ul class="prize d-flex">
-                          <li>$35.00</li>
-                          <li class="old_prize">$35.00</li>
-                        </ul>
-                        <div class="action">
-                          <div class="actions_inner">
-                            <ul class="add_to_links">
-                              <li>
-                                <a class="cart" href="cart.html">
-                                  <i class="bi bi-shopping-bag4" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="wishlist" href="wishlist.html">
-                                  <i class="bi bi-shopping-cart-full" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="compare" href="#">
-                                  <i class="bi bi-heart-beat" />
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  data-toggle="modal"
-                                  title="Quick View"
-                                  class="quickview modal-view detail-link"
-                                  href="#productmodal"
-                                >
-                                  <i class="bi bi-search" />
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="product__hover--content">
-                          <ul class="rating d-flex">
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                      <div class="product__thumb">
-                        <a class="first__img" href="product">
-                          <img src="images/books/7.jpg" alt="product image" />
-                        </a>
-                        <a
-                          class="second__img animation1"
-                          href="product"
-                        >
-                          <img src="images/books/8.jpg" alt="product image" />
-                        </a>
-                        <div class="hot__box">
-                          <span class="hot-label">HOT</span>
-                        </div>
-                      </div>
-                      <div class="product__content content--center">
-                        <h4>
-                          <a href="product">Lando</a>
-                        </h4>
-                        <ul class="prize d-flex">
-                          <li>$35.00</li>
-                          <li class="old_prize">$50.00</li>
-                        </ul>
-                        <div class="action">
-                          <div class="actions_inner">
-                            <ul class="add_to_links">
-                              <li>
-                                <a class="cart" href="cart.html">
-                                  <i class="bi bi-shopping-bag4" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="wishlist" href="wishlist.html">
-                                  <i class="bi bi-shopping-cart-full" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="compare" href="#">
-                                  <i class="bi bi-heart-beat" />
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  data-toggle="modal"
-                                  title="Quick View"
-                                  class="quickview modal-view detail-link"
-                                  href="#productmodal"
-                                >
-                                  <i class="bi bi-search" />
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="product__hover--content">
-                          <ul class="rating d-flex">
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                      <div class="product__thumb">
-                        <a class="first__img" href="product">
-                          <img src="images/books/9.jpg" alt="product image" />
-                        </a>
-                        <a
-                          class="second__img animation1"
-                          href="product"
-                        >
-                          <img src="images/books/10.jpg" alt="product image" />
-                        </a>
-                        <div class="hot__box">
-                          <span class="hot-label">HOT</span>
-                        </div>
-                      </div>
-                      <div class="product__content content--center">
-                        <h4>
-                          <a href="product">Doctor Wldo</a>
-                        </h4>
-                        <ul class="prize d-flex">
-                          <li>$35.00</li>
-                          <li class="old_prize">$35.00</li>
-                        </ul>
-                        <div class="action">
-                          <div class="actions_inner">
-                            <ul class="add_to_links">
-                              <li>
-                                <a class="cart" href="cart.html">
-                                  <i class="bi bi-shopping-bag4" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="wishlist" href="wishlist.html">
-                                  <i class="bi bi-shopping-cart-full" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="compare" href="#">
-                                  <i class="bi bi-heart-beat" />
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  data-toggle="modal"
-                                  title="Quick View"
-                                  class="quickview modal-view detail-link"
-                                  href="#productmodal"
-                                >
-                                  <i class="bi bi-search" />
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="product__hover--content">
-                          <ul class="rating d-flex">
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                      <div class="product__thumb">
-                        <a class="first__img" href="product">
-                          <img src="images/books/11.jpg" alt="product image" />
-                        </a>
-                        <a
-                          class="second__img animation1"
-                          href="product"
-                        >
-                          <img src="images/books/2.jpg" alt="product image" />
-                        </a>
-                        <div class="hot__box">
-                          <span class="hot-label">BEST SALER</span>
-                        </div>
-                      </div>
-                      <div class="product__content content--center content--center">
-                        <h4>
-                          <a href="product">Animals Life</a>
-                        </h4>
-                        <ul class="prize d-flex">
-                          <li>$50.00</li>
-                          <li class="old_prize">$35.00</li>
-                        </ul>
-                        <div class="action">
-                          <div class="actions_inner">
-                            <ul class="add_to_links">
-                              <li>
-                                <a class="cart" href="cart.html">
-                                  <i class="bi bi-shopping-bag4" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="wishlist" href="wishlist.html">
-                                  <i class="bi bi-shopping-cart-full" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="compare" href="#">
-                                  <i class="bi bi-heart-beat" />
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  data-toggle="modal"
-                                  title="Quick View"
-                                  class="quickview modal-view detail-link"
-                                  href="#productmodal"
-                                >
-                                  <i class="bi bi-search" />
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="product__hover--content">
-                          <ul class="rating d-flex">
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                      <div class="product__thumb">
-                        <a class="first__img" href="product">
-                          <img src="images/books/1.jpg" alt="product image" />
-                        </a>
-                        <a
-                          class="second__img animation1"
-                          href="product"
-                        >
-                          <img src="images/books/6.jpg" alt="product image" />
-                        </a>
-                        <div class="hot__box">
-                          <span class="hot-label">BEST SALER</span>
-                        </div>
-                      </div>
-                      <div class="product__content content--center content--center">
-                        <h4>
-                          <a href="product">Olio Madu</a>
-                        </h4>
-                        <ul class="prize d-flex">
-                          <li>$50.00</li>
-                          <li class="old_prize">$35.00</li>
-                        </ul>
-                        <div class="action">
-                          <div class="actions_inner">
-                            <ul class="add_to_links">
-                              <li>
-                                <a class="cart" href="cart.html">
-                                  <i class="bi bi-shopping-bag4" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="wishlist" href="wishlist.html">
-                                  <i class="bi bi-shopping-cart-full" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="compare" href="#">
-                                  <i class="bi bi-heart-beat" />
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  data-toggle="modal"
-                                  title="Quick View"
-                                  class="quickview modal-view detail-link"
-                                  href="#productmodal"
-                                >
-                                  <i class="bi bi-search" />
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="product__hover--content">
-                          <ul class="rating d-flex">
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
+                    {productexData.map((item, index)=>{
+                        return(
+                          <ProductEx
+                          key={index}
+                            image={item.image}
+                            scndimage={item.scndimage}
+                            tag={item.tag}
+                            price={item.price}
+                            oldprice={item.oldprice}
+                            name={item.name}
+                          />
+                        )
+                    })}
                   </div>
                 </div>
               </div>
-              <div class="wn__related__product">
+              <div class="wn__related__product pt--80 pb--50">
                 <div class="section__title text-center">
-                  <h2 class="title__be--2">upsell products</h2>
+                  <h2 class="title__be--2">সর্বচ্চ বিক্রিত বই সমূহ</h2>
                 </div>
                 <div class="row mt--60">
                   <div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
-                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                      <div class="product__thumb">
-                        <a class="first__img" href="product">
-                          <img src="images/books/1.jpg" alt="product image" />
-                        </a>
-                        <a
-                          class="second__img animation1"
-                          href="product"
-                        >
-                          <img src="images/books/2.jpg" alt="product image" />
-                        </a>
-                        <div class="hot__box">
-                          <span class="hot-label">BEST SALLER</span>
-                        </div>
-                      </div>
-                      <div class="product__content content--center">
-                        <h4>
-                          <a href="product">robin parrish</a>
-                        </h4>
-                        <ul class="prize d-flex">
-                          <li>$35.00</li>
-                          <li class="old_prize">$35.00</li>
-                        </ul>
-                        <div class="action">
-                          <div class="actions_inner">
-                            <ul class="add_to_links">
-                              <li>
-                                <a class="cart" href="cart.html">
-                                  <i class="bi bi-shopping-bag4" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="wishlist" href="wishlist.html">
-                                  <i class="bi bi-shopping-cart-full" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="compare" href="#">
-                                  <i class="bi bi-heart-beat" />
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  data-toggle="modal"
-                                  title="Quick View"
-                                  class="quickview modal-view detail-link"
-                                  href="#productmodal"
-                                >
-                                  <i class="bi bi-search" />
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="product__hover--content">
-                          <ul class="rating d-flex">
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                      <div class="product__thumb">
-                        <a class="first__img" href="product">
-                          <img src="images/books/3.jpg" alt="product image" />
-                        </a>
-                        <a
-                          class="second__img animation1"
-                          href="product"
-                        >
-                          <img src="images/books/4.jpg" alt="product image" />
-                        </a>
-                        <div class="hot__box color--2">
-                          <span class="hot-label">HOT</span>
-                        </div>
-                      </div>
-                      <div class="product__content content--center">
-                        <h4>
-                          <a href="product">The Remainng</a>
-                        </h4>
-                        <ul class="prize d-flex">
-                          <li>$35.00</li>
-                          <li class="old_prize">$35.00</li>
-                        </ul>
-                        <div class="action">
-                          <div class="actions_inner">
-                            <ul class="add_to_links">
-                              <li>
-                                <a class="cart" href="cart.html">
-                                  <i class="bi bi-shopping-bag4" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="wishlist" href="wishlist.html">
-                                  <i class="bi bi-shopping-cart-full" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="compare" href="#">
-                                  <i class="bi bi-heart-beat" />
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  data-toggle="modal"
-                                  title="Quick View"
-                                  class="quickview modal-view detail-link"
-                                  href="#productmodal"
-                                >
-                                  <i class="bi bi-search" />
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="product__hover--content">
-                          <ul class="rating d-flex">
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                      <div class="product__thumb">
-                        <a class="first__img" href="product">
-                          <img src="images/books/7.jpg" alt="product image" />
-                        </a>
-                        <a
-                          class="second__img animation1"
-                          href="product"
-                        >
-                          <img src="images/books/8.jpg" alt="product image" />
-                        </a>
-                        <div class="hot__box">
-                          <span class="hot-label">HOT</span>
-                        </div>
-                      </div>
-                      <div class="product__content content--center">
-                        <h4>
-                          <a href="product">Lando</a>
-                        </h4>
-                        <ul class="prize d-flex">
-                          <li>$35.00</li>
-                          <li class="old_prize">$50.00</li>
-                        </ul>
-                        <div class="action">
-                          <div class="actions_inner">
-                            <ul class="add_to_links">
-                              <li>
-                                <a class="cart" href="cart.html">
-                                  <i class="bi bi-shopping-bag4" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="wishlist" href="wishlist.html">
-                                  <i class="bi bi-shopping-cart-full" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="compare" href="#">
-                                  <i class="bi bi-heart-beat" />
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  data-toggle="modal"
-                                  title="Quick View"
-                                  class="quickview modal-view detail-link"
-                                  href="#productmodal"
-                                >
-                                  <i class="bi bi-search" />
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="product__hover--content">
-                          <ul class="rating d-flex">
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                      <div class="product__thumb">
-                        <a class="first__img" href="product">
-                          <img src="images/books/9.jpg" alt="product image" />
-                        </a>
-                        <a
-                          class="second__img animation1"
-                          href="product"
-                        >
-                          <img src="images/books/10.jpg" alt="product image" />
-                        </a>
-                        <div class="hot__box">
-                          <span class="hot-label">HOT</span>
-                        </div>
-                      </div>
-                      <div class="product__content content--center">
-                        <h4>
-                          <a href="product">Doctor Wldo</a>
-                        </h4>
-                        <ul class="prize d-flex">
-                          <li>$35.00</li>
-                          <li class="old_prize">$35.00</li>
-                        </ul>
-                        <div class="action">
-                          <div class="actions_inner">
-                            <ul class="add_to_links">
-                              <li>
-                                <a class="cart" href="cart.html">
-                                  <i class="bi bi-shopping-bag4" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="wishlist" href="wishlist.html">
-                                  <i class="bi bi-shopping-cart-full" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="compare" href="#">
-                                  <i class="bi bi-heart-beat" />
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  data-toggle="modal"
-                                  title="Quick View"
-                                  class="quickview modal-view detail-link"
-                                  href="#productmodal"
-                                >
-                                  <i class="bi bi-search" />
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="product__hover--content">
-                          <ul class="rating d-flex">
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                      <div class="product__thumb">
-                        <a class="first__img" href="product">
-                          <img src="images/books/11.jpg" alt="product image" />
-                        </a>
-                        <a
-                          class="second__img animation1"
-                          href="product"
-                        >
-                          <img src="images/books/2.jpg" alt="product image" />
-                        </a>
-                        <div class="hot__box">
-                          <span class="hot-label">BEST SALER</span>
-                        </div>
-                      </div>
-                      <div class="product__content content--center content--center">
-                        <h4>
-                          <a href="product">Animals Life</a>
-                        </h4>
-                        <ul class="prize d-flex">
-                          <li>$50.00</li>
-                          <li class="old_prize">$35.00</li>
-                        </ul>
-                        <div class="action">
-                          <div class="actions_inner">
-                            <ul class="add_to_links">
-                              <li>
-                                <a class="cart" href="cart.html">
-                                  <i class="bi bi-shopping-bag4" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="wishlist" href="wishlist.html">
-                                  <i class="bi bi-shopping-cart-full" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="compare" href="#">
-                                  <i class="bi bi-heart-beat" />
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  data-toggle="modal"
-                                  title="Quick View"
-                                  class="quickview modal-view detail-link"
-                                  href="#productmodal"
-                                >
-                                  <i class="bi bi-search" />
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="product__hover--content">
-                          <ul class="rating d-flex">
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-                      <div class="product__thumb">
-                        <a class="first__img" href="product">
-                          <img src="images/books/1.jpg" alt="product image" />
-                        </a>
-                        <a
-                          class="second__img animation1"
-                          href="product"
-                        >
-                          <img src="images/books/6.jpg" alt="product image" />
-                        </a>
-                        <div class="hot__box">
-                          <span class="hot-label">BEST SALER</span>
-                        </div>
-                      </div>
-                      <div class="product__content content--center content--center">
-                        <h4>
-                          <a href="product">Olio Madu</a>
-                        </h4>
-                        <ul class="prize d-flex">
-                          <li>$50.00</li>
-                          <li class="old_prize">$35.00</li>
-                        </ul>
-                        <div class="action">
-                          <div class="actions_inner">
-                            <ul class="add_to_links">
-                              <li>
-                                <a class="cart" href="cart.html">
-                                  <i class="bi bi-shopping-bag4" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="wishlist" href="wishlist.html">
-                                  <i class="bi bi-shopping-cart-full" />
-                                </a>
-                              </li>
-                              <li>
-                                <a class="compare" href="#">
-                                  <i class="bi bi-heart-beat" />
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  data-toggle="modal"
-                                  title="Quick View"
-                                  class="quickview modal-view detail-link"
-                                  href="#productmodal"
-                                >
-                                  <i class="bi bi-search" />
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="product__hover--content">
-                          <ul class="rating d-flex">
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li class="on">
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                            <li>
-                              <i class="fa fa-star-o" />
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
+                    {productexData.map((item, index)=>{
+                        return(
+                          <ProductEx
+                          key={index}
+                            image={item.image}
+                            scndimage={item.scndimage}
+                            tag={item.tag}
+                            price={item.price}
+                            oldprice={item.oldprice}
+                            name={item.name}
+                          />
+                        )
+                    })}
                   </div>
                 </div>
               </div>
@@ -1329,86 +444,56 @@ class Product extends Component {
             <div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
               <div class="shop__sidebar">
                 <aside class="wedget__categories poroduct--cat">
-                  <h3 class="wedget__title">Product Categories</h3>
+                  <h3 class="wedget__title">ক্যাটাগরী সমূহ</h3>
                   <ul>
                     <li>
                       <a href="#">
-                        Biography <span>(3)</span>
+                        মুক্তিযুদ্ধ <span>(3)</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        Business <span>(4)</span>
+                        বিজ্ঞান <span>(4)</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        Cookbooks <span>(6)</span>
+                        পশ্চিম বঙ্গের বই <span>(6)</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        Health & Fitness <span>(7)</span>
+                        শিশুতোষ <span>(7)</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        History <span>(8)</span>
+                        কিশোর সাহিত্য <span>(8)</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        Mystery <span>(9)</span>
+                        বেস্ট সেলার বই <span>(9)</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        Inspiration <span>(13)</span>
+                        ধর্মিয় বই <span>(13)</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        Romance <span>(20)</span>
+                        নিষিদ্ধ বই <span>(20)</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        Fiction/Fantasy <span>(22)</span>
+                        পাঠক কর্নার <span>(22)</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        Self-Improvement <span>(13)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        Humor Books <span>(17)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        Harry Potter <span>(20)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        Land of Stories <span>(34)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        Kids' Music <span>(60)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        Toys & Games <span>(3)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        hoodies <span>(3)</span>
+                        ব্লগ <span>(13)</span>
                       </a>
                     </li>
                   </ul>
@@ -1434,71 +519,41 @@ class Product extends Component {
                     </div>
                   </div>
                 </aside>
-                <aside class="wedget__categories poroduct--compare">
-                  <h3 class="wedget__title">Compare</h3>
-                  <ul>
-                    <li>
-                      <a href="#">x</a>
-                      <a href="#">Condimentum posuere</a>
-                    </li>
-                    <li>
-                      <a href="#">x</a>
-                      <a href="#">Condimentum posuere</a>
-                    </li>
-                    <li>
-                      <a href="#">x</a>
-                      <a href="#">Dignissim venenatis</a>
-                    </li>
-                  </ul>
-                </aside>
+              
                 <aside class="wedget__categories poroduct--tag">
-                  <h3 class="wedget__title">Product Tags</h3>
+                  <h3 class="wedget__title">Book Tags</h3>
                   <ul>
                     <li>
-                      <a href="#">Biography</a>
+                      <a href="#"> নিষিদ্ধ বই</a>
                     </li>
                     <li>
-                      <a href="#">Business</a>
+                      <a href="#"> বেস্ট সেলার বই</a>
                     </li>
                     <li>
-                      <a href="#">Cookbooks</a>
+                      <a href="#">পাঠক কর্নার</a>
                     </li>
                     <li>
-                      <a href="#">Health & Fitness</a>
+                      <a href="#">ধর্মিয় বই</a>
                     </li>
                     <li>
-                      <a href="#">History</a>
+                      <a href="#">মুক্তিযুদ্ধ</a>
                     </li>
                     <li>
-                      <a href="#">Mystery</a>
+                      <a href="#">পশ্চিম বঙ্গের বই</a>
                     </li>
                     <li>
-                      <a href="#">Inspiration</a>
+                      <a href="#">কিশোর সাহিত্য</a>
                     </li>
                     <li>
-                      <a href="#">Religion</a>
-                    </li>
-                    <li>
-                      <a href="#">Fiction</a>
-                    </li>
-                    <li>
-                      <a href="#">Fantasy</a>
-                    </li>
-                    <li>
-                      <a href="#">Music</a>
-                    </li>
-                    <li>
-                      <a href="#">Toys</a>
-                    </li>
-                    <li>
-                      <a href="#">Hoodies</a>
+                      <a href="#">বিজ্ঞান</a>
                     </li>
                   </ul>
                 </aside>
                 <aside class="wedget__categories sidebar--banner">
                   <img
-                    src="images/others/banner_left.jpg"
+                    src="images/books/newProduct.jpg"
                     alt="banner images"
+                    style={{maxHeight: 350}}
                   />
                   <div class="text">
                     <h2>new products</h2>

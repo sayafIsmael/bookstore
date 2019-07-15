@@ -18,10 +18,10 @@ class Product extends Component {
       <div class="product product__style--3">
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
           <div class="product__thumb">
-            <Link to={"product"} class="first__img" style={{height: 300}}>
+            <Link to={"product"} class="first__img" style={{height: 350}}>
               <img src={this.props.image} alt="product image" />
             </Link>
-            <Link to={"product"} class="second__img animation1">
+            <Link to={"product"} class="second__img animation1" style={{height: 350}}>
               <img src={this.props.image2} alt="product image" />
             </Link>
             <div class="hot__box">

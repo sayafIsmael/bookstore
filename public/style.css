@@ -5838,7 +5838,7 @@ a.checkout__title {
       margin: 0 auto 20px;
       width: 100%; }
     .wedget__categories.sidebar--banner .text h2 {
-      color: #e59285;
+      color: yellow;
       font-size: 14px;
       text-transform: uppercase; }
     .wedget__categories.sidebar--banner .text h6 {
@@ -5847,7 +5847,7 @@ a.checkout__title {
       text-transform: uppercase;
       font-weight: 700; }
       .wedget__categories.sidebar--banner .text h6 strong {
-        color: #e59285; }
+        color: yellow; }
 .wedget__categories.poroduct--compare ul li:last-child {
   border: 0 none; }
 .content-shopby {

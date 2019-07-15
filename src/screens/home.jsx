@@ -173,15 +173,53 @@ class Home extends Component {
             </div>
 
             {this.firstRow()}
-            <div class="row m-0 pb-2 pt-2" >
+            {this.firstRow()}
+            {this.firstRow()}
+            <div class="row m-0 pb-4 pt-2" >
               <img src="images/ad/1.jpg" style={{height: 250, width: '100%'}}/>
             </div>
+
+            <div class="row" style={{marginTop: 70}}>
+              <div class="col-lg-12">
+                <div class="section__title text-center">
+                  <h2 class="title__be--2">
+                    সর্বোচ্চ <span class="color--theme">বিক্রিত বই</span>
+                  </h2>
+                  <p>
+                    There are many variations of passages of Lorem Ipsum
+                    available, but the majority have suffered lebmid alteration
+                    in some ledmid form
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {this.firstRow()}
-            <div class="row m-0 pb-2 pt-2" >
+            {this.firstRow()}
+            {this.firstRow()}
+            <div class="row m-0 pb-4 pt-2" >
               <img src="images/ad/2.jpg" style={{height: 250, width: '100%'}}/>
             </div>
+
+            <div class="row" style={{marginTop: 70}}>
+              <div class="col-lg-12">
+                <div class="section__title text-center">
+                  <h2 class="title__be--2">
+                    আসন্ন <span class="color--theme"> বই সমূহ</span>
+                  </h2>
+                  <p>
+                    There are many variations of passages of Lorem Ipsum
+                    available, but the majority have suffered lebmid alteration
+                    in some ledmid form
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {this.firstRow()}
-            <div class="row m-0 pb-2 pt-2" >
+            {this.firstRow()}
+            {this.firstRow()}
+            <div class="row m-0 pb-4 pt-2" >
               <img src="images/ad/3.jpg" style={{height: 250, width: '100%'}}/>
             </div>
           </div>

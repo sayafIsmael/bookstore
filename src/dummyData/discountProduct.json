@@ -8,12 +8,60 @@
         "image2": "images/product/harryporter.jpg"
     },
     {
+        "discount": "45%",
+        "image":"images/books/gronthik1.jpg",
+        "name":"সময়ের ব্যবচ্ছেদ",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "55%",
+        "image":"images/books/gronthik2.jpg",
+        "name":"রুপসী স্নান",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "65%",
+        "image":"images/books/gronthik3.jpg",
+        "name":"দাদুর দস্তানা",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
         "discount": "25%",
         "name":"হিমু রিমান্ডে",
         "price": "35",
         "oldPrice": "20",
         "image": "images/product/book2.jpg",
         "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "45%",
+        "image":"images/books/gronthik1.jpg",
+        "name":"সময়ের ব্যবচ্ছেদ",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "55%",
+        "image":"images/books/gronthik2.jpg",
+        "name":"রুপসী স্নান",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "65%",
+        "image":"images/books/gronthik3.jpg",
+        "name":"দাদুর দস্তানা",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
     },
     {
         "discount": "25%",
@@ -24,12 +72,60 @@
         "image2": "images/product/harryporter.jpg"
     },
     {
+        "discount": "45%",
+        "image":"images/books/gronthik1.jpg",
+        "name":"সময়ের ব্যবচ্ছেদ",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "55%",
+        "image":"images/books/gronthik2.jpg",
+        "name":"রুপসী স্নান",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "65%",
+        "image":"images/books/gronthik3.jpg",
+        "name":"দাদুর দস্তানা",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
         "discount": "25%",
         "name":"হিমু রিমান্ডে",
         "price": "35",
         "oldPrice": "20",
         "image": "images/product/book2.jpg",
         "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "45%",
+        "image":"images/books/gronthik1.jpg",
+        "name":"সময়ের ব্যবচ্ছেদ",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "55%",
+        "image":"images/books/gronthik2.jpg",
+        "name":"রুপসী স্নান",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "65%",
+        "image":"images/books/gronthik3.jpg",
+        "name":"দাদুর দস্তানা",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
     },
     {
         "discount": "25%",
@@ -40,12 +136,60 @@
         "image2": "images/product/harryporter.jpg"
     },
     {
+        "discount": "45%",
+        "image":"images/books/gronthik1.jpg",
+        "name":"সময়ের ব্যবচ্ছেদ",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "55%",
+        "image":"images/books/gronthik2.jpg",
+        "name":"রুপসী স্নান",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "65%",
+        "image":"images/books/gronthik3.jpg",
+        "name":"দাদুর দস্তানা",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
         "discount": "25%",
         "name":"হিমু রিমান্ডে",
         "price": "35",
         "oldPrice": "20",
         "image": "images/product/book2.jpg",
         "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "45%",
+        "image":"images/books/gronthik1.jpg",
+        "name":"সময়ের ব্যবচ্ছেদ",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "55%",
+        "image":"images/books/gronthik2.jpg",
+        "name":"রুপসী স্নান",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "65%",
+        "image":"images/books/gronthik3.jpg",
+        "name":"দাদুর দস্তানা",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
     },
     {
         "discount": "25%",
@@ -56,12 +200,60 @@
         "image2": "images/product/harryporter.jpg"
     },
     {
+        "discount": "45%",
+        "image":"images/books/gronthik1.jpg",
+        "name":"সময়ের ব্যবচ্ছেদ",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "55%",
+        "image":"images/books/gronthik2.jpg",
+        "name":"রুপসী স্নান",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "65%",
+        "image":"images/books/gronthik3.jpg",
+        "name":"দাদুর দস্তানা",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
         "discount": "25%",
         "name":"হিমু রিমান্ডে",
         "price": "35",
         "oldPrice": "20",
         "image": "images/product/book2.jpg",
         "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "45%",
+        "image":"images/books/gronthik1.jpg",
+        "name":"সময়ের ব্যবচ্ছেদ",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "55%",
+        "image":"images/books/gronthik2.jpg",
+        "name":"রুপসী স্নান",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "65%",
+        "image":"images/books/gronthik3.jpg",
+        "name":"দাদুর দস্তানা",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
     },
     {
         "discount": "25%",
@@ -72,12 +264,60 @@
         "image2": "images/product/harryporter.jpg"
     },
     {
+        "discount": "45%",
+        "image":"images/books/gronthik1.jpg",
+        "name":"সময়ের ব্যবচ্ছেদ",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "55%",
+        "image":"images/books/gronthik2.jpg",
+        "name":"রুপসী স্নান",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "65%",
+        "image":"images/books/gronthik3.jpg",
+        "name":"দাদুর দস্তানা",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
         "discount": "25%",
         "name":"হিমু রিমান্ডে",
         "price": "35",
         "oldPrice": "20",
         "image": "images/product/book2.jpg",
         "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "45%",
+        "image":"images/books/gronthik1.jpg",
+        "name":"সময়ের ব্যবচ্ছেদ",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "55%",
+        "image":"images/books/gronthik2.jpg",
+        "name":"রুপসী স্নান",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "65%",
+        "image":"images/books/gronthik3.jpg",
+        "name":"দাদুর দস্তানা",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
     },
     {
         "discount": "25%",
@@ -88,11 +328,59 @@
         "image2": "images/product/harryporter.jpg"
     },
     {
+        "discount": "45%",
+        "image":"images/books/gronthik1.jpg",
+        "name":"সময়ের ব্যবচ্ছেদ",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "55%",
+        "image":"images/books/gronthik2.jpg",
+        "name":"রুপসী স্নান",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "65%",
+        "image":"images/books/gronthik3.jpg",
+        "name":"দাদুর দস্তানা",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
         "discount": "25%",
         "name":"হিমু রিমান্ডে",
         "price": "35",
         "oldPrice": "20",
         "image": "images/product/book2.jpg",
         "image2": "images/product/harryporter.jpg"
+    },
+    {
+        "discount": "45%",
+        "image":"images/books/gronthik1.jpg",
+        "name":"সময়ের ব্যবচ্ছেদ",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "55%",
+        "image":"images/books/gronthik2.jpg",
+        "name":"রুপসী স্নান",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
+    },
+    {
+        "discount": "65%",
+        "image":"images/books/gronthik3.jpg",
+        "name":"দাদুর দস্তানা",
+        "image2":"images/product/harryporter.jpg",
+        "price":"২৫০",
+        "oldPrice": "৩৫০"
     }
 ]
