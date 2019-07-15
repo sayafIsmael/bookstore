@@ -212,9 +212,9 @@ class navbar extends Component {
                         <span>$66.00</span>
                       </div>
                       <div class="mini_action checkout">
-                        <a class="checkout__btn" href="cart">
-                          Go to Checkout
-                        </a>
+                      <Link class="checkout__btn" to={"cart"} onClick={()=> this.setState({cart: !this.state.cart})}>
+                      Go to Checkout
+                        </Link>
                       </div>
                       <div class="single__items">
                         <div class="miniproduct">
@@ -316,7 +316,7 @@ class navbar extends Component {
                         </div>
                       </div>
                       <div class="mini_action cart">
-                        <Link class="cart__btn" to={"cart"}>
+                        <Link class="cart__btn" to={"cart"} onClick={()=> this.setState({cart: !this.state.cart})}>
                           View and edit cart
                         </Link>
                       </div>
