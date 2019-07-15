@@ -158,3 +158,8 @@ footer, .h6 , .dark-grey-text{
     }
 }
 
+.sliderBtn{
+  background: black;
+  padding: 10px;
+  border-radius: 100%;
+}

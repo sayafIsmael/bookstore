@@ -130,12 +130,17 @@ class Home extends Component {
              
         </div>
         <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+          <div class="sliderBtn d-flex justify-content-center mr-5">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
+          </div>
         </a>
         <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
+        <div class="sliderBtn d-flex justify-content-center ml-5">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
+        </div>
+
         </a>
     </div>
 </div>
@@ -168,11 +173,17 @@ class Home extends Component {
             </div>
 
             {this.firstRow()}
-            <div class="row m-0 p-2">
-              <img src=""/>
+            <div class="row m-0 pb-2 pt-2" >
+              <img src="images/ad/1.jpg" style={{height: 250, width: '100%'}}/>
             </div>
             {this.firstRow()}
+            <div class="row m-0 pb-2 pt-2" >
+              <img src="images/ad/2.jpg" style={{height: 250, width: '100%'}}/>
+            </div>
             {this.firstRow()}
+            <div class="row m-0 pb-2 pt-2" >
+              <img src="images/ad/3.jpg" style={{height: 250, width: '100%'}}/>
+            </div>
           </div>
         </section>
 
