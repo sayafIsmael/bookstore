@@ -4,7 +4,8 @@ import loadjs from "loadjs";
 
 class Signin extends Component {
   constructor(props) {
-    super(props);
+		super(props);
+		window.scrollTo(0, 0);
   }
 
   componentWillMount() {

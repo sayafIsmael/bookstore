@@ -8,6 +8,7 @@ import productexData from "./../dummyData/productex";
 class shopGrid extends Component {
   constructor(props) {
     super(props);
+    window.scrollTo(0, 0);
   }
 
   componentWillMount() {

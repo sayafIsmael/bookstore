@@ -4,23 +4,24 @@ import loadjs from "loadjs";
 import {
   HashRouter as Router,
   Route,
-  Link,
+  Link
   // NavLink,
   // Redirect,
   // Prompt
 } from "react-router-dom";
+import ReactTyped from "react-typed";
 
 class navbar extends Component {
-   constructor(props){
-       super(props);
-       this.state={
-        logedIn: false,
-        cart: false,
-        setting: false
-       }
-   }
+  constructor(props) {
+    super(props);
+    this.state = {
+      logedIn: false,
+      cart: false,
+      setting: false
+    };
+  }
 
-   componentWillMount() {
+  componentWillMount() {
     loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
       loadjs("js/vendor/jquery-3.2.1.min.js", function() {
         loadjs("js/popper.min.js", function() {
@@ -36,42 +37,42 @@ class navbar extends Component {
     });
   }
 
-   logedIn = () =>{
-     if(this.state.logedIn===true){
-       return(
-         <React.Fragment>
-         <strong class="label switcher-label">
-                          <span>My Account</span>
-                        </strong>
-                <span>
-                  <a href="#">My Wishlist</a>
-                </span>
-                <span>
-                  <a href="#">Logout</a>
-                </span>
-         </React.Fragment>
-       )
-     }
-   }
-
-   logIn = () => {
-    if(this.state.logedIn === false){
-      return(
+  logedIn = () => {
+    if (this.state.logedIn === true) {
+      return (
         <React.Fragment>
-        <span>
-        <Link to={"signin"}>Sign In</Link>
-      </span>
-      <span>
-        <Link to={"signin"}>Create An Account</Link>
-      </span>
-      </React.Fragment>
-      )
+          <strong class="label switcher-label">
+            <span>My Account</span>
+          </strong>
+          <span>
+            <a href="#">My Wishlist</a>
+          </span>
+          <span>
+            <a href="#">Logout</a>
+          </span>
+        </React.Fragment>
+      );
     }
-  }
+  };
+
+  logIn = () => {
+    if (this.state.logedIn === false) {
+      return (
+        <React.Fragment>
+          <span>
+            <Link to={"signin"}>Sign In</Link>
+          </span>
+          <span>
+            <Link to={"signin"}>Create An Account</Link>
+          </span>
+        </React.Fragment>
+      );
+    }
+  };
 
   render() {
     return (
-        <header id="wn__header" class="header__area sticky__header">
+      <header id="wn__header" class="header__area sticky__header">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-6 col-sm-6 col-6 col-lg-2">
@@ -150,8 +151,6 @@ class navbar extends Component {
                     </div>
                   </li>
 
-                  
-
                   <li class="drop">
                     <a href="#">প্রকাশনী</a>
                     <div class="megamenu dropdown">
@@ -175,13 +174,29 @@ class navbar extends Component {
               <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
                 <form class="form-inline searchAll">
                   <div class="row" style={{ width: 400 }}>
-                    <input
-                      style={{ width: 300 }}
-                      class="form-control mr-sm-2"
-                      type="search"
-                      placeholder="পছন্দের বই খুজতে এখানে টাইপ করুন"
-                      aria-label="Search"
-                    />
+                    <ReactTyped
+                      // typedRef={typedRef()}
+                      loop={true}
+                      loopCount={0}
+                      typeSpeed={50}
+                      startDelay={0}
+                      backSpeed={20}
+                      backDelay={2}
+                      strings={["পছন্দের বই খুজতে এখানে টাইপ করুন", "Search by books (ex. সময়ের ব্যাবচ্ছেদ)", "Search by Authors (ex. জাফর ইকবাল)", "Search by Publishers (ex. বাতিঘর)"]}
+                      stopped={null}
+                      smartBackspace
+                      shuffle={false}
+                      fadeOut={false}
+                      fadeOutDelay={100}
+                      attr="placeholder"
+                      bindInputFocusEvents={false}
+                    >
+                      <input
+                        type="search"
+                        style={{ width: 300 }}
+                        class="form-control mr-sm-2"
+                      />
+                    </ReactTyped>
                     <button class="btn my-2 my-sm-0" type="submit">
                       Search
                     </button>
@@ -192,16 +207,28 @@ class navbar extends Component {
                   <a href="#" />
                 </li>
                 <li class="shopcart">
-               
-                <a class="cartbox_active" href="#" onClick={()=> this.setState({cart: !this.state.cart})}>
+                  <a
+                    class="cartbox_active"
+                    href="#"
+                    onClick={() => this.setState({ cart: !this.state.cart })}
+                  >
                     <span class="product_qun">3</span>
                   </a>
-               
-                  
 
-                  <div class={this.state.cart===true?"block-minicart minicart__active is-visible ":"block-minicart minicart__active  "}>
+                  <div
+                    class={
+                      this.state.cart === true
+                        ? "block-minicart minicart__active is-visible "
+                        : "block-minicart minicart__active  "
+                    }
+                  >
                     <div class="minicart-content-wrapper">
-                      <div class="micart__close"  onClick={()=> this.setState({cart: !this.state.cart})}>
+                      <div
+                        class="micart__close"
+                        onClick={() =>
+                          this.setState({ cart: !this.state.cart })
+                        }
+                      >
                         <span>close</span>
                       </div>
                       <div class="items-total d-flex justify-content-between">
@@ -212,8 +239,14 @@ class navbar extends Component {
                         <span>$66.00</span>
                       </div>
                       <div class="mini_action checkout">
-                      <Link class="checkout__btn" to={"cart"} onClick={()=> this.setState({cart: !this.state.cart})}>
-                      Go to Checkout
+                        <Link
+                          class="checkout__btn"
+                          to={"cart"}
+                          onClick={() =>
+                            this.setState({ cart: !this.state.cart })
+                          }
+                        >
+                          Go to Checkout
                         </Link>
                       </div>
                       <div class="single__items">
@@ -229,7 +262,9 @@ class navbar extends Component {
                             </div>
                             <div class="content">
                               <h6>
-                                <a href="product-details.html">Voyage Yoga Bag</a>
+                                <a href="product-details.html">
+                                  Voyage Yoga Bag
+                                </a>
                               </h6>
                               <span class="prize">$30.00</span>
                               <div class="product_prize d-flex justify-content-between">
@@ -260,7 +295,9 @@ class navbar extends Component {
                             </div>
                             <div class="content">
                               <h6>
-                                <a href="product-details.html">Impulse Duffle</a>
+                                <a href="product-details.html">
+                                  Impulse Duffle
+                                </a>
                               </h6>
                               <span class="prize">$40.00</span>
                               <div class="product_prize d-flex justify-content-between">
@@ -316,16 +353,33 @@ class navbar extends Component {
                         </div>
                       </div>
                       <div class="mini_action cart">
-                        <Link class="cart__btn" to={"cart"} onClick={()=> this.setState({cart: !this.state.cart})}>
+                        <Link
+                          class="cart__btn"
+                          to={"cart"}
+                          onClick={() =>
+                            this.setState({ cart: !this.state.cart })
+                          }
+                        >
                           View and edit cart
                         </Link>
                       </div>
                     </div>
                   </div>
                 </li>
-                <li class="setting__bar__icon" onClick={()=> this.setState({setting: !this.state.setting})}>
+                <li
+                  class="setting__bar__icon"
+                  onClick={() =>
+                    this.setState({ setting: !this.state.setting })
+                  }
+                >
                   <a class="setting__active is-visible" href="#" />
-                  <div class={this.state.setting===true?"searchbar__content setting__block is-visible":"searchbar__content setting__block"}>
+                  <div
+                    class={
+                      this.state.setting === true
+                        ? "searchbar__content setting__block is-visible"
+                        : "searchbar__content setting__block"
+                    }
+                  >
                     <div class="content-inner">
                       <div class="switcher-currency">
                         <div class="switcher-options">
@@ -364,7 +418,9 @@ class navbar extends Component {
                             <a href="portfolio.html">Portfolio</a>
                           </li>
                           <li>
-                            <a href="portfolio-details.html">Portfolio Details</a>
+                            <a href="portfolio-details.html">
+                              Portfolio Details
+                            </a>
                           </li>
                         </ul>
                       </li>
