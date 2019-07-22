@@ -157,15 +157,23 @@ footer, .h6 , .dark-grey-text{
     border-radius: 100%;
   }
 
-/* Just because ;) */
-@media (max-width: 1300px) {
-	.searchAll{
-        display: none;
-    }
-}
+  .sc-bdVaJa{
+      width: 80%;
+      margin-left: 20px;
+  }
+
 
 .sliderBtn{
   background: black;
   padding: 10px;
   border-radius: 100%;
+}
+.search-btn{
+    width: 13%;
+    border-top-right-radius: 34px;
+    border-bottom-right-radius: 34px;
+    height: 35px;
+    position: relative;
+    top: 9px;
+    background-color: #C67935;
 }
