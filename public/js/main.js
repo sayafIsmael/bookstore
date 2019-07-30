@@ -70,6 +70,11 @@ $(document).ready( function() {
         }, function(){
         $('.pubIcon').css("color", "#1E1E1E");
       });
+
+      // $('.slick-active').attr('style','width: 195px');
+      // $('.slick-slide').attr('style','width: 168px');
+
+
 });
 
 function initMap() {

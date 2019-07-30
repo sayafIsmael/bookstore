@@ -1,14 +1,16 @@
 [
     {
         "discount": "25%",
+        "writer": "হুমায়ন আহমেদ",
         "name":"হিমু সমগ্র",
-        "price": "35",
+        "price": "৩৫",
         "oldPrice": "20",
         "image": "images/product/book1.jpg",
         "image2": "images/product/harryporter.jpg"
     },
     {
         "discount": "45%",
+        "writer": "জাফর ইকবাল",
         "image":"images/books/gronthik1.jpg",
         "name":"সময়ের ব্যবচ্ছেদ",
         "image2":"images/product/harryporter.jpg",
@@ -17,6 +19,7 @@
     },
     {
         "discount": "55%",
+        "writer": "জসীম উদ্দীন",
         "image":"images/books/gronthik2.jpg",
         "name":"রুপসী স্নান",
         "image2":"images/product/harryporter.jpg",
@@ -25,6 +28,7 @@
     },
     {
         "discount": "65%",
+        "writer": "প্রিন্স কামাল",
         "image":"images/books/gronthik3.jpg",
         "name":"দাদুর দস্তানা",
         "image2":"images/product/harryporter.jpg",
@@ -33,14 +37,16 @@
     },
     {
         "discount": "25%",
+        "writer": "হুমায়ন আহমেদ",
         "name":"হিমু রিমান্ডে",
-        "price": "35",
+        "price": "৩৫",
         "oldPrice": "20",
         "image": "images/product/book2.jpg",
         "image2": "images/product/harryporter.jpg"
     },
     {
         "discount": "45%",
+        "writer": "জাফর ইকবাল",
         "image":"images/books/gronthik1.jpg",
         "name":"সময়ের ব্যবচ্ছেদ",
         "image2":"images/product/harryporter.jpg",
@@ -49,6 +55,7 @@
     },
     {
         "discount": "55%",
+        "writer": "জসীম উদ্দীন",
         "image":"images/books/gronthik2.jpg",
         "name":"রুপসী স্নান",
         "image2":"images/product/harryporter.jpg",
@@ -57,6 +64,7 @@
     },
     {
         "discount": "65%",
+        "writer": "প্রিন্স কামাল",
         "image":"images/books/gronthik3.jpg",
         "name":"দাদুর দস্তানা",
         "image2":"images/product/harryporter.jpg",
@@ -65,14 +73,16 @@
     },
     {
         "discount": "25%",
+        "writer": "হুমায়ন আহমেদ",
         "name":"হিমু সমগ্র",
-        "price": "35",
+        "price": "৩৫",
         "oldPrice": "20",
         "image": "images/product/book1.jpg",
         "image2": "images/product/harryporter.jpg"
     },
     {
         "discount": "45%",
+        "writer": "জাফর ইকবাল",
         "image":"images/books/gronthik1.jpg",
         "name":"সময়ের ব্যবচ্ছেদ",
         "image2":"images/product/harryporter.jpg",
@@ -81,6 +91,7 @@
     },
     {
         "discount": "55%",
+        "writer": "জসীম উদ্দীন",
         "image":"images/books/gronthik2.jpg",
         "name":"রুপসী স্নান",
         "image2":"images/product/harryporter.jpg",
@@ -89,6 +100,7 @@
     },
     {
         "discount": "65%",
+        "writer": "প্রিন্স কামাল",
         "image":"images/books/gronthik3.jpg",
         "name":"দাদুর দস্তানা",
         "image2":"images/product/harryporter.jpg",
@@ -97,14 +109,16 @@
     },
     {
         "discount": "25%",
+        "writer": "হুমায়ন আহমেদ",
         "name":"হিমু রিমান্ডে",
-        "price": "35",
+        "price": "৩৫",
         "oldPrice": "20",
         "image": "images/product/book2.jpg",
         "image2": "images/product/harryporter.jpg"
     },
     {
         "discount": "45%",
+        "writer": "জাফর ইকবাল",
         "image":"images/books/gronthik1.jpg",
         "name":"সময়ের ব্যবচ্ছেদ",
         "image2":"images/product/harryporter.jpg",
@@ -113,6 +127,7 @@
     },
     {
         "discount": "55%",
+        "writer": "জসীম উদ্দীন",
         "image":"images/books/gronthik2.jpg",
         "name":"রুপসী স্নান",
         "image2":"images/product/harryporter.jpg",
@@ -121,6 +136,7 @@
     },
     {
         "discount": "65%",
+        "writer": "প্রিন্স কামাল",
         "image":"images/books/gronthik3.jpg",
         "name":"দাদুর দস্তানা",
         "image2":"images/product/harryporter.jpg",
@@ -129,14 +145,16 @@
     },
     {
         "discount": "25%",
+        "writer": "হুমায়ন আহমেদ",
         "name":"হিমু সমগ্র",
-        "price": "35",
+        "price": "৩৫",
         "oldPrice": "20",
         "image": "images/product/book1.jpg",
         "image2": "images/product/harryporter.jpg"
     },
     {
         "discount": "45%",
+        "writer": "জাফর ইকবাল",
         "image":"images/books/gronthik1.jpg",
         "name":"সময়ের ব্যবচ্ছেদ",
         "image2":"images/product/harryporter.jpg",
@@ -145,6 +163,7 @@
     },
     {
         "discount": "55%",
+        "writer": "জসীম উদ্দীন",
         "image":"images/books/gronthik2.jpg",
         "name":"রুপসী স্নান",
         "image2":"images/product/harryporter.jpg",
@@ -153,6 +172,7 @@
     },
     {
         "discount": "65%",
+        "writer": "প্রিন্স কামাল",
         "image":"images/books/gronthik3.jpg",
         "name":"দাদুর দস্তানা",
         "image2":"images/product/harryporter.jpg",
@@ -161,14 +181,16 @@
     },
     {
         "discount": "25%",
+        "writer": "হুমায়ন আহমেদ",
         "name":"হিমু রিমান্ডে",
-        "price": "35",
+        "price": "৩৫",
         "oldPrice": "20",
         "image": "images/product/book2.jpg",
         "image2": "images/product/harryporter.jpg"
     },
     {
         "discount": "45%",
+        "writer": "জাফর ইকবাল",
         "image":"images/books/gronthik1.jpg",
         "name":"সময়ের ব্যবচ্ছেদ",
         "image2":"images/product/harryporter.jpg",
@@ -177,6 +199,7 @@
     },
     {
         "discount": "55%",
+        "writer": "জসীম উদ্দীন",
         "image":"images/books/gronthik2.jpg",
         "name":"রুপসী স্নান",
         "image2":"images/product/harryporter.jpg",
@@ -185,6 +208,7 @@
     },
     {
         "discount": "65%",
+        "writer": "প্রিন্স কামাল",
         "image":"images/books/gronthik3.jpg",
         "name":"দাদুর দস্তানা",
         "image2":"images/product/harryporter.jpg",
@@ -193,14 +217,16 @@
     },
     {
         "discount": "25%",
+        "writer": "হুমায়ন আহমেদ",
         "name":"হিমু সমগ্র",
-        "price": "35",
+        "price": "৩৫",
         "oldPrice": "20",
         "image": "images/product/book1.jpg",
         "image2": "images/product/harryporter.jpg"
     },
     {
         "discount": "45%",
+        "writer": "জাফর ইকবাল",
         "image":"images/books/gronthik1.jpg",
         "name":"সময়ের ব্যবচ্ছেদ",
         "image2":"images/product/harryporter.jpg",
@@ -209,6 +235,7 @@
     },
     {
         "discount": "55%",
+        "writer": "জসীম উদ্দীন",
         "image":"images/books/gronthik2.jpg",
         "name":"রুপসী স্নান",
         "image2":"images/product/harryporter.jpg",
@@ -217,6 +244,7 @@
     },
     {
         "discount": "65%",
+        "writer": "প্রিন্স কামাল",
         "image":"images/books/gronthik3.jpg",
         "name":"দাদুর দস্তানা",
         "image2":"images/product/harryporter.jpg",
@@ -225,14 +253,16 @@
     },
     {
         "discount": "25%",
+        "writer": "হুমায়ন আহমেদ",
         "name":"হিমু রিমান্ডে",
-        "price": "35",
+        "price": "৩৫",
         "oldPrice": "20",
         "image": "images/product/book2.jpg",
         "image2": "images/product/harryporter.jpg"
     },
     {
         "discount": "45%",
+        "writer": "জাফর ইকবাল",
         "image":"images/books/gronthik1.jpg",
         "name":"সময়ের ব্যবচ্ছেদ",
         "image2":"images/product/harryporter.jpg",
@@ -241,6 +271,7 @@
     },
     {
         "discount": "55%",
+        "writer": "জসীম উদ্দীন",
         "image":"images/books/gronthik2.jpg",
         "name":"রুপসী স্নান",
         "image2":"images/product/harryporter.jpg",
@@ -249,6 +280,7 @@
     },
     {
         "discount": "65%",
+        "writer": "প্রিন্স কামাল",
         "image":"images/books/gronthik3.jpg",
         "name":"দাদুর দস্তানা",
         "image2":"images/product/harryporter.jpg",
@@ -257,14 +289,16 @@
     },
     {
         "discount": "25%",
+        "writer": "হুমায়ন আহমেদ",
         "name":"হিমু সমগ্র",
-        "price": "35",
+        "price": "৩৫",
         "oldPrice": "20",
         "image": "images/product/book1.jpg",
         "image2": "images/product/harryporter.jpg"
     },
     {
         "discount": "45%",
+        "writer": "জাফর ইকবাল",
         "image":"images/books/gronthik1.jpg",
         "name":"সময়ের ব্যবচ্ছেদ",
         "image2":"images/product/harryporter.jpg",
@@ -273,6 +307,7 @@
     },
     {
         "discount": "55%",
+        "writer": "জসীম উদ্দীন",
         "image":"images/books/gronthik2.jpg",
         "name":"রুপসী স্নান",
         "image2":"images/product/harryporter.jpg",
@@ -281,6 +316,7 @@
     },
     {
         "discount": "65%",
+        "writer": "প্রিন্স কামাল",
         "image":"images/books/gronthik3.jpg",
         "name":"দাদুর দস্তানা",
         "image2":"images/product/harryporter.jpg",
@@ -289,14 +325,16 @@
     },
     {
         "discount": "25%",
+        "writer": "হুমায়ন আহমেদ",
         "name":"হিমু রিমান্ডে",
-        "price": "35",
+        "price": "৩৫",
         "oldPrice": "20",
         "image": "images/product/book2.jpg",
         "image2": "images/product/harryporter.jpg"
     },
     {
         "discount": "45%",
+        "writer": "জাফর ইকবাল",
         "image":"images/books/gronthik1.jpg",
         "name":"সময়ের ব্যবচ্ছেদ",
         "image2":"images/product/harryporter.jpg",
@@ -305,6 +343,7 @@
     },
     {
         "discount": "55%",
+        "writer": "জসীম উদ্দীন",
         "image":"images/books/gronthik2.jpg",
         "name":"রুপসী স্নান",
         "image2":"images/product/harryporter.jpg",
@@ -313,6 +352,7 @@
     },
     {
         "discount": "65%",
+        "writer": "প্রিন্স কামাল",
         "image":"images/books/gronthik3.jpg",
         "name":"দাদুর দস্তানা",
         "image2":"images/product/harryporter.jpg",
@@ -321,14 +361,16 @@
     },
     {
         "discount": "25%",
+        "writer": "হুমায়ন আহমেদ",
         "name":"হিমু সমগ্র",
-        "price": "35",
+        "price": "৩৫",
         "oldPrice": "20",
         "image": "images/product/book1.jpg",
         "image2": "images/product/harryporter.jpg"
     },
     {
         "discount": "45%",
+        "writer": "জাফর ইকবাল",
         "image":"images/books/gronthik1.jpg",
         "name":"সময়ের ব্যবচ্ছেদ",
         "image2":"images/product/harryporter.jpg",
@@ -337,6 +379,7 @@
     },
     {
         "discount": "55%",
+        "writer": "জসীম উদ্দীন",
         "image":"images/books/gronthik2.jpg",
         "name":"রুপসী স্নান",
         "image2":"images/product/harryporter.jpg",
@@ -345,6 +388,7 @@
     },
     {
         "discount": "65%",
+        "writer": "প্রিন্স কামাল",
         "image":"images/books/gronthik3.jpg",
         "name":"দাদুর দস্তানা",
         "image2":"images/product/harryporter.jpg",
@@ -353,14 +397,17 @@
     },
     {
         "discount": "25%",
+        "writer": "হুমায়ন আহমেদ",
         "name":"হিমু রিমান্ডে",
-        "price": "35",
+        "price": "৩৫",
         "oldPrice": "20",
         "image": "images/product/book2.jpg",
         "image2": "images/product/harryporter.jpg"
     },
     {
         "discount": "45%",
+        "writer": "জাফর ইকবাল",
+        "writer": "হুমায়ন আহমেদ",
         "image":"images/books/gronthik1.jpg",
         "name":"সময়ের ব্যবচ্ছেদ",
         "image2":"images/product/harryporter.jpg",
@@ -369,6 +416,8 @@
     },
     {
         "discount": "55%",
+        "writer": "জসীম উদ্দীন",
+        "writer": "হুমায়ন আহমেদ",
         "image":"images/books/gronthik2.jpg",
         "name":"রুপসী স্নান",
         "image2":"images/product/harryporter.jpg",
@@ -377,6 +426,8 @@
     },
     {
         "discount": "65%",
+        "writer": "প্রিন্স কামাল",
+        "writer": "হুমায়ন আহমেদ",
         "image":"images/books/gronthik3.jpg",
         "name":"দাদুর দস্তানা",
         "image2":"images/product/harryporter.jpg",

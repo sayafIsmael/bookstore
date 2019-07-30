@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { createStore } from 'redux'
-import MainSlider from './../components/mainSlider'
+import { createStore } from "redux";
+import MainSlider from "./../components/mainSlider";
 
 import Product from "./../components/product";
 
@@ -9,30 +9,38 @@ import publishers from "./../dummyData/publishers";
 import FontAwesome from "react-fontawesome";
 import loadjs from "loadjs";
 
+import Slider from "react-slick";
+
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile
+} from "react-device-detect";
 
 function counter(state = [], action) {
   switch (action.type) {
-    case 'INCREMENT':
-      state.push({id: 1, name: "xxx"})
-      return state
-    case 'DECREMENT':
-    state.push({id: 2, name: "zzzz"})
-    return state
+    case "INCREMENT":
+      state.push({ id: 1, name: "xxx" });
+      return state;
+    case "DECREMENT":
+      state.push({ id: 2, name: "zzzz" });
+      return state;
     default:
-    state.push({id: 0, name: "yyyy"})
-    return state
+      state.push({ id: 0, name: "yyyy" });
+      return state;
   }
 }
 
 // Create a Redux store holding the state of your app.
 // Its API is { subscribe, dispatch, getState }.
-let store = createStore(counter)
+let store = createStore(counter);
 
 // You can use subscribe() to update the UI in response to state changes.
 // Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
 // However it can also be handy to persist the current state in the localStorage.
 
-store.subscribe(() => console.log("Redux consoling",store.getState()))
+store.subscribe(() => console.log("Redux consoling", store.getState()));
 
 // The only way to mutate the internal state is to dispatch an action.
 // The actions can be serialized, logged or stored and later replayed.
@@ -43,12 +51,11 @@ store.subscribe(() => console.log("Redux consoling",store.getState()))
 // store.dispatch({ type: 'DECREMENT' })
 // 1
 class Home extends Component {
-  
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       books: discountProduct
-    }
+    };
     window.scrollTo(0, 0);
   }
 
@@ -69,243 +76,667 @@ class Home extends Component {
   }
 
   firstRow = () => {
+    var settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToScroll: 6,
+      slidesToShow: 7,
+    };
+    var settings2 = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToScroll: 2,
+      slidesToShow: 2
+    };
     return (
-      <div class="furniture--4 border--round arrows_style owl-carousel owl-theme row mt--50">
-        {this.state.books.map((item, index) => {
-          console.log("Items found from dummy: ",item)
-          return (
-            <Product
-              key={index}
-              name={item.name}
-              price={item.price}
-              oldPrice={item.oldPrice}
-              discount={item.discount}
-              image={item.image}
-              image2={item.image2}
-            />
-          );
-        })}
+      <div>
+        <BrowserView>
+          <div style={{ background: "#F1F2EE",   }}>
+            {console.log("Screen width", window.innerWidth)}
+            <Slider {...settings}>
+              {this.state.books.map((item, index) => {
+                console.log("Items found from dummy: ", item);
+                return (
+                  <Product
+                    key={index}
+                    name={item.name}
+                    price={item.price}
+                    oldPrice={item.oldPrice}
+                    discount={item.discount}
+                    image={item.image}
+                    image2={item.image2}
+                    writer={item.writer}
+                  />
+                );
+              })}
+            </Slider>
+          </div>
+        </BrowserView>
+        <MobileView>
+          <div style={{ background: "#F1F2EE" }}>
+            {console.log("Screen width", window.innerWidth)}
+            <Slider {...settings2}>
+              {this.state.books.map((item, index) => {
+                console.log("Items found from dummy: ", item);
+                return (
+                  <Product
+                    key={index}
+                    name={item.name}
+                    price={item.price}
+                    oldPrice={item.oldPrice}
+                    discount={item.discount}
+                    image={item.image}
+                    image2={item.image2}
+                    writer={item.writer}
+                  />
+                );
+              })}
+            </Slider>
+          </div>
+        </MobileView>
       </div>
     );
   };
 
-  sellers = () => {
+  adRow = () => {
+    var settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToScroll: 1,
+      slidesToShow: 3,
+      // autoplay: true,
+      pauseOnHover: true,
+      variableWidth: true
+
+    };
     return (
-      <div class="container-fluid publisher-slider pb-5">
-       <div class="row">
-            <div class="col-lg-12">
-              <div class="section__title text-center pb--50">
-                <h2 class="title__be--2">
-                  প্রকাশনী <span class="color--theme">সমূহ </span>
-                </h2>
-                <p>
-                  There are many variations of passages of Lorem Ipsum
-                  available, but the majority have suffered lebmid alteration in
-                  some ledmid form
-                </p>
-              </div>
-            </div>
+          <div>
+            <Slider {...settings}>
+             <div>
+               <img class="ad-banner" src="images/ad/1.png"/>
+             </div>
+             <div>
+               <img class="ad-banner" src="images/ad/2.png"/>
+             </div>
+             <div>
+               <img class="ad-banner" src="images/ad/3.png"/>
+             </div>
+             <div>
+               <img class="ad-banner" src="images/ad/1.png"/>
+             </div>
+             <div>
+               <img class="ad-banner" src="images/ad/2.png"/>
+             </div>
+             <div>
+               <img class="ad-banner" src="images/ad/3.png"/>
+             </div>   
+            </Slider>
           </div>
-    <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
-        <div class="carousel-inner carousel-innerx row w-100 mx-auto" role="listbox">
-            <div class="carousel-item carousel-itemx col-md-3  active">
-               <div class="panel panel-default">
-                  <div class="panel-thumbnail">
-                    <a href="#" title="image 1" class="thumb">
-                      <img class="img-fluid mx-auto d-block" src="images/publishers/3.jpg" alt="slide 1" style={{height: 200, width: 'auto'}}/>
-                    </a>
-                  </div>
-                </div>
-            </div>
-            {publishers.map((item, index) => {
-              return (
-                <div class="carousel-item carousel-itemx col-md-3  ">
-                <div class="panel panel-default">
-                  <div class="panel-thumbnail">
-                    <a href="#" title="image 2" class="thumb">
-                     <img class="img-fluid mx-auto d-block" src={item.image} alt="slide 8" style={{height: 200, width: 'auto'}}/>
-                    </a>
-                  </div>
-                  
-                </div>
-            </div>
-              );
-            })}
-             
-        </div>
-        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
-          <div class="sliderBtn d-flex justify-content-center mr-5">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </div>
-        </a>
-        <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
-        <div class="sliderBtn d-flex justify-content-center ml-5">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </div>
-
-        </a>
-    </div>
-</div>
-
     );
   };
 
- 
-  
+  sellers = () => {
+    var settings = {
+      dots: false,
+      infinite: true,
+      slidesToShow: 8,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      pauseOnHover: true
+    };
+
+    var settings2 = {
+      dots: false,
+      infinite: true,
+      slidesToShow: 2,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      pauseOnHover: true
+    };
+    return (
+      <div class="container mt-5">
+        <h4 class="">প্রকাশনী সমূহ</h4>
+
+        <BrowserView>
+          <div style={{ background: "#F1F2EE" }}>
+            <Slider {...settings}>
+              {publishers.map((item, index) => {
+                return (
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src={item.image}
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </Slider>
+          </div>
+        </BrowserView>
+
+        <MobileView>
+          <div style={{ background: "#F1F2EE" }}>
+            <Slider {...settings2}>
+              {publishers.map((item, index) => {
+                return (
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src={item.image}
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </Slider>
+          </div>
+        </MobileView>
+      </div>
+    );
+  };
+
+  bestWrtiters = () =>{
+    var settings = {
+      dots: false,
+      infinite: true,
+      slidesToShow: 6,
+      slidesToScroll: 1,
+      autoplay: false,
+      autoplaySpeed: 2000,
+      pauseOnHover: true
+    };
+
+    var settings2 = {
+      dots: false,
+      infinite: true,
+      slidesToShow: 2,
+      slidesToScroll: 1,
+      autoplay: false,
+      autoplaySpeed: 2000,
+      pauseOnHover: true
+    };
+    return (
+      <div class="container mt-5">
+        <h4 class="">সাপ্তাহিক সেরা লেখক</h4>
+
+        <BrowserView>
+          <div style={{ background: "#F1F2EE" }}>
+            <Slider {...settings}>
+             
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src="images/writers/1.jpg"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src="images/writers/2.jpg"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src="images/writers/1.jpg"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src="images/writers/2.jpg"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src="images/writers/1.jpg"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src="images/writers/2.jpg"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src="images/writers/1.jpg"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+            </Slider>
+          </div>
+        </BrowserView>
+
+        <MobileView>
+        <div style={{ background: "#F1F2EE" }}>
+            <Slider {...settings2}>
+             
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src="images/writers/1.jpg"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src="images/writers/2.jpg"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src="images/writers/2.jpg"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src="images/writers/2.jpg"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src="images/writers/1.jpg"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src="images/writers/2.jpg"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="cr-item">
+                      <img
+                        class="m-pub-img"
+                        src="images/writers/1.jpg"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </div>
+            </Slider>
+          </div>
+        </MobileView>
+      </div>
+      )
+  }
+
+  subscribe = () =>{
+    return(
+      <div class="container">
+        <div class="" style={{background: '#EED7C2'}}>
+        <div class="row d-flex justify-content-center mt-3">
+        <h4 class="c-black " style={{fontSize: 18}}>সাবস্ক্রাইব করে জিতে নিন আকর্ষনীয় <span style={{color: '#02A868', fontSize: 25}}>অফার</span></h4>
+        </div>
+        <div class="row d-flex justify-content-center mt-2 pb-3">
+            <input class="col-md-5 subs-input pl-2 pr-2" placeholder="ইমেইল/মোবাইল নম্বর" style={{height: 55}}/>
+            <div class="row mt-auto mb-auto ml-0">
+              <div class="male-btn">
+                <p>পুরুষ</p>
+              </div>
+              <div class="female-btn">
+                <p>মহিলা</p>
+              </div>
+            </div>
+        </div>
+      </div>
+      </div>
+    )
+  }
+
+  services = () =>{
+    return(
+     <div class="container">
+       <div class="pt-3 pb-3 mb-3" style={{background: '#F1F2EE'}}>
+        <div class="row">
+          <div className="row col-sm-3">
+            <img class="mr-auto ml-auto" src="images/icons/phone.png" style={{height: 76}}/>
+            <div class="mt-auto mb-auto">
+              <p class="service-text">হেল্প লাইন</p>
+              <p class="service-text">+৮৮ ০২ ৭১৯ ১৭৪৭</p>
+              <p class="service-text">০১৬১৬ ৩১৩ ৯৫৭</p>
+            </div>
+          </div>
+          <div className="row col-sm-3">
+            <img class="mr-auto ml-auto" src="images/icons/cash_on.png" style={{height: 76}}/>
+            <div class="mt-auto mb-auto">
+              <p class="service-text">কেশ অন</p>
+              <p class="service-text">ডেলিভারি</p>
+            </div>
+          </div>
+          <div className="row col-sm-3">
+            <img class="mr-auto ml-auto" src="images/icons/delivery_cycle.png" style={{height: 76}}/>
+            <div class="mt-auto mb-auto">
+              <p class="service-text">ঢাকায়</p>
+              <p class="service-text">হোম ডেলিভারি</p>
+            </div>
+          </div>
+          <div className="row col-sm-3">
+            <img class="mr-auto ml-auto" src="images/icons/delivery.png" style={{height: 90}}/>
+            <div class="mt-auto mb-auto">
+              <p class="service-text">সেবা</p>
+              <p class="service-text">সারা বাংলাদেশ</p>
+            </div>
+          </div>
+        </div>
+      </div>
+     </div>
+
+    )
+  }
+
+  recentlySearched = () =>{
+      return(
+       <div class="container mt-3">
+          <h4>সাম্প্রতি খোজা বই</h4>
+          {this.firstRow()}
+      </div>
+      )
+  }
 
   render() {
     return (
       <div>
-        <MainSlider/>
+        <MainSlider />
         <section class="wn__product__area brown--color pt--80  pb--30">
           <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="section__title text-center">
-                  <h2 class="title__be--2">
-                    সর্বোচ্চ <span class="color--theme">ছাড়ের বই</span>
-                  </h2>
-                  <p>
-                    There are many variations of passages of Lorem Ipsum
-                    available, but the majority have suffered lebmid alteration
-                    in some ledmid form
-                  </p>
-                </div>
-              </div>
+            <div class="row m-0 mt-3">
+              <h4 class="">
+                সর্বোচ্চ ছাড়ের বই {/* <span class="color--theme"></span> */}
+              </h4>
             </div>
 
             {this.firstRow()}
-            {this.firstRow()}
-            {this.firstRow()}
-            <div class="row m-0 pb-4 pt-2" >
-              <img src="images/ad/1.jpg" style={{height: 250, width: '100%'}}/>
-            </div>
 
-            <div class="row" style={{marginTop: 70}}>
-              <div class="col-lg-12">
-                <div class="section__title text-center">
-                  <h2 class="title__be--2">
-                    সর্বোচ্চ <span class="color--theme">বিক্রিত বই</span>
-                  </h2>
-                  <p>
-                    There are many variations of passages of Lorem Ipsum
-                    available, but the majority have suffered lebmid alteration
-                    in some ledmid form
-                  </p>
-                </div>
-              </div>
+            <div class="row m-0 mt-3">
+              <h4 class="">
+                বিজ্ঞান {/* <span class="color--theme"></span> */}
+              </h4>
             </div>
 
             {this.firstRow()}
-            {this.firstRow()}
-            {this.firstRow()}
-            <div class="row m-0 pb-4 pt-2" >
-              <img src="images/ad/2.jpg" style={{height: 250, width: '100%'}}/>
-            </div>
 
-            <div class="row" style={{marginTop: 70}}>
-              <div class="col-lg-12">
-                <div class="section__title text-center">
-                  <h2 class="title__be--2">
-                    আসন্ন <span class="color--theme"> বই সমূহ</span>
-                  </h2>
-                  <p>
-                    There are many variations of passages of Lorem Ipsum
-                    available, but the majority have suffered lebmid alteration
-                    in some ledmid form
-                  </p>
-                </div>
-              </div>
+            <div class="row m-0 mt-3">
+              <h4 class="">
+                ইতিহাস {/* <span class="color--theme"></span> */}
+              </h4>
             </div>
 
             {this.firstRow()}
+      
+            <div class="pb-4 pt-2">
+            {this.adRow()}
+            </div>
+
+            <div class="row m-0 mt-3">
+              <h4 class="">
+                সর্বোচ্চ বিক্রিত বই {/* <span class="color--theme"></span> */}
+              </h4>
+            </div>
+
             {this.firstRow()}
+
+            <div class="row m-0 mt-3">
+              <h4 class="">
+                গ্রন্থিক প্রকাশনীর বই {/* <span class="color--theme"></span> */}
+              </h4>
+            </div>
+
             {this.firstRow()}
-            <div class="row m-0 pb-4 pt-2" >
-              <img src="images/ad/3.jpg" style={{height: 250, width: '100%'}}/>
+
+            <div class="row m-0 mt-3">
+              <h4 class="">
+                শিশুতোষ {/* <span class="color--theme"></span> */}
+              </h4>
+            </div>
+
+            {this.firstRow()}
+
+            <div class="pb-4 pt-2">
+            {this.adRow()}
+            </div>
+
+            <div class="row m-0 mt-3">
+              <h4 class="">
+                প্রবন্ধ {/* <span class="color--theme"></span> */}
+              </h4>
+            </div>
+
+            {this.firstRow()}
+
+            <div class="row m-0 mt-3">
+              <h4 class="">
+                সমাজ বিজ্ঞান {/* <span class="color--theme"></span> */}
+              </h4>
+            </div>
+
+            {this.firstRow()}
+
+            <div class="row m-0 mt-3">
+              <h4 class="">
+                অর্থনীতি {/* <span class="color--theme"></span> */}
+              </h4>
+            </div>
+
+            {this.firstRow()}
+
+            <div class="pb-4 pt-2">
+            {this.adRow()}
             </div>
           </div>
         </section>
 
+        {this.bestWrtiters()}
+
+        {this.subscribe()}
+
         {this.sellers()}
 
+        {this.services()}
+
         <div class="modal fade" id="productmodal" tabindex="-1" role="dialog">
-		        <div class="modal-dialog modal__container" role="document">
-		            <div class="modal-content">
-		                <div class="modal-header modal__header">
-		                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		                </div>
-		                <div class="modal-body">
-		                    <div class="modal-product">
-		                        <div class="product-images">
-		                            <div class="main-image images">
-		                                <img alt="big images" src="images/product/big-img/1.jpg"/>
-		                            </div>
-		                        </div>
-		                        <div class="product-info">
-		                            <h1>Simple Fabric Bags</h1>
-		                            <div class="rating__and__review">
-		                                <ul class="rating">
-		                                    <li><span class="ti-star"></span></li>
-		                                    <li><span class="ti-star"></span></li>
-		                                    <li><span class="ti-star"></span></li>
-		                                    <li><span class="ti-star"></span></li>
-		                                    <li><span class="ti-star"></span></li>
-		                                </ul>
-		                                <div class="review">
-		                                    <a href="#">4 customer reviews</a>
-		                                </div>
-		                            </div>
-		                            <div class="price-box-3">
-		                                <div class="s-price-box">
-		                                    <span class="new-price">$17.20</span>
-		                                    <span class="old-price">$45.00</span>
-		                                </div>
-		                            </div>
-		                            <div class="quick-desc">
-		                                Designed for simplicity and made from high quality materials. Its sleek geometry and material combinations creates a modern look.
-		                            </div>
-		                            <div class="select__color">
-		                                <h2>Select color</h2>
-		                                <ul class="color__list">
-		                                    <li class="red"><a title="Red" href="#">Red</a></li>
-		                                    <li class="gold"><a title="Gold" href="#">Gold</a></li>
-		                                    <li class="orange"><a title="Orange" href="#">Orange</a></li>
-		                                    <li class="orange"><a title="Orange" href="#">Orange</a></li>
-		                                </ul>
-		                            </div>
-		                            <div class="select__size">
-		                                <h2>Select size</h2>
-		                                <ul class="color__list">
-		                                    <li class="l__size"><a title="L" href="#">L</a></li>
-		                                    <li class="m__size"><a title="M" href="#">M</a></li>
-		                                    <li class="s__size"><a title="S" href="#">S</a></li>
-		                                    <li class="xl__size"><a title="XL" href="#">XL</a></li>
-		                                    <li class="xxl__size"><a title="XXL" href="#">XXL</a></li>
-		                                </ul>
-		                            </div>
-		                            <div class="social-sharing">
-		                                <div class="widget widget_socialsharing_widget">
-		                                    <h3 class="widget-title-modal">Share this product</h3>
-		                                    <ul class="social__net social__net--2 d-flex justify-content-start">
-		                                        <li class="facebook"><a href="#" class="rss social-icon"><i class="zmdi zmdi-rss"></i></a></li>
-		                                        <li class="linkedin"><a href="#" class="linkedin social-icon"><i class="zmdi zmdi-linkedin"></i></a></li>
-		                                        <li class="pinterest"><a href="#" class="pinterest social-icon"><i class="zmdi zmdi-pinterest"></i></a></li>
-		                                        <li class="tumblr"><a href="#" class="tumblr social-icon"><i class="zmdi zmdi-tumblr"></i></a></li>
-		                                    </ul>
-		                                </div>
-		                            </div>
-		                            <div class="addtocart-btn">
-		                                <a href="#">Add to cart</a>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
-		    </div>
+          <div class="modal-dialog modal__container" role="document">
+            <div class="modal-content">
+              <div class="modal-header modal__header">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="modal-product">
+                  <div class="product-images">
+                    <div class="main-image images">
+                      <img
+                        alt="big images"
+                        src="images/product/big-img/1.jpg"
+                      />
+                    </div>
+                  </div>
+                  <div class="product-info">
+                    <h1>Simple Fabric Bags</h1>
+                    <div class="rating__and__review">
+                      <ul class="rating">
+                        <li>
+                          <span class="ti-star" />
+                        </li>
+                        <li>
+                          <span class="ti-star" />
+                        </li>
+                        <li>
+                          <span class="ti-star" />
+                        </li>
+                        <li>
+                          <span class="ti-star" />
+                        </li>
+                        <li>
+                          <span class="ti-star" />
+                        </li>
+                      </ul>
+                      <div class="review">
+                        <a href="#">4 customer reviews</a>
+                      </div>
+                    </div>
+                    <div class="price-box-3">
+                      <div class="s-price-box">
+                        <span class="new-price">$17.20</span>
+                        <span class="old-price">$45.00</span>
+                      </div>
+                    </div>
+                    <div class="quick-desc">
+                      Designed for simplicity and made from high quality
+                      materials. Its sleek geometry and material combinations
+                      creates a modern look.
+                    </div>
+                    <div class="select__color">
+                      <h2>Select color</h2>
+                      <ul class="color__list">
+                        <li class="red">
+                          <a title="Red" href="#">
+                            Red
+                          </a>
+                        </li>
+                        <li class="gold">
+                          <a title="Gold" href="#">
+                            Gold
+                          </a>
+                        </li>
+                        <li class="orange">
+                          <a title="Orange" href="#">
+                            Orange
+                          </a>
+                        </li>
+                        <li class="orange">
+                          <a title="Orange" href="#">
+                            Orange
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="select__size">
+                      <h2>Select size</h2>
+                      <ul class="color__list">
+                        <li class="l__size">
+                          <a title="L" href="#">
+                            L
+                          </a>
+                        </li>
+                        <li class="m__size">
+                          <a title="M" href="#">
+                            M
+                          </a>
+                        </li>
+                        <li class="s__size">
+                          <a title="S" href="#">
+                            S
+                          </a>
+                        </li>
+                        <li class="xl__size">
+                          <a title="XL" href="#">
+                            XL
+                          </a>
+                        </li>
+                        <li class="xxl__size">
+                          <a title="XXL" href="#">
+                            XXL
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="social-sharing">
+                      <div class="widget widget_socialsharing_widget">
+                        <h3 class="widget-title-modal">Share this product</h3>
+                        <ul class="social__net social__net--2 d-flex justify-content-start">
+                          <li class="facebook">
+                            <a href="#" class="rss social-icon">
+                              <i class="zmdi zmdi-rss" />
+                            </a>
+                          </li>
+                          <li class="linkedin">
+                            <a href="#" class="linkedin social-icon">
+                              <i class="zmdi zmdi-linkedin" />
+                            </a>
+                          </li>
+                          <li class="pinterest">
+                            <a href="#" class="pinterest social-icon">
+                              <i class="zmdi zmdi-pinterest" />
+                            </a>
+                          </li>
+                          <li class="tumblr">
+                            <a href="#" class="tumblr social-icon">
+                              <i class="zmdi zmdi-tumblr" />
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="addtocart-btn">
+                      <a href="#">Add to cart</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {this.recentlySearched()}
       </div>
     );
   }
