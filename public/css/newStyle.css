@@ -194,11 +194,25 @@ footer, .h6 , .dark-grey-text{
     width: 100px;
     margin-top: 5px;
 }
+.payment-img-mb {
+    height: 90%;
+    margin-top: 5px;
+    width: 90%;
+}
 .payment-box{
     height: 100px;
     background-color: #fff;
     width: 120px;
     margin-right: 26px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 2px solid #838384;
+}
+.payment-box-mb {
+    height: 52px;
+    background-color: #fff;
+    width: 59px;
+    margin-right: 9px;
     margin-top: 10px;
     border-radius: 10px;
     border: 2px solid #838384;
@@ -210,6 +224,114 @@ footer, .h6 , .dark-grey-text{
     margin-top: 5px;
 }
 .ad-banner{
-    width: 365px; 
+    width: 290px; 
     margin-right: 25px;
 }
+
+.slick-arrow .slick-next{
+    right: -25px;
+}
+
+.read_some{
+    position: absolute;
+    left: 34px;
+    top: 40px;
+}
+.social_icon{
+    width: 30px;
+    padding-right: 10px;
+    cursor: pointer;
+    height: 30px;
+}
+.siteLogomb{
+    width: 90px;
+    height: 54px;
+    margin-left: 8px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* .sidenav a:hover {
+    color: #f1f1f1;
+  } */
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+  
+  .sidenav2 {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidenav2 a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* .sidenav2 a:hover {
+    color: #f1f1f1;
+  } */
+  
+  .sidenav2 .closebtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav2 {padding-top: 15px;}
+    .sidenav2 a {font-size: 18px;}
+  }
+  
+  [data-toggle="collapse"] .fa:before {  
+    content: "\f139";
+  }
+  
+  [data-toggle="collapse"].collapsed .fa:before {
+    content: "\f13a";
+  }
+  

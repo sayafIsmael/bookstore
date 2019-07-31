@@ -6,8 +6,27 @@
   padding: 2%;
   position: relative;
   text-align: center;
-  width: 130px;
+  width: 157px;
+  cursor: pointer;
 }
+.cr-item-mb {
+  /* background: #00558B; */
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  padding: 2%;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  width: 114px;
+}
+.read_some_mb {
+  position: absolute;
+  left: 11px;
+  top: 38px;
+}
+.var
 .variable-width .slick-slide p {
   background: #00558B;
   height: 100px;
@@ -39,23 +58,18 @@
     width: 70%;
   }
 }
+
 .m-item-img{
-  width: 100%;
-  height: 250px;
+  width: 110px;
+  height: 135px;
+  background-image: url("images/books/dummy.png")
 }
 
-.m-pub-img{
-  width: 100%;
-  height: 180px;
-}
+
 @media (max-width: 320px) {
   .m-item-img{
-    width: 100%;
-    height: 150px;
-  }
-  .m-pub-img{
-    width: 100%;
-    height: 180px;
+    width: 110px;
+  height: 135px;
   }
 }
 .slick-slide .image {
@@ -120,8 +134,10 @@
   height: 180px;
 }
 .slick-arrow {
-  background-color: grey;
-  border-radius: 100%;
+      background: white;
+    height: 71px;
+    width: 40px;
+    border: 0.1px solid gray;
 }
 .slick-prev{
   /* left: 4px;
@@ -129,16 +145,13 @@
 }
 .slick-next{
   display: block;
-  /* position: absolute;
-  z-index: 2000;
-  right: -10px;
-  overflow: visible; */
+  box-shadow: -2px 2px 12px -2px rgba(0,0,0,.3);
 }
 .slick-arrow:hover {
-  background-color: grey;
+  background-color: white;
 }
 .slick-arrow:focus {
-  background-color: grey;
+  background-color: white;
 }
 .button {
   background-color: #00558B;
@@ -149,4 +162,47 @@
   font-size: 20px;
   border-radius: 5px;
   min-height: 45px
+}
+
+.discount_badge{
+  position: absolute;
+  width: 40px;
+  height: 40px;
+}
+.crp-item {
+  /* background: #00558B; */
+  color: #fff;
+  margin: 10px;
+  padding: 2%;
+  position: relative;
+  text-align: center;
+  width: 83px;
+  cursor: pointer;
+  
+}
+
+.crw-item {
+  /* background: #00558B; */
+  color: #fff;
+  margin: 10px;
+  padding: 2%;
+  position: relative;
+  text-align: center;
+  width: 113px;
+  cursor: pointer;
+}
+
+.m-pub-img{
+  width: 100%;
+  height: 100%;
+}
+
+.m-pubp-img{
+  width: 100%;
+  height: 83px;
+}
+
+.mw-pub-img{
+  width: 100%;
+  height: 113px;
 }

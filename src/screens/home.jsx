@@ -11,6 +11,9 @@ import loadjs from "loadjs";
 
 import Slider from "react-slick";
 
+import { Style } from "react-style-tag";
+
+
 import {
   BrowserView,
   MobileView,
@@ -50,6 +53,45 @@ store.subscribe(() => console.log("Redux consoling", store.getState()));
 // // 2
 // store.dispatch({ type: 'DECREMENT' })
 // 1
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10
+      }}
+      onClick={onClick}
+    >
+      <img class="mr-auto" src="images/icons/nextIcon.png" />
+    </div>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        left: 0,
+        zIndex: 10,
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10
+      }}
+      onClick={onClick}
+    >
+      <img class="mr-auto" src="images/icons/prevIcon.png" />
+    </div>
+  );
+}
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -75,29 +117,41 @@ class Home extends Component {
     });
   }
 
+  componentDidMount() {
+    // Jquery here $(...)...
+   
+  }
+
+
   firstRow = () => {
     var settings = {
       dots: false,
       infinite: true,
       speed: 500,
       slidesToScroll: 6,
-      slidesToShow: 7,
+      slidesToShow: 6,
+      variableWidth: true,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />
     };
     var settings2 = {
       dots: false,
       infinite: true,
       speed: 500,
-      slidesToScroll: 2,
-      slidesToShow: 2
+      // slidesToScroll: 1,
+      slidesToShow: 2,
+      variableWidth: true,
+      arrows: false
     };
     return (
       <div>
         <BrowserView>
-          <div style={{ background: "#F1F2EE",   }}>
+        <div style={{ background: "#F1F2EE", paddingRight: 25 }}>
+          <div>
             {console.log("Screen width", window.innerWidth)}
             <Slider {...settings}>
               {this.state.books.map((item, index) => {
-                console.log("Items found from dummy: ", item);
+                // console.log("Items found from dummy: ", item);
                 return (
                   <Product
                     key={index}
@@ -113,13 +167,13 @@ class Home extends Component {
               })}
             </Slider>
           </div>
+          </div>
         </BrowserView>
         <MobileView>
-          <div style={{ background: "#F1F2EE" }}>
-            {console.log("Screen width", window.innerWidth)}
+          <div style={{ background: "#F1F2EE",}}>
             <Slider {...settings2}>
               {this.state.books.map((item, index) => {
-                console.log("Items found from dummy: ", item);
+                // console.log("Items found from dummy: ", item);
                 return (
                   <Product
                     key={index}
@@ -147,34 +201,72 @@ class Home extends Component {
       speed: 500,
       slidesToScroll: 1,
       slidesToShow: 3,
-      // autoplay: true,
+      autoplay: true,
       pauseOnHover: true,
-      variableWidth: true
-
+      variableWidth: true,
+      arrows: false
+    };
+    var settings2 = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToScroll: 1,
+      slidesToShow: 1,
+      autoplay: true,
+      pauseOnHover: true,
+      variableWidth: true,
+      arrows: false
     };
     return (
-          <div>
-            <Slider {...settings}>
-             <div>
-               <img class="ad-banner" src="images/ad/1.png"/>
-             </div>
-             <div>
-               <img class="ad-banner" src="images/ad/2.png"/>
-             </div>
-             <div>
-               <img class="ad-banner" src="images/ad/3.png"/>
-             </div>
-             <div>
-               <img class="ad-banner" src="images/ad/1.png"/>
-             </div>
-             <div>
-               <img class="ad-banner" src="images/ad/2.png"/>
-             </div>
-             <div>
-               <img class="ad-banner" src="images/ad/3.png"/>
-             </div>   
-            </Slider>
-          </div>
+      <div>
+        <BrowserView>
+          <Slider {...settings}>
+            <div>
+              <img class="ad-banner" src="images/ad/1.png" />
+            </div>
+            <div>
+              <img class="ad-banner" src="images/ad/2.png" />
+            </div>
+            <div>
+              <img class="ad-banner" src="images/ad/3.png" />
+            </div>
+            <div>
+              <img class="ad-banner" src="images/ad/1.png" />
+            </div>
+            <div>
+              <img class="ad-banner" src="images/ad/2.png" />
+            </div>
+            <div>
+              <img class="ad-banner" src="images/ad/3.png" />
+            </div>
+          </Slider>
+        </BrowserView>
+        <MobileView>
+        <div style={{height: 100}}>
+        <Slider {...settings2}>
+            <div>
+              <img class="ad-banner" src="images/ad/1.png" />
+            </div>
+            <div>
+              <img class="ad-banner" src="images/ad/2.png" />
+            </div>
+            <div>
+              <img class="ad-banner" src="images/ad/3.png" />
+            </div>
+            <div>
+              <img class="ad-banner" src="images/ad/1.png" />
+            </div>
+            <div>
+              <img class="ad-banner" src="images/ad/2.png" />
+            </div>
+            <div>
+              <img class="ad-banner" src="images/ad/3.png" />
+            </div>
+          </Slider>
+</div>
+        
+        </MobileView>
+      </div>
     );
   };
 
@@ -182,11 +274,89 @@ class Home extends Component {
     var settings = {
       dots: false,
       infinite: true,
-      slidesToShow: 8,
+      speed: 500,
+      slidesToScroll: 2,
+      slidesToShow: 6,
+      variableWidth: true,
+      autoplay: true,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />
+    };
+    var settings2 = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToScroll: 2,
+      slidesToShow: 2,
+      variableWidth: true,
+      arrows: false,
+    };
+    return (
+      <div class="container mt-2">
+        <div class="row m-0 mt-4">
+          <h4 class="">
+            প্রকাশনী সমূহ{/* <span class="color--theme"></span> */}
+          </h4>
+        </div>
+          <BrowserView>
+          <div style={{ background: "#F1F2EE", paddingRight: 25 }}>
+            <div>
+              {console.log("Screen width", window.innerWidth)}
+              <Slider {...settings}>
+                {publishers.map((item, index) => {
+                  return (
+                    <div>
+                      <div class="crp-item">
+                        <img
+                          class="m-pubp-img"
+                          src={item.image}
+                          style={{ borderRadius: "100%" }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </Slider>
+            </div>
+            </div>
+          </BrowserView>
+          <MobileView>
+          <div style={{ background: "#F1F2EE"}}>
+            <div style={{ background: "#F1F2EE" }}>
+              {console.log("Screen width", window.innerWidth)}
+              <Slider {...settings2}>
+                {publishers.map((item, index) => {
+                  return (
+                    <div>
+                      <div class="cr-item-mb" style={{width: 97}}>
+                        <img
+                          class="m-pub-img"
+                          src={item.image}
+                          style={{ borderRadius: "100%" }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </Slider>
+            </div>
+            </div>
+          </MobileView>
+      </div>
+    );
+  };
+
+  bestWrtiters = () => {
+    var settings = {
+      dots: false,
+      infinite: true,
+      slidesToShow: 6,
       slidesToScroll: 1,
       autoplay: true,
-      autoplaySpeed: 2000,
-      pauseOnHover: true
+      pauseOnHover: true,
+      variableWidth: true,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />
     };
 
     var settings2 = {
@@ -195,29 +365,80 @@ class Home extends Component {
       slidesToShow: 2,
       slidesToScroll: 1,
       autoplay: true,
-      autoplaySpeed: 2000,
-      pauseOnHover: true
+      pauseOnHover: true,
+      arrows: false,
+      variableWidth: true,
     };
     return (
-      <div class="container mt-5">
-        <h4 class="">প্রকাশনী সমূহ</h4>
+      <div class="container">
+        <h4 class="">সাপ্তাহিক সেরা লেখক</h4>
 
         <BrowserView>
-          <div style={{ background: "#F1F2EE" }}>
+          <div style={{ background: "#F1F2EE", paddingRight: 25 }}>
             <Slider {...settings}>
-              {publishers.map((item, index) => {
-                return (
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src={item.image}
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-                );
-              })}
+              <div>
+                <div class="crw-item">
+                  <img
+                    class="mw-pub-img"
+                    src="images/writers/1.jpg"
+                    style={{ borderRadius: "100%" }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="crw-item">
+                  <img
+                    class="mw-pub-img"
+                    src="images/writers/2.jpg"
+                    style={{ borderRadius: "100%" }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="crw-item">
+                  <img
+                    class="mw-pub-img"
+                    src="images/writers/1.jpg"
+                    style={{ borderRadius: "100%" }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="crw-item">
+                  <img
+                    class="mw-pub-img"
+                    src="images/writers/2.jpg"
+                    style={{ borderRadius: "100%" }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="crw-item">
+                  <img
+                    class="mw-pub-img"
+                    src="images/writers/1.jpg"
+                    style={{ borderRadius: "100%" }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="crw-item">
+                  <img
+                    class="mw-pub-img"
+                    src="images/writers/2.jpg"
+                    style={{ borderRadius: "100%" }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="crw-item">
+                  <img
+                    class="mw-pub-img"
+                    src="images/writers/1.jpg"
+                    style={{ borderRadius: "100%" }}
+                  />
+                </div>
+              </div>
             </Slider>
           </div>
         </BrowserView>
@@ -225,19 +446,69 @@ class Home extends Component {
         <MobileView>
           <div style={{ background: "#F1F2EE" }}>
             <Slider {...settings2}>
-              {publishers.map((item, index) => {
-                return (
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src={item.image}
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-                );
-              })}
+              <div>
+                <div class="crw-item">
+                  <img
+                    class="mw-pub-img"
+                    src="images/writers/1.jpg"
+                    style={{ borderRadius: "100%" }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="crw-item">
+                  <img
+                    class="mw-pub-img"
+                    src="images/writers/2.jpg"
+                    style={{ borderRadius: "100%" }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="crw-item">
+                  <img
+                    class="mw-pub-img"
+                    src="images/writers/2.jpg"
+                    style={{ borderRadius: "100%" }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="crw-item">
+                  <img
+                    class="mw-pub-img"
+                    src="images/writers/2.jpg"
+                    style={{ borderRadius: "100%" }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="crw-item">
+                  <img
+                    class="mw-pub-img"
+                    src="images/writers/1.jpg"
+                    style={{ borderRadius: "100%" }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="crw-item">
+                  <img
+                    class="mw-pub-img"
+                    src="images/writers/2.jpg"
+                    style={{ borderRadius: "100%" }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="crw-item">
+                  <img
+                    class="mw-pub-img"
+                    src="images/writers/1.jpg"
+                    style={{ borderRadius: "100%" }}
+                  />
+                </div>
+              </div>
             </Slider>
           </div>
         </MobileView>
@@ -245,184 +516,24 @@ class Home extends Component {
     );
   };
 
-  bestWrtiters = () =>{
-    var settings = {
-      dots: false,
-      infinite: true,
-      slidesToShow: 6,
-      slidesToScroll: 1,
-      autoplay: false,
-      autoplaySpeed: 2000,
-      pauseOnHover: true
-    };
-
-    var settings2 = {
-      dots: false,
-      infinite: true,
-      slidesToShow: 2,
-      slidesToScroll: 1,
-      autoplay: false,
-      autoplaySpeed: 2000,
-      pauseOnHover: true
-    };
+  subscribe = () => {
     return (
-      <div class="container mt-5">
-        <h4 class="">সাপ্তাহিক সেরা লেখক</h4>
-
+      <div>
         <BrowserView>
-          <div style={{ background: "#F1F2EE" }}>
-            <Slider {...settings}>
-             
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src="images/writers/1.jpg"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src="images/writers/2.jpg"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src="images/writers/1.jpg"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src="images/writers/2.jpg"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src="images/writers/1.jpg"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src="images/writers/2.jpg"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src="images/writers/1.jpg"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-            </Slider>
-          </div>
-        </BrowserView>
-
-        <MobileView>
-        <div style={{ background: "#F1F2EE" }}>
-            <Slider {...settings2}>
-             
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src="images/writers/1.jpg"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src="images/writers/2.jpg"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src="images/writers/2.jpg"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src="images/writers/2.jpg"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src="images/writers/1.jpg"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src="images/writers/2.jpg"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="cr-item">
-                      <img
-                        class="m-pub-img"
-                        src="images/writers/1.jpg"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-            </Slider>
-          </div>
-        </MobileView>
-      </div>
-      )
-  }
-
-  subscribe = () =>{
-    return(
       <div class="container">
-        <div class="" style={{background: '#EED7C2'}}>
-        <div class="row d-flex justify-content-center mt-3">
-        <h4 class="c-black " style={{fontSize: 18}}>সাবস্ক্রাইব করে জিতে নিন আকর্ষনীয় <span style={{color: '#02A868', fontSize: 25}}>অফার</span></h4>
-        </div>
-        <div class="row d-flex justify-content-center mt-2 pb-3">
-            <input class="col-md-5 subs-input pl-2 pr-2" placeholder="ইমেইল/মোবাইল নম্বর" style={{height: 55}}/>
+        <div class="" style={{ background: "#EED7C2" }}>
+          <div class="row d-flex justify-content-center mt-3">
+            <h4 class="c-black " style={{ fontSize: 18 }}>
+              সাবস্ক্রাইব করে জিতে নিন আকর্ষনীয়{" "}
+              <span style={{ color: "#02A868", fontSize: 25 }}>অফার</span>
+            </h4>
+          </div>
+          <div class="row d-flex justify-content-center mt-2 pb-3">
+            <input
+              class="col-md-5 subs-input pl-2 pr-2"
+              placeholder="ইমেইল/মোবাইল নম্বর"
+              style={{ height: 55 }}
+            />
             <div class="row mt-auto mb-auto ml-0">
               <div class="male-btn">
                 <p>পুরুষ</p>
@@ -431,67 +542,176 @@ class Home extends Component {
                 <p>মহিলা</p>
               </div>
             </div>
+          </div>
         </div>
       </div>
-      </div>
-    )
-  }
-
-  services = () =>{
-    return(
-     <div class="container">
-       <div class="pt-3 pb-3 mb-3" style={{background: '#F1F2EE'}}>
-        <div class="row">
-          <div className="row col-sm-3">
-            <img class="mr-auto ml-auto" src="images/icons/phone.png" style={{height: 76}}/>
-            <div class="mt-auto mb-auto">
-              <p class="service-text">হেল্প লাইন</p>
-              <p class="service-text">+৮৮ ০২ ৭১৯ ১৭৪৭</p>
-              <p class="service-text">০১৬১৬ ৩১৩ ৯৫৭</p>
-            </div>
+      </BrowserView>
+      <MobileView>
+        <div class="container">
+        <div class="" style={{ background: "#EED7C2" }}>
+          <div class="row d-flex justify-content-center pt-2">
+            <h4 class="c-black " style={{ fontSize: 18 }}>
+              সাবস্ক্রাইব করে জিতে নিন 
+            </h4>
+            <h4 class="c-black " style={{ fontSize: 18 }}>
+              আকর্ষনীয়{" "}
+              <span style={{ color: "#02A868", fontSize: 22 }}>অফার</span>
+            </h4>
           </div>
-          <div className="row col-sm-3">
-            <img class="mr-auto ml-auto" src="images/icons/cash_on.png" style={{height: 76}}/>
-            <div class="mt-auto mb-auto">
-              <p class="service-text">কেশ অন</p>
-              <p class="service-text">ডেলিভারি</p>
-            </div>
-          </div>
-          <div className="row col-sm-3">
-            <img class="mr-auto ml-auto" src="images/icons/delivery_cycle.png" style={{height: 76}}/>
-            <div class="mt-auto mb-auto">
-              <p class="service-text">ঢাকায়</p>
-              <p class="service-text">হোম ডেলিভারি</p>
-            </div>
-          </div>
-          <div className="row col-sm-3">
-            <img class="mr-auto ml-auto" src="images/icons/delivery.png" style={{height: 90}}/>
-            <div class="mt-auto mb-auto">
-              <p class="service-text">সেবা</p>
-              <p class="service-text">সারা বাংলাদেশ</p>
+          <div class="row d-flex justify-content-center mt-2 pb-3">
+            <input
+              class="col-md-5 subs-input "
+              placeholder="ইমেইল/মোবাইল নম্বর"
+              style={{ height: 55, marginLeft: 29, marginRight: 28}}
+            />
+            <div class="row mt-auto mb-auto ml-0">
+              <div class="male-btn">
+                <p>পুরুষ</p>
+              </div>
+              <div class="female-btn">
+                <p>মহিলা</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-     </div>
-
-    )
-  }
-
-  recentlySearched = () =>{
-      return(
-       <div class="container mt-3">
-          <h4>সাম্প্রতি খোজা বই</h4>
-          {this.firstRow()}
+      </MobileView>
       </div>
-      )
-  }
+    );
+  };
+
+  services = () => {
+    return (
+      <div class="container">
+      <BrowserView>
+      <div class="pt-3 pb-3 mb-3" style={{ background: "#F1F2EE" }}>
+          <div class="row">
+            <div className="row col-sm-3">
+              <img
+                class="mr-auto ml-auto"
+                src="images/icons/phone.png"
+                style={{ height: 76 }}
+              />
+              <div class="mt-auto mb-auto">
+                <p class="service-text">হেল্প লাইন</p>
+                <p class="service-text">+৮৮ ০২ ৭১৯ ১৭৪৭</p>
+                <p class="service-text">০১৬১৬ ৩১৩ ৯৫৭</p>
+              </div>
+            </div>
+            <div className="row col-sm-3">
+              <img
+                class="mr-auto ml-auto"
+                src="images/icons/cash_on.png"
+                style={{ height: 76 }}
+              />
+              <div class="mt-auto mb-auto">
+                <p class="service-text">কেশ অন</p>
+                <p class="service-text">ডেলিভারি</p>
+              </div>
+            </div>
+            <div className="row col-sm-3">
+              <img
+                class="mr-auto ml-auto"
+                src="images/icons/delivery_cycle.png"
+                style={{ height: 76 }}
+              />
+              <div class="mt-auto mb-auto">
+                <p class="service-text">ঢাকায়</p>
+                <p class="service-text">হোম ডেলিভারি</p>
+              </div>
+            </div>
+            <div className="row col-sm-3">
+              <img
+                class="mr-auto ml-auto"
+                src="images/icons/delivery.png"
+                style={{ height: 90 }}
+              />
+              <div class="mt-auto mb-auto">
+                <p class="service-text">সেবা</p>
+                <p class="service-text">সারা বাংলাদেশ</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </BrowserView>
+      <MobileView>
+      <div class="pt-3 pb-3 mb-3" style={{ background: "#F1F2EE" }}>
+          <div class="row">
+            <div className="row col-sm-3 mb-2">
+              <div class="d-flex justify-content-center" style={{width: '40%'}}>
+              <img
+                class=""
+                src="images/icons/phone.png"
+                style={{ height: 76 }}
+              />
+              </div>
+              <div class="mt-auto mb-auto">
+                <p class="service-text">হেল্প লাইন</p>
+                <p class="service-text">+৮৮ ০২ ৭১৯ ১৭৪৭</p>
+                <p class="service-text">০১৬১৬ ৩১৩ ৯৫৭</p>
+              </div>
+            </div>
+            <div className="row col-sm-3 mb-2">
+            <div class="d-flex justify-content-center" style={{width: '40%'}}>
+            <img
+                class=""
+                src="images/icons/cash_on.png"
+                style={{ height: 76 }}
+              />
+            </div>
+              
+              <div class="mt-auto mb-auto">
+                <p class="service-text">কেশ অন</p>
+                <p class="service-text">ডেলিভারি</p>
+              </div>
+            </div>
+            <div className="row col-sm-3 mb-2">
+            <div class="d-flex justify-content-center" style={{width: '40%'}}>
+              <img
+                class=""
+                src="images/icons/delivery_cycle.png"
+                style={{ height: 76 }}
+              />
+              </div>
+              <div class="mt-auto mb-auto">
+                <p class="service-text">ঢাকায়</p>
+                <p class="service-text">হোম ডেলিভারি</p>
+              </div>
+            </div>
+            <div className="row col-sm-3 mb-2">
+            <div class="d-flex justify-content-center" style={{width: '40%'}}>
+              <img
+                class=""
+                src="images/icons/delivery.png"
+                style={{ height: 90 }}
+              />
+              </div>
+              <div class="mt-auto mb-auto">
+                <p class="service-text">সেবা</p>
+                <p class="service-text">সারা বাংলাদেশ</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </MobileView>
+      </div>
+    );
+  };
+
+  recentlySearched = () => {
+    return (
+      <div class="container mt-3">
+        <h4>সাম্প্রতি খোজা বই</h4>
+        {this.firstRow()}
+      </div>
+    );
+  };
 
   render() {
     return (
       <div>
         <MainSlider />
-        <section class="wn__product__area brown--color pt--80  pb--30">
+        <section class="wn__product__area brown--color pt--20  pb--20">
           <div class="container">
             <div class="row m-0 mt-3">
               <h4 class="">
@@ -516,10 +736,8 @@ class Home extends Component {
             </div>
 
             {this.firstRow()}
-      
-            <div class="pb-4 pt-2">
-            {this.adRow()}
-            </div>
+
+            <div>{this.adRow()}</div>
 
             <div class="row m-0 mt-3">
               <h4 class="">
@@ -545,9 +763,7 @@ class Home extends Component {
 
             {this.firstRow()}
 
-            <div class="pb-4 pt-2">
-            {this.adRow()}
-            </div>
+            <div>{this.adRow()}</div>
 
             <div class="row m-0 mt-3">
               <h4 class="">
@@ -573,9 +789,7 @@ class Home extends Component {
 
             {this.firstRow()}
 
-            <div class="pb-4 pt-2">
-            {this.adRow()}
-            </div>
+            <div>{this.adRow()}</div>
           </div>
         </section>
 

@@ -7,7 +7,7 @@ class mainSlider extends Component {
 
   render() {
     return (
-        <div id="carouselExampleIndicators" class="carousel slide container mb-3" style={{marginTop: 61}} data-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide container mt-4 mb-2" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>

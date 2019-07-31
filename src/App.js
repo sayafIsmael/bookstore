@@ -18,12 +18,29 @@ import SingleProduct from "./components/singleProduct";
 import ShopGrid from "./components/shopGrid";
 import Signin from "./components/signin";
 import Shopingcart from "./components/shopingcart";
+import { Style } from "react-style-tag";
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile
+} from "react-device-detect";
 
 class App extends Component {
+  
   render() {
     return (
       <BrowserRouter>
         <div class="wrapper" id="wrapper">
+
+        <MobileView>
+        {/* <Style>{`
+          .slick-slide{
+            width: 125px;
+          }
+        `}</Style> */}
+        </MobileView>
+
           <Navbar />
 
           <Route

@@ -71,8 +71,7 @@ $(document).ready( function() {
         $('.pubIcon').css("color", "#1E1E1E");
       });
 
-      // $('.slick-active').attr('style','width: 195px');
-      // $('.slick-slide').attr('style','width: 168px');
+      // $('.slick-slide').attr('style','width: 127px');
 
 
 });
@@ -330,5 +329,4 @@ $(document).ready(function() {
   });
   
 }); 
-
 
