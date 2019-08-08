@@ -102,11 +102,21 @@ footer, .h6 , .dark-grey-text{
     border-top-right-radius: 34px;
     border-bottom-right-radius: 34px;
     height: 35px;
-    position: relative;
-    top: 9px;
-    background-color: #C67935;
+    top: 3px;
+    left: 25px;
+    position: absolute;
+    left: 86%;
 }
 
+.search-btn-mb{
+    width: 13%;
+    border-top-right-radius: 34px;
+    border-bottom-right-radius: 34px;
+    height: 35px;
+    top: 3px;
+    background-color: #C67935;
+    position: absolute;
+}
 
 .col-sub p{
     font-size: 20px;
@@ -234,19 +244,19 @@ footer, .h6 , .dark-grey-text{
 
 .read_some{
     position: absolute;
-    left: 34px;
-    top: 40px;
+    left: 30px;
+    top: 44px;
 }
 .social_icon{
     width: 30px;
     padding-right: 10px;
     cursor: pointer;
-    height: 30px;
+    height: 22px;
 }
 .siteLogomb{
-    width: 90px;
-    height: 54px;
-    margin-left: 8px;
+    width: 82px;
+    height: 42px;
+    margin-left: 15px;
 }
 
 .sidenav {
@@ -335,3 +345,76 @@ footer, .h6 , .dark-grey-text{
     content: "\f13a";
   }
   
+  textarea:focus, 
+textarea.form-control:focus, 
+input.form-control:focus, 
+input[type=text]:focus, 
+input[type=password]:focus, 
+input[type=email]:focus, 
+input[type=number]:focus, 
+[type=text].form-control:focus, 
+[type=password].form-control:focus, 
+[type=email].form-control:focus, 
+[type=tel].form-control:focus, 
+[contenteditable].form-control:focus {
+  box-shadow: inset 0 -1px 0 #ddd;
+}
+
+.nav-item{
+    padding-right: 10px 
+}
+.breadcrumb{
+    background: #fff;
+}
+
+.filter_text{
+    cursor: pointer;
+    width: 167px;
+}
+
+.filter_text:hover{
+    color: #00AEEF;
+}
+
+.book-bg {
+    position: relative;
+    height: 344px;
+     width: 238px;
+     background: gray;
+     margin: 30px auto;
+     margin-top: 40px;
+     background-size: cover;
+     transform-style: preserve-3d;
+     perspective: 900px;
+}
+.book-bg-bg{
+    height: 429px;
+     width: 309px;
+     border: 1px solid gray;
+}
+.book-cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    transform-origin: 0 95%;
+    transition: all 0.3s ease;
+    
+}
+.book-bg:hover .book-cover:hover {
+    transform: rotateY(-30deg);
+}
+.fotorama__stage{
+    height: 433px;
+    width: 313px;
+}
+.readsome_badge{
+    height: 20px;
+    position: absolute;
+    right: 180px;
+    top: 12px;
+}
+.pro__tab_label table tr td:first-child {
+    width: 15%;
+    background-color: #f1f2f4;
+}

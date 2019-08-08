@@ -60,7 +60,7 @@
 }
 
 .m-item-img{
-  width: 110px;
+  width: 101px;
   height: 135px;
   background-image: url("images/books/dummy.png")
 }
@@ -68,7 +68,7 @@
 
 @media (max-width: 320px) {
   .m-item-img{
-    width: 110px;
+    width: 101px;
   height: 135px;
   }
 }
@@ -138,6 +138,7 @@
     height: 71px;
     width: 40px;
     border: 0.1px solid gray;
+    top: 165px;
 }
 .slick-prev{
   /* left: 4px;
@@ -205,4 +206,8 @@
 .mw-pub-img{
   width: 100%;
   height: 113px;
+}
+
+.slick-slider{
+  max-height: 241px;
 }

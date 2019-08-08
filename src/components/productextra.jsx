@@ -1,87 +1,109 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import {
-  Link,
-} from "react-router-dom";
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile
+} from "react-device-detect";
+import { tsImportEqualsDeclaration } from "@babel/types";
+import FontAwesome from "react-fontawesome";
 
 class ProductExtra extends Component {
-   constructor(props){
-       super(props);
-   }
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+      mouseOver: false
+    };
+  }
+
+
+
   render() {
     return (
-      <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-      <div class="product__thumb">
-        <Link class="first__img" to={"product"} style={{height: 350}}>
-          <img src={this.props.image} alt="product image" />
-        </Link>
-        <Link class="second__img animation1" to={"product"} style={{height: 350}}>
-          <img src={this.props.scndimage} alt="product image" />
-        </Link>
-        <div class="hot__box">
-          <span class="hot-label">{this.props.tag}</span>
-        </div>
-      </div>
-      <div class="product__content content--center">
-        <h4>
-          <Link to={"product"}>{this.props.name}</Link>
-        </h4>
-        <ul class="prize d-flex">
-          <li>৳{this.props.price}</li>
-          <li class="old_prize">৳{this.props.oldprice}</li>
-        </ul>
-        <div class="action">
-          <div class="actions_inner">
-            <ul class="add_to_links">
-              <li>
-                <Link class="cart" to={"cart.html"}>
-                  <i class="bi bi-shopping-bag4" />
-                </Link>
-              </li>
-              <li>
-                <Link class="wishlist" to={"wishlist.html"}>
-                  <i class="bi bi-shopping-cart-full" />
-                </Link>
-              </li>
-              <li>
-                <Link class="compare" to={"#"}>
-                  <i class="bi bi-heart-beat" />
-                </Link>
-              </li>
-              <li>
-                <Link
-                  data-toggle="modal"
-                  title="Quick View"
-                  class="quickview modal-view detail-link"
-                  to={"#productmodal"}
-                >
-                  <i class="bi bi-search" />
-                </Link>
-              </li>
-            </ul>
+      <React.Fragment>
+        <BrowserView>
+          <div
+            class="cr-item pt-4"
+            style={{
+              width: 205,
+              height: 370,
+              boxShadow: this.state.mouseOver
+                ? "inset 0 0 7px 0 #cdcdcd"
+                : "none"
+            }}
+            onMouseOver={() => {
+              this.setState({ mouseOver: true });
+            }}
+            onMouseOut={() => {
+              this.setState({ mouseOver: false });
+            }}
+          >
+            <div>
+              <img
+                style={{ opacity: this.state.mouseOver ? 0.3 : 1 }}
+                class="discount_badge"
+                src="images/badges/discount.png"
+              />
+               <button
+                type="button"
+                class="btn btn-warning"
+                style={{ zIndex: 1, position: "absolute", top: 112, color: 'white', display: this.state.mouseOver?'inline':'none'}}
+              >
+                <FontAwesome
+                  name="fas fa-shopping-cart"
+                  style={{ color: "white", marginRight: 10}}
+                />
+                Add to Cart
+              </button>
+              <img
+                class="read_some"
+                src="images/badges/read_some.png"
+                style={{
+                  left: 68,
+                  top: 112,
+                  opacity: this.state.mouseOver ? 0.3 : 1
+                }}
+              />
+
+              <img
+                class="m-item-img ml-auto mr-auto"
+                src={this.props.image}
+                style={{
+                  width: 130,
+                  height: 188,
+                  opacity: this.state.mouseOver ? 0.3 : 1
+                }}
+              />
+            </div>
+            <div>
+              <p style={{ color: "black", marginTop: 10, opacity: this.state.mouseOver ? 0.3 : 1  }}>{this.props.name}</p>
+              <p style={{ color: "black", opacity: this.state.mouseOver ? 0.3 : 1  }}>
+                {this.props.writer ? this.props.writer : "লেখকের নাম"}
+              </p>
+              <p class="text-success" style={{ opacity: this.state.mouseOver ? 0.3 : 1 }}>Product In Stock</p>
+              <p style={{ color: "black" , opacity: this.state.mouseOver ? 0.3 : 1 }}>মূল্য : {this.props.price}</p>
+            </div>
+            <Link to="/product">
+            <button type="button" class="btn btn-primary mt-2" style={{width: '100%', display: this.state.mouseOver?'inline':'none'}}>View Details</button>
+            </Link>
           </div>
-        </div>
-        <div class="product__hover--content">
-          <ul class="rating d-flex">
-            <li class="on">
-              <i class="fa fa-star-o" />
-            </li>
-            <li class="on">
-              <i class="fa fa-star-o" />
-            </li>
-            <li class="on">
-              <i class="fa fa-star-o" />
-            </li>
-            <li>
-              <i class="fa fa-star-o" />
-            </li>
-            <li>
-              <i class="fa fa-star-o" />
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+        </BrowserView>
+        <MobileView>
+          <div class="cr-item-mb">
+            <div>
+              <img class="discount_badge" src="images/badges/discount.png" />
+              <img class="read_some_mb" src="images/badges/read_some.png" />
+              <img class="m-item-img ml-auto mr-auto" src={this.props.image} />
+            </div>
+            <div>
+              <p style={{ color: "black", marginTop: 10 }}>{this.props.name}</p>
+              <p style={{ color: "black" }}>{this.props.writer}</p>
+              <p style={{ color: "black" }}>মূল্য : {this.props.price}</p>
+            </div>
+          </div>
+        </MobileView>
+      </React.Fragment>
     );
   }
 }

@@ -38,21 +38,21 @@ class navbar extends Component {
     };
   }
 
-  componentWillMount() {
-    loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
-      loadjs("js/vendor/jquery-3.2.1.min.js", function() {
-        loadjs("js/popper.min.js", function() {
-          loadjs("js/plugins.js", function() {
-            loadjs("js/bootstrap.min.js", function() {
-              loadjs("js/active.js", function() {
-                loadjs("js/main.js");
-              });
-            });
-          });
-        });
-      });
-    });
-  }
+  // componentWillMount() {
+  //   loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
+  //     loadjs("js/vendor/jquery-3.2.1.min.js", function() {
+  //       loadjs("js/popper.min.js", function() {
+  //         loadjs("js/plugins.js", function() {
+  //           loadjs("js/bootstrap.min.js", function() {
+  //             loadjs("js/active.js", function() {
+  //               loadjs("js/main.js");
+  //             });
+  //           });
+  //         });
+  //       });
+  //     });
+  //   });
+  // }
 
   logedIn = () => {
     if (this.state.logedIn === true) {
@@ -91,6 +91,144 @@ class navbar extends Component {
     return <div />;
   };
 
+  cart = () => {
+    if (this.state.cart === true) {
+      return (
+        <div class="block-minicart minicart__active is-visible ">
+          <div class="minicart-content-wrapper">
+            <div
+              class="micart__close"
+              onClick={() => this.setState({ cart: !this.state.cart })}
+            >
+              <span>close</span>
+            </div>
+            <div class="items-total d-flex justify-content-between">
+              <span>3 items</span>
+              <span>Cart Subtotal</span>
+            </div>
+            <div class="total_amount text-right">
+              <span>$66.00</span>
+            </div>
+            <div class="mini_action checkout">
+              <Link
+                class="checkout__btn"
+                to={"cart"}
+                onClick={() => this.setState({ cart: !this.state.cart })}
+              >
+                Go to Checkout
+              </Link>
+            </div>
+            <div class="single__items">
+              <div class="miniproduct">
+                <div class="item01 d-flex">
+                  <div class="thumb">
+                    <a href="product-details.html">
+                      <img
+                        src="images/product/sm-img/1.jpg"
+                        alt="product images"
+                      />
+                    </a>
+                  </div>
+                  <div class="content">
+                    <h6>
+                      <a href="product-details.html">Voyage Yoga Bag</a>
+                    </h6>
+                    <span class="prize">$30.00</span>
+                    <div class="product_prize d-flex justify-content-between">
+                      <span class="qun">Qty: 01</span>
+                      <ul class="d-flex justify-content-end">
+                        <li>
+                          <a href="#">
+                            <i class="zmdi zmdi-settings" />
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i class="zmdi zmdi-delete" />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="item01 d-flex mt--20">
+                  <div class="thumb">
+                    <a href="product-details.html">
+                      <img
+                        src="images/product/sm-img/3.jpg"
+                        alt="product images"
+                      />
+                    </a>
+                  </div>
+                  <div class="content">
+                    <h6>
+                      <a href="product-details.html">Impulse Duffle</a>
+                    </h6>
+                    <span class="prize">$40.00</span>
+                    <div class="product_prize d-flex justify-content-between">
+                      <span class="qun">Qty: 03</span>
+                      <ul class="d-flex justify-content-end">
+                        <li>
+                          <a href="#">
+                            <i class="zmdi zmdi-settings" />
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i class="zmdi zmdi-delete" />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="item01 d-flex mt--20">
+                  <div class="thumb">
+                    <a href="product-details.html">
+                      <img
+                        src="images/product/sm-img/2.jpg"
+                        alt="product images"
+                      />
+                    </a>
+                  </div>
+                  <div class="content">
+                    <h6>
+                      <a href="product-details.html">Compete Track Tote</a>
+                    </h6>
+                    <span class="prize">$40.00</span>
+                    <div class="product_prize d-flex justify-content-between">
+                      <span class="qun">Qty: 03</span>
+                      <ul class="d-flex justify-content-end">
+                        <li>
+                          <a href="#">
+                            <i class="zmdi zmdi-settings" />
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i class="zmdi zmdi-delete" />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mini_action cart">
+              <Link
+                class="cart__btn"
+                to={"cart"}
+                onClick={() => this.setState({ cart: !this.state.cart })}
+              >
+                View and edit cart
+              </Link>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  };
   category = () => {
     if (this.state.category === true) {
       return (
@@ -173,35 +311,35 @@ class navbar extends Component {
     }
   };
 
-  allCategory = () =>{
-    if(this.state.catclicked === true){
-      return(
+  allCategory = () => {
+    if (this.state.catclicked === true) {
+      return (
         <div class="ml-4">
-          <a style={{fontSize: 16}}>নতুন বই</a>
-          <a style={{fontSize: 16}}>ধ্রূপদী সাহিত্য</a>
-          <a style={{fontSize: 16}}>শিশুতোষ</a>
-          <a style={{fontSize: 16}}>বিজ্ঞান</a>
-          <a style={{fontSize: 16}}>রাজনীতি</a>
-          <a style={{fontSize: 16}}>কিশোর সাহিত্য</a>
-          <a style={{fontSize: 16}}>ধর্মীয় বই</a>
-          <a style={{fontSize: 16}}>মুক্তিযুদ্ধ</a>
-          <a style={{fontSize: 16}}>পশিম বঙ্গের বই</a>
-          <a style={{fontSize: 16}}>নিষিদ্ধ বই</a>
-          <a style={{fontSize: 16}}>পাঠ্য বই</a>
+          <a style={{ fontSize: 16 }}>নতুন বই</a>
+          <a style={{ fontSize: 16 }}>ধ্রূপদী সাহিত্য</a>
+          <a style={{ fontSize: 16 }}>শিশুতোষ</a>
+          <a style={{ fontSize: 16 }}>বিজ্ঞান</a>
+          <a style={{ fontSize: 16 }}>রাজনীতি</a>
+          <a style={{ fontSize: 16 }}>কিশোর সাহিত্য</a>
+          <a style={{ fontSize: 16 }}>ধর্মীয় বই</a>
+          <a style={{ fontSize: 16 }}>মুক্তিযুদ্ধ</a>
+          <a style={{ fontSize: 16 }}>পশিম বঙ্গের বই</a>
+          <a style={{ fontSize: 16 }}>নিষিদ্ধ বই</a>
+          <a style={{ fontSize: 16 }}>পাঠ্য বই</a>
         </div>
-      )
+      );
     }
-  }
+  };
 
   render() {
     return (
-      <header id="wn__header" class="header__area " style={{ zIndex: 1000 }}>
+      <header id="wn__header" class="header__area " style={{ zIndex: 3000 }}>
         <BrowserView>
-          <div class="sticky__header" style={{ backgroundColor: "#C67935" }}>
-            <div class="container-fluid">
-              <div class="row d-flex align-items-center">
+          <div class="sticky__header" style={{ backgroundColor: "white" }}>
+            <div class="container">
+              <div class="row d-flex align-items-center" style={{ height: 70 }}>
                 <div class="col-md-3">
-                  <div class="logo">
+                  <div class="logo pt-2">
                     <a href="/">
                       <img
                         class="siteLogo"
@@ -222,9 +360,11 @@ class navbar extends Component {
                       <div
                         class="row m-0"
                         style={{
+                          border: "1px solid black",
                           width: "100%",
                           backgroundColor: "white",
-                          borderRadius: 26
+                          borderRadius: 26,
+                          position: "relative"
                         }}
                       >
                         <ReactTyped
@@ -249,7 +389,7 @@ class navbar extends Component {
                             style={{
                               width: "100%",
                               border: "none",
-                              height: 53
+                              height: 40
                             }}
                             class="form-control mr-sm-2"
                           />
@@ -268,184 +408,38 @@ class navbar extends Component {
                   </ul>
                 </div>
                 <div class="col-md-4">
-                  <ul class="header__sidebar__right d-flex justify-content-center align-items-center">
+                  <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
                     <li class="pr-3">
                       <a href="#">
                         <img
                           src="images/icons/wish.png"
-                          style={{ width: 50, height: 50 }}
+                          style={{ width: 40, height: 40 }}
                         />
                       </a>
                     </li>
-                    <li class="shopcart">
-                      <a
-                        class="cartbox_active"
-                        href="#"
-                        onClick={() =>
+                    <li class="shopcart" onClick={() =>
                           this.setState({ cart: !this.state.cart })
-                        }
+                        }>
+                      <div
+                      class="cartIcon"
+                        to=""
                       >
                         <span class="product_qun">3</span>
-                      </a>
-
-                      <div
-                        class={
-                          this.state.cart === true
-                            ? "block-minicart minicart__active is-visible "
-                            : "block-minicart minicart__active  "
-                        }
-                      >
-                        <div class="minicart-content-wrapper">
-                          <div
-                            class="micart__close"
-                            onClick={() =>
-                              this.setState({ cart: !this.state.cart })
-                            }
-                          >
-                            <span>close</span>
-                          </div>
-                          <div class="items-total d-flex justify-content-between">
-                            <span>3 items</span>
-                            <span>Cart Subtotal</span>
-                          </div>
-                          <div class="total_amount text-right">
-                            <span>$66.00</span>
-                          </div>
-                          <div class="mini_action checkout">
-                            <Link
-                              class="checkout__btn"
-                              to={"cart"}
-                              onClick={() =>
-                                this.setState({ cart: !this.state.cart })
-                              }
-                            >
-                              Go to Checkout
-                            </Link>
-                          </div>
-                          <div class="single__items">
-                            <div class="miniproduct">
-                              <div class="item01 d-flex">
-                                <div class="thumb">
-                                  <a href="product-details.html">
-                                    <img
-                                      src="images/product/sm-img/1.jpg"
-                                      alt="product images"
-                                    />
-                                  </a>
-                                </div>
-                                <div class="content">
-                                  <h6>
-                                    <a href="product-details.html">
-                                      Voyage Yoga Bag
-                                    </a>
-                                  </h6>
-                                  <span class="prize">$30.00</span>
-                                  <div class="product_prize d-flex justify-content-between">
-                                    <span class="qun">Qty: 01</span>
-                                    <ul class="d-flex justify-content-end">
-                                      <li>
-                                        <a href="#">
-                                          <i class="zmdi zmdi-settings" />
-                                        </a>
-                                      </li>
-                                      <li>
-                                        <a href="#">
-                                          <i class="zmdi zmdi-delete" />
-                                        </a>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="item01 d-flex mt--20">
-                                <div class="thumb">
-                                  <a href="product-details.html">
-                                    <img
-                                      src="images/product/sm-img/3.jpg"
-                                      alt="product images"
-                                    />
-                                  </a>
-                                </div>
-                                <div class="content">
-                                  <h6>
-                                    <a href="product-details.html">
-                                      Impulse Duffle
-                                    </a>
-                                  </h6>
-                                  <span class="prize">$40.00</span>
-                                  <div class="product_prize d-flex justify-content-between">
-                                    <span class="qun">Qty: 03</span>
-                                    <ul class="d-flex justify-content-end">
-                                      <li>
-                                        <a href="#">
-                                          <i class="zmdi zmdi-settings" />
-                                        </a>
-                                      </li>
-                                      <li>
-                                        <a href="#">
-                                          <i class="zmdi zmdi-delete" />
-                                        </a>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="item01 d-flex mt--20">
-                                <div class="thumb">
-                                  <a href="product-details.html">
-                                    <img
-                                      src="images/product/sm-img/2.jpg"
-                                      alt="product images"
-                                    />
-                                  </a>
-                                </div>
-                                <div class="content">
-                                  <h6>
-                                    <a href="product-details.html">
-                                      Compete Track Tote
-                                    </a>
-                                  </h6>
-                                  <span class="prize">$40.00</span>
-                                  <div class="product_prize d-flex justify-content-between">
-                                    <span class="qun">Qty: 03</span>
-                                    <ul class="d-flex justify-content-end">
-                                      <li>
-                                        <a href="#">
-                                          <i class="zmdi zmdi-settings" />
-                                        </a>
-                                      </li>
-                                      <li>
-                                        <a href="#">
-                                          <i class="zmdi zmdi-delete" />
-                                        </a>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="mini_action cart">
-                            <Link
-                              class="cart__btn"
-                              to={"cart"}
-                              onClick={() =>
-                                this.setState({ cart: !this.state.cart })
-                              }
-                            >
-                              View and edit cart
-                            </Link>
-                          </div>
-                        </div>
                       </div>
+
+                      {this.cart()}
                     </li>
                     <li
-                      class="setting__bar__icon"
+                      class=""
                       onClick={() =>
                         this.setState({ setting: !this.state.setting })
                       }
                     >
-                      <a class="setting__active is-visible" href="#" />
+                      <FontAwesome
+                        name="fas fa-user"
+                        // size="2x"
+                        style={{ color: "black", fontSize: 24}}
+                      />
                       <div
                         class={
                           this.state.setting === true
@@ -489,7 +483,7 @@ class navbar extends Component {
             <div
               class="collapse navbar-collapse d-flex "
               id="navbarNav"
-              style={{ borderBottom: "2px solid #C67935" }}
+              style={{ borderBottom: "1px solid #C67935" }}
             >
               <ul class="navbar-nav ml-auto mr-auto">
                 <li
@@ -505,26 +499,9 @@ class navbar extends Component {
                     })
                   }
                 >
-                  <a class="nav-link" href="#">
-                    ক্যাটাগরি <span class="sr-only">(current)</span>
-                  </a>
-                </li>
-                <li
-                  class="nav-item "
-                  onClick={() =>
-                    this.setState({
-                      category: false,
-                      writer: true,
-                      publisher: false,
-                      reader: false,
-                      ovijatri: false,
-                      bookfair: false
-                    })
-                  }
-                >
-                  <a class="nav-link" href="#">
-                    প্রাতিষ্ঠানিক অর্ডার
-                  </a>
+                  <p class="nav-link" href="#">
+                    বিষয় <span class="sr-only">(current)</span>
+                  </p>
                 </li>
                 <li
                   class="nav-item "
@@ -582,6 +559,23 @@ class navbar extends Component {
                   onClick={() =>
                     this.setState({
                       category: false,
+                      writer: true,
+                      publisher: false,
+                      reader: false,
+                      ovijatri: false,
+                      bookfair: false
+                    })
+                  }
+                >
+                  <a class="nav-link" href="#">
+                    প্রাতিষ্ঠানিক অর্ডার
+                  </a>
+                </li>
+                <li
+                  class="nav-item"
+                  onClick={() =>
+                    this.setState({
+                      category: false,
                       writer: false,
                       publisher: false,
                       reader: false,
@@ -631,20 +625,28 @@ class navbar extends Component {
             >
               &times;
             </a>
-            <div class="row m-0 d-flex justify-content-between align-items-center" onClick={()=> this.setState({catclicked: !this.state.catclicked})} >
-            <a href="#">ক্যাটাগরি </a>
-            <FontAwesome
-        name={this.state.catclicked?'angle-down':'angle-right'}
-        size='2x'
-        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)', paddingRight: 10}}
-      />
+            <div
+              class="row m-0 d-flex justify-content-between align-items-center"
+              onClick={() =>
+                this.setState({ catclicked: !this.state.catclicked })
+              }
+            >
+              <a href="#">বিষয় </a>
+              <FontAwesome
+                name={this.state.catclicked ? "angle-down" : "angle-right"}
+                size="2x"
+                style={{
+                  textShadow: "0 1px 0 rgba(0, 0, 0, 0.1)",
+                  paddingRight: 10
+                }}
+              />
             </div>
-            
+
             {this.allCategory()}
-            <a href="#">প্রাতিষ্ঠানিক অর্ডার</a>
             <a href="#">লেখক</a>
             <a href="#">প্রকাশনী</a>
             <a href="#">পাঠক কর্নার</a>
+            <a href="#">প্রাতিষ্ঠানিক অর্ডার</a> 
             <a href="#">অভিযাত্রী</a>
             <a href="#">বইমেলা</a>
           </div>
@@ -667,11 +669,11 @@ class navbar extends Component {
           </div>
           <div
             class="row m-0 sticky__header d-flex align-items-center"
-            style={{ background: "#C67935" }}
+            style={{ background: "white" }}
           >
             <div class="mt-auto mb-auto pl-3">
               <span
-                style={{ fontSize: 30, cursor: "pointer" }}
+                style={{ fontSize: 24, cursor: "pointer" }}
                 onClick={() =>
                   this.setState({ menuOpend: !this.state.menuOpend })
                 }
@@ -679,7 +681,7 @@ class navbar extends Component {
                 &#9776;
               </span>
             </div>
-            <div class="logo">
+            <div class="logo d-flex align-items-center">
               <a href="/">
                 <img
                   class="siteLogomb"
@@ -693,12 +695,12 @@ class navbar extends Component {
               <img
                 class="ml-5"
                 src="images/icons/wish.png"
-                style={{ width: 50, height: 50 }}
+                style={{ width: 35, height: 35 }}
               />
 
               <a href="/cart">
                 <img
-                  style={{ width: 30, height: 30 }}
+                  style={{ width: 24, height: 24 }}
                   src="images/icons/cart.png"
                 />
                 <span
@@ -711,8 +713,7 @@ class navbar extends Component {
 
               <FontAwesome
                 name="fas fa-user"
-                size="2x"
-                style={{ textShadow: "0 1px 0 rgba(0, 0, 0, 0.1)" }}
+                style={{ fontSize: 24}}
                 onClick={() =>
                   this.setState({ pmenuOpend: !this.state.pmenuOpend })
                 }
@@ -720,52 +721,49 @@ class navbar extends Component {
             </div>
           </div>
           <div
-                        class="row m-0 d-flex align-items-center ml-3 mt-2"
-                        style={{
-                          width: "90%",
-                          backgroundColor: "white",
-                          borderRadius: 26,
-                          border: '1px solid gray',
-                        }}
-                      >
-                        <ReactTyped
-                          // typedRef={typedRef()}
-                          loop={true}
-                          loopCount={0}
-                          typeSpeed={50}
-                          startDelay={0}
-                          backSpeed={20}
-                          backDelay={2}
-                          strings={["পছন্দের বই টাইপ করুন "]}
-                          stopped={null}
-                          smartBackspace
-                          shuffle={false}
-                          fadeOut={false}
-                          fadeOutDelay={100}
-                          attr="placeholder"
-                          bindInputFocusEvents={false}
-                        >
-                          <input
-                            type="search"
-                            style={{
-                              width: "100%",
-                              border: "none",
-                              height: 35,
-                            }}
-                            class="form-control mr-sm-2"
-                          />
-                        </ReactTyped>
-                        <button
-                          class="btn my-2 my-sm-0 search-btn"
-                          type="submit"
-                          style={{top: 0, position: 'relative', right: 10}}
-                        >
-                          <FontAwesome
-                            name="search"
-                            style={{ color: "white" }}
-                          />
-                        </button>
-                      </div>
+            class="row m-0 d-flex align-items-center ml-3 mt-2"
+            style={{
+              width: "90%",
+              backgroundColor: "white",
+              borderRadius: 26,
+              border: "1px solid gray"
+            }}
+          >
+            <ReactTyped
+              // typedRef={typedRef()}
+              loop={true}
+              loopCount={0}
+              typeSpeed={50}
+              startDelay={0}
+              backSpeed={20}
+              backDelay={2}
+              strings={["পছন্দের বই টাইপ করুন "]}
+              stopped={null}
+              smartBackspace
+              shuffle={false}
+              fadeOut={false}
+              fadeOutDelay={100}
+              attr="placeholder"
+              bindInputFocusEvents={false}
+            >
+              <input
+                type="search"
+                style={{
+                  width: "100%",
+                  border: "none",
+                  height: 20
+                }}
+                class="form-control mr-sm-2"
+              />
+            </ReactTyped>
+            <button
+              class="btn my-2 my-sm-0 search-btn-mb"
+              type="submit"
+              style={{ top: 0, position: "relative", right: 10 }}
+            >
+              <FontAwesome name="search" style={{ color: "white" }} />
+            </button>
+          </div>
         </MobileView>
       </header>
     );

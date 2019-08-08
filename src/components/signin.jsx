@@ -8,21 +8,21 @@ class Signin extends Component {
 		window.scrollTo(0, 0);
   }
 
-  componentWillMount() {
-    loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
-      loadjs("js/vendor/jquery-3.2.1.min.js", function() {
-        loadjs("js/popper.min.js", function() {
-          loadjs("js/plugins.js", function() {
-            loadjs("js/bootstrap.min.js", function() {
-              loadjs("js/active.js", function() {
-                loadjs("js/main.js");
-              });
-            });
-          });
-        });
-      });
-    });
-  }
+  // componentWillMount() {
+  //   loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
+  //     loadjs("js/vendor/jquery-3.2.1.min.js", function() {
+  //       loadjs("js/popper.min.js", function() {
+  //         loadjs("js/plugins.js", function() {
+  //           loadjs("js/bootstrap.min.js", function() {
+  //             loadjs("js/active.js", function() {
+  //               loadjs("js/main.js");
+  //             });
+  //           });
+  //         });
+  //       });
+  //     });
+  //   });
+  // }
 
   render() {
     return (

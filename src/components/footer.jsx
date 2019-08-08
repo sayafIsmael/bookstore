@@ -14,21 +14,21 @@ class Footer extends Component {
     super(props);
   }
 
-  componentWillMount() {
-    loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
-      loadjs("js/vendor/jquery-3.2.1.min.js", function() {
-        loadjs("js/popper.min.js", function() {
-          loadjs("js/plugins.js", function() {
-            loadjs("js/bootstrap.min.js", function() {
-              loadjs("js/active.js", function() {
-                loadjs("js/main.js");
-              });
-            });
-          });
-        });
-      });
-    });
-  }
+  // componentWillMount() {
+  //   loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
+  //     loadjs("js/vendor/jquery-3.2.1.min.js", function() {
+  //       loadjs("js/popper.min.js", function() {
+  //         loadjs("js/plugins.js", function() {
+  //           loadjs("js/bootstrap.min.js", function() {
+  //             loadjs("js/active.js", function() {
+  //               loadjs("js/main.js");
+  //             });
+  //           });
+  //         });
+  //       });
+  //     });
+  //   });
+  // }
 
   render() {
     return (
@@ -44,16 +44,16 @@ class Footer extends Component {
             >
               <div
                 class="col-md-3 col-lg-4 col-xl-3 mb-4"
-                style={{ borderRight: "4px solid black" }}
+                style={{ borderRight: "1px solid black" }}
               >
                 <h6 class="text-uppercase font-weight-bold">গ্রন্থিক.কম</h6>
 
                 <div class="row m-0">
-                  <div style={{ width: "20%" }}>
-                    <img
-                      src="images/icons/phone.png"
-                      style={{ height: 50, width: 30 }}
-                    />
+                  <div class="d-flex justify-content-center align-items-center" style={{ width: "20%" }}>
+                  <FontAwesome
+                    name="fas fa-phone-square"
+                    style={{ fontSize: 30}}
+                  />
                   </div>
                   <div style={{ width: "80%" }}>
                     <p>হেল্প লাইন</p>
@@ -62,30 +62,22 @@ class Footer extends Component {
                   </div>
                 </div>
                 <div class="row m-0">
-                  <div style={{ width: "20%" }}>
-                    <FontAwesome
-                      // className='super-crazy-colors'
-                      name="far fa-envelope-open"
-                      size="2x"
-                      style={{ textShadow: "0 1px 0 rgba(0, 0, 0, 0.1)" }}
-                    />
+                <div class="d-flex justify-content-center align-items-center" style={{ width: "20%" }}>
+                  <FontAwesome
+                    name="far fa-envelope-open"
+                    style={{ fontSize: 25}}
+                  />
                   </div>
                   <div style={{ width: "80%" }}>
                     <p>info@gronthik.com</p>
                   </div>
                 </div>
                 <div class="row m-0 mt-2">
-                  <div style={{ width: "20%" }}>
-                    <img
-                      class="ml-2"
-                      src="images/icons/map-marker.png"
-                      style={{
-                        height: 35,
-                        width: 35,
-                        position: "relative",
-                        right: 10
-                      }}
-                    />
+                <div class="d-flex justify-content-center align-items-center" style={{ width: "20%" }}>
+                  <FontAwesome
+                    name="fas fa-map-marker"
+                    style={{ fontSize: 30}}
+                  />
                   </div>
                   <div style={{ width: "80%" }}>
                     <p>১১০ আলিজা টাওয়ার (৪র্থ তলা)</p>
@@ -105,7 +97,7 @@ class Footer extends Component {
 
               <div
                 class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4"
-                style={{ borderRight: "4px solid black" }}
+                style={{ borderRight: "1px solid black" }}
               >
                 <h6 class="text-uppercase font-weight-bold">সাইড ম্যাপ</h6>
 
@@ -153,7 +145,7 @@ class Footer extends Component {
 
               <div
                 class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4"
-                style={{ borderRight: "4px solid black" }}
+                style={{ borderRight: "1px solid black" }}
               >
                 <h6 class="text-uppercase font-weight-bold">ফেইসবুক</h6>
 
@@ -173,7 +165,6 @@ class Footer extends Component {
 
               <div class="col-md-3 col-lg-2 col-xl-4 mx-auto mb-4">
                 <h6 class="text-uppercase font-weight-bold">ঠিকানা</h6>
-
                 <div id="map" />
               </div>
             </div>
@@ -189,11 +180,11 @@ class Footer extends Component {
                 <h6 class="text-uppercase font-weight-bold mb-2">গ্রন্থিক.কম</h6>
 
                 <div class="row m-0">
-                  <div style={{ width: "30%" }}>
-                    <img
-                      src="images/icons/phone.png"
-                      style={{ height: 50, width: 30 }}
-                    />
+                <div class="d-flex justify-content-center align-items-center" style={{ width: "30%" }}>
+                  <FontAwesome
+                    name="fas fa-phone-square"
+                    style={{ fontSize: 30}}
+                  />
                   </div>
                   <div style={{ width: "70%", textAlign: 'start'}}>
                     <p>হেল্প লাইন</p>
@@ -202,30 +193,22 @@ class Footer extends Component {
                   </div>
                 </div>
                 <div class="row m-0">
-                  <div style={{ width: "30%" }}>
-                    <FontAwesome
-                      // className='super-crazy-colors'
-                      name="far fa-envelope-open"
-                      size="2x"
-                      style={{ textShadow: "0 1px 0 rgba(0, 0, 0, 0.1)" }}
-                    />
+                <div class="d-flex justify-content-center align-items-center" style={{ width: "30%" }}>
+                  <FontAwesome
+                    name="far fa-envelope-open"
+                    style={{ fontSize: 25}}
+                  />
                   </div>
                   <div style={{ width: "70%", textAlign: 'start'}}>
                     <p>info@gronthik.com</p>
                   </div>
                 </div>
                 <div class="row m-0 mt-2">
-                  <div style={{ width: "30%" }}>
-                    <img
-                      class="ml-2"
-                      src="images/icons/map-marker.png"
-                      style={{
-                        height: 35,
-                        width: 35,
-                        position: "relative",
-                        right: 10
-                      }}
-                    />
+                <div class="d-flex justify-content-center align-items-center" style={{ width: "30%" }}>
+                  <FontAwesome
+                    name="fas fa-map-marker"
+                    style={{ fontSize: 30}}
+                  />
                   </div>
                   <div style={{ width: "70%", textAlign: 'start'}}>
                     <p>১১০ আলিজা টাওয়ার (৪র্থ তলা)</p>
@@ -247,14 +230,13 @@ class Footer extends Component {
         </MobileView>
         <BrowserView>
         <div class="container mt-3">
-          <div
-            class="row"
-            style={{ background: "#F1F2EE", height: 120, borderRadius: 12 }}
+        <div style={{ background: "#F1F2EE", width: '100%', height: 150, borderRadius: 12}}>
+        <div >
+          <p class="payment-text" style={{textAlign: 'center'}}>We accept payment via</p>
+        </div>
+        <div
+            class="row m-0 pl-3 pb-2"
           >
-            <div class="col">
-              <p class="payment-text mt-3">We accept</p>
-              <p class="payment-text ">payment via</p>
-            </div>
             <div class="payment-box col">
               <img class="payment-img" src="images/icons/visa.png" />
             </div>
@@ -278,13 +260,14 @@ class Footer extends Component {
             </div>
           </div>
         </div>
+        </div>
         <div class="container">
           <div class="row d-flex justify-content-center align-items-center pt-4 pb-4">
-            <p style={{ fontSize: 18 }}>
-              <span class="font-weight-bold">
-                গ্রন্থিক.কম বাংলাদেশের অনলাইন ভিত্তিক বুক শপগুলোর মধ্যে অন্যতম ।{" "}
-              </span>
-              বইয়ের এক ভিন্নধর্মী প্লাটফর্ম গড়ে তুলতে আমাদের এই যাত্রা।{" "}
+            <p style={{ fontSize: 14, fontWeight: 'bold', width: '100%', textAlign: 'center'}}> 
+                গ্রন্থিক.কম বাংলাদেশের অনলাইন ভিত্তিক বুক শপগুলোর মধ্যে অন্যতম ।
+            </p>
+            <p>
+            বইয়ের এক ভিন্নধর্মী প্লাটফর্ম গড়ে তুলতে আমাদের এই যাত্রা।                                            
             </p>
             <p>
               দেশের সকল প্রান্তের পাঠকের কাছে সবচেয়ে সহজ, নিরাপদ ও দ্রুত বই পৌছে
@@ -301,7 +284,7 @@ class Footer extends Component {
         </div>
         <div class="container">
           <div
-            class="footer-copyright text-center text-black-50 py-3"
+            class="footer-copyright text-center text-black-50 py-2"
             style={{ background: "#C67935" }}
           >
             gronthik.com
@@ -368,7 +351,7 @@ class Footer extends Component {
         </div>
       
           <div
-            class="footer-copyright text-center text-black-50 py-3"
+            class="footer-copyright text-center text-black-50 py-2"
             style={{ background: "#C67935" }}
           >
             gronthik.com

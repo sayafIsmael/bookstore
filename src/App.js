@@ -25,9 +25,25 @@ import {
   isBrowser,
   isMobile
 } from "react-device-detect";
+import loadjs from "loadjs";
 
 class App extends Component {
-  
+  componentWillMount() {
+    loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
+      loadjs("js/vendor/jquery-3.2.1.min.js", function() {
+        loadjs("js/popper.min.js", function() {
+          loadjs("js/plugins.js", function() {
+            loadjs("js/bootstrap.min.js", function() {
+              loadjs("js/active.js", function() {
+                loadjs("js/main.js");
+              });
+            });
+          });
+        });
+      });
+    });
+  }
+
   render() {
     return (
       <BrowserRouter>

@@ -96,26 +96,26 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: discountProduct
+      books: discountProduct,
     };
     window.scrollTo(0, 0);
   }
 
-  componentWillMount() {
-    loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
-      loadjs("js/vendor/jquery-3.2.1.min.js", function() {
-        loadjs("js/popper.min.js", function() {
-          loadjs("js/plugins.js", function() {
-            loadjs("js/bootstrap.min.js", function() {
-              loadjs("js/active.js", function() {
-                loadjs("js/main.js");
-              });
-            });
-          });
-        });
-      });
-    });
-  }
+  // componentWillMount() {
+  //   loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
+  //     loadjs("js/vendor/jquery-3.2.1.min.js", function() {
+  //       loadjs("js/popper.min.js", function() {
+  //         loadjs("js/plugins.js", function() {
+  //           loadjs("js/bootstrap.min.js", function() {
+  //             loadjs("js/active.js", function() {
+  //               loadjs("js/main.js");
+  //             });
+  //           });
+  //         });
+  //       });
+  //     });
+  //   });
+  // }
 
   componentDidMount() {
     // Jquery here $(...)...
@@ -144,9 +144,10 @@ class Home extends Component {
       arrows: false
     };
     return (
-      <div>
+      <React.Fragment>
         <BrowserView>
-        <div style={{ background: "#F1F2EE", paddingRight: 25 }}>
+        
+        <div style={{ background: "#F1F2EE", paddingRight: 25, height: 340}}>
           <div>
             {console.log("Screen width", window.innerWidth)}
             <Slider {...settings}>
@@ -190,7 +191,7 @@ class Home extends Component {
             </Slider>
           </div>
         </MobileView>
-      </div>
+      </React.Fragment>
     );
   };
 
@@ -218,7 +219,7 @@ class Home extends Component {
       arrows: false
     };
     return (
-      <div>
+      <React.Fragment>
         <BrowserView>
           <Slider {...settings}>
             <div>
@@ -266,7 +267,7 @@ class Home extends Component {
 </div>
         
         </MobileView>
-      </div>
+      </React.Fragment>
     );
   };
 
@@ -518,7 +519,7 @@ class Home extends Component {
 
   subscribe = () => {
     return (
-      <div>
+      <React.Fragment>
         <BrowserView>
       <div class="container">
         <div class="" style={{ background: "#EED7C2" }}>
@@ -550,12 +551,11 @@ class Home extends Component {
         <div class="container">
         <div class="" style={{ background: "#EED7C2" }}>
           <div class="row d-flex justify-content-center pt-2">
-            <h4 class="c-black " style={{ fontSize: 18 }}>
+            <h4 class="c-black " style={{ fontSize: 18, fontWeight: 'normal'}}>
               সাবস্ক্রাইব করে জিতে নিন 
             </h4>
-            <h4 class="c-black " style={{ fontSize: 18 }}>
-              আকর্ষনীয়{" "}
-              <span style={{ color: "#02A868", fontSize: 22 }}>অফার</span>
+            <h4 class="c-black " style={{ fontSize: 18, fontWeight: 'normal'}}>
+              <span style={{ color: "#02A868", fontSize: 22 }}>আকর্ষনীয় অফার</span>
             </h4>
           </div>
           <div class="row d-flex justify-content-center mt-2 pb-3">
@@ -564,19 +564,17 @@ class Home extends Component {
               placeholder="ইমেইল/মোবাইল নম্বর"
               style={{ height: 55, marginLeft: 29, marginRight: 28}}
             />
-            <div class="row mt-auto mb-auto ml-0">
-              <div class="male-btn">
-                <p>পুরুষ</p>
-              </div>
-              <div class="female-btn">
-                <p>মহিলা</p>
-              </div>
+            <div class="row mt-2 ml-0">
+            <button type="button" class="btn btn-primary mr-2">পুরুষ</button>
+            <button type="button" class="btn btn-success mr-2">মহিলা</button>
+            <button type="button" class="btn btn-warning mr-2">অন্যান্য</button>
+
             </div>
           </div>
         </div>
       </div>
       </MobileView>
-      </div>
+      </React.Fragment>
     );
   };
 
@@ -709,8 +707,11 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <MainSlider />
+        <div class="container">
+          {this.adRow()}
+        </div>
         <section class="wn__product__area brown--color pt--20  pb--20">
           <div class="container">
             <div class="row m-0 mt-3">
@@ -749,7 +750,15 @@ class Home extends Component {
 
             <div class="row m-0 mt-3">
               <h4 class="">
-                গ্রন্থিক প্রকাশনীর বই {/* <span class="color--theme"></span> */}
+                অবশ্য পাঠ্য {/* <span class="color--theme"></span> */}
+              </h4>
+            </div>
+
+            {this.firstRow()}
+
+            <div class="row m-0 mt-3">
+              <h4 class="">
+                গ্রন্থিক প্রকাশনের বই {/* <span class="color--theme"></span> */}
               </h4>
             </div>
 
@@ -951,7 +960,7 @@ class Home extends Component {
           </div>
         </div>
         {this.recentlySearched()}
-      </div>
+      </React.Fragment>
     );
   }
 }
