@@ -12,15 +12,12 @@ import {
 } from "react-device-detect";
 import Slider from "react-slick";
 
-// import {
-//   HashRouter as Router,
-//   Route,
-//   Link,
-//   NavLink,
-//   Redirect,
-//   Prompt
-// } from "react-router-dom";
-
+import {
+  Link,
+  Redirect,
+  Prompt
+} from "react-router-dom";
+import FontAwesome from "react-fontawesome";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -187,10 +184,17 @@ class Productz extends Component {
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="product__info__main">
-                      <h1>হিমু রিমান্ডে</h1>
+                      <h1 class="mb-4">হিমু রিমান্ডে</h1>
+                      <Link style={{fontSize: 16}} to="/humayon_ahmed">হুমায়ন আহমেদ</Link>
                       <div class="price-box">
                         <span>৳১৫২.০০</span>
                       </div>
+                      <p class="text-success">
+                        <span class="mr-2"><FontAwesome
+                        name="circle"
+                        dtyle={{fontSize: 15,}}
+                        /></span>
+                        অনলাইনে পেমেন্ট বিকাশ করলেই ২০% ইন্সট্যান্ট ক্যাশব্যাক। (শর্ত প্রযোজ্য)</p>
                       <div class="product__overview">
                         <p>
                           Ideal for cold-weather training or work outdoors, the
@@ -203,17 +207,13 @@ class Productz extends Component {
                           Chaz Hoodie promises superior warmth with every wear.{" "}
                         </p>
                       </div>
+                      <div>
+                      <div class="product-addto-links clearfix pb-3 row ml-0 d-flex align-items-center">
+                         <a class="wishlist" href="#" /> <p class="pl-2">Add to booklist</p> 
+                        </div>
+                      </div>
                       <div class="box-tocart d-flex">
-                        <span>Qty</span>
-                        <input
-                          id="qty"
-                          class="input-text qty"
-                          name="qty"
-                          min="1"
-                          value="1"
-                          title="Qty"
-                          type="number"
-                        />
+                      <button type="button" class="btn btn-outline-dark mr-2">একটু পড়ে দেখুন</button>
                         <div class="addtocart__actions">
                           <button
                             class="tocart"
@@ -222,10 +222,6 @@ class Productz extends Component {
                           >
                             Add to Cart
                           </button>
-                        </div>
-                        <div class="product-addto-links clearfix">
-                          <a class="wishlist" href="#" />
-                          <a class="compare" href="#" />
                         </div>
                       </div>
                       <div class="product_meta">
