@@ -72,7 +72,7 @@ class App extends Component {
             path="/product"
             exact
             strict
-            render={props => <SingleProduct />}
+            render={props => <SingleProduct {...props}/>}
           />
 
           <Route
@@ -80,7 +80,7 @@ class App extends Component {
             path="/shopGrid"
             exact
             strict
-            render={props => <ShopGrid />}
+            render={props => <ShopGrid {...props}/>}
           />
 
           <Route
@@ -88,7 +88,7 @@ class App extends Component {
             path="/signin"
             exact
             strict
-            render={props => <Signin />}
+            render={props => <Signin {...props}/>}
           />
 
           <Route
@@ -96,7 +96,7 @@ class App extends Component {
             path="/cart"
             exact
             strict
-            render={props => <Shopingcart />}
+            render={props => <Shopingcart {...props}/>}
           />
 
           <Footer />

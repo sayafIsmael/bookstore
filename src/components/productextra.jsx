@@ -38,6 +38,7 @@ class ProductExtra extends Component {
             onMouseOut={() => {
               this.setState({ mouseOver: false });
             }}
+            onClick={() => this.props.history.push(`/product`)}
           >
             <div>
               <img
@@ -49,6 +50,10 @@ class ProductExtra extends Component {
                 type="button"
                 class="btn btn-warning"
                 style={{ zIndex: 1, position: "absolute", top: 112, color: 'white', display: this.state.mouseOver?'inline':'none'}}
+                onClick={(e) => {
+                  e.stopPropagation(); 
+                  // this.handleRefs(dwelling.address, index)
+                }}
               >
                 <FontAwesome
                   name="fas fa-shopping-cart"
@@ -90,7 +95,7 @@ class ProductExtra extends Component {
           </div>
         </BrowserView>
         <MobileView>
-          <div class="cr-item-mb">
+          <div class="cr-item-mb" onClick={() => this.props.history.push(`/product`)}>
             <div>
               <img class="discount_badge" src="images/badges/discount.png" />
               <img class="read_some_mb" src="images/badges/read_some.png" />

@@ -808,6 +808,7 @@ class shopGrid extends Component {
                           price={item.price}
                           oldprice={item.oldprice}
                           name={item.name}
+                          history={this.props.history}
                         />
                       );
                     })}

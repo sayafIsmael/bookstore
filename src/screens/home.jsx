@@ -163,6 +163,7 @@ class Home extends Component {
                     image={item.image}
                     image2={item.image2}
                     writer={item.writer}
+                    history={this.props.history}
                   />
                 );
               })}
@@ -185,6 +186,7 @@ class Home extends Component {
                     image={item.image}
                     image2={item.image2}
                     writer={item.writer}
+                    history={this.props.history}
                   />
                 );
               })}
