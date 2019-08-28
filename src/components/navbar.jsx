@@ -38,7 +38,8 @@ class navbar extends Component {
       mouseClickedAuthor: false,
       mouseOverPublisher: false,
       mouseClickedPublisher: false,
-      authors: []
+      authors: null,
+      publishers: null
     };
     this.fetch_authors();
     this.fetch_publishers();
@@ -297,7 +298,7 @@ class navbar extends Component {
                 });
               }}
             >
-              <Link class={"nav-link"} to="/shopGrid">
+              <p class={"nav-link"}>
                 প্রকাশনী{" "}
                 <FontAwesome
                   name={
@@ -313,7 +314,7 @@ class navbar extends Component {
                     fontSize: 14
                   }}
                 />
-              </Link>
+              </p>
             </li>
             <li class="nav-item">
               <Link class={"nav-link"} to="/shopGrid">
@@ -425,7 +426,7 @@ class navbar extends Component {
       });
   };
   authors = () => {
-    if (this.state.mouseClickedAuthor == true) {
+    if (this.state.mouseClickedAuthor == true && this.state.authors != null) {
       return (
         <div class="row ml-5 mr-5 mega-menu">
           {this.state.authors.map((group, i) => {
@@ -467,7 +468,7 @@ class navbar extends Component {
   };
 
   publishers = () => {
-    if (this.state.mouseClickedPublisher == true) {
+    if (this.state.mouseClickedPublisher == true && this.state.publishers != null) {
       return (
         <div class="row ml-5 mr-5 mega-menu">
           {this.state.publishers.map((group, i) => {

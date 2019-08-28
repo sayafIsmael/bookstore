@@ -29,6 +29,7 @@ import {
 import loadjs from "loadjs";
 import store from './store';
 
+
 class App extends Component {
   componentWillMount() {
     loadjs("js/vendor/modernizr-3.5.0.min.js", function() {

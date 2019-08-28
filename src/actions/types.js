@@ -1,3 +1,4 @@
 export const FETCH_POSTS = 'FETCH_POST';
 export const NEW_POST = 'NEW_POST';
 export const FETCH_BOOKS = 'FETCH_BOOKS';
+export const FETCH_BOOK = 'FETCH_BOOK';

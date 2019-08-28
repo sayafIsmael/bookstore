@@ -8,6 +8,10 @@ import {
 } from "react-device-detect";
 import { tsImportEqualsDeclaration } from "@babel/types";
 import FontAwesome from "react-fontawesome";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { fetchBook } from "../actions/bookActions";
+import * as helper from "./../helper";
 
 class ProductExtra extends Component {
   constructor(props) {
@@ -16,8 +20,6 @@ class ProductExtra extends Component {
       mouseOver: false
     };
   }
-
-
 
   render() {
     return (
@@ -38,7 +40,12 @@ class ProductExtra extends Component {
             onMouseOut={() => {
               this.setState({ mouseOver: false });
             }}
-            onClick={() => this.props.history.push(`/product`)}
+            onClick={() => {
+              this.props.history.push(`/product`);
+              this.props.fetchBook(
+                helper.prefix + "book/singlebook/" + this.props.id
+              );
+            }}
           >
             <div>
               <img
@@ -46,18 +53,24 @@ class ProductExtra extends Component {
                 class="discount_badge"
                 src="images/badges/discount.png"
               />
-               <button
+              <button
                 type="button"
                 class="btn btn-warning"
-                style={{ zIndex: 1, position: "absolute", top: 112, color: 'white', display: this.state.mouseOver?'inline':'none'}}
-                onClick={(e) => {
-                  e.stopPropagation(); 
+                style={{
+                  zIndex: 1,
+                  position: "absolute",
+                  top: 112,
+                  color: "white",
+                  display: this.state.mouseOver ? "inline" : "none"
+                }}
+                onClick={e => {
+                  e.stopPropagation();
                   // this.handleRefs(dwelling.address, index)
                 }}
               >
                 <FontAwesome
                   name="fas fa-shopping-cart"
-                  style={{ color: "white", marginRight: 10}}
+                  style={{ color: "white", marginRight: 10 }}
                 />
                 Add to Cart
               </button>
@@ -82,20 +95,61 @@ class ProductExtra extends Component {
               />
             </div>
             <div>
-              <p style={{ color: "black", marginTop: 10, opacity: this.state.mouseOver ? 0.3 : 1  }}>{this.props.name}</p>
-              <p style={{ color: "black", opacity: this.state.mouseOver ? 0.3 : 1  }}>
+              <p
+                style={{
+                  color: "black",
+                  marginTop: 10,
+                  opacity: this.state.mouseOver ? 0.3 : 1
+                }}
+              >
+                {this.props.name}
+              </p>
+              <p
+                style={{
+                  color: "black",
+                  opacity: this.state.mouseOver ? 0.3 : 1
+                }}
+              >
                 {this.props.writer ? this.props.writer : "লেখকের নাম"}
               </p>
-              {this.props.stock>0?<p class="text-success" style={{ opacity: this.state.mouseOver ? 0.3 : 1 }}>Product In Stock</p>:''}
-              <p style={{ color: "black" , opacity: this.state.mouseOver ? 0.3 : 1 }}>মূল্য : ৳{this.props.price}</p>
+              {this.props.stock > 0 ? (
+                <p
+                  class="text-success"
+                  style={{ opacity: this.state.mouseOver ? 0.3 : 1 }}
+                >
+                  Product In Stock
+                </p>
+              ) : (
+                ""
+              )}
+              <p
+                style={{
+                  color: "black",
+                  opacity: this.state.mouseOver ? 0.3 : 1
+                }}
+              >
+                মূল্য : ৳{this.props.price}
+              </p>
             </div>
             <Link to="/product">
-            <button type="button" class="btn btn-primary mt-2" style={{width: '100%', display: this.state.mouseOver?'inline':'none'}}>View Details</button>
+              <button
+                type="button"
+                class="btn btn-primary mt-2"
+                style={{
+                  width: "100%",
+                  display: this.state.mouseOver ? "inline" : "none"
+                }}
+              >
+                View Details
+              </button>
             </Link>
           </div>
         </BrowserView>
         <MobileView>
-          <div class="cr-item-mb" onClick={() => this.props.history.push(`/product`)}>
+          <div
+            class="cr-item-mb"
+            onClick={() => this.props.history.push(`/product`)}
+          >
             <div>
               <img class="discount_badge" src="images/badges/discount.png" />
               <img class="read_some_mb" src="images/badges/read_some.png" />
@@ -113,4 +167,11 @@ class ProductExtra extends Component {
   }
 }
 
-export default ProductExtra;
+ProductExtra.propTypes = {
+  fetchBook: PropTypes.func.isRequired
+};
+
+export default connect(
+  null,
+  { fetchBook }
+)(ProductExtra);
