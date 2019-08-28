@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import loadjs from "loadjs";
+import axios from "axios";
 
 import {
   HashRouter as Router,
@@ -15,9 +16,13 @@ import {
   isBrowser,
   isMobile
 } from "react-device-detect";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { fetchBooks } from "../actions/bookActions";
 
 import ReactTyped from "react-typed";
 import FontAwesome from "react-fontawesome";
+import * as helper from "./../helper";
 
 class navbar extends Component {
   constructor(props) {
@@ -26,16 +31,17 @@ class navbar extends Component {
       logedIn: false,
       cart: false,
       setting: false,
-      category: false,
-      writer: false,
-      reader: false,
-      ovijatri: false,
-      bookfair: false,
-      publisher: false,
       menuOpend: false,
       pmenuOpend: false,
-      catclicked: false
+      catclicked: false,
+      mouseOverAuthor: false,
+      mouseClickedAuthor: false,
+      mouseOverPublisher: false,
+      mouseClickedPublisher: false,
+      authors: []
     };
+    this.fetch_authors();
+    this.fetch_publishers();
   }
 
   // componentWillMount() {
@@ -230,83 +236,274 @@ class navbar extends Component {
     }
   };
   category = () => {
-    if (this.state.category === true) {
+    return (
+      <nav class="navbar navbar-expand-lg navbar-light nav-category">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#categoryNav"
+          aria-controls="categoryNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon" />
+        </button>
+        <div
+          class="collapse navbar-collapse d-flex justify-content-center"
+          id="categoryNav"
+          style={{ borderTop: "1px solid #C67935" }}
+        >
+          <ul class="navbar-nav">
+            <li
+              class="nav-item"
+              onClick={() => {
+                this.setState({
+                  mouseClickedAuthor: !this.state.mouseClickedAuthor,
+                  mouseClickedPublisher: false
+                });
+              }}
+              onMouseOver={() => this.setState({ mouseOverAuthor: true })}
+              onMouseOut={() => this.setState({ mouseOverAuthor: false })}
+            >
+              <p class={"nav-link"} style={{ cursor: "pointer" }}>
+                লেখক{" "}
+                <FontAwesome
+                  name={
+                    this.state.mouseClickedAuthor == true
+                      ? "angle-up"
+                      : "angle-down"
+                  }
+                  style={{
+                    color:
+                      this.state.mouseOverAuthor == true ? "#C67935" : "black",
+                    fontSize: 14
+                  }}
+                />
+              </p>
+            </li>
+            <li
+              class="nav-item"
+              onMouseOver={() => {
+                this.setState({ mouseOverPublisher: true });
+              }}
+              onMouseOut={() => {
+                this.setState({ mouseOverPublisher: false });
+              }}
+              onClick={() => {
+                this.setState({
+                  mouseClickedPublisher: !this.state.mouseClickedPublisher,
+                  mouseClickedAuthor: false
+                });
+              }}
+            >
+              <Link class={"nav-link"} to="/shopGrid">
+                প্রকাশনী{" "}
+                <FontAwesome
+                  name={
+                    this.state.mouseClickedPublisher == true
+                      ? "angle-up"
+                      : "angle-down"
+                  }
+                  style={{
+                    color:
+                      this.state.mouseOverPublisher == true
+                        ? "#C67935"
+                        : "black",
+                    fontSize: 14
+                  }}
+                />
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link class={"nav-link"} to="/shopGrid">
+                নতুন বই
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/shopGrid">
+                ধ্রূপদী সাহিত্য
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/shopGrid">
+                শিশুতোষ
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/shopGrid">
+                বিজ্ঞান
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/shopGrid">
+                রাজনীতি
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/shopGrid">
+                কিশোর সাহিত্য
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/shopGrid">
+                ধর্মীয় বই
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/shopGrid">
+                মুক্তিযুদ্ধ
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/shopGrid">
+                পশিম বঙ্গের বই
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/shopGrid">
+                নিষিদ্ধ বই
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/shopGrid">
+                পাঠ্য বই
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    );
+  };
+
+  fetch_authors = () => {
+    fetch(helper.prefix + "authors", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+        // 'Authorization': 'Bearer ' + user.success.token,
+      }
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        if (responseJson.success) {
+          let authors = helper
+            .breakArrayIntoGroups(responseJson.authors, 8)
+            .slice(0, 4);
+          console.log(authors);
+          this.setState({ authors: authors });
+        }
+      })
+      .catch(error => {
+        //this.setState({loading:false})
+        console.log(error);
+      });
+  };
+  fetch_publishers = () => {
+    fetch(helper.prefix + "publishers", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+        // 'Authorization': 'Bearer ' + user.success.token,
+      }
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        if (responseJson.success) {
+          let publishers = helper
+            .breakArrayIntoGroups(responseJson.publishers, 8)
+            .slice(0, 4);
+          console.log(publishers);
+          this.setState({ publishers: publishers });
+        }
+      })
+      .catch(error => {
+        //this.setState({loading:false})
+        console.log(error);
+      });
+  };
+  authors = () => {
+    if (this.state.mouseClickedAuthor == true) {
       return (
-        <nav class="navbar navbar-expand-lg navbar-light nav-category">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#categoryNav"
-            aria-controls="categoryNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon" />
-          </button>
-          <div
-            class="collapse navbar-collapse d-flex justify-content-center"
-            id="categoryNav"
-          >
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <Link class="nav-link" to="/shopGrid">
-                  নতুন বই
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/shopGrid">
-                  ধ্রূপদী সাহিত্য
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/shopGrid">
-                  শিশুতোষ
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/shopGrid">
-                  বিজ্ঞান
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/shopGrid">
-                  রাজনীতি
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/shopGrid">
-                  কিশোর সাহিত্য
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/shopGrid">
-                  ধর্মীয় বই
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/shopGrid">
-                  মুক্তিযুদ্ধ
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/shopGrid">
-                  পশিম বঙ্গের বই
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/shopGrid">
-                  নিষিদ্ধ বই
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/shopGrid">
-                  পাঠ্য বই
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <div class="row ml-5 mr-5 mega-menu">
+          {this.state.authors.map((group, i) => {
+            return (
+              <div class="col-md-3 " key={i}>
+                <ul>
+                  {group.map((author, index) => {
+                    return (
+                      <li class="mt-2 mb-2" key={index}>
+                        <Link
+                          to="/shopGrid"
+                          onClick={() => {
+                            this.setState({ mouseClickedAuthor: false });
+                            this.props.fetchBooks(
+                              helper.prefix + "author/books/" + author.id
+                            );
+                          }}
+                        >
+                          <FontAwesome
+                            name="circle"
+                            style={{
+                              color: "black",
+                              marginRight: 10,
+                              fontSize: 7
+                            }}
+                          />{" "}
+                          {author.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+  };
+
+  publishers = () => {
+    if (this.state.mouseClickedPublisher == true) {
+      return (
+        <div class="row ml-5 mr-5 mega-menu">
+          {this.state.publishers.map((group, i) => {
+            return (
+              <div class="col-md-3 " key={i}>
+                <ul>
+                  {group.map((publisher, index) => {
+                    return (
+                      <li class="mt-2 mb-2 nav-sub-item" key={index}>
+                        <Link
+                          to="/shopGrid"
+                          onClick={() => {
+                            this.setState({ mouseClickedPublisher: false });
+                            this.props.fetchBooks(
+                              helper.prefix + "publisher/books/" + publisher.id
+                            );
+                          }}
+                        >
+                          <FontAwesome
+                            name="circle"
+                            style={{
+                              color: "black",
+                              marginRight: 10,
+                              fontSize: 7
+                            }}
+                          />{" "}
+                          {publisher.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
       );
     }
   };
@@ -340,14 +537,14 @@ class navbar extends Component {
               <div class="row d-flex align-items-center" style={{ height: 70 }}>
                 <div class="col-md-3">
                   <div class="logo pt-2">
-                    <a href="/">
+                    <Link to="/">
                       <img
                         class="siteLogo"
                         src="images/logo/logoText.png"
                         alt="Gronthik"
                         id="siteLogo"
                       />
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
@@ -417,13 +614,11 @@ class navbar extends Component {
                         />
                       </a>
                     </li>
-                    <li class="shopcart" onClick={() =>
-                          this.setState({ cart: !this.state.cart })
-                        }>
-                      <div
-                      class="cartIcon"
-                        to=""
-                      >
+                    <li
+                      class="shopcart"
+                      onClick={() => this.setState({ cart: !this.state.cart })}
+                    >
+                      <div class="cartIcon" to="">
                         <span class="product_qun">3</span>
                       </div>
 
@@ -438,7 +633,7 @@ class navbar extends Component {
                       <FontAwesome
                         name="fas fa-user"
                         // size="2x"
-                        style={{ color: "black", fontSize: 24}}
+                        style={{ color: "black", fontSize: 24 }}
                       />
                       <div
                         class={
@@ -480,63 +675,23 @@ class navbar extends Component {
             >
               <span class="navbar-toggler-icon" />
             </button>
-            <div
-              class="collapse navbar-collapse d-flex "
-              id="navbarNav"
-              style={{ borderBottom: "1px solid #C67935" }}
-            >
-              <ul class="navbar-nav ml-auto mr-auto">
+            <div class="collapse navbar-collapse d-flex " id="navbarNav">
+              <ul
+                class="navbar-nav ml-auto mr-auto"
+                style={{ position: "relative", top: 17 }}
+              >
                 <li
-                  class="nav-item"
-                  onClick={() =>
-                    this.setState({
-                      category: true,
-                      writer: false,
-                      publisher: false,
-                      reader: false,
-                      ovijatri: false,
-                      bookfair: false
-                    })
+                  class={
+                    window.location.pathname == "/"
+                      ? "nav-item nav-sub active"
+                      : "nav-sub nav-item"
                   }
                 >
-                  <p class="nav-link" href="#">
-                    বিষয় <span class="sr-only">(current)</span>
+                  <p class="nav-link" href="/">
+                    বিষয়<span class="sr-only">(current)</span>
                   </p>
                 </li>
-                <li
-                  class="nav-item "
-                  onClick={() =>
-                    this.setState({
-                      category: false,
-                      writer: true,
-                      publisher: false,
-                      reader: false,
-                      ovijatri: false,
-                      bookfair: false
-                    })
-                  }
-                >
-                  <a class="nav-link" href="#">
-                    লেখক
-                  </a>
-                </li>
-                <li
-                  class="nav-item"
-                  onClick={() =>
-                    this.setState({
-                      category: false,
-                      writer: false,
-                      publisher: true,
-                      reader: false,
-                      ovijatri: false,
-                      bookfair: false
-                    })
-                  }
-                >
-                  <a class="nav-link" href="#">
-                    প্রকাশনী
-                  </a>
-                </li>
+
                 <li
                   class="nav-item"
                   onClick={() =>
@@ -609,8 +764,11 @@ class navbar extends Component {
             </div>
           </nav>
           {this.category()}
+          {this.authors()}
+          {this.publishers()}
         </BrowserView>
         <MobileView>
+          {/* {this.authors()} */}
           <div
             id="mySidenav"
             class="sidenav"
@@ -646,7 +804,7 @@ class navbar extends Component {
             <a href="#">লেখক</a>
             <a href="#">প্রকাশনী</a>
             <a href="#">পাঠক কর্নার</a>
-            <a href="#">প্রাতিষ্ঠানিক অর্ডার</a> 
+            <a href="#">প্রাতিষ্ঠানিক অর্ডার</a>
             <a href="#">অভিযাত্রী</a>
             <a href="#">বইমেলা</a>
           </div>
@@ -713,7 +871,7 @@ class navbar extends Component {
 
               <FontAwesome
                 name="fas fa-user"
-                style={{ fontSize: 24}}
+                style={{ fontSize: 24 }}
                 onClick={() =>
                   this.setState({ pmenuOpend: !this.state.pmenuOpend })
                 }
@@ -770,4 +928,10 @@ class navbar extends Component {
   }
 }
 
-export default navbar;
+navbar.propTypes = {
+  fetchBooks: PropTypes.func.isRequired
+};
+export default connect(
+  null,
+  { fetchBooks }
+)(navbar);

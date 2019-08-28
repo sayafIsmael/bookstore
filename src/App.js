@@ -13,12 +13,13 @@ import logo from "./logo.svg";
 import "./App.css";
 import Home from "./screens/home";
 import Navbar from "./components/navbar";
-import MainSlider from "./components/mainSlider";
+// import MainSlider from "./components/mainSlider";
 import SingleProduct from "./components/singleProduct";
 import ShopGrid from "./components/shopGrid";
 import Signin from "./components/signin";
 import Shopingcart from "./components/shopingcart";
-import { Style } from "react-style-tag";
+// import { Style } from "react-style-tag";
+import {Provider} from 'react-redux'
 import {
   BrowserView,
   MobileView,
@@ -26,6 +27,7 @@ import {
   isMobile
 } from "react-device-detect";
 import loadjs from "loadjs";
+import store from './store';
 
 class App extends Component {
   componentWillMount() {
@@ -43,21 +45,14 @@ class App extends Component {
       });
     });
   }
-
+  
   render() {
     return (
-      <BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
         <div class="wrapper" id="wrapper">
 
-        <MobileView>
-        {/* <Style>{`
-          .slick-slide{
-            width: 125px;
-          }
-        `}</Style> */}
-        </MobileView>
-
-          <Navbar />
+          <Navbar   />
 
           <Route
             exact
@@ -76,10 +71,12 @@ class App extends Component {
           />
 
           <Route
-            exact
-            path="/shopGrid"
-            exact
+            // exact
             strict
+            path="/shopGrid"
+            // exact
+            
+            handler={ShopGrid}
             render={props => <ShopGrid {...props}/>}
           />
 
@@ -102,6 +99,8 @@ class App extends Component {
           <Footer />
         </div>
       </BrowserRouter>
+      </Provider>
+      
     );
   }
 }

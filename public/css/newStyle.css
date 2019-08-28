@@ -126,7 +126,6 @@ footer, .h6 , .dark-grey-text{
 .navbar-light .navbar-nav .nav-link {
     font-size: 20px;
     color: black;
-    font-weight: bold;
 }
 
 .nav-category .navbar-nav .nav-link {
@@ -138,8 +137,7 @@ footer, .h6 , .dark-grey-text{
 .navbar-light .nav-item .nav-link:active,
 .navbar-light .nav-item .nav-link:focus,
 .navbar-light .nav-item:hover .nav-link {
-    color: #fff;
-    background-color: #C67935;
+    color: #C67935;
 }
 
 .writer-img{
@@ -147,6 +145,11 @@ footer, .h6 , .dark-grey-text{
     width: 172px;
 }
 
+.nav-sub{
+    border: 1px solid #C67935;
+    border-bottom: 1px solid white;
+    z-index: 100;
+}
 .slick-list{
     /* width: 1261px !important; */
 } 
@@ -362,7 +365,7 @@ input[type=number]:focus,
 }
 
 .nav-item{
-    padding-right: 10px 
+    margin-right: 10px 
 }
 .breadcrumb{
     background: #fff;
@@ -418,4 +421,21 @@ input[type=number]:focus,
 .pro__tab_label table tr td:first-child {
     width: 15%;
     background-color: #f1f2f4;
+}
+
+.mega-menu{
+    width: 92%;
+    background: #fff;
+    position: absolute;
+    z-index: 2850;
+    padding: 15px;
+    box-shadow: 0 6px 12px 0 rgba(0,0,0,.1);
+    border-radius: 3px;
+    border-bottom: 1px solid #e0e0e0;
+    border-top: 0;
+}
+
+.mega-nav{
+    position: relative;
+    bottom: 23px;   
 }

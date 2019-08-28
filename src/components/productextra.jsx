@@ -86,8 +86,8 @@ class ProductExtra extends Component {
               <p style={{ color: "black", opacity: this.state.mouseOver ? 0.3 : 1  }}>
                 {this.props.writer ? this.props.writer : "লেখকের নাম"}
               </p>
-              <p class="text-success" style={{ opacity: this.state.mouseOver ? 0.3 : 1 }}>Product In Stock</p>
-              <p style={{ color: "black" , opacity: this.state.mouseOver ? 0.3 : 1 }}>মূল্য : {this.props.price}</p>
+              {this.props.stock>0?<p class="text-success" style={{ opacity: this.state.mouseOver ? 0.3 : 1 }}>Product In Stock</p>:''}
+              <p style={{ color: "black" , opacity: this.state.mouseOver ? 0.3 : 1 }}>মূল্য : ৳{this.props.price}</p>
             </div>
             <Link to="/product">
             <button type="button" class="btn btn-primary mt-2" style={{width: '100%', display: this.state.mouseOver?'inline':'none'}}>View Details</button>

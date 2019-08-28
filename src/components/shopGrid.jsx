@@ -1,44 +1,137 @@
 import React, { Component } from "react";
-import loadjs from "loadjs";
+// import loadjs from "loadjs";
 
 import ProductExtra from "./../components/productextra";
 import ListBook from "./../components/listbook";
 import productexData from "./../dummyData/productex";
 import FontAwesome from "react-fontawesome";
-import { Checkbox } from 'react-bootstrap';
+import { Checkbox } from "react-bootstrap";
+import * as helper from "./../helper";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchBooks } from '../actions/bookActions';
+
+import {
+  // Route,
+  Link
+  // NavLink,
+  // Redirect,
+  // Prompt
+} from "react-router-dom";
 
 class shopGrid extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedOption: null
+      selectedOption: null,
+      author: null,
+      authorBooks: null
     };
     window.scrollTo(0, 0);
   }
 
-  // componentWillMount() {
-  //   loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
-  //     loadjs("js/vendor/jquery-3.2.1.min.js", function() {
-  //       loadjs("js/popper.min.js", function() {
-  //         loadjs("js/plugins.js", function() {
-  //           loadjs("js/bootstrap.min.js", function() {
-  //             loadjs("js/active.js", function() {
-  //               loadjs("js/main.js");
-  //             });
-  //           });
-  //         });
-  //       });
-  //     });
-  //   });
-  // }
   handleOptionChange = changeEvent => {
     this.setState({
       selectedOption: changeEvent.target.value
     });
   };
+
+  componentWillMount() {
+    this.props.fetchBooks();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // if (nextProps.newBook) {
+    //   this.props.books.unshift(nextProps.newBook);
+    // }
+  }
+
+  booksTitle=()=>{
+    if (this.props.books.author) {
+      return(
+        this.props.books.author.name 
+      )
+    }else if(this.props.books.publisher){
+      return(
+        this.props.books.publisher.name
+      )
+    }else if(this.props.books.category){
+      return(
+        this.props.books.category.name
+      )
+    }
+  }
+
+  authordetails = () => {
+    if (this.props.books.author) {
+      return (
+        <div class="row m-0">
+          <div class="col-2">
+            <div class="browse__meta--thumbnail">
+              <img
+                class="img-fluid rounded-circle"
+                alt="Humayun Ahmed books"
+                src={this.props.books.author.image}
+              />
+            </div>
+          </div>
+          <div class="col-10">
+            <h4 class="browse__meta--title">{this.props.books.author.name}</h4>
+            <p class="browse__meta--description js--browse__meta--description">
+              {this.props.books.author.description}
+            </p>
+          </div>
+        </div>
+      );
+    }else if (this.props.books.publisher) {
+      return (
+        <div class="row m-0">
+          <div class="col-2">
+            <div class="browse__meta--thumbnail">
+              <img
+                class="img-fluid rounded-circle"
+                alt="Humayun Ahmed books"
+                src={this.props.books.publisher.image}
+              />
+            </div>
+          </div>
+          <div class="col-10">
+            <h4 class="browse__meta--title">{this.props.books.publisher.name}</h4>
+            <p class="browse__meta--description js--browse__meta--description">
+              {this.props.books.publisher.description}
+            </p>
+          </div>
+        </div>
+      );
+    }
+  };
+  
+  showBooks = () =>{
+    
+    if (this.props.books.books != null || this.props.books.books != []) {
+      let books = this.props.books.books;
+     console.log("Fuck pussy ",books)
+     return  books.map((item, index) => {
+        console.log("Fuck ass ",item.title)
+      return (
+        <ProductExtra
+          key={index}
+          image={item.cover}
+          price={item.new_price}
+          oldprice={item.old_price}
+          name={item.title}
+          stock={item.stock}
+          history={this.props.history}
+        />
+      );
+    })
+  }
+  }
   render() {
+    console.log(this.props.books)
     return (
-      <div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+      <React.Fragment>
+        <div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
         <div class="container">
           <div class="row">
             <div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
@@ -167,7 +260,7 @@ class shopGrid extends Component {
                         style={{
                           color: "black",
                           marginRight: 10,
-                          fontSize: 20,
+                          fontSize: 20
                         }}
                       />
                       <h3 class="wedget__title">Filter</h3>
@@ -180,90 +273,104 @@ class shopGrid extends Component {
                     </p>
                   </div>
                   <div class="row m-0 p-2 pt-4">
-                  <aside class="wedget__categories poroduct--tag">
-                  <ul>
-                    <li>
-                      <a href="#"> নিষিদ্ধ বই x</a>
-                    </li>
-                    <li>
-                      <a href="#"> বেস্ট সেলার বই x</a>
-                    </li>
-                    <li>
-                      <a href="#">পাঠক কর্নার x</a>
-                    </li>
-                    <li>
-                      <a href="#">ধর্মিয় বই x</a>
-                    </li>
-                    <li>
-                      <a href="#">মুক্তিযুদ্ধ x</a>
-                    </li>
-                    <li>
-                      <a href="#">পশ্চিম বঙ্গের বই x</a>
-                    </li>
-                    <li>
-                      <a href="#">কিশোর সাহিত্য x</a>
-                    </li>
-                    <li>
-                      <a href="#">বিজ্ঞান x</a>
-                    </li>
-                  </ul>
-                </aside>
-                  <h4 style={{fontWeight: 'normal'}}>উপন্যাস</h4>
-                  <FontAwesome
-                        name="fas fa-sort-down"
-                        style={{
-                          color: "black",
-                          marginRight: 10,
-                          fontSize: 20,
-                          paddingLeft: 10,
-                        }}
-                      />
+                    <aside class="wedget__categories poroduct--tag">
+                      <ul>
+                        <li>
+                          <a href="#"> নিষিদ্ধ বই x</a>
+                        </li>
+                        <li>
+                          <a href="#"> বেস্ট সেলার বই x</a>
+                        </li>
+                        <li>
+                          <a href="#">পাঠক কর্নার x</a>
+                        </li>
+                        <li>
+                          <a href="#">ধর্মিয় বই x</a>
+                        </li>
+                        <li>
+                          <a href="#">মুক্তিযুদ্ধ x</a>
+                        </li>
+                        <li>
+                          <a href="#">পশ্চিম বঙ্গের বই x</a>
+                        </li>
+                        <li>
+                          <a href="#">কিশোর সাহিত্য x</a>
+                        </li>
+                        <li>
+                          <a href="#">বিজ্ঞান x</a>
+                        </li>
+                      </ul>
+                    </aside>
+                    <h4 style={{ fontWeight: "normal" }}>উপন্যাস</h4>
+                    <FontAwesome
+                      name="fas fa-sort-down"
+                      style={{
+                        color: "black",
+                        marginRight: 10,
+                        fontSize: 20,
+                        paddingLeft: 10
+                      }}
+                    />
                   </div>
-                  <ul style={{height: 300, overflowY: 'scroll'}}>
+                  <ul style={{ height: 300, overflowY: "scroll" }}>
                     <li class="row m-0 ml-4">
-                    <p class="pr-2">০</p>
+                      <p class="pr-2">০</p>
                       <p class="filter_text">সমকালীন উপন্যাস</p>
                     </li>
                     <li class="row m-0 ml-4">
-                    <p class="pr-2">০</p>
+                      <p class="pr-2">০</p>
                       <p class="filter_text">চিরায়ত উপন্যাস</p>
                     </li>
                     <li class="row m-0 ml-4">
-                    <p class="pr-2">০</p>
+                      <p class="pr-2">০</p>
                       <p class="filter_text">সায়েন্স ফিকশন</p>
                     </li>
                     <li class="row m-0 ml-4">
-                    <p class="pr-2">০</p>
+                      <p class="pr-2">০</p>
                       <p class="filter_text">রোমান্টিক উপন্যাস</p>
                     </li>
                     <li class="row m-0 ml-4">
-                    <p class="pr-2">০</p>
-                      <p class="filter_text">মুক্তিযুদ্ধভিত্তিক ও রাজনৈতিক উপন্যাস</p>
+                      <p class="pr-2">০</p>
+                      <p class="filter_text">
+                        মুক্তিযুদ্ধভিত্তিক ও রাজনৈতিক উপন্যাস
+                      </p>
                     </li>
                     <li class="row m-0 ml-4">
-                    <p class="pr-2">০</p>
+                      <p class="pr-2">০</p>
                       <p class="filter_text">শিশু-কিশোর উপন্যাস</p>
                     </li>
                     <li class="row m-0 ml-4">
-                    <p class="pr-2">০</p>
+                      <p class="pr-2">০</p>
                       <p class="filter_text">থ্রিলার ও অ্যাডভেঞ্চার উপন্যাস</p>
                     </li>
                     <li class="row m-0 ml-4">
-                    <p class="pr-2">০</p>
+                      <p class="pr-2">০</p>
                       <p class="filter_text">ঐতিহাসিক উপন্যাস</p>
                     </li>
                   </ul>
                 </aside>
                 <aside class="wedget__categories poroduct--cat">
                   <form>
-                      <div>
-                        <h3 class="wedget__title" style={{ borderBottom: "1px solid #2e2e2e" }}>Authors</h3>
-                      </div>
-                    <ul style={{height: 300, overflowY: 'scroll'}}>
+                    <div>
+                      <h3
+                        class="wedget__title"
+                        style={{ borderBottom: "1px solid #2e2e2e" }}
+                      >
+                        Authors
+                      </h3>
+                    </div>
+                    <ul style={{ height: 300, overflowY: "scroll" }}>
                       <li>
-                      <div class="input-group input-group-sm filter-search mt-1">
-                          <input type="search" class="form-control js--client_search" placeholder="&#9906;" data_search_list="#authorIds" aria-label="Small" aria-describedby="inputGroup-sizing-sm"/>
-                      </div>
+                        <div class="input-group input-group-sm filter-search mt-1">
+                          <input
+                            type="search"
+                            class="form-control js--client_search"
+                            placeholder="&#9906;"
+                            data_search_list="#authorIds"
+                            aria-label="Small"
+                            aria-describedby="inputGroup-sizing-sm"
+                          />
+                        </div>
                       </li>
                       <li>
                         <div className="radio">
@@ -369,20 +476,31 @@ class shopGrid extends Component {
                           </label>
                         </div>
                       </li>
-                      
                     </ul>
                   </form>
                 </aside>
                 <aside class="wedget__categories poroduct--cat">
                   <form>
-                      <div>
-                        <h3 class="wedget__title" style={{ borderBottom: "1px solid #2e2e2e" }}>Publishers</h3>
-                      </div>
-                    <ul style={{height: 300, overflowY: 'scroll'}}>
+                    <div>
+                      <h3
+                        class="wedget__title"
+                        style={{ borderBottom: "1px solid #2e2e2e" }}
+                      >
+                        Publishers
+                      </h3>
+                    </div>
+                    <ul style={{ height: 300, overflowY: "scroll" }}>
                       <li>
-                      <div class="input-group input-group-sm filter-search mt-1">
-                          <input type="search" class="form-control js--client_search" placeholder="&#9906;" data_search_list="#authorIds" aria-label="Small" aria-describedby="inputGroup-sizing-sm"/>
-                      </div>
+                        <div class="input-group input-group-sm filter-search mt-1">
+                          <input
+                            type="search"
+                            class="form-control js--client_search"
+                            placeholder="&#9906;"
+                            data_search_list="#authorIds"
+                            aria-label="Small"
+                            aria-describedby="inputGroup-sizing-sm"
+                          />
+                        </div>
                       </li>
                       <li>
                         <div className="radio">
@@ -488,7 +606,6 @@ class shopGrid extends Component {
                           </label>
                         </div>
                       </li>
-                      
                     </ul>
                   </form>
                 </aside>
@@ -515,14 +632,26 @@ class shopGrid extends Component {
                 </aside>
                 <aside class="wedget__categories poroduct--cat">
                   <form>
-                      <div>
-                        <h3 class="wedget__title" style={{ borderBottom: "1px solid #2e2e2e" }}>Languages</h3>
-                      </div>
-                    <ul style={{height: 300, overflowY: 'scroll'}}>
+                    <div>
+                      <h3
+                        class="wedget__title"
+                        style={{ borderBottom: "1px solid #2e2e2e" }}
+                      >
+                        Languages
+                      </h3>
+                    </div>
+                    <ul style={{ height: 300, overflowY: "scroll" }}>
                       <li>
-                      <div class="input-group input-group-sm filter-search mt-1">
-                          <input type="search" class="form-control js--client_search" placeholder="&#9906;" data_search_list="#authorIds" aria-label="Small" aria-describedby="inputGroup-sizing-sm"/>
-                      </div>
+                        <div class="input-group input-group-sm filter-search mt-1">
+                          <input
+                            type="search"
+                            class="form-control js--client_search"
+                            placeholder="&#9906;"
+                            data_search_list="#authorIds"
+                            aria-label="Small"
+                            aria-describedby="inputGroup-sizing-sm"
+                          />
+                        </div>
                       </li>
                       <li>
                         <div className="radio">
@@ -585,8 +714,7 @@ class shopGrid extends Component {
                               id="exampleCheck52"
                               for="exampleCheck52"
                             />
-                            
-                          বাংলা ও ইংরেজী
+                            বাংলা ও ইংরেজী
                           </label>
                         </div>
                       </li>
@@ -629,139 +757,197 @@ class shopGrid extends Component {
                           </label>
                         </div>
                       </li>
-                      
                     </ul>
                   </form>
                 </aside>
                 <aside class="wedget__categories pro--range">
-                <div>
-                        <h3 class="wedget__title" style={{ borderBottom: "1px solid #2e2e2e" }}>Ratings</h3>
+                  <div>
+                    <h3
+                      class="wedget__title"
+                      style={{ borderBottom: "1px solid #2e2e2e" }}
+                    >
+                      Ratings
+                    </h3>
+                  </div>
+                  <ul>
+                    <li>
+                      <div className="radio">
+                        <label for="exampleCheck25">
+                          <input
+                            type="checkbox"
+                            class="mr-2"
+                            id="exampleCheck52"
+                            for="exampleCheck52"
+                          />
+                          <FontAwesome
+                            name="fas fa-star"
+                            style={{ fontSize: 18, color: "#FF9900" }}
+                          />
+                        </label>
                       </div>
-                    <ul>
-                      <li>
-                        <div className="radio">
-                          <label for="exampleCheck25">
-                            <input
-                              type="checkbox"
-                              class="mr-2"
-                              id="exampleCheck52"
-                              for="exampleCheck52"
-                            />
-                            <FontAwesome 
+                    </li>
+                    <li>
+                      <div className="radio">
+                        <label for="exampleCheck24">
+                          <input
+                            type="checkbox"
+                            class="mr-2"
+                            id="exampleCheck24"
+                            for="exampleCheck24"
+                          />
+                          <FontAwesome
                             name="fas fa-star"
-                            style={{fontSize: 18, color: '#FF9900'}}
-                            />
-                          </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="radio">
-                          <label for="exampleCheck24">
-                            <input
-                              type="checkbox"
-                              class="mr-2"
-                              id="exampleCheck24"
-                              for="exampleCheck24"
-                            />
-                            <FontAwesome 
+                            style={{
+                              fontSize: 18,
+                              color: "#FF9900",
+                              marginRight: 5
+                            }}
+                          />
+                          <FontAwesome
                             name="fas fa-star"
-                            style={{fontSize: 18, color: '#FF9900', marginRight: 5}}
-                            />
-                            <FontAwesome 
+                            style={{
+                              fontSize: 18,
+                              color: "#FF9900",
+                              marginRight: 5
+                            }}
+                          />
+                        </label>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="radio">
+                        <label for="exampleCheck35">
+                          <input
+                            type="checkbox"
+                            class="mr-2"
+                            id="exampleCheck35"
+                            for="exampleCheck35"
+                          />
+                          <FontAwesome
                             name="fas fa-star"
-                            style={{fontSize: 18, color: '#FF9900', marginRight: 5}}
-                            />
+                            style={{
+                              fontSize: 18,
+                              color: "#FF9900",
+                              marginRight: 5
+                            }}
+                          />
+                          <FontAwesome
+                            name="fas fa-star"
+                            style={{
+                              fontSize: 18,
+                              color: "#FF9900",
+                              marginRight: 5
+                            }}
+                          />
+                          <FontAwesome
+                            name="fas fa-star"
+                            style={{
+                              fontSize: 18,
+                              color: "#FF9900",
+                              marginRight: 5
+                            }}
+                          />
+                        </label>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="radio">
+                        <label for="exampleCheck44">
+                          <input
+                            type="checkbox"
+                            class="mr-2"
+                            id="exampleCheck44"
+                            for="exampleCheck44"
+                          />
+                          <FontAwesome
+                            name="fas fa-star"
+                            style={{
+                              fontSize: 18,
+                              color: "#FF9900",
+                              marginRight: 5
+                            }}
+                          />
+                          <FontAwesome
+                            name="fas fa-star"
+                            style={{
+                              fontSize: 18,
+                              color: "#FF9900",
+                              marginRight: 5
+                            }}
+                          />
+                          <FontAwesome
+                            name="fas fa-star"
+                            style={{
+                              fontSize: 18,
+                              color: "#FF9900",
+                              marginRight: 5
+                            }}
+                          />
+                          <FontAwesome
+                            name="fas fa-star"
+                            style={{
+                              fontSize: 18,
+                              color: "#FF9900",
+                              marginRight: 5
+                            }}
+                          />
+                        </label>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="radio">
+                        <label for="exampleCheck53">
+                          <input
+                            type="checkbox"
+                            class="mr-2"
+                            id="exampleCheck53"
+                            for="exampleCheck53"
+                          />
 
-                          </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="radio">
-                          <label for="exampleCheck35">
-                            <input
-                              type="checkbox"
-                              class="mr-2"
-                              id="exampleCheck35"
-                              for="exampleCheck35"
-                            />
-                            <FontAwesome 
+                          <FontAwesome
                             name="fas fa-star"
-                            style={{fontSize: 18, color: '#FF9900', marginRight: 5}}
-                            />
-                            <FontAwesome 
+                            style={{
+                              fontSize: 18,
+                              color: "#FF9900",
+                              marginRight: 5
+                            }}
+                          />
+                          <FontAwesome
                             name="fas fa-star"
-                            style={{fontSize: 18, color: '#FF9900', marginRight: 5}}
-                            />
-                            <FontAwesome 
+                            style={{
+                              fontSize: 18,
+                              color: "#FF9900",
+                              marginRight: 5
+                            }}
+                          />
+                          <FontAwesome
                             name="fas fa-star"
-                            style={{fontSize: 18, color: '#FF9900', marginRight: 5}}
-                            />
-                          </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="radio">
-                          <label for="exampleCheck44">
-                            <input
-                              type="checkbox"
-                              class="mr-2"
-                              id="exampleCheck44"
-                              for="exampleCheck44"
-                            />
-                            <FontAwesome 
+                            style={{
+                              fontSize: 18,
+                              color: "#FF9900",
+                              marginRight: 5
+                            }}
+                          />
+                          <FontAwesome
                             name="fas fa-star"
-                            style={{fontSize: 18, color: '#FF9900', marginRight: 5}}
-                            />
-                            <FontAwesome 
+                            style={{
+                              fontSize: 18,
+                              color: "#FF9900",
+                              marginRight: 5
+                            }}
+                          />
+                          <FontAwesome
                             name="fas fa-star"
-                            style={{fontSize: 18, color: '#FF9900', marginRight: 5}}
-                            />
-                            <FontAwesome 
-                            name="fas fa-star"
-                            style={{fontSize: 18, color: '#FF9900', marginRight: 5}}
-                            />
-                            <FontAwesome 
-                            name="fas fa-star"
-                            style={{fontSize: 18, color: '#FF9900', marginRight: 5}}
-                            />
-                          </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="radio">
-                          <label for="exampleCheck53">
-                            <input
-                              type="checkbox"
-                              class="mr-2"
-                              id="exampleCheck53"
-                              for="exampleCheck53"
-                            />
-                            
-                            <FontAwesome 
-                            name="fas fa-star"
-                            style={{fontSize: 18, color: '#FF9900', marginRight: 5}}
-                            />
-                            <FontAwesome 
-                            name="fas fa-star"
-                            style={{fontSize: 18, color: '#FF9900', marginRight: 5}}
-                            />
-                            <FontAwesome 
-                            name="fas fa-star"
-                            style={{fontSize: 18, color: '#FF9900', marginRight: 5}}
-                            />
-                            <FontAwesome 
-                            name="fas fa-star"
-                            style={{fontSize: 18, color: '#FF9900', marginRight: 5}}
-                            />
-                            <FontAwesome 
-                            name="fas fa-star"
-                            style={{fontSize: 18, color: '#FF9900', marginRight: 5}}
-                            />
-                          </label>
-                        </div>
-                      </li>
-                      
-                    </ul>
+                            style={{
+                              fontSize: 18,
+                              color: "#FF9900",
+                              marginRight: 5
+                            }}
+                          />
+                        </label>
+                      </div>
+                    </li>
+                  </ul>
                 </aside>
               </div>
             </div>
@@ -772,46 +958,35 @@ class shopGrid extends Component {
                   id="nav-grid"
                   role="tabpanel"
                 >
+                  {this.authordetails()}
                   <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                       <li class="breadcrumb-item">
-                        <a href="/">Home</a>
+                        <Link to="/">Home</Link>
                       </li>
 
                       <li class="breadcrumb-item">
-                        <a href="/book">Books</a>
+                        <Link to="/">Books</Link>
                       </li>
                       <li class="breadcrumb-item">
-                        <a href="/book/categories">Categories</a>
+                        <Link>{(this.props.books.author) ? ("author") : ((this.props.books.publisher) ? ("publisher") : ("category"))}</Link>
                       </li>
                       <li class="breadcrumb-item active" aria-current="page">
-                        ইংরেজি ভাষার বই
+                        {this.booksTitle()}
                       </li>
                     </ol>
                   </nav>
                   <div class="row m-0">
                     <div class="col-lg-12">
                       <h1 style={{ fontSize: "150%", fontWeight: 400 }}>
-                        ইংরেজি ভাষার বই
+                        {this.booksTitle()}  এর বই সমূহ
                       </h1>
 
                       <p>(Showing 1 to 60 of 20147 books)</p>
                     </div>
                   </div>
                   <div class="row">
-                    {productexData.map((item, index) => {
-                      return (
-                        <ProductExtra
-                          key={index}
-                          image={item.image}
-                          tag={item.tag}
-                          price={item.price}
-                          oldprice={item.oldprice}
-                          name={item.name}
-                          history={this.props.history}
-                        />
-                      );
-                    })}
+                    {this.props.books.books!=null?this.showBooks():console.log("no books found")}
                   </div>
                   <ul class="wn__pagination">
                     <li class="active">
@@ -857,8 +1032,22 @@ class shopGrid extends Component {
           </div>
         </div>
       </div>
+      </React.Fragment>
     );
   }
 }
 
-export default shopGrid;
+shopGrid.propTypes = {
+  fetchBooks: PropTypes.func.isRequired,
+  books: PropTypes.array.isRequired,
+  newBook: PropTypes.object
+};
+
+const mapStateToProps = state => ({
+  books: state.books.items,
+  newBook: state.books.item
+});
+
+
+// export default shopGrid;
+export default connect(mapStateToProps, { fetchBooks })(shopGrid);

@@ -15,7 +15,8 @@ class Shopingcart extends Component {
   
   render() {
     return (
-      <div class="cart-main-area section-padding--lg bg--white">
+      <React.Fragment>
+          <div class="cart-main-area section-padding--lg bg--white">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 ol-lg-12">
@@ -93,6 +94,7 @@ class Shopingcart extends Component {
                 </div>
             </div>  
         </div>
+      </React.Fragment>
       
     );
   }

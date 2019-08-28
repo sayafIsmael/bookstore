@@ -4035,11 +4035,11 @@ h3.widget-title-modal {
   margin: 15px 0 20px;
 }
 .product__info__main .price-box span {
-  color: #333;
+  /* color: #333;
   display: block;
   font-size: 24px;
   font-weight: 600;
-  margin-bottom: 5px;
+  margin-bottom: 5px; */
 }
 .product__info__main .product-color-label span {
   font-size: 14px;
@@ -6276,4 +6276,25 @@ section.wn_contact_area {
 section.wn_contact_area {
   padding-bottom: 60px;
 }
+}
+
+.details-book-info__content-book-price {
+  font-family: lato,sans-serif;
+  font-size: 160%;
+  word-spacing: 3px;
+  font-weight: 700;
+  margin: 12px 0;
+}
+
+.details-book-info__content-book-price .original-price {
+  margin-left: 10px;
+  font-size: 70%;
+  color: #a0a0a0;
+}
+
+.details-book-info__content-book-price .price-off {
+  margin-left: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #33c24d;
 }

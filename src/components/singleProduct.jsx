@@ -12,11 +12,7 @@ import {
 } from "react-device-detect";
 import Slider from "react-slick";
 
-import {
-  Link,
-  Redirect,
-  Prompt
-} from "react-router-dom";
+import { Link, Redirect, Prompt } from "react-router-dom";
 import FontAwesome from "react-fontawesome";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -60,26 +56,11 @@ class Productz extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: discountProduct,
+      books: discountProduct
     };
     window.scrollTo(0, 0);
   }
 
-  // componentWillMount() {
-  //   loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
-  //     loadjs("js/vendor/jquery-3.2.1.min.js", function() {
-  //       loadjs("js/popper.min.js", function() {
-  //         loadjs("js/plugins.js", function() {
-  //           loadjs("js/bootstrap.min.js", function() {
-  //             loadjs("js/active.js", function() {
-  //               loadjs("js/main.js");
-  //             });
-  //           });
-  //         });
-  //       });
-  //     });
-  //   });
-  // }
 
   firstRow = () => {
     var settings = {
@@ -104,33 +85,32 @@ class Productz extends Component {
     return (
       <React.Fragment>
         <BrowserView>
-        
-        <div style={{ background: "#F1F2EE", paddingRight: 25, height: 340}}>
-          <div>
-            {console.log("Screen width", window.innerWidth)}
-            <Slider {...settings}>
-              {this.state.books.map((item, index) => {
-                // console.log("Items found from dummy: ", item);
-                return (
-                  <Product
-                    key={index}
-                    name={item.name}
-                    price={item.price}
-                    oldPrice={item.oldPrice}
-                    discount={item.discount}
-                    image={item.image}
-                    image2={item.image2}
-                    writer={item.writer}
-                    history={this.props.history}
-                  />
-                );
-              })}
-            </Slider>
-          </div>
+          <div style={{ background: "#F1F2EE", paddingRight: 25, height: 340 }}>
+            <div>
+              {console.log("Screen width", window.innerWidth)}
+              <Slider {...settings}>
+                {this.state.books.map((item, index) => {
+                  // console.log("Items found from dummy: ", item);
+                  return (
+                    <Product
+                      key={index}
+                      name={item.name}
+                      price={item.price}
+                      oldPrice={item.oldPrice}
+                      discount={item.discount}
+                      image={item.image}
+                      image2={item.image2}
+                      writer={item.writer}
+                      history={this.props.history}
+                    />
+                  );
+                })}
+              </Slider>
+            </div>
           </div>
         </BrowserView>
         <MobileView>
-          <div style={{ background: "#F1F2EE",}}>
+          <div style={{ background: "#F1F2EE" }}>
             <Slider {...settings2}>
               {this.state.books.map((item, index) => {
                 // console.log("Items found from dummy: ", item);
@@ -156,7 +136,8 @@ class Productz extends Component {
 
   render() {
     return (
-      <div class="maincontent bg--white pt--40 pb--55">
+      <React.Fragment>
+        <div class="maincontent bg--white pt--40 pb--55">
         <div class="container">
           <div class="row">
             <div class="col-12">
@@ -186,16 +167,26 @@ class Productz extends Component {
                   <div class="col-lg-6 col-12">
                     <div class="product__info__main">
                       <h1 class="mb-4">হিমু রিমান্ডে</h1>
-                      <Link style={{fontSize: 16}} to="/humayon_ahmed">হুমায়ন আহমেদ</Link>
+                      <Link style={{ fontSize: 16 }} to="/humayon_ahmed">
+                        হুমায়ন আহমেদ
+                      </Link>
                       <div class="price-box">
-                        <span>৳১৫২.০০</span>
+                        <p class="details-book-info__content-book-price">
+                          TK. 132
+                          <strike class="original-price">TK. 150</strike>
+                          <span class="price-off">
+                            (<span class="js--save-message">You can Save</span>
+                            12%)
+                          </span>
+                        </p>
                       </div>
                       <p class="text-success">
-                        <span class="mr-2"><FontAwesome
-                        name="circle"
-                        dtyle={{fontSize: 15,}}
-                        /></span>
-                        অনলাইনে পেমেন্ট বিকাশ করলেই ২০% ইন্সট্যান্ট ক্যাশব্যাক। (শর্ত প্রযোজ্য)</p>
+                        <span class="mr-2">
+                          <FontAwesome name="circle" dtyle={{ fontSize: 15 }} />
+                        </span>
+                        অনলাইনে পেমেন্ট বিকাশ করলেই ২০% ইন্সট্যান্ট ক্যাশব্যাক।
+                        (শর্ত প্রযোজ্য)
+                      </p>
                       <div class="product__overview">
                         <p>
                           Ideal for cold-weather training or work outdoors, the
@@ -209,12 +200,15 @@ class Productz extends Component {
                         </p>
                       </div>
                       <div>
-                      <div class="product-addto-links clearfix pb-3 row ml-0 d-flex align-items-center">
-                         <a class="wishlist" href="#" /> <p class="pl-2">Add to booklist</p> 
+                        <div class="product-addto-links clearfix pb-3 row ml-0 d-flex align-items-center">
+                          <a class="wishlist" href="#" />{" "}
+                          <p class="pl-2">Add to booklist</p>
                         </div>
                       </div>
                       <div class="box-tocart d-flex">
-                      <button type="button" class="btn btn-outline-dark mr-2">একটু পড়ে দেখুন</button>
+                        <button type="button" class="btn btn-outline-dark mr-2">
+                          একটু পড়ে দেখুন
+                        </button>
                         <div class="addtocart__actions">
                           <button
                             class="tocart"
@@ -570,16 +564,18 @@ class Productz extends Component {
                 </div>
               </div>
               <div class="row m-0 mt-3">
-              <h4 class="">
-                সর্বোচ্চ ছাড়ের বই {/* <span class="color--theme"></span> */}
-              </h4>
-            </div>
+                <h4 class="">
+                  সর্বোচ্চ ছাড়ের বই {/* <span class="color--theme"></span> */}
+                </h4>
+              </div>
 
-            {this.firstRow()}
+              {this.firstRow()}
             </div>
           </div>
         </div>
       </div>
+      </React.Fragment>
+      
     );
   }
 }
