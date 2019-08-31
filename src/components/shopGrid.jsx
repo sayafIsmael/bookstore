@@ -37,7 +37,7 @@ class shopGrid extends Component {
   };
 
   componentWillMount() {
-    this.props.fetchBooks();
+    // this.props.fetchBooks();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -120,6 +120,7 @@ class shopGrid extends Component {
           price={item.new_price}
           oldprice={item.old_price}
           name={item.title}
+          author={this.props.books.author != null ? this.props.books.author.name : null}
           stock={item.stock}
           id={item.id}
           history={this.props.history}

@@ -14,6 +14,11 @@ import Slider from "react-slick";
 
 import { Link, Redirect, Prompt } from "react-router-dom";
 import FontAwesome from "react-fontawesome";
+import * as helper from "./../helper";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchBook } from '../actions/bookActions';
+
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -52,6 +57,7 @@ function SamplePrevArrow(props) {
   );
 }
 
+
 class Productz extends Component {
   constructor(props) {
     super(props);
@@ -61,6 +67,9 @@ class Productz extends Component {
     window.scrollTo(0, 0);
   }
 
+  componentWillMount() {
+    // this.props.fetchBook();
+  }
 
   firstRow = () => {
     var settings = {
@@ -133,7 +142,84 @@ class Productz extends Component {
       </React.Fragment>
     );
   };
-
+  title=()=>{
+    try {
+      if(this.props.book.book){
+        return this.props.book.book.title;
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  summary=()=>{
+    try {
+      if(this.props.book.book){
+        return this.props.book.book.summary;
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  new_price=()=>{
+    try {
+      if(this.props.book.book){
+        return this.props.book.book.new_price;
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  old_price=()=>{
+    try {
+      if(this.props.book.book){
+        return this.props.book.book.old_price;
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  old_price=()=>{
+    try {
+      if(this.props.book.book){
+        return this.props.book.book.old_price;
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  description=()=>{
+    try {
+      if(this.props.book.book){
+        return this.props.book.book.description;
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  // {
+  //   "id": 19,
+  //   "category_id": 16,
+  //   "title": "added book",
+  //   "summary": "sumary of a",
+  //   "stock": 651,
+  //   "rating": "3",
+  //   "description": "asdasdasd sda sas",
+  //   "old_price": 661,
+  //   "new_price": 558,
+  //   "page": 88,
+  //   "country": "Bd",
+  //   "author_id": 3,
+  //   "language": "china",
+  //   "publisher_id": 3,
+  //   "discount": 996,
+  //   "cover": "1566539946.png",
+  //   "upcoming": 0,
+  //   "created_at": "2019-08-23 05:59:06",
+  //   "updated_at": "2019-08-23 05:59:23",
+  //   "category": "caat",
+  //   "author": "Photo",
+  //   "publisher": "Kodu ajad"
+  // }
   render() {
     return (
       <React.Fragment>
@@ -166,7 +252,8 @@ class Productz extends Component {
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="product__info__main">
-                      <h1 class="mb-4">হিমু রিমান্ডে</h1>
+                      {console.log("mother fuck ", this.title())}
+                      <h1 class="mb-4">{this.title()}</h1>{/**/}
                       <Link style={{ fontSize: 16 }} to="/humayon_ahmed">
                         হুমায়ন আহমেদ
                       </Link>
@@ -175,7 +262,7 @@ class Productz extends Component {
                           TK. 132
                           <strike class="original-price">TK. 150</strike>
                           <span class="price-off">
-                            (<span class="js--save-message">You can Save</span>
+                            {/* (<span class="js--save-message">You can Save</span> */}
                             12%)
                           </span>
                         </p>
@@ -580,4 +667,15 @@ class Productz extends Component {
   }
 }
 
-export default Productz;
+
+Productz.propTypes = {
+  fetchBook: PropTypes.func.isRequired,
+  books: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => ({
+  book: state.books.item,
+});
+
+
+export default connect(mapStateToProps, {fetchBook})(Productz);

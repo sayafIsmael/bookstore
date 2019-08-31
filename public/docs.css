@@ -62,7 +62,8 @@
 .m-item-img{
   width: 101px;
   height: 135px;
-  background-image: url("images/books/dummy.png")
+  background-image: url("images/books/dummy.png");
+  background-size: cover;
 }
 
 

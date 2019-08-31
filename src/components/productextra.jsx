@@ -41,10 +41,10 @@ class ProductExtra extends Component {
               this.setState({ mouseOver: false });
             }}
             onClick={() => {
-              this.props.history.push(`/product`);
               this.props.fetchBook(
                 helper.prefix + "book/singlebook/" + this.props.id
               );
+              this.props.history.push(`/product`);
             }}
           >
             <div>
@@ -110,14 +110,14 @@ class ProductExtra extends Component {
                   opacity: this.state.mouseOver ? 0.3 : 1
                 }}
               >
-                {this.props.writer ? this.props.writer : "লেখকের নাম"}
+                {this.props.author ? this.props.author : null}
               </p>
               {this.props.stock > 0 ? (
                 <p
                   class="text-success"
                   style={{ opacity: this.state.mouseOver ? 0.3 : 1 }}
                 >
-                  Product In Stock
+                  {this.props.stock > 0 ? "Product In Stock" : null}
                 </p>
               ) : (
                 ""

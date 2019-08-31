@@ -392,7 +392,7 @@ class navbar extends Component {
           let authors = helper
             .breakArrayIntoGroups(responseJson.authors, 8)
             .slice(0, 4);
-          console.log(authors);
+          console.log("Is found authors",authors);
           this.setState({ authors: authors });
         }
       })
