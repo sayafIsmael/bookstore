@@ -8,6 +8,13 @@ import discountProduct from "./../dummyData/discountProduct";
 import publishers from "./../dummyData/publishers";
 import FontAwesome from "react-fontawesome";
 import loadjs from "loadjs";
+import * as helper from "./../helper";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchBooks} from '../actions/bookActions';
+import {
+  Link
+} from "react-router-dom";
 
 import Slider from "react-slick";
 
@@ -96,9 +103,15 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: discountProduct,
+      // books: discountProduct,
+      cat_orders: null,
+      publishers: null,
+      top_authors: null
     };
     window.scrollTo(0, 0);
+    this.fetchBooks();
+    this.fetchPublishers();
+    this.fecthTopAuthors();
   }
 
   // componentWillMount() {
@@ -122,8 +135,16 @@ class Home extends Component {
    
   }
 
+  fecthTopAuthors = () =>{
+    fetch(helper.prefix + "authors/top")
+    .then(res => res.json())
+    .then(data => {
+      this.setState({top_authors: data.authors})
+      console.log("Weekly top authors", data.authors)
+    })
+  }
 
-  firstRow = () => {
+  firstRow = (title, books) => {
     var settings = {
       dots: false,
       infinite: true,
@@ -146,27 +167,32 @@ class Home extends Component {
     return (
       <React.Fragment>
         <BrowserView>
-        
-        <div style={{ background: "#F1F2EE", paddingRight: 25, height: 340}}>
+        <div class="row m-0 mt-3">
+          <h4 class="">
+            {title}
+          </h4>
+        </div>
+        <div style={{ background: "#F1F2EE", paddingRight: 25, height: 340, marginBottom: 30}}>
           <div>
             {console.log("Screen width", window.innerWidth)}
             <Slider {...settings}>
-              {this.state.books.map((item, index) => {
-                // console.log("Items found from dummy: ", item);
+              {books !== []?books.map((item, index) => {
+                console.log("Items found from data: ", item);
                 return (
                   <Product
                     key={index}
-                    name={item.name}
-                    price={item.price}
-                    oldPrice={item.oldPrice}
+                    name={item.title}
+                    cart_book={item}
+                    id={item.id}
+                    price={item.new_price}
+                    oldPrice={item.old_price}
                     discount={item.discount}
-                    image={item.image}
-                    image2={item.image2}
-                    writer={item.writer}
+                    image={item.cover}
+                    writer={item.author}
                     history={this.props.history}
                   />
                 );
-              })}
+              }):null}
             </Slider>
           </div>
           </div>
@@ -174,7 +200,7 @@ class Home extends Component {
         <MobileView>
           <div style={{ background: "#F1F2EE",}}>
             <Slider {...settings2}>
-              {this.state.books.map((item, index) => {
+              {books !== []? books.map((item, index) => {
                 // console.log("Items found from dummy: ", item);
                 return (
                   <Product
@@ -189,7 +215,7 @@ class Home extends Component {
                     history={this.props.history}
                   />
                 );
-              })}
+              }):null}
             </Slider>
           </div>
         </MobileView>
@@ -298,7 +324,7 @@ class Home extends Component {
       <div class="container mt-2">
         <div class="row m-0 mt-4">
           <h4 class="">
-            প্রকাশনী সমূহ{/* <span class="color--theme"></span> */}
+            প্রকাশনী সমূহ
           </h4>
         </div>
           <BrowserView>
@@ -306,9 +332,16 @@ class Home extends Component {
             <div>
               {console.log("Screen width", window.innerWidth)}
               <Slider {...settings}>
-                {publishers.map((item, index) => {
+                { console.log("Got all publisher ",this.state.publishers)}
+                {this.state.publishers !== null ? this.state.publishers.map((item, index) => {
                   return (
-                    <div>
+                    <Link  to="/shopGrid"
+                    onClick={() => {
+                      this.props.fetchBooks(
+                        helper.prefix + "publisher/books/" + item.id
+                      );
+                      console.log(item.id)
+                    }}>
                       <div class="crp-item">
                         <img
                           class="m-pubp-img"
@@ -316,9 +349,9 @@ class Home extends Component {
                           style={{ borderRadius: "100%" }}
                         />
                       </div>
-                    </div>
+                    </Link>
                   );
-                })}
+                }):null}
               </Slider>
             </div>
             </div>
@@ -379,69 +412,26 @@ class Home extends Component {
         <BrowserView>
           <div style={{ background: "#F1F2EE", paddingRight: 25 }}>
             <Slider {...settings}>
-              <div>
-                <div class="crw-item">
-                  <img
-                    class="mw-pub-img"
-                    src="images/writers/1.jpg"
-                    style={{ borderRadius: "100%" }}
-                  />
-                </div>
-              </div>
-              <div>
-                <div class="crw-item">
-                  <img
-                    class="mw-pub-img"
-                    src="images/writers/2.jpg"
-                    style={{ borderRadius: "100%" }}
-                  />
-                </div>
-              </div>
-              <div>
-                <div class="crw-item">
-                  <img
-                    class="mw-pub-img"
-                    src="images/writers/1.jpg"
-                    style={{ borderRadius: "100%" }}
-                  />
-                </div>
-              </div>
-              <div>
-                <div class="crw-item">
-                  <img
-                    class="mw-pub-img"
-                    src="images/writers/2.jpg"
-                    style={{ borderRadius: "100%" }}
-                  />
-                </div>
-              </div>
-              <div>
-                <div class="crw-item">
-                  <img
-                    class="mw-pub-img"
-                    src="images/writers/1.jpg"
-                    style={{ borderRadius: "100%" }}
-                  />
-                </div>
-              </div>
-              <div>
-                <div class="crw-item">
-                  <img
-                    class="mw-pub-img"
-                    src="images/writers/2.jpg"
-                    style={{ borderRadius: "100%" }}
-                  />
-                </div>
-              </div>
-              <div>
-                <div class="crw-item">
-                  <img
-                    class="mw-pub-img"
-                    src="images/writers/1.jpg"
-                    style={{ borderRadius: "100%" }}
-                  />
-                </div>
-              </div>
+             {this.state.top_authors?this.state.top_authors.map((item, index) =>{
+                 return(
+                  <Link to="/shopGrid"
+                      onClick={() => {
+                        this.props.fetchBooks(
+                          helper.prefix + "author/books/" + item.id
+                        );
+                      }}>
+                  <div class="crw-item">
+                    <img
+                      class="mw-pub-img"
+                      src={item.image}
+                      style={{ borderRadius: "100%" }}
+                    />
+                  </div>
+                </Link>
+                 )
+               }):null
+             }
+              
             </Slider>
           </div>
         </BrowserView>
@@ -707,6 +697,37 @@ class Home extends Component {
     );
   };
 
+
+  fetchBooks = () =>{
+    fetch(helper.prefix+'book/book_order')
+            .then(res => res.json())
+            .then(book => {
+              console.log("Order by books", book.cat_orders)
+                this.setState({cat_orders: book.cat_orders})
+            })
+  }
+  
+  fetchPublishers = () => {
+    fetch(helper.prefix+'publishers')
+    .then(res => res.json())
+    .then(data => {
+      console.log("Fetched publishers", data.publishers)
+        this.setState({publishers: data.publishers})
+    })
+  }
+
+  fetchBooksRow = () =>{
+    if(this.state.cat_orders){
+      return this.state.cat_orders.map((data, index) =>{
+        console.log("Books to show",data.books)
+        if(data.books.length > 6){
+          return this.firstRow(data.category, data.books)
+                // <div>{this.adRow()}</div>
+        }
+      })
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -716,91 +737,7 @@ class Home extends Component {
         </div>
         <section class="wn__product__area brown--color pt--20  pb--20">
           <div class="container">
-            <div class="row m-0 mt-3">
-              <h4 class="">
-                সর্বোচ্চ ছাড়ের বই {/* <span class="color--theme"></span> */}
-              </h4>
-            </div>
-
-            {this.firstRow()}
-
-            <div class="row m-0 mt-3">
-              <h4 class="">
-                বিজ্ঞান {/* <span class="color--theme"></span> */}
-              </h4>
-            </div>
-
-            {this.firstRow()}
-
-            <div class="row m-0 mt-3">
-              <h4 class="">
-                ইতিহাস {/* <span class="color--theme"></span> */}
-              </h4>
-            </div>
-
-            {this.firstRow()}
-
-            <div>{this.adRow()}</div>
-
-            <div class="row m-0 mt-3">
-              <h4 class="">
-                সর্বোচ্চ বিক্রিত বই {/* <span class="color--theme"></span> */}
-              </h4>
-            </div>
-
-            {this.firstRow()}
-
-            <div class="row m-0 mt-3">
-              <h4 class="">
-                অবশ্য পাঠ্য {/* <span class="color--theme"></span> */}
-              </h4>
-            </div>
-
-            {this.firstRow()}
-
-            <div class="row m-0 mt-3">
-              <h4 class="">
-                গ্রন্থিক প্রকাশনের বই {/* <span class="color--theme"></span> */}
-              </h4>
-            </div>
-
-            {this.firstRow()}
-
-            <div class="row m-0 mt-3">
-              <h4 class="">
-                শিশুতোষ {/* <span class="color--theme"></span> */}
-              </h4>
-            </div>
-
-            {this.firstRow()}
-
-            <div>{this.adRow()}</div>
-
-            <div class="row m-0 mt-3">
-              <h4 class="">
-                প্রবন্ধ {/* <span class="color--theme"></span> */}
-              </h4>
-            </div>
-
-            {this.firstRow()}
-
-            <div class="row m-0 mt-3">
-              <h4 class="">
-                সমাজ বিজ্ঞান {/* <span class="color--theme"></span> */}
-              </h4>
-            </div>
-
-            {this.firstRow()}
-
-            <div class="row m-0 mt-3">
-              <h4 class="">
-                অর্থনীতি {/* <span class="color--theme"></span> */}
-              </h4>
-            </div>
-
-            {this.firstRow()}
-
-            <div>{this.adRow()}</div>
+            {this.fetchBooksRow()}
           </div>
         </section>
 
@@ -961,10 +898,17 @@ class Home extends Component {
             </div>
           </div>
         </div>
-        {this.recentlySearched()}
+        {/* {this.recentlySearched()} */}
       </React.Fragment>
     );
   }
 }
 
-export default Home;
+Home.propTypes = {
+  fetchBooks: PropTypes.func.isRequired,
+};
+
+
+
+
+export default connect(null, { fetchBooks })(Home);

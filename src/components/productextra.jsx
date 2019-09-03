@@ -10,7 +10,7 @@ import { tsImportEqualsDeclaration } from "@babel/types";
 import FontAwesome from "react-fontawesome";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchBook } from "../actions/bookActions";
+import { fetchBook, addtoCart} from "../actions/bookActions";
 import * as helper from "./../helper";
 
 class ProductExtra extends Component {
@@ -44,6 +44,7 @@ class ProductExtra extends Component {
               this.props.fetchBook(
                 helper.prefix + "book/singlebook/" + this.props.id
               );
+              console.log("fecth book id = ",this.props.id)
               this.props.history.push(`/product`);
             }}
           >
@@ -65,7 +66,7 @@ class ProductExtra extends Component {
                 }}
                 onClick={e => {
                   e.stopPropagation();
-                  // this.handleRefs(dwelling.address, index)
+                  this.props.addtoCart(this.props.cart_book);
                 }}
               >
                 <FontAwesome
@@ -111,6 +112,7 @@ class ProductExtra extends Component {
                 }}
               >
                 {this.props.author ? this.props.author : null}
+                {this.props.writer ? this.props.writer : null}
               </p>
               {this.props.stock > 0 ? (
                 <p
@@ -168,10 +170,11 @@ class ProductExtra extends Component {
 }
 
 ProductExtra.propTypes = {
-  fetchBook: PropTypes.func.isRequired
+  fetchBook: PropTypes.func.isRequired,
+  addtoCart: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
-  { fetchBook }
+  { fetchBook, addtoCart}
 )(ProductExtra);

@@ -3,8 +3,6 @@ import loadjs from "loadjs";
 import axios from "axios";
 
 import {
-  HashRouter as Router,
-  Route,
   Link
   // NavLink,
   // Redirect,
@@ -18,11 +16,19 @@ import {
 } from "react-device-detect";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchBooks } from "../actions/bookActions";
+import { fetchBooks, fetchBook, deleteFromCart} from "../actions/bookActions";
 
 import ReactTyped from "react-typed";
 import FontAwesome from "react-fontawesome";
 import * as helper from "./../helper";
+
+Array.prototype.sum = function(prop) {
+  var total = 0;
+  for (var i = 0, _len = this.length; i < _len; i++) {
+    total += this[i][prop];
+  }
+  return total;
+};
 
 class navbar extends Component {
   constructor(props) {
@@ -43,6 +49,7 @@ class navbar extends Component {
     };
     this.fetch_authors();
     this.fetch_publishers();
+    console.log("Cart from state ", this.props.cart);
   }
 
   // componentWillMount() {
@@ -99,7 +106,7 @@ class navbar extends Component {
   };
 
   cart = () => {
-    if (this.state.cart === true) {
+    if (this.state.cart === true && this.props.cart != null) {
       return (
         <div class="block-minicart minicart__active is-visible ">
           <div class="minicart-content-wrapper">
@@ -109,12 +116,61 @@ class navbar extends Component {
             >
               <span>close</span>
             </div>
+            <div style={{height: 380, overflowY: 'scroll'}}>
+            {this.props.cart.map((book, index) => {
+              return(
+                <div class="single__items">
+              <div class="miniproduct">
+                <div class="item01 d-flex">
+                  <div class="thumb">
+                    <Link to="/product" 
+                    onClick={() => {
+                      this.props.fetchBook(
+                        helper.prefix + "book/singlebook/" + book.id
+                      );
+                    }}
+                    >
+                      <object data={book.cover} type="image/jpg" style={{height: 100, width: 70}} >
+                          <img src="images/books/dummy.png" />
+                      </object>
+                    </Link>
+                  </div>
+                  <div class="content">
+                    <h6>
+                      <Link to="/product" onClick={() => {
+                      this.props.fetchBook(
+                        helper.prefix + "book/singlebook/" + book.id
+                      );
+                    }}>{book.title}</Link>
+                    </h6>
+                    <span class="prize">৳{book.new_price}</span>
+                    <div class="product_prize d-flex justify-content-between">
+                      <span class="qun">Qty: {book.quantity}</span>
+                      <ul class="d-flex justify-content-end">
+                        <li>
+                          <span href="#"
+                          onClick={() => {
+                            this.props.deleteFromCart(index)
+                          }}
+                          >
+                            <i class="zmdi zmdi-delete" />
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              )
+            })}
+            </div>
             <div class="items-total d-flex justify-content-between">
-              <span>3 items</span>
+              <span>{this.props.cart.length} items</span>
               <span>Cart Subtotal</span>
             </div>
             <div class="total_amount text-right">
-              <span>$66.00</span>
+              <span>৳{parseFloat(this.props.cart.sum("new_price")).toFixed(2)}</span>
             </div>
             <div class="mini_action checkout">
               <Link
@@ -123,112 +179,6 @@ class navbar extends Component {
                 onClick={() => this.setState({ cart: !this.state.cart })}
               >
                 Go to Checkout
-              </Link>
-            </div>
-            <div class="single__items">
-              <div class="miniproduct">
-                <div class="item01 d-flex">
-                  <div class="thumb">
-                    <a href="product-details.html">
-                      <img
-                        src="images/product/sm-img/1.jpg"
-                        alt="product images"
-                      />
-                    </a>
-                  </div>
-                  <div class="content">
-                    <h6>
-                      <a href="product-details.html">Voyage Yoga Bag</a>
-                    </h6>
-                    <span class="prize">$30.00</span>
-                    <div class="product_prize d-flex justify-content-between">
-                      <span class="qun">Qty: 01</span>
-                      <ul class="d-flex justify-content-end">
-                        <li>
-                          <a href="#">
-                            <i class="zmdi zmdi-settings" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="zmdi zmdi-delete" />
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="item01 d-flex mt--20">
-                  <div class="thumb">
-                    <a href="product-details.html">
-                      <img
-                        src="images/product/sm-img/3.jpg"
-                        alt="product images"
-                      />
-                    </a>
-                  </div>
-                  <div class="content">
-                    <h6>
-                      <a href="product-details.html">Impulse Duffle</a>
-                    </h6>
-                    <span class="prize">$40.00</span>
-                    <div class="product_prize d-flex justify-content-between">
-                      <span class="qun">Qty: 03</span>
-                      <ul class="d-flex justify-content-end">
-                        <li>
-                          <a href="#">
-                            <i class="zmdi zmdi-settings" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="zmdi zmdi-delete" />
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="item01 d-flex mt--20">
-                  <div class="thumb">
-                    <a href="product-details.html">
-                      <img
-                        src="images/product/sm-img/2.jpg"
-                        alt="product images"
-                      />
-                    </a>
-                  </div>
-                  <div class="content">
-                    <h6>
-                      <a href="product-details.html">Compete Track Tote</a>
-                    </h6>
-                    <span class="prize">$40.00</span>
-                    <div class="product_prize d-flex justify-content-between">
-                      <span class="qun">Qty: 03</span>
-                      <ul class="d-flex justify-content-end">
-                        <li>
-                          <a href="#">
-                            <i class="zmdi zmdi-settings" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="zmdi zmdi-delete" />
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="mini_action cart">
-              <Link
-                class="cart__btn"
-                to={"cart"}
-                onClick={() => this.setState({ cart: !this.state.cart })}
-              >
-                View and edit cart
               </Link>
             </div>
           </div>
@@ -392,7 +342,7 @@ class navbar extends Component {
           let authors = helper
             .breakArrayIntoGroups(responseJson.authors, 8)
             .slice(0, 4);
-          console.log("Is found authors",authors);
+          console.log("Is found authors", authors);
           this.setState({ authors: authors });
         }
       })
@@ -468,7 +418,10 @@ class navbar extends Component {
   };
 
   publishers = () => {
-    if (this.state.mouseClickedPublisher == true && this.state.publishers != null) {
+    if (
+      this.state.mouseClickedPublisher == true &&
+      this.state.publishers != null
+    ) {
       return (
         <div class="row ml-5 mr-5 mega-menu">
           {this.state.publishers.map((group, i) => {
@@ -526,6 +479,18 @@ class navbar extends Component {
           <a style={{ fontSize: 16 }}>পাঠ্য বই</a>
         </div>
       );
+    }
+  };
+
+  cart_total = () => {
+    try {
+      if (this.props.cart != undefined) {
+        return this.props.cart.length;
+      } else {
+        return 0;
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -620,7 +585,7 @@ class navbar extends Component {
                       onClick={() => this.setState({ cart: !this.state.cart })}
                     >
                       <div class="cartIcon" to="">
-                        <span class="product_qun">3</span>
+                        <span class="product_qun">{this.cart_total()}</span>
                       </div>
 
                       {this.cart()}
@@ -930,9 +895,16 @@ class navbar extends Component {
 }
 
 navbar.propTypes = {
-  fetchBooks: PropTypes.func.isRequired
+  fetchBooks: PropTypes.func.isRequired,
+  fetchBook: PropTypes.func.isRequired,
+  deleteFromCart: PropTypes.func.isRequired
 };
+
+const mapStateToProps = state => ({
+  cart: state.books.cart
+});
+
 export default connect(
-  null,
-  { fetchBooks }
+  mapStateToProps,
+  { fetchBooks, fetchBook, deleteFromCart}
 )(navbar);

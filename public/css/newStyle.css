@@ -167,7 +167,8 @@ footer, .h6 , .dark-grey-text{
     z-index: 10;
 }
 .male-btn{
-    margin-right: 10px;
+    margin-right: 21px;
+    margin-left: 11px;
     background: #00AEEF;
     font-size: 18px;
     color: white;
@@ -176,7 +177,6 @@ footer, .h6 , .dark-grey-text{
     padding-top: 5px;
     padding-bottom: 5px;
     position: relative;
-    right: 10px;
     cursor: pointer;
 }
 .female-btn{

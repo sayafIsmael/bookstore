@@ -9,6 +9,11 @@ import {
   isMobile
 } from "react-device-detect";
 
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { fetchBook, addtoCart} from "../actions/bookActions";
+import * as helper from "./../helper";
+
 import FontAwesome from "react-fontawesome";
 
 class Product extends Component {
@@ -36,7 +41,13 @@ class Product extends Component {
             onMouseOut={() => {
               this.setState({ mouseOver: false });
             }}
-            onClick={() => this.props.history.push(`/product`)}
+            onClick={() => {
+              this.props.fetchBook(
+                helper.prefix + "book/singlebook/" + this.props.id
+              );
+              console.log("fecth book id = ",this.props.id)
+              this.props.history.push(`/product`);
+            }}
           >
             <div>
               <img class="discount_badge" src="images/badges/discount.png" style={{ opacity: this.state.mouseOver ? 0.3 : 1 }}/>
@@ -44,9 +55,9 @@ class Product extends Component {
                 type="button"
                 class="btn btn-warning ml-2"
                 style={{ zIndex: 1, position: "absolute", top: 112, color: 'white', display: this.state.mouseOver?'block':'none'}}
-                onClick={(e) => {
-                  e.stopPropagation(); 
-                  // this.handleRefs(dwelling.address, index)
+                onClick={e => {
+                  e.stopPropagation();
+                  this.props.addtoCart(this.props.cart_book);
                 }}
               >
                 <FontAwesome
@@ -87,4 +98,13 @@ class Product extends Component {
   }
 }
 
-export default Product;
+Product.propTypes = {
+  fetchBook: PropTypes.func.isRequired,
+  addtoCart: PropTypes.func.isRequired
+};
+
+export default connect(
+  null,
+  { fetchBook, addtoCart}
+)(Product);
+

@@ -116,11 +116,13 @@ class shopGrid extends Component {
       return (
         <ProductExtra
           key={index}
+          cart_book={item}
           image={item.cover}
           price={item.new_price}
           oldprice={item.old_price}
           name={item.title}
-          author={this.props.books.author != null ? this.props.books.author.name : null}
+          author={item.author ? null : (this.props.books.author != null ? this.props.books.author.name : null)}
+          writer={item.author}
           stock={item.stock}
           id={item.id}
           history={this.props.history}
