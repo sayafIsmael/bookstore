@@ -12,11 +12,12 @@ import {
 } from "../actions/bookActions";
 import * as helper from "./../helper";
 import FontAwesome from "react-fontawesome";
+import { parse } from "@babel/core";
 
-Array.prototype.sum = function(prop) {
+Array.prototype.sum = function(prop, quantity) {
   var total = 0;
   for (var i = 0, _len = this.length; i < _len; i++) {
-    total += this[i][prop];
+    total += parseInt(this[i][prop]) * parseInt(this[i][quantity]);
   }
   return total;
 };
@@ -76,7 +77,7 @@ class Shipping extends Component {
             var data = {
                 book_id: book.id,
                 name: this.state.name,
-                payment_method: this.state.payment,
+                payment_method: this.state.payment != null ? this.state.payment : "cash on delivery",
                 quantity: book.quantity,
                 phone_number: this.state.phone,
                 shiping_address: this.state.address,
@@ -84,7 +85,7 @@ class Shipping extends Component {
                 location: this.state.location ? this.state.location : 'Dhaka',
                 total_price: parseInt(book.new_price) * parseInt(book.quantity),
                 user_id: null,
-                transection_id: this.state.transection_id
+                transection_id: this.state.transection_id ? this.state.transection_id : 'null'
             };
 
             fetch(url, {
@@ -253,7 +254,7 @@ class Shipping extends Component {
                               <tr>
                                 <td>Subtotal</td>
                                 <td class="text-right" id="subtotal">
-                                {parseFloat(this.props.cart.sum("new_price")).toFixed(2)} TK.
+                                {parseFloat(this.props.cart.sum("new_price", "quantity")).toFixed(2)} TK.
                                 </td>
                               </tr>
 
@@ -267,14 +268,14 @@ class Shipping extends Component {
                               <tr>
                                 <td>Total</td>
                                 <td class="text-right" id="total">
-                                  {parseFloat(this.props.cart.sum("new_price")).toFixed(2)} TK.
+                                  {parseFloat(this.props.cart.sum("new_price", "quantity")).toFixed(2)} TK.
                                 </td>
                               </tr>
 
                               <tr>
                                 <td>Payable Total</td>
                                 <td class="text-right" id="payable">
-                                  {parseFloat(this.props.cart.sum("new_price")).toFixed(2)} TK.
+                                  {parseFloat(this.props.cart.sum("new_price", "quantity")).toFixed(2)} TK.
                                 </td>
                               </tr>
                             </tbody>

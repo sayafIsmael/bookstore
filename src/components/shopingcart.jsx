@@ -8,10 +8,10 @@ import { updateCartQuantity, deleteFromCart, fetchBook} from "../actions/bookAct
 import * as helper from "./../helper";
 import FontAwesome from "react-fontawesome";
 
-Array.prototype.sum = function(prop) {
+Array.prototype.sum = function(prop, quantity) {
     var total = 0;
     for (var i = 0, _len = this.length; i < _len; i++) {
-      total += this[i][prop];
+      total += parseInt(this[i][prop]) * parseInt(this[i][quantity]);
     }
     return total;
   };
@@ -157,13 +157,13 @@ gotoShipping = () =>{
                       <li>Sub Total</li>
                     </ul>
                     <ul class="cart__total__tk">
-                      <li>Tk.{parseFloat(this.props.cart.sum("new_price")).toFixed(2)}</li>
-                      <li>Tk.{parseFloat(this.props.cart.sum("new_price")).toFixed(2)}</li>
+                      <li>Tk.{parseFloat(this.props.cart.sum("new_price", "quantity")).toFixed(2)}</li>
+                      <li>Tk.{parseFloat(this.props.cart.sum("new_price", "quantity")).toFixed(2)}</li>
                     </ul>
                   </div>
                   <div class="cart__total__amount">
                     <span>Grand Total</span>
-                    <span>Tk.{parseFloat(this.props.cart.sum("new_price")).toFixed(2)}</span>
+                    <span>Tk.{parseFloat(this.props.cart.sum("new_price", "quantity")).toFixed(2)}</span>
                   </div>
                 </div>
               </div>

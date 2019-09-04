@@ -22,10 +22,10 @@ import ReactTyped from "react-typed";
 import FontAwesome from "react-fontawesome";
 import * as helper from "./../helper";
 
-Array.prototype.sum = function(prop) {
+Array.prototype.sum = function(prop, quantity) {
   var total = 0;
   for (var i = 0, _len = this.length; i < _len; i++) {
-    total += this[i][prop];
+    total += parseInt(this[i][prop]) * parseInt(this[i][quantity]);
   }
   return total;
 };
@@ -186,7 +186,7 @@ class navbar extends Component {
             </div>
             <div class="total_amount text-right">
               <span>
-               {parseFloat(this.props.cart.sum("new_price")).toFixed(2)} Tk.
+               {parseFloat(this.props.cart.sum("new_price", "quantity")).toFixed(2)} Tk.
               </span>
             </div>
             <div class="mini_action checkout">
