@@ -130,7 +130,7 @@ class ProductExtra extends Component {
                   opacity: this.state.mouseOver ? 0.3 : 1
                 }}
               >
-                মূল্য : ৳{this.props.price}
+                মূল্য : {this.props.price} Tk.
               </p>
             </div>
             <Link to="/product">

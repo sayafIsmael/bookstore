@@ -1,4 +1,4 @@
-import { FETCH_BOOKS,  FETCH_BOOK, ADD_TO_CART, DELETE_FROM_CART} from './types';
+import { FETCH_BOOKS,  FETCH_BOOK, ADD_TO_CART, DELETE_FROM_CART, UPDATE_CART_QUANTITY, EMPTY_CART} from './types';
 
 export const fetchBooks = (url) => dispatch => {
   fetch(url)
@@ -29,9 +29,24 @@ export const addtoCart = (book) => dispatch => {
   });
 }
 
+export const emptyCart = () => dispatch => {
+  dispatch({
+    type: EMPTY_CART,
+    payload: null
+  });
+}
+
 export const deleteFromCart = (id) => dispatch => {
   dispatch({
     type: DELETE_FROM_CART,
     payload: id
+  });
+}
+
+export const updateCartQuantity = (id, quantity) => dispatch => {
+  dispatch({
+    type: UPDATE_CART_QUANTITY,
+    payload: id,
+    quantity: quantity
   });
 }

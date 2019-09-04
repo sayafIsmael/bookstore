@@ -52,8 +52,8 @@ class ListBook extends Component {
             </li>
           </ul>
           <ul class="prize__box">
-          <li>৳{this.props.price}</li>
-          <li class="old__prize">৳{this.props.oldprice}</li>
+          <li>{this.props.price} Tk.</li>
+          <li class="old__prize">{this.props.oldprice} Tk.</li>
           </ul>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing

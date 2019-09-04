@@ -5332,9 +5332,7 @@ h3.widget-title-modal {
   padding: 0 26px;
   text-transform: capitalize;
   transition: all 0.3s ease 0s; }
-.cart__btn__list li a:hover {
-  background: #A31416 none repeat scroll 0 0;
-  color: #fff; }
+
 .cartbox-total {
   background: #f6f6f6 none repeat scroll 0 0;
   padding: 0 40px; }

@@ -28,8 +28,8 @@ class Productex extends Component {
           <Link to={"product"}>{this.props.name}</Link>
         </h4>
         <ul class="prize d-flex">
-          <li>৳{this.props.price}</li>
-          <li class="old_prize">৳{this.props.oldprice}</li>
+          <li>{this.props.price} Tk.</li>
+          <li class="old_prize">{this.props.oldprice} Tk.</li>
         </ul>
         <div class="action">
           <div class="actions_inner">

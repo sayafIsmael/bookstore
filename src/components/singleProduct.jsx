@@ -407,9 +407,9 @@ class Productz extends Component {
                         </Link>
                         <div class="price-box">
                           <p class="details-book-info__content-book-price">
-                            TK. {this.new_price()}
+                            {this.new_price()} Tk.
                             <strike class="original-price">
-                              TK. {this.old_price()}
+                              {this.old_price()} Tk.
                             </strike>
                             <span class="price-off">
                               {this.discount() ? "(" : null}

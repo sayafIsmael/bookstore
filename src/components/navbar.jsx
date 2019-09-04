@@ -16,7 +16,7 @@ import {
 } from "react-device-detect";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchBooks, fetchBook, deleteFromCart} from "../actions/bookActions";
+import { fetchBooks, fetchBook, deleteFromCart } from "../actions/bookActions";
 
 import ReactTyped from "react-typed";
 import FontAwesome from "react-fontawesome";
@@ -106,7 +106,11 @@ class navbar extends Component {
   };
 
   cart = () => {
-    if (this.state.cart === true && this.props.cart != null) {
+    if (
+      this.state.cart === true &&
+      this.props.cart != null &&
+      this.props.cart.length > 0
+    ) {
       return (
         <div class="block-minicart minicart__active is-visible ">
           <div class="minicart-content-wrapper">
@@ -116,61 +120,74 @@ class navbar extends Component {
             >
               <span>close</span>
             </div>
-            <div style={{height: 380, overflowY: 'scroll'}}>
-            {this.props.cart.map((book, index) => {
-              return(
-                <div class="single__items">
-              <div class="miniproduct">
-                <div class="item01 d-flex">
-                  <div class="thumb">
-                    <Link to="/product" 
-                    onClick={() => {
-                      this.props.fetchBook(
-                        helper.prefix + "book/singlebook/" + book.id
-                      );
-                    }}
-                    >
-                      <object data={book.cover} type="image/jpg" style={{height: 100, width: 70}} >
-                          <img src="images/books/dummy.png" />
-                      </object>
-                    </Link>
-                  </div>
-                  <div class="content">
-                    <h6>
-                      <Link to="/product" onClick={() => {
-                      this.props.fetchBook(
-                        helper.prefix + "book/singlebook/" + book.id
-                      );
-                    }}>{book.title}</Link>
-                    </h6>
-                    <span class="prize">৳{book.new_price}</span>
-                    <div class="product_prize d-flex justify-content-between">
-                      <span class="qun">Qty: {book.quantity}</span>
-                      <ul class="d-flex justify-content-end">
-                        <li>
-                          <span href="#"
-                          onClick={() => {
-                            this.props.deleteFromCart(index)
-                          }}
+            <div style={{ height: 380, overflowY: "scroll" }}>
+              {this.props.cart.map((book, index) => {
+                return (
+                  <div class="single__items">
+                    <div class="miniproduct">
+                      <div class="item01 d-flex">
+                        <div class="thumb">
+                          <Link
+                            to="/product"
+                            onClick={() => {
+                              this.props.fetchBook(
+                                helper.prefix + "book/singlebook/" + book.id
+                              );
+                            }}
                           >
-                            <i class="zmdi zmdi-delete" />
-                          </span>
-                        </li>
-                      </ul>
+                            <object
+                              data={book.cover}
+                              type="image/jpg"
+                              style={{ height: 100, width: 70 }}
+                            >
+                              <img src="images/books/dummy.png" />
+                            </object>
+                          </Link>
+                        </div>
+                        <div class="content">
+                          <h6>
+                            <Link
+                              to="/product"
+                              onClick={() => {
+                                this.props.fetchBook(
+                                  helper.prefix + "book/singlebook/" + book.id
+                                );
+                              }}
+                            >
+                              {book.title}
+                            </Link>
+                          </h6>
+                          <span class="prize">{book.new_price} Tk.</span>
+                          <div class="product_prize d-flex justify-content-between">
+                            <span class="qun">Qty: {book.quantity}</span>
+                            <ul class="d-flex justify-content-end">
+                              <li>
+                                <span
+                                  href="#"
+                                  onClick={() => {
+                                    this.props.deleteFromCart(index);
+                                  }}
+                                >
+                                  <i class="zmdi zmdi-delete" />
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-              )
-            })}
+                );
+              })}
             </div>
             <div class="items-total d-flex justify-content-between">
               <span>{this.props.cart.length} items</span>
               <span>Cart Subtotal</span>
             </div>
             <div class="total_amount text-right">
-              <span>৳{parseFloat(this.props.cart.sum("new_price")).toFixed(2)}</span>
+              <span>
+               {parseFloat(this.props.cart.sum("new_price")).toFixed(2)} Tk.
+              </span>
             </div>
             <div class="mini_action checkout">
               <Link
@@ -211,7 +228,9 @@ class navbar extends Component {
               onClick={() => {
                 this.setState({
                   mouseClickedAuthor: !this.state.mouseClickedAuthor,
-                  mouseClickedPublisher: false
+                  mouseClickedPublisher: false,
+                  cart: false,
+                  setting: false
                 });
               }}
               onMouseOver={() => this.setState({ mouseOverAuthor: true })}
@@ -244,7 +263,9 @@ class navbar extends Component {
               onClick={() => {
                 this.setState({
                   mouseClickedPublisher: !this.state.mouseClickedPublisher,
-                  mouseClickedAuthor: false
+                  mouseClickedAuthor: false,
+                  cart: false,
+                  setting: false
                 });
               }}
             >
@@ -582,7 +603,14 @@ class navbar extends Component {
                     </li>
                     <li
                       class="shopcart"
-                      onClick={() => this.setState({ cart: !this.state.cart })}
+                      onClick={() =>
+                        this.setState({
+                          cart: !this.state.cart,
+                          setting: false,
+                          mouseClickedAuthor: false,
+                          mouseClickedPublisher: false
+                        })
+                      }
                     >
                       <div class="cartIcon" to="">
                         <span class="product_qun">{this.cart_total()}</span>
@@ -593,7 +621,10 @@ class navbar extends Component {
                     <li
                       class=""
                       onClick={() =>
-                        this.setState({ setting: !this.state.setting })
+                        this.setState({ setting: !this.state.setting , 
+                          mouseClickedAuthor: false,
+                          mouseClickedPublisher: false,
+                          cart: false})
                       }
                     >
                       <FontAwesome
@@ -906,5 +937,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchBooks, fetchBook, deleteFromCart}
+  { fetchBooks, fetchBook, deleteFromCart }
 )(navbar);

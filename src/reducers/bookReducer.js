@@ -2,7 +2,9 @@
     FETCH_BOOKS,
     FETCH_BOOK,
     ADD_TO_CART,
-    DELETE_FROM_CART
+    DELETE_FROM_CART,
+    UPDATE_CART_QUANTITY,
+    EMPTY_CART
   } from '../actions/types';
 
   const initialState = {
@@ -32,14 +34,28 @@
         }
 
         case DELETE_FROM_CART:
+          return {
+            ...state,
+            cart: [
+              ...state.cart.slice(0, action.payload),
+              ...state.cart.slice(action.payload + 1)
+            ]
+          };
+
+        case UPDATE_CART_QUANTITY:
+          if (action.quantity >= 1) {
+            let books = [...state.cart];
+            books.find(book => book.id == action.payload).quantity = action.quantity;
             return {
               ...state,
-              cart: [
-                ...state.cart.slice(0, action.payload),
-                ...state.cart.slice(action.payload + 1)
-              ]
+              cart: books
             };
-
+          }
+          case EMPTY_CART:
+            return {
+              ...state,
+              cart: []
+            };
           default:
             return state;
     }

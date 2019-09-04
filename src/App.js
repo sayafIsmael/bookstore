@@ -18,6 +18,8 @@ import SingleProduct from "./components/singleProduct";
 import ShopGrid from "./components/shopGrid";
 import Signin from "./components/signin";
 import Shopingcart from "./components/shopingcart";
+import Shipping from "./components/shipping";
+
 // import { Style } from "react-style-tag";
 import {Provider} from 'react-redux'
 import {
@@ -32,19 +34,19 @@ import store from './store';
 
 class App extends Component {
   componentWillMount() {
-    loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
-      loadjs("js/vendor/jquery-3.2.1.min.js", function() {
-        loadjs("js/popper.min.js", function() {
-          loadjs("js/plugins.js", function() {
-            loadjs("js/bootstrap.min.js", function() {
-              loadjs("js/active.js", function() {
-                loadjs("js/main.js");
-              });
-            });
-          });
-        });
-      });
-    });
+    // loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
+    //   loadjs("js/vendor/jquery-3.2.1.min.js", function() {
+    //     loadjs("js/popper.min.js", function() {
+    //       loadjs("js/plugins.js", function() {
+    //         loadjs("js/bootstrap.min.js", function() {
+    //           loadjs("js/active.js", function() {
+    //             loadjs("js/main.js");
+    //           });
+    //         });
+    //       });
+    //     });
+    //   });
+    // });
   }
   
   render() {
@@ -95,6 +97,14 @@ class App extends Component {
             exact
             strict
             render={props => <Shopingcart {...props}/>}
+          />
+
+          <Route
+            exact
+            path="/shipping"
+            exact
+            strict
+            render={props => <Shipping {...props}/>}
           />
 
           <Footer />
