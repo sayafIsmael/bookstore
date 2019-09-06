@@ -52,24 +52,32 @@ class navbar extends Component {
     console.log("Cart from state ", this.props.cart);
   }
 
-  // componentWillMount() {
-  //   loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
-  //     loadjs("js/vendor/jquery-3.2.1.min.js", function() {
-  //       loadjs("js/popper.min.js", function() {
-  //         loadjs("js/plugins.js", function() {
-  //           loadjs("js/bootstrap.min.js", function() {
-  //             loadjs("js/active.js", function() {
-  //               loadjs("js/main.js");
-  //             });
-  //           });
-  //         });
-  //       });
-  //     });
-  //   });
-  // }
+  handleLogout = response => {
+    alert(response.message);
+    if (response.success) {
+      this.props.deleteToken();
+    }
+  };
+
+  logOut = () => {
+    var url = helper.prefix + "logout";
+
+    fetch(url, {
+      method: "GET", // or 'PUT'
+      // body: JSON.stringify(data), // data can be `string` or {object}!
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Bearer " + this.props.token
+      }
+    })
+      .then(res => res.json())
+      .then(response => this.handleLogout(response))
+      .catch(error => console.error("Error:", error));
+  };
 
   logedIn = () => {
-    if (this.state.logedIn === true) {
+    if (this.props.token) {
       return (
         <React.Fragment>
           <strong class="label switcher-label">
@@ -79,7 +87,7 @@ class navbar extends Component {
             <a href="#">My Wishlist</a>
           </span>
           <span>
-            <a href="#">Logout</a>
+            <Link onClick={() => this.logOut()}>Logout</Link>
           </span>
         </React.Fragment>
       );
@@ -87,7 +95,7 @@ class navbar extends Component {
   };
 
   logIn = () => {
-    if (this.state.logedIn === false) {
+    if (!this.props.token) {
       return (
         <React.Fragment>
           <span>
@@ -186,7 +194,10 @@ class navbar extends Component {
             </div>
             <div class="total_amount text-right">
               <span>
-               {parseFloat(this.props.cart.sum("new_price", "quantity")).toFixed(2)} Tk.
+                {parseFloat(
+                  this.props.cart.sum("new_price", "quantity")
+                ).toFixed(2)}{" "}
+                Tk.
               </span>
             </div>
             <div class="mini_action checkout">
@@ -621,10 +632,12 @@ class navbar extends Component {
                     <li
                       class=""
                       onClick={() =>
-                        this.setState({ setting: !this.state.setting , 
+                        this.setState({
+                          setting: !this.state.setting,
                           mouseClickedAuthor: false,
                           mouseClickedPublisher: false,
-                          cart: false})
+                          cart: false
+                        })
                       }
                     >
                       <FontAwesome
@@ -928,11 +941,13 @@ class navbar extends Component {
 navbar.propTypes = {
   fetchBooks: PropTypes.func.isRequired,
   fetchBook: PropTypes.func.isRequired,
-  deleteFromCart: PropTypes.func.isRequired
+  deleteFromCart: PropTypes.func.isRequired,
+  deleteToken: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  cart: state.books.cart
+  cart: state.books.cart,
+  token: state.auth.token
 });
 
 export default connect(

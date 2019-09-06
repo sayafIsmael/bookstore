@@ -1,0 +1,27 @@
+import {
+    STORE_TOKEN,
+    DELETE_TOKEN
+  } from '../actions/types';
+
+  const initialState = {
+    user: [],
+    token: {}
+  };
+
+  export default function (state = initialState, action) {
+    switch (action.type) {
+      case STORE_TOKEN:
+        return {
+          ...state,
+          token: action.payload
+        };
+        case DELETE_TOKEN:
+            return {
+              ...state,
+              token: action.payload
+            };
+          
+          default:
+            return state;
+    }
+  }
