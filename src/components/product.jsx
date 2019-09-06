@@ -11,7 +11,7 @@ import {
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchBook, addtoCart} from "../actions/bookActions";
+import { fetchBook, addtoCart, fetchReviews} from "../actions/bookActions";
 import * as helper from "./../helper";
 
 import FontAwesome from "react-fontawesome";
@@ -45,12 +45,16 @@ class Product extends Component {
               this.props.fetchBook(
                 helper.prefix + "book/singlebook/" + this.props.id
               );
+              this.props.fetchReviews( helper.prefix + "book/reviews/" + this.props.id)
               console.log("fecth book id = ",this.props.id)
               this.props.history.push(`/product`);
             }}
           >
             <div>
+              <div style={{position: 'relative', left: 16, top: 16}}>
               <img class="discount_badge" src="images/badges/discount.png" style={{ opacity: this.state.mouseOver ? 0.3 : 1 }}/>
+              <p style={{position: 'relative',right: 60,top: 5}}>{this.props.discount}</p>
+              </div>
               <button
                 type="button"
                 class="btn btn-warning ml-2"
@@ -100,11 +104,12 @@ class Product extends Component {
 
 Product.propTypes = {
   fetchBook: PropTypes.func.isRequired,
-  addtoCart: PropTypes.func.isRequired
+  addtoCart: PropTypes.func.isRequired,
+  fetchReviews: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
-  { fetchBook, addtoCart}
+  { fetchBook, addtoCart, fetchReviews}
 )(Product);
 

@@ -13,12 +13,14 @@ import {
       case STORE_TOKEN:
         return {
           ...state,
-          token: action.payload
+          token: action.payload,
+          user: action.userData
         };
         case DELETE_TOKEN:
             return {
               ...state,
-              token: action.payload
+              token: {},
+              user: []
             };
           
           default:

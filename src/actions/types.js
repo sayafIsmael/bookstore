@@ -6,3 +6,4 @@ export const UPDATE_CART_QUANTITY = 'UPDATE_CART_QUANTITY';
 export const EMPTY_CART = 'EMPTY_CART';
 export const STORE_TOKEN = 'STORE_TOKEN';
 export const DELETE_TOKEN = 'DELETE_TOKEN';
+export const FETCH_REVIEWS = 'FETCH_REVIEWS';

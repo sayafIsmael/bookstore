@@ -17,6 +17,7 @@ import {
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchBooks, fetchBook, deleteFromCart } from "../actions/bookActions";
+import { deleteToken } from "../actions/authActions";
 
 import ReactTyped from "react-typed";
 import FontAwesome from "react-fontawesome";
@@ -50,6 +51,7 @@ class navbar extends Component {
     this.fetch_authors();
     this.fetch_publishers();
     console.log("Cart from state ", this.props.cart);
+    console.log("Fucking user ", this.props.user);
   }
 
   handleLogout = response => {
@@ -77,14 +79,17 @@ class navbar extends Component {
   };
 
   logedIn = () => {
-    if (this.props.token) {
+    if (Object.keys(this.props.token).length > 0) {
       return (
         <React.Fragment>
           <strong class="label switcher-label">
-            <span>My Account</span>
+            <span> <Link to="myaccount">My Account</Link></span>
           </strong>
           <span>
-            <a href="#">My Wishlist</a>
+            <Link to="myorders">My orders</Link>
+          </span>
+          <span>
+            <Link to="#">My Wishlist</Link>
           </span>
           <span>
             <Link onClick={() => this.logOut()}>Logout</Link>
@@ -95,7 +100,7 @@ class navbar extends Component {
   };
 
   logIn = () => {
-    if (!this.props.token) {
+    if (Object.keys(this.props.token).length === 0) {
       return (
         <React.Fragment>
           <span>
@@ -947,10 +952,11 @@ navbar.propTypes = {
 
 const mapStateToProps = state => ({
   cart: state.books.cart,
-  token: state.auth.token
+  token: state.auth.token,
+  user: state.auth.user
 });
 
 export default connect(
   mapStateToProps,
-  { fetchBooks, fetchBook, deleteFromCart }
+  { fetchBooks, fetchBook, deleteFromCart, deleteToken}
 )(navbar);

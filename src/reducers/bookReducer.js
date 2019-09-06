@@ -4,13 +4,15 @@
     ADD_TO_CART,
     DELETE_FROM_CART,
     UPDATE_CART_QUANTITY,
-    EMPTY_CART
+    EMPTY_CART,
+    FETCH_REVIEWS
   } from '../actions/types';
 
   const initialState = {
     items: [],
     item: {},
-    cart: []
+    cart: [],
+    reviews: []
   };
 
   export default function (state = initialState, action) {
@@ -55,6 +57,11 @@
             return {
               ...state,
               cart: []
+            };
+          case FETCH_REVIEWS:
+            return {
+              ...state,
+              reviews: action.payload
             };
           default:
             return state;

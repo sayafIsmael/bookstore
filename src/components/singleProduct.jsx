@@ -18,7 +18,7 @@ import FontAwesome from "react-fontawesome";
 import * as helper from "./../helper";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchBook, fetchBooks, addtoCart} from "../actions/bookActions";
+import { fetchBook, fetchBooks, addtoCart , fetchReviews} from "../actions/bookActions";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -62,10 +62,18 @@ class Productz extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: discountProduct
+      books: discountProduct,
+      review_rating: 0,
+      review_text: null
     };
     window.scrollTo(0, 0);
   }
+
+  changeRating = newRating => {
+    this.setState({
+      review_rating: newRating
+    });
+  };
 
   componentWillMount() {
     // this.props.fetchBook();
@@ -211,10 +219,9 @@ class Productz extends Component {
       if (this.props.book.book) {
         return (
           <StarRatings
-            rating={parseFloat(this.props.book.book.rating)}
+            rating={parseFloat(this.averageRating())}
             starRatedColor="#FF9900"
             starDimension="12px"
-            changeRating={this.changeRating}
             numberOfStars={5}
             name="rating"
           />
@@ -347,7 +354,7 @@ class Productz extends Component {
     }
   };
 
-  addtoCart = () =>{
+  addtoCart = () => {
     try {
       if (this.props.book.book) {
         this.props.addtoCart(this.props.book.book);
@@ -355,7 +362,193 @@ class Productz extends Component {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  reviews = () => {
+    if (this.props.reviews.reviews.length > 0) {
+      return this.props.reviews.reviews.map((review, index) => {
+        return (
+          <div class="row mt-3" style={{ borderBottom: "1px solid #E9ECEF" }}>
+            <div class="col-2 content--review__user-info">
+              <div>
+                <img
+                  class="align-items-center rounded-circle"
+                  src="http://conferenceoeh.com/wp-content/uploads/profile-pic-dummy.png"
+                  style={{ width: 80, height: 80 }}
+                />
+                <br />
+                <span class="ml-auto mr-auto"> {review.username} </span>
+              </div>
+              <br />
+              <span class="ml-auto mr-auto"> {review.updated_at} </span>
+              <StarRatings
+                rating={parseFloat(review.rating)}
+                starRatedColor="#FF9900"
+                starDimension="12px"
+                numberOfStars={5}
+                name="rating"
+              />
+            </div>
+            <div class="col-10 content--review__user-comment">
+              <div class="user-review-container">
+                <div
+                  class="user-review-container--description"
+                  style={{ maxHeight: 3000 }}
+                >
+                  {review.review_text}
+                </div>
+
+                <div class="read-more-overlay--container">
+                  <div class="read-more-overlay"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      });
+    }
+  };
+
+  averageRating = () => {
+    let fivestar = this.props.reviews.fivestar;
+    let fourstar = this.props.reviews.fourstar;
+    let threestar = this.props.reviews.threestar;
+    let twostar = this.props.reviews.twostar;
+    let onestar = this.props.reviews.onestar;
+
+    if (
+      fivestar > fourstar &&
+      fivestar > threestar &&
+      fivestar > twostar &&
+      fivestar > onestar
+    ) {
+      return parseFloat(5.0).toFixed(1);
+    } else if (
+      fourstar > fivestar &&
+      fourstar > threestar &&
+      fourstar > twostar &&
+      fourstar > onestar
+    ) {
+      return parseFloat(4.0).toFixed(1);
+    } else if (
+      threestar > fivestar &&
+      threestar > fourstar &&
+      threestar > twostar &&
+      threestar > onestar
+    ) {
+      return parseFloat(3.0).toFixed(1);
+    } else if (
+      twostar > fivestar &&
+      twostar > threestar &&
+      twostar > fourstar &&
+      twostar > onestar
+    ) {
+      return parseFloat(2.0).toFixed(1);
+    } else if (
+      onestar > fivestar &&
+      onestar > threestar &&
+      onestar > twostar &&
+      onestar > fourstar
+    ) {
+      return parseFloat(1.0).toFixed(1);
+    } else {
+      return parseFloat(0.0).toFixed(1);
+    }
+  };
+
+  submitReview = () =>{
+    if(this.state.review_rating > 0){
+      var url = helper.prefix + "review";
+      var data = {
+        book_id: this.props.book.book.id,
+        review_text: this.state.review_text,
+        rating: this.state.review_rating
+      };
+
+      fetch(url, {
+        method: "POST", 
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization : 'Bearer '+ this.props.token,
+        }
+      })
+        .then(res => res.json())
+        .then(response => this.handleReview(response))
+        .catch(error => console.error("Error:", error));
+    }
   }
+
+  handleReview = (response) =>{
+    if(response.success){
+      alert('Success submiting review')
+      this.setState({review_rating: 0, review_text: null})
+      this.props.fetchReviews( helper.prefix + "book/reviews/" + this.props.book.book.id)
+    }
+  }
+
+  checkRating = () => {
+    if (Object.keys(this.props.token).length > 0) {
+      return (
+        <div class="ratings-review__content--form">
+          <p class="review-text"></p>
+          <form>
+            <div class="form-group">
+              <textarea
+                class="form-control"
+                id="js--review-writing"
+                rows="5"
+                onChange={e =>
+                  this.setState({
+                    review_text: e.target.value
+                  })
+                }
+                placeholder="Please write your review and give rating here"
+              >
+                {this.state.review_text}
+              </textarea>
+            </div>
+            <StarRatings
+              rating={this.state.review_rating}
+              starRatedColor="#FF9900"
+              starHoverColor="#FF9900"
+              starDimension="20px"
+              changeRating={e => this.changeRating(e)}
+              numberOfStars={5}
+              name="rating"
+            />
+            <button
+              onClick={() => this.submitReview()}
+              type="button"
+              class="btn btn-success ml-2"
+            >
+              Submit
+            </button>
+          </form>
+
+          <p></p>
+        </div>
+      );
+    } else {
+      return (
+        <div
+          class="ratings-review__content--form d-flex align-items-center"
+          style={{ height: "100%", width: "100%", border: "1px solid #E9ECEF" }}
+        >
+          <p
+            class="ml-auto mr-auto"
+            style={{ textAlign: "center", fontSize: 18 }}
+          >
+            Please log in to write review
+            <Link to="/signin" class="ml-2 btn btn-success">
+              Log in
+            </Link>
+          </p>
+        </div>
+      );
+    }
+  };
   render() {
     return (
       <React.Fragment>
@@ -374,8 +567,12 @@ class Productz extends Component {
                         <div class="book-bg">
                           <div
                             class="book-cover"
-                            style={{ height: 344, width: 238, backgroundImage: 'url(images/books/dummy.png)',
-                              backgroundSize: 'cover'}}
+                            style={{
+                              height: 344,
+                              width: 238,
+                              backgroundImage: "url(images/books/dummy.png)",
+                              backgroundSize: "cover"
+                            }}
                           >
                             <img
                               class="bookCover"
@@ -448,7 +645,9 @@ class Productz extends Component {
                               class="tocart"
                               type="submit"
                               title="Add to Cart"
-                              onClick={() => {this.addtoCart()}}
+                              onClick={() => {
+                                this.addtoCart();
+                              }}
                             >
                               Add to Cart
                             </button>
@@ -622,173 +821,166 @@ class Productz extends Component {
                       id="nav-review"
                       role="tabpanel"
                     >
-                      <div class="review__attribute">
-                        <h1>Customer Reviews</h1>
-                        <h2>Hastech</h2>
-                        <div class="review__ratings__type d-flex">
-                          <div class="review-ratings">
-                            <div class="rating-summary d-flex">
-                              <span>Quality</span>
-                              <ul class="rating d-flex">
-                                <li>
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li>
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li>
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                              </ul>
-                            </div>
+                      <div class="row">
+                        <div class="col">
+                          <h1 style={{ fontWeight: "normal" }}>
+                            Reviews and Ratings
+                          </h1>
+                          <p class="text-muted mt-1">Submit Review-Rating</p>
+                        </div>
+                        &gt;
+                      </div>
+                      <div class="row mb-4">
+                        <div class="col-7">{this.checkRating()}</div>
 
-                            <div class="rating-summary d-flex">
-                              <span>Price</span>
-                              <ul class="rating d-flex">
-                                <li>
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li>
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li>
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                              </ul>
-                            </div>
-                            <div class="rating-summary d-flex">
-                              <span>value</span>
-                              <ul class="rating d-flex">
-                                <li>
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li>
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li>
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                              </ul>
+                        <div class="col-5">
+                          <div class="media ratings-review__content--rating">
+                            <h2 style={{ fontWeight: "normal" }} class="pt-2">
+                              {this.averageRating()}
+                            </h2>
+
+                            <div class="media-body ml-4 mb-3">
+                              <p class="text-secondary">
+                                {this.props.reviews.reviews.length
+                                  ? this.props.reviews.reviews.length
+                                  : 0}{" "}
+                                Ratings Reviews
+                              </p>
+                              <StarRatings
+                                rating={parseFloat(5)}
+                                starRatedColor="#FF9900"
+                                starDimension="18px"
+                                numberOfStars={5}
+                                name="rating"
+                              />
                             </div>
                           </div>
-                          <div class="review-content">
-                            <p>Hastech</p>
-                            <p>Review by Hastech</p>
-                            <p>Posted on 11/6/2018</p>
+                          <div class="row">
+                            <div class="col-4 text-warning pl-4">
+                              <div>
+                                <StarRatings
+                                  rating={parseFloat(5)}
+                                  starRatedColor="#FF9900"
+                                  starDimension="12px"
+                                  numberOfStars={5}
+                                  name="rating"
+                                />
+                              </div>
+                              <div>
+                                <StarRatings
+                                  rating={parseFloat(4)}
+                                  starRatedColor="#FF9900"
+                                  starDimension="12px"
+                                  numberOfStars={5}
+                                  name="rating"
+                                />
+                              </div>
+                              <div>
+                                <StarRatings
+                                  rating={parseFloat(3)}
+                                  starRatedColor="#FF9900"
+                                  starDimension="12px"
+                                  numberOfStars={5}
+                                  name="rating"
+                                />
+                              </div>
+                              <div>
+                                <StarRatings
+                                  rating={parseFloat(2)}
+                                  starRatedColor="#FF9900"
+                                  starDimension="12px"
+                                  numberOfStars={5}
+                                  name="rating"
+                                />
+                              </div>
+                              <div>
+                                <StarRatings
+                                  rating={parseFloat(1)}
+                                  starRatedColor="#FF9900"
+                                  starDimension="12px"
+                                  numberOfStars={5}
+                                  name="rating"
+                                />
+                              </div>
+                            </div>
+                            <div class="col-8" id="ratingChart">
+                              <div class="row">
+                                <div class="col-2">
+                                  [{this.props.reviews.fivestar}]
+                                </div>
+                                <div class="col-10">
+                                  <div class="progress rating-bar mt-2">
+                                    <div
+                                      class="progress-bar bg-warning"
+                                      role="progressbar"
+                                      style={{ width: "100%" }}
+                                      aria-valuemin="0"
+                                      aria-valuemax="100"
+                                    ></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-2">[0]</div>
+                                <div class="col-10">
+                                  <div class="progress rating-bar mt-2">
+                                    <div
+                                      class="progress-bar bg-warning"
+                                      role="progressbar"
+                                      style={{ width: "0%" }}
+                                      aria-valuemin="0"
+                                      aria-valuemax="100"
+                                    ></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-2">[0]</div>
+                                <div class="col-10">
+                                  <div class="progress rating-bar mt-2">
+                                    <div
+                                      class="progress-bar bg-warning"
+                                      role="progressbar"
+                                      style={{ width: "0%" }}
+                                      aria-valuemin="0"
+                                      aria-valuemax="100"
+                                    ></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-2">[0]</div>
+                                <div class="col-10">
+                                  <div class="progress rating-bar mt-2">
+                                    <div
+                                      class="progress-bar bg-warning"
+                                      role="progressbar"
+                                      style={{ width: "0%" }}
+                                      aria-valuemin="0"
+                                      aria-valuemax="100"
+                                    ></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-2">[0]</div>
+                                <div class="col-10">
+                                  <div class="progress rating-bar mt-2">
+                                    <div
+                                      class="progress-bar bg-warning"
+                                      role="progressbar"
+                                      style={{ width: "0%" }}
+                                      aria-valuemin="0"
+                                      aria-valuemax="100"
+                                    ></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div class="review-fieldset">
-                        <h2>You're reviewing:</h2>
-                        <h3>Chaz Kangeroo Hoodie</h3>
-                        <div class="review-field-ratings">
-                          <div class="product-review-table">
-                            <div class="review-field-rating d-flex">
-                              <span>Quality</span>
-                              <ul class="rating d-flex">
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                              </ul>
-                            </div>
-                            <div class="review-field-rating d-flex">
-                              <span>Price</span>
-                              <ul class="rating d-flex">
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                              </ul>
-                            </div>
-                            <div class="review-field-rating d-flex">
-                              <span>Value</span>
-                              <ul class="rating d-flex">
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                                <li class="off">
-                                  <i class="zmdi zmdi-star" />
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="review_form_field">
-                          <div class="input__box">
-                            <span>Nickname</span>
-                            <input
-                              id="nickname_field"
-                              type="text"
-                              name="nickname"
-                            />
-                          </div>
-                          <div class="input__box">
-                            <span>Summary</span>
-                            <input
-                              id="summery_field"
-                              type="text"
-                              name="summery"
-                            />
-                          </div>
-                          <div class="input__box">
-                            <span>Review</span>
-                            <textarea name="review" />
-                          </div>
-                          <div class="review-form-actions">
-                            <button>Submit Review</button>
-                          </div>
-                        </div>
-                      </div>
+                      {this.reviews()}
                     </div>
                   </div>
                 </div>
@@ -812,14 +1004,17 @@ Productz.propTypes = {
   fetchBook: PropTypes.func.isRequired,
   fetchBooks: PropTypes.func.isRequired,
   books: PropTypes.object.isRequired,
-  addtoCart: PropTypes.func.isRequired
+  addtoCart: PropTypes.func.isRequired,
+  fetchReviews: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  book: state.books.item
+  book: state.books.item,
+  reviews: state.books.reviews,
+  token: state.auth.token
 });
 
 export default connect(
   mapStateToProps,
-  { fetchBook, fetchBooks, addtoCart}
+  { fetchBook, fetchBooks, addtoCart, fetchReviews}
 )(Productz);

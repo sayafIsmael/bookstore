@@ -19,6 +19,8 @@ import ShopGrid from "./components/shopGrid";
 import Signin from "./components/signin";
 import Shopingcart from "./components/shopingcart";
 import Shipping from "./components/shipping";
+import Orders from "./components/orders";
+import Account from "./components/account";
 
 // import { Style } from "react-style-tag";
 import {Provider} from 'react-redux'
@@ -105,6 +107,22 @@ class App extends Component {
             exact
             strict
             render={props => <Shipping {...props}/>}
+          />
+
+          <Route
+            exact
+            path="/myorders"
+            exact
+            strict
+            render={props => <Orders {...props}/>}
+          />
+
+          <Route
+            exact
+            path="/myaccount"
+            exact
+            strict
+            render={props => <Account {...props}/>}
           />
 
           <Footer />

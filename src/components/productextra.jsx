@@ -10,7 +10,7 @@ import { tsImportEqualsDeclaration } from "@babel/types";
 import FontAwesome from "react-fontawesome";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchBook, addtoCart} from "../actions/bookActions";
+import { fetchBook, addtoCart, fetchReviews } from "../actions/bookActions";
 import * as helper from "./../helper";
 
 class ProductExtra extends Component {
@@ -44,11 +44,25 @@ class ProductExtra extends Component {
               this.props.fetchBook(
                 helper.prefix + "book/singlebook/" + this.props.id
               );
-              console.log("fecth book id = ",this.props.id)
+              this.props.fetchReviews(
+                helper.prefix + "book/reviews/" + this.props.id
+              );
+              console.log("fecth book id = ", this.props.id);
               this.props.history.push(`/product`);
             }}
           >
             <div>
+              <p
+                style={{
+                  position: "relative",
+                  color: "white",
+                  top: 29,
+                  right: 50,
+                  zIndex: 10
+                }}
+              >
+                {this.props.discount}
+              </p>
               <img
                 style={{ opacity: this.state.mouseOver ? 0.3 : 1 }}
                 class="discount_badge"
@@ -80,7 +94,7 @@ class ProductExtra extends Component {
                 src="images/badges/read_some.png"
                 style={{
                   left: 68,
-                  top: 112,
+                  top: 136,
                   opacity: this.state.mouseOver ? 0.3 : 1
                 }}
               />
@@ -171,10 +185,11 @@ class ProductExtra extends Component {
 
 ProductExtra.propTypes = {
   fetchBook: PropTypes.func.isRequired,
-  addtoCart: PropTypes.func.isRequired
+  addtoCart: PropTypes.func.isRequired,
+  fetchReviews: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
-  { fetchBook, addtoCart}
+  { fetchBook, addtoCart, fetchReviews }
 )(ProductExtra);

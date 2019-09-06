@@ -120,6 +120,7 @@ class shopGrid extends Component {
           image={item.cover}
           price={item.new_price}
           oldprice={item.old_price}
+          discount={item.discount}
           name={item.title}
           author={item.author ? null : (this.props.books.author != null ? this.props.books.author.name : null)}
           writer={item.author}
@@ -992,7 +993,7 @@ class shopGrid extends Component {
                   <div class="row">
                     {this.props.books.books!=null?this.showBooks():console.log("no books found")}
                   </div>
-                  <ul class="wn__pagination">
+                  <ul class="wn__pagination mt-3">
                     <li class="active">
                       <a href="#">1</a>
                     </li>

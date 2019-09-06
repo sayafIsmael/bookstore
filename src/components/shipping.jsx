@@ -27,8 +27,8 @@ class Shipping extends Component {
     super(props);
     this.state = {
       payment: null,
-      name: null,
-      phone: null,
+      name: this.props.user.name ? this.props.user.name : null,
+      phone: this.props.user.phone_no ? this.props.user.phone_no : null,
       location: null,
       address: null,
       error: null,
@@ -94,7 +94,7 @@ class Shipping extends Component {
             headers:{
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'Authorization' : 'Bearer',
+                'Authorization' : 'Bearer '+this.props.token,
             }
             }).then(res => res.json())
             .then(response => this.report(response))
@@ -125,7 +125,7 @@ class Shipping extends Component {
           <div class="container">
             <div id="shipping-content-wrapper">
               <div class="row">
-                <div class="col-6">
+                <div class="col-md-6">
                   <section class="checkout-header">
                     <h1 style={{ fontWeight: "normal" }}>Shipping Address</h1>
                   </section>
@@ -208,7 +208,7 @@ class Shipping extends Component {
                   </section>
                 </div>
 
-                <div class="col-4">
+                <div class="col-md-4">
                   <section id="checkout-sidebar">
                     <div class="checkout-sidebar__header">
                       <h1 style={{ fontWeight: "normal" }}>Checkout Summary</h1>
@@ -302,7 +302,9 @@ Shipping.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  cart: state.books.cart
+  cart: state.books.cart,
+  user: state.auth.user,
+  token: state.auth.token
 });
 
 export default connect(

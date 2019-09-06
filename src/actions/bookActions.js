@@ -1,4 +1,12 @@
-import { FETCH_BOOKS,  FETCH_BOOK, ADD_TO_CART, DELETE_FROM_CART, UPDATE_CART_QUANTITY, EMPTY_CART} from './types';
+import {
+  FETCH_BOOKS,
+  FETCH_BOOK,
+  ADD_TO_CART,
+  DELETE_FROM_CART,
+  UPDATE_CART_QUANTITY,
+  EMPTY_CART,
+  FETCH_REVIEWS
+} from './types';
 
 export const fetchBooks = (url) => dispatch => {
   fetch(url)
@@ -49,4 +57,15 @@ export const updateCartQuantity = (id, quantity) => dispatch => {
     payload: id,
     quantity: quantity
   });
+}
+
+export const fetchReviews = (url) => dispatch => {
+  fetch(url)
+    .then(res => res.json())
+    .then(review =>
+      dispatch({
+        type: FETCH_REVIEWS,
+        payload: review
+      })
+    );
 }
