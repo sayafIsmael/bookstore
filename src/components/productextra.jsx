@@ -56,15 +56,15 @@ class ProductExtra extends Component {
                 style={{
                   position: "relative",
                   color: "white",
-                  top: 29,
-                  right: 50,
+                  top: 24,
+                  right: 53,
                   zIndex: 10
                 }}
               >
-                {this.props.discount}
+                {this.props.discount}%
               </p>
               <img
-                style={{ opacity: this.state.mouseOver ? 0.3 : 1 }}
+                style={{ opacity: this.state.mouseOver ? 0.3 : 1,  left: 29, top: 43}}
                 class="discount_badge"
                 src="images/badges/discount.png"
               />

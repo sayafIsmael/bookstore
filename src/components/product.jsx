@@ -53,7 +53,7 @@ class Product extends Component {
             <div>
               <div style={{position: 'relative', left: 16, top: 16}}>
               <img class="discount_badge" src="images/badges/discount.png" style={{ opacity: this.state.mouseOver ? 0.3 : 1 }}/>
-              <p style={{position: 'relative',right: 60,top: 5}}>{this.props.discount}</p>
+              <p style={{position: 'relative',right: 55,top: 5}}>{this.props.discount}%</p>
               </div>
               <button
                 type="button"

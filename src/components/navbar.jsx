@@ -46,7 +46,10 @@ class navbar extends Component {
       mouseOverPublisher: false,
       mouseClickedPublisher: false,
       authors: null,
-      publishers: null
+      publishers: null,
+      search: false,
+      searchText: null,
+      bookSuggestions: null
     };
     this.fetch_authors();
     this.fetch_publishers();
@@ -83,7 +86,10 @@ class navbar extends Component {
       return (
         <React.Fragment>
           <strong class="label switcher-label">
-            <span> <Link to="myaccount">My Account</Link></span>
+            <span>
+              {" "}
+              <Link to="myaccount">My Account</Link>
+            </span>
           </strong>
           <span>
             <Link to="myorders">My orders</Link>
@@ -531,6 +537,72 @@ class navbar extends Component {
     }
   };
 
+  autocomplete = () => {
+    if (
+      this.state.search === true &&
+      this.state.searchText != null &&
+      this.state.searchText != "" &&
+      this.state.bookSuggestions != null &&
+      this.state.bookSuggestions != []
+    ) {
+      return (
+        <div class="row autocomplete">
+          {this.state.bookSuggestions.map(book => {
+            return (
+              <Link to="product" 
+              onClick={() =>{
+                this.props.fetchBook(
+                  helper.prefix + "book/singlebook/" + book.id
+                );
+                this.setState({search: false, searchText: null})
+              }}
+              style={{width: '100%'}}>
+               <div class="row booksugRow" style={{width: '100%', padding: 10, marginLeft: 0, paddingLeft: 10}}>
+                <div  style={{width: '7%'}}>
+                  <img src={book.cover} style={{width: 26, height: 45, backgroundImage: 'url(images/books/dummy.png)', backgroundSize: 'cover'}}/>
+                </div>
+                <div style={{width: '58%'}} class="pl-2">
+                  <p>{book.title}</p>
+                  <p style={{color: 'gray'}}>{book.author}</p>
+                </div>
+                <div style={{width: '15%'}}>
+                    <p class="mt-2" style={{color: '#D76F6D'}}>({book.discount}% off)</p>
+                </div>
+                <div class="pl-2" style={{width: '20%'}}>
+                <p class="mt-2" style={{fontSize: 20}}>{book.new_price} TK.</p>
+                </div>
+              </div>
+              </Link>
+            )
+          })}
+        </div>
+      );
+    }
+  };
+
+  searchBook = value => {
+    this.setState({ searchText: value });
+    fetch(helper.prefix + "book/search?data=" + value, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        if (responseJson.success && responseJson.books.length > 0) {
+          this.setState({ search: true, bookSuggestions: responseJson.books });
+        } else {
+          this.setState({ search: false });
+        }
+      })
+      .catch(error => {
+        //this.setState({loading:false})
+        console.log(error);
+      });
+  };
+
   render() {
     return (
       <header id="wn__header" class="header__area " style={{ zIndex: 3000 }}>
@@ -551,7 +623,7 @@ class navbar extends Component {
                   </div>
                 </div>
 
-                <div class="col-md-5">
+                <div class="col-md-5" style={{zIndex: 1000}}>
                   <ul class="header__sidebar__right d-flex align-items-center mt-auto mb-auto">
                     <form
                       class="form-inline searchAll"
@@ -591,7 +663,9 @@ class navbar extends Component {
                               border: "none",
                               height: 40
                             }}
+                            value={this.state.searchText}
                             class="form-control mr-sm-2"
+                            onChange={e => this.searchBook(e.target.value)}
                           />
                         </ReactTyped>
                         <button
@@ -604,6 +678,7 @@ class navbar extends Component {
                           />
                         </button>
                       </div>
+                      {this.autocomplete()}
                     </form>
                   </ul>
                 </div>
@@ -958,5 +1033,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchBooks, fetchBook, deleteFromCart, deleteToken}
+  { fetchBooks, fetchBook, deleteFromCart, deleteToken }
 )(navbar);
