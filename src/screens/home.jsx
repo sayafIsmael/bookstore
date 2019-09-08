@@ -159,7 +159,7 @@ class Home extends Component {
       dots: false,
       infinite: true,
       speed: 500,
-      // slidesToScroll: 1,
+      slidesToScroll: 2,
       slidesToShow: 2,
       variableWidth: true,
       arrows: false
@@ -198,21 +198,27 @@ class Home extends Component {
           </div>
         </BrowserView>
         <MobileView>
+        <div class="row m-0 mt-3">
+          <h4 class="">
+            {title}
+          </h4>
+        </div>
           <div style={{ background: "#F1F2EE",}}>
             <Slider {...settings2}>
               {books !== []? books.map((item, index) => {
                 // console.log("Items found from dummy: ", item);
                 return (
                   <Product
-                    key={index}
-                    name={item.name}
-                    price={item.price}
-                    oldPrice={item.oldPrice}
-                    discount={item.discount}
-                    image={item.image}
-                    image2={item.image2}
-                    writer={item.writer}
-                    history={this.props.history}
+                  key={index}
+                  name={item.title}
+                  cart_book={item}
+                  id={item.id}
+                  price={item.new_price}
+                  oldPrice={item.old_price}
+                  discount={item.discount}
+                  image={item.cover}
+                  writer={item.author}
+                  history={this.props.history}
                   />
                 );
               }):null}
@@ -361,9 +367,15 @@ class Home extends Component {
             <div style={{ background: "#F1F2EE" }}>
               {console.log("Screen width", window.innerWidth)}
               <Slider {...settings2}>
-                {publishers.map((item, index) => {
+                {this.state.publishers !== null ? this.state.publishers.map((item, index) => {
                   return (
-                    <div>
+                    <Link  to="/shopGrid"
+                    onClick={() => {
+                      this.props.fetchBooks(
+                        helper.prefix + "publisher/books/" + item.id
+                      );
+                      console.log(item.id)
+                    }}>
                       <div class="cr-item-mb" style={{width: 97}}>
                         <img
                           class="m-pub-img"
@@ -371,9 +383,9 @@ class Home extends Component {
                           style={{ borderRadius: "100%" }}
                         />
                       </div>
-                    </div>
+                    </Link>
                   );
-                })}
+                }):null}
               </Slider>
             </div>
             </div>
@@ -439,69 +451,25 @@ class Home extends Component {
         <MobileView>
           <div style={{ background: "#F1F2EE" }}>
             <Slider {...settings2}>
-              <div>
-                <div class="crw-item">
-                  <img
-                    class="mw-pub-img"
-                    src="images/writers/1.jpg"
-                    style={{ borderRadius: "100%" }}
-                  />
-                </div>
-              </div>
-              <div>
-                <div class="crw-item">
-                  <img
-                    class="mw-pub-img"
-                    src="images/writers/2.jpg"
-                    style={{ borderRadius: "100%" }}
-                  />
-                </div>
-              </div>
-              <div>
-                <div class="crw-item">
-                  <img
-                    class="mw-pub-img"
-                    src="images/writers/2.jpg"
-                    style={{ borderRadius: "100%" }}
-                  />
-                </div>
-              </div>
-              <div>
-                <div class="crw-item">
-                  <img
-                    class="mw-pub-img"
-                    src="images/writers/2.jpg"
-                    style={{ borderRadius: "100%" }}
-                  />
-                </div>
-              </div>
-              <div>
-                <div class="crw-item">
-                  <img
-                    class="mw-pub-img"
-                    src="images/writers/1.jpg"
-                    style={{ borderRadius: "100%" }}
-                  />
-                </div>
-              </div>
-              <div>
-                <div class="crw-item">
-                  <img
-                    class="mw-pub-img"
-                    src="images/writers/2.jpg"
-                    style={{ borderRadius: "100%" }}
-                  />
-                </div>
-              </div>
-              <div>
-                <div class="crw-item">
-                  <img
-                    class="mw-pub-img"
-                    src="images/writers/1.jpg"
-                    style={{ borderRadius: "100%" }}
-                  />
-                </div>
-              </div>
+            {this.state.top_authors?this.state.top_authors.map((item, index) =>{
+                 return(
+                  <Link to="/shopGrid"
+                      onClick={() => {
+                        this.props.fetchBooks(
+                          helper.prefix + "author/books/" + item.id
+                        );
+                      }}>
+                    <div class="crw-item">
+                      <img
+                        class="mw-pub-img"
+                        src={item.image}
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                  </Link>
+                  )
+                }):null
+              }
             </Slider>
           </div>
         </MobileView>

@@ -64,9 +64,11 @@ class Productz extends Component {
     this.state = {
       books: discountProduct,
       review_rating: 0,
-      review_text: null
+      review_text: null,
+      reviewProgress: null
     };
     window.scrollTo(0, 0);
+    this.fetchReviewBar();
   }
 
   changeRating = newRating => {
@@ -549,6 +551,23 @@ class Productz extends Component {
       );
     }
   };
+
+  fetchReviewBar=()=>{
+    var arr = {};
+    arr["fivestar"] = this.props.reviews.fivestar;
+    arr["fourstar"] = this.props.reviews.fourstar;
+    arr["threestar"] = this.props.reviews.threestar;
+    arr["twostar"] = this.props.reviews.twostar;
+    arr["onestar"] = this.props.reviews.onestar;
+
+    let sum = Object.keys(arr).reduce((s,k) => s += arr[k], 0);
+
+    var result = Object.keys(arr).map(k => ({[k] : (arr[k]/sum * 100).toFixed(2)+"%"}));
+
+    console.log("asdasd asd asd",result[0].fivestar)
+    this.setState({reviewProgress: result})
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -641,6 +660,7 @@ class Productz extends Component {
                             একটু পড়ে দেখুন
                           </button>
                           <div class="addtocart__actions">
+                            <BrowserView>
                             <button
                               class="tocart"
                               type="submit"
@@ -651,6 +671,20 @@ class Productz extends Component {
                             >
                               Add to Cart
                             </button>
+                            </BrowserView>
+                            <MobileView>
+                            <button
+                              class="tocart"
+                              type="submit"
+                              title="Add to Cart"
+                              onClick={() => {
+                                this.addtoCart();
+                              }}
+                            >
+                              Add Cart
+                            </button>
+                            </MobileView>
+                            
                           </div>
                         </div>
                         <div class="product_meta">
@@ -831,9 +865,9 @@ class Productz extends Component {
                         &gt;
                       </div>
                       <div class="row mb-4">
-                        <div class="col-7">{this.checkRating()}</div>
+                        <div class="col-sm-7">{this.checkRating()}</div>
 
-                        <div class="col-5">
+                        <div class="col-sm-5">
                           <div class="media ratings-review__content--rating">
                             <h2 style={{ fontWeight: "normal" }} class="pt-2">
                               {this.averageRating()}
@@ -856,7 +890,7 @@ class Productz extends Component {
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col-4 text-warning pl-4">
+                            <div class="col-sm-5 text-warning pl-4" style={{width: '50%'}}>
                               <div>
                                 <StarRatings
                                   rating={parseFloat(5)}
@@ -903,17 +937,17 @@ class Productz extends Component {
                                 />
                               </div>
                             </div>
-                            <div class="col-8" id="ratingChart">
+                            <div class="col-sm-5" id="ratingChart" style={{width: '50%'}}>
                               <div class="row">
-                                <div class="col-2">
+                                <div style={{width: '10%'}}>
                                   [{this.props.reviews.fivestar}]
                                 </div>
-                                <div class="col-10">
+                                <div style={{width: '90%'}}>
                                   <div class="progress rating-bar mt-2">
                                     <div
                                       class="progress-bar bg-warning"
                                       role="progressbar"
-                                      style={{ width: "100%" }}
+                                      style={{ width: this.state.reviewProgress != null ?this.state.reviewProgress[0].fivestar:"0%"  }}
                                       aria-valuemin="0"
                                       aria-valuemax="100"
                                     ></div>
@@ -921,22 +955,8 @@ class Productz extends Component {
                                 </div>
                               </div>
                               <div class="row">
-                                <div class="col-2">[0]</div>
-                                <div class="col-10">
-                                  <div class="progress rating-bar mt-2">
-                                    <div
-                                      class="progress-bar bg-warning"
-                                      role="progressbar"
-                                      style={{ width: "0%" }}
-                                      aria-valuemin="0"
-                                      aria-valuemax="100"
-                                    ></div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-2">[0]</div>
-                                <div class="col-10">
+                                <div style={{width: '10%'}}>[{this.props.reviews.fourstar}]</div>
+                                <div style={{width: '90%'}}>
                                   <div class="progress rating-bar mt-2">
                                     <div
                                       class="progress-bar bg-warning"
@@ -949,8 +969,8 @@ class Productz extends Component {
                                 </div>
                               </div>
                               <div class="row">
-                                <div class="col-2">[0]</div>
-                                <div class="col-10">
+                                <div style={{width: '10%'}}>[{this.props.reviews.threestar}]</div>
+                                <div style={{width: '90%'}}>
                                   <div class="progress rating-bar mt-2">
                                     <div
                                       class="progress-bar bg-warning"
@@ -963,8 +983,22 @@ class Productz extends Component {
                                 </div>
                               </div>
                               <div class="row">
-                                <div class="col-2">[0]</div>
-                                <div class="col-10">
+                                <div style={{width: '10%'}}>[{this.props.reviews.twostar}]</div>
+                                <div style={{width: '90%'}}>
+                                  <div class="progress rating-bar mt-2">
+                                    <div
+                                      class="progress-bar bg-warning"
+                                      role="progressbar"
+                                      style={{ width: "0%" }}
+                                      aria-valuemin="0"
+                                      aria-valuemax="100"
+                                    ></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div style={{width: '15%'}}>[{this.props.reviews.onestar}]</div>
+                                <div style={{width: '85%'}}>
                                   <div class="progress rating-bar mt-2">
                                     <div
                                       class="progress-bar bg-warning"

@@ -84,9 +84,19 @@ class Product extends Component {
           </div>
         </BrowserView>
         <MobileView>
-          <div class="cr-item-mb" onClick={() => this.props.history.push(`/product`)}>
+          <div class="cr-item-mb" onClick={() => {
+              this.props.fetchBook(
+                helper.prefix + "book/singlebook/" + this.props.id
+              );
+              this.props.fetchReviews( helper.prefix + "book/reviews/" + this.props.id)
+              console.log("fecth book id = ",this.props.id)
+              this.props.history.push(`/product`);
+            }}>
             <div>
-              <img class="discount_badge" src="images/badges/discount.png" />
+              <div>
+                <img class="discount_badge" src="images/badges/discount.png" />
+                <p class="mobile-discount">{this.props.discount}%</p>
+              </div>
               <img class="read_some_mb" src="images/badges/read_some.png" />
               <img class="m-item-img ml-auto mr-auto" src={this.props.image} />
             </div>

@@ -46,10 +46,14 @@ class navbar extends Component {
       mouseOverPublisher: false,
       mouseClickedPublisher: false,
       authors: null,
+      mAuthors: null,
       publishers: null,
       search: false,
       searchText: null,
-      bookSuggestions: null
+      bookSuggestions: null,
+      mAuthorclicked: false,
+      mPublishers: null,
+      mPublisherclicked: false
     };
     this.fetch_authors();
     this.fetch_publishers();
@@ -386,7 +390,7 @@ class navbar extends Component {
             .breakArrayIntoGroups(responseJson.authors, 8)
             .slice(0, 4);
           console.log("Is found authors", authors);
-          this.setState({ authors: authors });
+          this.setState({ authors: authors, mAuthors: responseJson.authors });
         }
       })
       .catch(error => {
@@ -410,7 +414,10 @@ class navbar extends Component {
             .breakArrayIntoGroups(responseJson.publishers, 8)
             .slice(0, 4);
           console.log(publishers);
-          this.setState({ publishers: publishers });
+          this.setState({
+            publishers: publishers,
+            mPublishers: responseJson.publishers
+          });
         }
       })
       .catch(error => {
@@ -549,40 +556,68 @@ class navbar extends Component {
         <div class="row autocomplete">
           {this.state.bookSuggestions.map(book => {
             return (
-              <Link to="product" 
-              onClick={() =>{
-                this.props.fetchBook(
-                  helper.prefix + "book/singlebook/" + book.id
-                );
-                this.setState({search: false, searchText: null})
-              }}
-              style={{width: '100%'}}>
-               <div class="row booksugRow" style={{width: '100%', padding: 10, marginLeft: 0, paddingLeft: 10}}>
-                <div  style={{width: '7%'}}>
-                  <img src={book.cover} style={{width: 26, height: 45, backgroundImage: 'url(images/books/dummy.png)', backgroundSize: 'cover'}}/>
+              <Link
+                to="product"
+                onClick={() => {
+                  this.props.fetchBook(
+                    helper.prefix + "book/singlebook/" + book.id
+                  );
+                  this.setState({ search: false, searchText: null });
+                }}
+                style={{ width: "100%" }}
+              >
+                <div
+                  class="row booksugRow"
+                  style={{
+                    width: "100%",
+                    padding: 10,
+                    marginLeft: 0,
+                    paddingLeft: 10
+                  }}
+                >
+                  <div style={{ width: "7%" }}>
+                    <img
+                      src={book.cover}
+                      style={{
+                        width: 26,
+                        height: 45,
+                        backgroundImage: "url(images/books/dummy.png)",
+                        backgroundSize: "cover"
+                      }}
+                    />
+                  </div>
+                  <div style={{ width: "58%" }} class="pl-2">
+                    <p>{book.title}</p>
+                    <p style={{ color: "gray" }}>{book.author}</p>
+                  </div>
+                  <div style={{ width: "15%" }}>
+                    <p class="mt-2" style={{ color: "#D76F6D" }}>
+                      ({book.discount}% off)
+                    </p>
+                  </div>
+                  <div class="pl-2" style={{ width: "20%" }}>
+                    <p class="mt-2" style={{ fontSize: 20 }}>
+                      {book.new_price} TK.
+                    </p>
+                  </div>
                 </div>
-                <div style={{width: '58%'}} class="pl-2">
-                  <p>{book.title}</p>
-                  <p style={{color: 'gray'}}>{book.author}</p>
-                </div>
-                <div style={{width: '15%'}}>
-                    <p class="mt-2" style={{color: '#D76F6D'}}>({book.discount}% off)</p>
-                </div>
-                <div class="pl-2" style={{width: '20%'}}>
-                <p class="mt-2" style={{fontSize: 20}}>{book.new_price} TK.</p>
-                </div>
-              </div>
               </Link>
-            )
+            );
           })}
         </div>
       );
     }
   };
 
-  searchBook = value => {
-    this.setState({ searchText: value });
-    fetch(helper.prefix + "book/search?data=" + value, {
+  searchBook = e => {
+    this.setState({ searchText: e.target.value });
+    if (e.key === "Enter") {
+      this.setState({ search: false });
+      this.props.fetchBooks(
+        helper.prefix + "book/search?data=" + this.state.searchText
+      );
+    }
+    fetch(helper.prefix + "book/search?data=" + e.target.value, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -601,6 +636,111 @@ class navbar extends Component {
         //this.setState({loading:false})
         console.log(error);
       });
+  };
+
+  mobileUser = () => {
+    if (Object.keys(this.props.token).length > 0) {
+      return (
+        <React.Fragment>
+          <Link
+            to="myaccount"
+            onClick={() =>
+              this.setState({ pmenuOpend: !this.state.pmenuOpend })
+            }
+          >
+            {this.props.user.name}
+          </Link>
+          <Link
+            to="#"
+            onClick={() => {
+              this.setState({ pmenuOpend: !this.state.pmenuOpend });
+              this.logOut();
+            }}
+          >
+            Logout
+          </Link>
+        </React.Fragment>
+      );
+    }
+    if (!Object.keys(this.props.token).length > 0) {
+      return (
+        <React.Fragment>
+          <Link
+            to="signin"
+            onClick={() =>
+              this.setState({ pmenuOpend: !this.state.pmenuOpend })
+            }
+          >
+            Login
+          </Link>
+          <Link
+            to="signin"
+            onClick={() =>
+              this.setState({ pmenuOpend: !this.state.pmenuOpend })
+            }
+          >
+            Create account
+          </Link>
+        </React.Fragment>
+      );
+    }
+  };
+
+  allAuthor = () => {
+    if (this.state.mAuthorclicked === true && this.state.mAuthors.length > 0) {
+      return this.state.mAuthors.map((author, index) => {
+        if (index < 20) {
+          return (
+            <Link
+              to="/shopGrid"
+              onClick={() => {
+                this.setState({
+                  mAuthorclicked: false,
+                  menuOpend: false,
+                  mPublisherclicked: false
+                });
+                this.props.fetchBooks(
+                  helper.prefix + "author/books/" + author.id
+                );
+              }}
+              style={{ fontSize: 16 }}
+            >
+              {author.name}
+            </Link>
+          );
+        }
+      });
+    }
+  };
+
+  allPublisher = () => {
+    if (
+      this.state.mPublisherclicked === true &&
+      this.state.mPublishers.length > 0
+    ) {
+      return this.state.mPublishers.map((publisher, index) => {
+        if (index < 20) {
+          return (
+            <Link
+              to="/shopGrid"
+              onClick={() => {
+                this.setState({
+                  mPublisherclicked: false,
+                  menuOpend: false,
+                  mAuthorclicked: false
+                });
+                this.props.fetchBooks(
+                  helper.prefix + "publisher/books/" + publisher.id
+                );
+              }}
+              style={{ fontSize: 16 }}
+            >
+              {publisher.name}
+            </Link>
+          );
+        }
+      });
+    }
   };
 
   render() {
@@ -623,7 +763,7 @@ class navbar extends Component {
                   </div>
                 </div>
 
-                <div class="col-md-5" style={{zIndex: 1000}}>
+                <div class="col-md-5" style={{ zIndex: 1000 }}>
                   <ul class="header__sidebar__right d-flex align-items-center mt-auto mb-auto">
                     <form
                       class="form-inline searchAll"
@@ -665,18 +805,30 @@ class navbar extends Component {
                             }}
                             value={this.state.searchText}
                             class="form-control mr-sm-2"
-                            onChange={e => this.searchBook(e.target.value)}
+                            onChange={e => this.searchBook(e)}
                           />
                         </ReactTyped>
-                        <button
-                          class="btn my-2 my-sm-0 search-btn"
-                          type="submit"
+                        <Link
+                          to="shopGrid"
+                          onClick={() => {
+                            this.setState({ search: false });
+                            this.props.fetchBooks(
+                              helper.prefix +
+                                "book/search?data=" +
+                                this.state.searchText
+                            );
+                          }}
                         >
-                          <FontAwesome
-                            name="search"
-                            style={{ color: "white" }}
-                          />
-                        </button>
+                          <button
+                            class="btn my-2 my-sm-0 search-btn"
+                            type="submit"
+                          >
+                            <FontAwesome
+                              name="search"
+                              style={{ color: "white" }}
+                            />
+                          </button>
+                        </Link>
                       </div>
                       {this.autocomplete()}
                     </form>
@@ -876,10 +1028,13 @@ class navbar extends Component {
             <div
               class="row m-0 d-flex justify-content-between align-items-center"
               onClick={() =>
-                this.setState({ catclicked: !this.state.catclicked })
+                this.setState({
+                  catclicked: !this.state.catclicked,
+                  mAuthorclicked: false
+                })
               }
             >
-              <a href="#">বিষয় </a>
+              <Link to="#">বিষয় </Link>
               <FontAwesome
                 name={this.state.catclicked ? "angle-down" : "angle-right"}
                 size="2x"
@@ -891,8 +1046,50 @@ class navbar extends Component {
             </div>
 
             {this.allCategory()}
-            <a href="#">লেখক</a>
-            <a href="#">প্রকাশনী</a>
+            <div
+              class="row m-0 d-flex justify-content-between align-items-center"
+              onClick={() =>
+                this.setState({
+                  mAuthorclicked: !this.state.mAuthorclicked,
+                  catclicked: false,
+                  mPublisherclicked: false
+                })
+              }
+            >
+              <Link to="#">লেখক </Link>
+              <FontAwesome
+                name={this.state.mAuthorclicked ? "angle-down" : "angle-right"}
+                size="2x"
+                style={{
+                  textShadow: "0 1px 0 rgba(0, 0, 0, 0.1)",
+                  paddingRight: 10
+                }}
+              />
+            </div>
+            <div class="ml-4">{this.allAuthor()}</div>
+            <div
+              class="row m-0 d-flex justify-content-between align-items-center"
+              onClick={() =>
+                this.setState({
+                  mPublisherclicked: !this.state.mPublisherclicked,
+                  catclicked: false,
+                  mAuthorclicked: false
+                })
+              }
+            >
+              <Link to="#">প্রকাশনী </Link>
+              <FontAwesome
+                name={
+                  this.state.mPublisherclicked ? "angle-down" : "angle-right"
+                }
+                size="2x"
+                style={{
+                  textShadow: "0 1px 0 rgba(0, 0, 0, 0.1)",
+                  paddingRight: 10
+                }}
+              />
+            </div>
+            <div class="ml-4">{this.allPublisher()}</div>
             <a href="#">পাঠক কর্নার</a>
             <a href="#">প্রাতিষ্ঠানিক অর্ডার</a>
             <a href="#">অভিযাত্রী</a>
@@ -912,8 +1109,7 @@ class navbar extends Component {
             >
               &times;
             </a>
-            <a href="#">User</a>
-            <a href="#">Logout</a>
+            {this.mobileUser()}
           </div>
           <div
             class="row m-0 sticky__header d-flex align-items-center"
@@ -955,7 +1151,7 @@ class navbar extends Component {
                   class="badge badge-danger"
                   style={{ position: "relative", right: 8 }}
                 >
-                  3
+                  {this.cart_total()}
                 </span>
               </a>
 

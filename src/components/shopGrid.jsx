@@ -10,6 +10,12 @@ import * as helper from "./../helper";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchBooks } from '../actions/bookActions';
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile
+} from "react-device-detect";
 
 import {
   // Route,
@@ -67,6 +73,7 @@ class shopGrid extends Component {
       return (
         <div class="row m-0">
           <div class="col-2">
+            <BrowserView>
             <div class="browse__meta--thumbnail">
               <img
                 class="img-fluid rounded-circle"
@@ -74,6 +81,16 @@ class shopGrid extends Component {
                 src={this.props.books.author.image}
               />
             </div>
+            </BrowserView>
+            <MobileView>
+            <div class="browse__meta--thumbnail" style={{width: 54, paddingRight: 10}}>
+              <img
+                class="img-fluid rounded-circle"
+                alt="Humayun Ahmed books"
+                src={this.props.books.author.image}
+              />
+            </div>
+            </MobileView>
           </div>
           <div class="col-10">
             <h4 class="browse__meta--title">{this.props.books.author.name}</h4>
@@ -87,13 +104,25 @@ class shopGrid extends Component {
       return (
         <div class="row m-0">
           <div class="col-2">
-            <div class="browse__meta--thumbnail">
+          <BrowserView>
+          <div class="browse__meta--thumbnail">
               <img
                 class="img-fluid rounded-circle"
                 alt="Humayun Ahmed books"
                 src={this.props.books.publisher.image}
               />
             </div>
+          </BrowserView>
+          <MobileView>
+          <div class="browse__meta--thumbnail" style={{width: 54, paddingRight: 10}}>
+              <img
+                class="img-fluid rounded-circle"
+                alt="Humayun Ahmed books"
+                src={this.props.books.publisher.image}
+              />
+            </div>
+          </MobileView>
+            
           </div>
           <div class="col-10">
             <h4 class="browse__meta--title">{this.props.books.publisher.name}</h4>

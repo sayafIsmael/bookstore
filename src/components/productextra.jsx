@@ -167,7 +167,10 @@ class ProductExtra extends Component {
             onClick={() => this.props.history.push(`/product`)}
           >
             <div>
-              <img class="discount_badge" src="images/badges/discount.png" />
+            <div>
+                <img class="discount_badge" src="images/badges/discount.png" style={{left: 3}}/>
+                <p class="mobile-discount">{this.props.discount}%</p>
+              </div>
               <img class="read_some_mb" src="images/badges/read_some.png" />
               <img class="m-item-img ml-auto mr-auto" src={this.props.image} />
             </div>

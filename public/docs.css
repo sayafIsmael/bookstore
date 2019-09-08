@@ -24,7 +24,7 @@
 .read_some_mb {
   position: absolute;
   left: 11px;
-  top: 38px;
+  top: 60px;
 }
 .var
 .variable-width .slick-slide p {
@@ -169,6 +169,7 @@
   position: absolute;
   width: 40px;
   height: 40px;
+  top: 13px;
 }
 .crp-item {
   /* background: #00558B; */
