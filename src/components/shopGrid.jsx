@@ -167,7 +167,7 @@ class shopGrid extends Component {
       <React.Fragment>
         <div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
         <div class="container">
-          <div class="row">
+          <div class="row m-0">
             <div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
               <div class="shop__sidebar">
                 <aside class="wedget__categories poroduct--cat">
@@ -1019,7 +1019,7 @@ class shopGrid extends Component {
                       <p>(Showing 1 to 60 of 20147 books)</p>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row m-0">
                     {this.props.books.books!=null?this.showBooks():console.log("no books found")}
                   </div>
                   <ul class="wn__pagination mt-3">

@@ -496,12 +496,9 @@ class Home extends Component {
               style={{ height: 55 }}
             />
             <div class="row mt-auto mb-auto ml-0">
-              <div class="male-btn">
-                <p>পুরুষ</p>
-              </div>
-              <div class="female-btn">
-                <p>মহিলা</p>
-              </div>
+              <button class="btn btn-primary ml-2 mr-2">পুরুষ</button>
+              <button class="btn btn-success mr-2">মহিলা</button>
+              <button class="btn btn-warning">অন্যান্য</button>
             </div>
           </div>
         </div>

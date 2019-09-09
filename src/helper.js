@@ -1,4 +1,4 @@
-export const prefix = "http://gronthik.sobujvalobasha.com/public/api/";
+export const prefix = "http://127.0.0.1:8000/api/";
 
 export function breakArrayIntoGroups(data, maxPerGroup) {
     var groups = [];

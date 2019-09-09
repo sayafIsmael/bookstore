@@ -65,7 +65,11 @@ class Productz extends Component {
       books: discountProduct,
       review_rating: 0,
       review_text: null,
-      reviewProgress: null
+      fivestar: null,
+      fourstar: null,
+      threestar: null,
+      twostar: null,
+      onestar: null
     };
     window.scrollTo(0, 0);
     this.fetchReviewBar();
@@ -371,7 +375,7 @@ class Productz extends Component {
       return this.props.reviews.reviews.map((review, index) => {
         return (
           <div class="row mt-3" style={{ borderBottom: "1px solid #E9ECEF" }}>
-            <div class="col-2 content--review__user-info">
+            <div class="col-sm-2 content--review__user-info">
               <div>
                 <img
                   class="align-items-center rounded-circle"
@@ -391,7 +395,7 @@ class Productz extends Component {
                 name="rating"
               />
             </div>
-            <div class="col-10 content--review__user-comment">
+            <div class="col-sm-10 content--review__user-comment">
               <div class="user-review-container">
                 <div
                   class="user-review-container--description"
@@ -564,8 +568,13 @@ class Productz extends Component {
 
     var result = Object.keys(arr).map(k => ({[k] : (arr[k]/sum * 100).toFixed(2)+"%"}));
 
-    console.log("asdasd asd asd",result[0].fivestar)
-    this.setState({reviewProgress: result})
+    console.log("asdasd asd asd",result[0].fivestar.toString())
+    this.setState({fivestar: result[0].fivestar.toString(), 
+      fourstar: result[1].fourstar.toString(), 
+      threestar: result[2].threestar.toString(), 
+      twostar: result[3].twostar.toString(), 
+      onestar: result[4].onestar.toString(), 
+    })
   }
 
   render() {
@@ -947,7 +956,7 @@ class Productz extends Component {
                                     <div
                                       class="progress-bar bg-warning"
                                       role="progressbar"
-                                      style={{ width: this.state.reviewProgress != null ?this.state.reviewProgress[0].fivestar:"0%"  }}
+                                      style={{ width: this.state.fivestar != null ?this.state.fivestar:"0%"  }}
                                       aria-valuemin="0"
                                       aria-valuemax="100"
                                     ></div>

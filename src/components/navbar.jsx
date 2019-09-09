@@ -562,7 +562,72 @@ class navbar extends Component {
                   this.props.fetchBook(
                     helper.prefix + "book/singlebook/" + book.id
                   );
-                  this.setState({ search: false, searchText: null });
+                  this.setState({ search: false });
+                }}
+                style={{ width: "100%" }}
+              >
+                <div
+                  class="row booksugRow"
+                  style={{
+                    width: "100%",
+                    padding: 10,
+                    marginLeft: 0,
+                    paddingLeft: 10
+                  }}
+                >
+                  <div style={{ width: "7%" }}>
+                    <img
+                      src={book.cover}
+                      style={{
+                        width: 26,
+                        height: 45,
+                        backgroundImage: "url(images/books/dummy.png)",
+                        backgroundSize: "cover"
+                      }}
+                    />
+                  </div>
+                  <div style={{ width: "58%" }} class="pl-2">
+                    <p>{book.title}</p>
+                    <p style={{ color: "gray" }}>{book.author}</p>
+                  </div>
+                  <div style={{ width: "15%" }}>
+                    <p class="mt-2" style={{ color: "#D76F6D" }}>
+                      ({book.discount}% off)
+                    </p>
+                  </div>
+                  <div class="pl-2" style={{ width: "20%" }}>
+                    <p class="mt-2" style={{ fontSize: 20 }}>
+                      {book.new_price} TK.
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      );
+    }
+  };
+
+  autocomplete2 = () => {
+    if (
+      this.state.search === true &&
+      this.state.searchText != null &&
+      this.state.searchText != "" &&
+      this.state.bookSuggestions != null &&
+      this.state.bookSuggestions != []
+    ) {
+      return (
+        <div class="row autocomplete2">
+          {this.state.bookSuggestions.map(book => {
+            return (
+              <Link
+                to="product"
+                onClick={() => {
+                  this.props.fetchBook(
+                    helper.prefix + "book/singlebook/" + book.id
+                  );
+                  this.setState({ search: false});
                 }}
                 style={{ width: "100%" }}
               >
@@ -687,59 +752,67 @@ class navbar extends Component {
   };
 
   allAuthor = () => {
-    if (this.state.mAuthorclicked === true && this.state.mAuthors.length > 0) {
-      return this.state.mAuthors.map((author, index) => {
-        if (index < 20) {
-          return (
-            <Link
-              to="/shopGrid"
-              onClick={() => {
-                this.setState({
-                  mAuthorclicked: false,
-                  menuOpend: false,
-                  mPublisherclicked: false
-                });
-                this.props.fetchBooks(
-                  helper.prefix + "author/books/" + author.id
-                );
-              }}
-              style={{ fontSize: 16 }}
-            >
-              {author.name}
-            </Link>
-          );
-        }
-      });
+    try {
+      if (this.state.mAuthorclicked === true && this.state.mAuthors.length > 0) {
+        return this.state.mAuthors.map((author, index) => {
+          if (index < 20) {
+            return (
+              <Link
+                to="/shopGrid"
+                onClick={() => {
+                  this.setState({
+                    mAuthorclicked: false,
+                    menuOpend: false,
+                    mPublisherclicked: false
+                  });
+                  this.props.fetchBooks(
+                    helper.prefix + "author/books/" + author.id
+                  );
+                }}
+                style={{ fontSize: 16 }}
+              >
+                {author.name}
+              </Link>
+            );
+          }
+        });
+      }
+    } catch (error) {
+      console.log(error)
     }
   };
 
   allPublisher = () => {
-    if (
-      this.state.mPublisherclicked === true &&
-      this.state.mPublishers.length > 0
-    ) {
-      return this.state.mPublishers.map((publisher, index) => {
-        if (index < 20) {
-          return (
-            <Link
-              to="/shopGrid"
-              onClick={() => {
-                this.setState({
-                  mPublisherclicked: false,
-                  menuOpend: false,
-                  mAuthorclicked: false
-                });
-                this.props.fetchBooks(
-                  helper.prefix + "publisher/books/" + publisher.id
-                );
-              }}
-              style={{ fontSize: 16 }}
-            >
-              {publisher.name}
-            </Link>
-          );
-        }
-      });
+    try {
+      if (
+        this.state.mPublisherclicked === true &&
+        this.state.mPublishers.length > 0
+      ) {
+        return this.state.mPublishers.map((publisher, index) => {
+          if (index < 20) {
+            return (
+              <Link
+                to="/shopGrid"
+                onClick={() => {
+                  this.setState({
+                    mPublisherclicked: false,
+                    menuOpend: false,
+                    mAuthorclicked: false
+                  });
+                  this.props.fetchBooks(
+                    helper.prefix + "publisher/books/" + publisher.id
+                  );
+                }}
+                style={{ fontSize: 16 }}
+              >
+                {publisher.name}
+              </Link>
+            );
+          }
+        });
+      }
+    } catch (error) {
+      console.log(error)
     }
   };
 
@@ -811,7 +884,7 @@ class navbar extends Component {
                         <Link
                           to="shopGrid"
                           onClick={() => {
-                            this.setState({ search: false });
+                            this.setState({ search: false});
                             this.props.fetchBooks(
                               helper.prefix +
                                 "book/search?data=" +
@@ -1197,17 +1270,27 @@ class navbar extends Component {
                   border: "none",
                   height: 20
                 }}
+                value={this.state.searchText}
                 class="form-control mr-sm-2"
+                onChange={e => this.searchBook(e)}
               />
             </ReactTyped>
             <button
               class="btn my-2 my-sm-0 search-btn-mb"
-              type="submit"
               style={{ top: 0, position: "relative", right: 10 }}
+              onClick={() => {
+                this.setState({ search: false,});
+                this.props.fetchBooks(
+                  helper.prefix +
+                    "book/search?data=" +
+                    this.state.searchText
+                );
+              }}
             >
               <FontAwesome name="search" style={{ color: "white" }} />
             </button>
           </div>
+          {this.autocomplete2()}
         </MobileView>
       </header>
     );
