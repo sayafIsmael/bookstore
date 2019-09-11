@@ -202,34 +202,6 @@ class shopGrid extends Component {
                             <input
                               type="radio"
                               class="mr-2"
-                              value="option1"
-                              checked={this.state.selectedOption === "option1"}
-                              onChange={this.handleOptionChange}
-                            />
-                            Best Seller
-                          </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="radio">
-                          <label>
-                            <input
-                              type="radio"
-                              class="mr-2"
-                              value="option2"
-                              checked={this.state.selectedOption === "option2"}
-                              onChange={this.handleOptionChange}
-                            />
-                            New Released
-                          </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="radio">
-                          <label>
-                            <input
-                              type="radio"
-                              class="mr-2"
                               value="option3"
                               checked={this.state.selectedOption === "option3"}
                               onChange={this.handleOptionChange}
@@ -283,7 +255,7 @@ class shopGrid extends Component {
                     </ul>
                   </form>
                 </aside>
-                <aside class="wedget__categories poroduct--cat">
+                {/* <aside class="wedget__categories poroduct--cat">
                   <div
                     class="row m-0 d-flex justify-content-between"
                     style={{ borderBottom: "1px solid #2e2e2e" }}
@@ -382,8 +354,8 @@ class shopGrid extends Component {
                       <p class="filter_text">ঐতিহাসিক উপন্যাস</p>
                     </li>
                   </ul>
-                </aside>
-                <aside class="wedget__categories poroduct--cat">
+                </aside> */}
+                {/* <aside class="wedget__categories poroduct--cat">
                   <form>
                     <div>
                       <h3
@@ -512,7 +484,7 @@ class shopGrid extends Component {
                       </li>
                     </ul>
                   </form>
-                </aside>
+                </aside> */}
                 <aside class="wedget__categories poroduct--cat">
                   <form>
                     <div>
@@ -664,7 +636,7 @@ class shopGrid extends Component {
                     </div>
                   </div>
                 </aside>
-                <aside class="wedget__categories poroduct--cat">
+                {/* <aside class="wedget__categories poroduct--cat">
                   <form>
                     <div>
                       <h3
@@ -793,7 +765,7 @@ class shopGrid extends Component {
                       </li>
                     </ul>
                   </form>
-                </aside>
+                </aside> */}
                 <aside class="wedget__categories pro--range">
                   <div>
                     <h3

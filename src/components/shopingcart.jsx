@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { createStore } from "redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { updateCartQuantity, deleteFromCart, fetchBook} from "../actions/bookActions";
@@ -30,9 +30,16 @@ gotoShipping = () =>{
     }
 }
 
+checkCart = () => {
+  if (this.props.cart.length < 1) {
+    return <Redirect to="/" />;
+  }
+};
+
   render() {
     return (
       <React.Fragment>
+        {this.checkCart()}
         <div class="cart-main-area section-padding--lg bg--white">
           <div class="container">
             <div class="row">

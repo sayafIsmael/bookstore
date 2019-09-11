@@ -45,14 +45,14 @@
           };
 
         case UPDATE_CART_QUANTITY:
-          if (action.quantity >= 1) {
             let books = [...state.cart];
+            if (action.quantity >= 1) {
             books.find(book => book.id == action.payload).quantity = action.quantity;
+            }
             return {
               ...state,
               cart: books
             };
-          }
           case EMPTY_CART:
             return {
               ...state,
