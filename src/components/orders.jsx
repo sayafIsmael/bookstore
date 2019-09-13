@@ -30,7 +30,6 @@ class Orders extends Component {
       orders: null
     };
     window.scrollTo(0, 0);
-    this.fetchOrders()
   }
 
   
@@ -91,6 +90,7 @@ class Orders extends Component {
     return (
       <React.Fragment>
           {this.checkAuth()}
+          {this.fetchOrders()}
           <div class="container">
           <p class="m-2 mb-3" style={{fontSize: 30,}}>Orders</p>
           <div class="card">

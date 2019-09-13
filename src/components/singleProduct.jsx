@@ -605,7 +605,6 @@ class Productz extends Component {
                             <img
                               class="bookCover"
                               src={this.cover()}
-                              alt=""
                               style={{ height: 344, width: 238 }}
                             />
                           </div>

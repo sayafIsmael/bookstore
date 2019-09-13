@@ -100,7 +100,7 @@ checkCart = () => {
                                 >
                                  -
                                 </span>
-                                <input class="cart-qInput" type="number" value={book.quantity} />
+                                <input disabled class="cart-qInput" type="number" value={book.quantity} />
                                 <span
                                   class="cart-arrow ml-2 mr-2"
                                   onClick={() => {

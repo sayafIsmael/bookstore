@@ -75,20 +75,24 @@ class shopGrid extends Component {
           <div class="col-2">
             <BrowserView>
             <div class="browse__meta--thumbnail">
-              <img
+            <object class="img-fluid rounded-circle" data="images/default/default-avatar.png" style={{width: 100, height: 100}} type="image/png">
+            <img
                 class="img-fluid rounded-circle"
-                alt="Humayun Ahmed books"
                 src={this.props.books.author.image}
+                style={{width: 100, height: 100}}
               />
+            </object>
             </div>
             </BrowserView>
             <MobileView>
             <div class="browse__meta--thumbnail" style={{width: 54, paddingRight: 10}}>
-              <img
+            <object class="img-fluid rounded-circle" data="images/default/default-avatar.png" style={{width: 54, height: 54}} type="image/png">
+            <img
+            style={{width: 54, height: 54}}
                 class="img-fluid rounded-circle"
-                alt="Humayun Ahmed books"
                 src={this.props.books.author.image}
               />
+            </object>
             </div>
             </MobileView>
           </div>
@@ -106,20 +110,24 @@ class shopGrid extends Component {
           <div class="col-2">
           <BrowserView>
           <div class="browse__meta--thumbnail">
-              <img
+          <object class="img-fluid rounded-circle" data="images/default/publisher.png" style={{width: 100, height: 100}} type="image/png">
+          <img
+          style={{width: 100, height: 100}}
                 class="img-fluid rounded-circle"
-                alt="Humayun Ahmed books"
                 src={this.props.books.publisher.image}
               />
+            </object>
             </div>
           </BrowserView>
           <MobileView>
           <div class="browse__meta--thumbnail" style={{width: 54, paddingRight: 10}}>
-              <img
+          <object class="img-fluid rounded-circle" data="images/default/publisher.png" style={{width: 54, height: 54}} type="image/png">
+          <img
+          style={{width: 54, height: 54}}
                 class="img-fluid rounded-circle"
-                alt="Humayun Ahmed books"
                 src={this.props.books.publisher.image}
               />
+            </object>
             </div>
           </MobileView>
             

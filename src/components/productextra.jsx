@@ -64,7 +64,11 @@ class ProductExtra extends Component {
                 {this.props.discount}%
               </p>
               <img
-                style={{ opacity: this.state.mouseOver ? 0.3 : 1,  left: 29, top: 43}}
+                style={{
+                  opacity: this.state.mouseOver ? 0.3 : 1,
+                  left: 29,
+                  top: 43
+                }}
                 class="discount_badge"
                 src="images/badges/discount.png"
               />
@@ -109,7 +113,7 @@ class ProductExtra extends Component {
                 }}
               />
             </div>
-            <div>
+            <div style={{ overflow: "hidden" }}>
               <p
                 style={{
                   color: "black",
@@ -167,14 +171,18 @@ class ProductExtra extends Component {
             onClick={() => this.props.history.push(`/product`)}
           >
             <div>
-            <div>
-                <img class="discount_badge" src="images/badges/discount.png" style={{left: 3}}/>
+              <div>
+                <img
+                  class="discount_badge"
+                  src="images/badges/discount.png"
+                  style={{ left: 3 }}
+                />
                 <p class="mobile-discount">{this.props.discount}%</p>
               </div>
               <img class="read_some_mb" src="images/badges/read_some.png" />
               <img class="m-item-img ml-auto mr-auto" src={this.props.image} />
             </div>
-            <div>
+            <div style={{ overflow: "hidden" }}>
               <p style={{ color: "black", marginTop: 10 }}>{this.props.name}</p>
               <p style={{ color: "black" }}>{this.props.writer}</p>
               <p style={{ color: "black" }}>মূল্য : {this.props.price}</p>

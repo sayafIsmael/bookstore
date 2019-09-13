@@ -349,11 +349,14 @@ class Home extends Component {
                       console.log(item.id)
                     }}>
                       <div class="crp-item">
-                        <img
+                      <object data="images/default/publisher.png" style={{width: 80, height: 80}} type="image/png">
+                      <img                            
                           class="m-pubp-img"
                           src={item.image}
-                          style={{ borderRadius: "100%" }}
+                          style={{ borderRadius: "100%", width: 80, height: 80}}
                         />
+                      </object>
+                        
                       </div>
                     </Link>
                   );
@@ -377,11 +380,13 @@ class Home extends Component {
                       console.log(item.id)
                     }}>
                       <div class="cr-item-mb" style={{width: 97}}>
-                        <img
+                      <object data="images/default/publisher.png" style={{width: 97, height: 97}} type="image/png">
+                      <img
                           class="m-pub-img"
                           src={item.image}
-                          style={{ borderRadius: "100%" }}
+                          style={{ borderRadius: "100%", width: 97, height: 97}}
                         />
+                      </object>
                       </div>
                     </Link>
                   );
