@@ -7,3 +7,6 @@ export const EMPTY_CART = 'EMPTY_CART';
 export const STORE_TOKEN = 'STORE_TOKEN';
 export const DELETE_TOKEN = 'DELETE_TOKEN';
 export const FETCH_REVIEWS = 'FETCH_REVIEWS';
+export const SORT_BOOKS = 'SORT_BOOKS';
+export const SELECT_AUTHOR = 'SELECT_AUTHOR';
+export const SELECT_PUBLISHER = 'SELECT_PUBLISHER';

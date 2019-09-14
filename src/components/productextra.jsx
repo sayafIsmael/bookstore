@@ -29,7 +29,7 @@ class ProductExtra extends Component {
             class="cr-item pt-4"
             style={{
               width: 205,
-              height: 370,
+              // height: 440,
               boxShadow: this.state.mouseOver
                 ? "inset 0 0 7px 0 #cdcdcd"
                 : "none"

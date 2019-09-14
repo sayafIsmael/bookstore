@@ -16,7 +16,7 @@ import {
 } from "react-device-detect";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchBooks, fetchBook, deleteFromCart } from "../actions/bookActions";
+import { fetchBooks, fetchBook, deleteFromCart, selectAuthor, selectPublisher} from "../actions/bookActions";
 import { deleteToken } from "../actions/authActions";
 
 import ReactTyped from "react-typed";
@@ -156,6 +156,8 @@ class navbar extends Component {
                               this.props.fetchBook(
                                 helper.prefix + "book/singlebook/" + book.id
                               );
+                              this.props.selectAuthor(null)
+                              this.props.selectPublisher(null)
                             }}
                           >
                             <object
@@ -175,6 +177,8 @@ class navbar extends Component {
                                 this.props.fetchBook(
                                   helper.prefix + "book/singlebook/" + book.id
                                 );
+                                this.props.selectAuthor(null)
+                                this.props.selectPublisher(null)
                               }}
                             >
                               {book.title}
@@ -443,6 +447,8 @@ class navbar extends Component {
                             this.props.fetchBooks(
                               helper.prefix + "author/books/" + author.id
                             );
+                            this.props.selectAuthor(null)
+                            this.props.selectPublisher(null)
                           }}
                         >
                           <FontAwesome
@@ -488,6 +494,8 @@ class navbar extends Component {
                             this.props.fetchBooks(
                               helper.prefix + "publisher/books/" + publisher.id
                             );
+                            this.props.selectAuthor(null)
+                            this.props.selectPublisher(null)
                           }}
                         >
                           <FontAwesome
@@ -563,6 +571,8 @@ class navbar extends Component {
                     helper.prefix + "book/singlebook/" + book.id
                   );
                   this.setState({ search: false });
+                  this.props.selectAuthor(null)
+                  this.props.selectPublisher(null)
                 }}
                 style={{ width: "100%" }}
               >
@@ -628,6 +638,8 @@ class navbar extends Component {
                     helper.prefix + "book/singlebook/" + book.id
                   );
                   this.setState({ search: false});
+                  this.props.selectAuthor(null)
+                  this.props.selectPublisher(null)
                 }}
                 style={{ width: "100%" }}
               >
@@ -681,6 +693,8 @@ class navbar extends Component {
       this.props.fetchBooks(
         helper.prefix + "book/search?data=" + this.state.searchText
       );
+      this.props.selectAuthor(null)
+      this.props.selectPublisher(null)
     }
     fetch(helper.prefix + "book/search?data=" + e.target.value, {
       method: "GET",
@@ -768,6 +782,8 @@ class navbar extends Component {
                   this.props.fetchBooks(
                     helper.prefix + "author/books/" + author.id
                   );
+                  this.props.selectAuthor(null)
+                  this.props.selectPublisher(null)
                 }}
                 style={{ fontSize: 16 }}
               >
@@ -802,6 +818,8 @@ class navbar extends Component {
                   this.props.fetchBooks(
                     helper.prefix + "publisher/books/" + publisher.id
                   );
+                  this.props.selectAuthor(null)
+                  this.props.selectPublisher(null)
                 }}
                 style={{ fontSize: 16 }}
               >
@@ -860,7 +878,7 @@ class navbar extends Component {
                           startDelay={0}
                           backSpeed={20}
                           backDelay={2}
-                          strings={["পছন্দের বই টাইপ করুন সময়ের ব্যবচ্ছেদ"]}
+                          strings={["পছন্দের বইয়ের নাম লিখুন", "পছন্দের পাঠকের নাম লেখুন", "পছন্দের প্রকাশনীর নাম লেখুন"]}
                           stopped={null}
                           smartBackspace
                           shuffle={false}
@@ -890,6 +908,8 @@ class navbar extends Component {
                                 "book/search?data=" +
                                 this.state.searchText
                             );
+                            this.props.selectAuthor(null)
+                            this.props.selectPublisher(null)
                           }}
                         >
                           <button
@@ -1285,6 +1305,8 @@ class navbar extends Component {
                     "book/search?data=" +
                     this.state.searchText
                 );
+                this.props.selectAuthor(null)
+                this.props.selectPublisher(null)
               }}
             >
               <FontAwesome name="search" style={{ color: "white" }} />
@@ -1299,6 +1321,8 @@ class navbar extends Component {
 
 navbar.propTypes = {
   fetchBooks: PropTypes.func.isRequired,
+  selectAuthor: PropTypes.func.isRequired,
+  selectPublisher: PropTypes.func.isRequired,
   fetchBook: PropTypes.func.isRequired,
   deleteFromCart: PropTypes.func.isRequired,
   deleteToken: PropTypes.func.isRequired
@@ -1312,5 +1336,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchBooks, fetchBook, deleteFromCart, deleteToken }
+  { fetchBooks, fetchBook, deleteFromCart, deleteToken, selectAuthor, selectPublisher}
 )(navbar);
