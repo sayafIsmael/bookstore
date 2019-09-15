@@ -1,5 +1,6 @@
 export const FETCH_BOOKS = 'FETCH_BOOKS';
 export const FETCH_BOOK = 'FETCH_BOOK';
+export const FETCH_BOOK_PAGES = 'FETCH_BOOK';
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const DELETE_FROM_CART = 'DELETE_FROM_CART';
 export const UPDATE_CART_QUANTITY = 'UPDATE_CART_QUANTITY';

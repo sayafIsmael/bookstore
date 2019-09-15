@@ -5,6 +5,8 @@ import productexData from "./../dummyData/productex";
 import ProductExtra from "./../components/productextra";
 import discountProduct from "./../dummyData/discountProduct";
 import StarRatings from "react-star-ratings";
+import Modal from "react-modal";
+
 import {
   BrowserView,
   MobileView,
@@ -18,7 +20,12 @@ import FontAwesome from "react-fontawesome";
 import * as helper from "./../helper";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchBook, fetchBooks, addtoCart , fetchReviews} from "../actions/bookActions";
+import {
+  fetchBook,
+  fetchBooks,
+  addtoCart,
+  fetchReviews
+} from "../actions/bookActions";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -58,6 +65,20 @@ function SamplePrevArrow(props) {
   );
 }
 
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginTop: 80,
+    marginLeft: 20,
+    marginRight: 10,
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)"
+  }
+};
+
 class Productz extends Component {
   constructor(props) {
     super(props);
@@ -69,10 +90,28 @@ class Productz extends Component {
       fourstar: null,
       threestar: null,
       twostar: null,
-      onestar: null
+      onestar: null,
+      modalIsOpen: false,
+      bookPages: null
     };
     window.scrollTo(0, 0);
     this.fetchReviewBar();
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.fetchBookImages()
+  }
+
+  fetchBookImages = () =>{
+    fetch(helper.prefix + 'book/singlebook/pages/' + this.props.book.book.id)
+    .then((res => res.json()))
+    .then((data) => {
+      if(data.success && data.book.length > 0){
+        this.setState({bookPages: data.book})
+      }else{
+        this.setState({bookPages: null})
+      }
+    })
   }
 
   changeRating = newRating => {
@@ -83,6 +122,20 @@ class Productz extends Component {
 
   componentWillMount() {
     // this.props.fetchBook();
+    this.fetchBookImages()
+  }
+  
+
+  openModal() {
+    this.setState({ modalIsOpen: true });
+  }
+
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+  }
+
+  closeModal() {
+    this.setState({ modalIsOpen: false });
   }
 
   firstRow = () => {
@@ -462,8 +515,8 @@ class Productz extends Component {
     }
   };
 
-  submitReview = () =>{
-    if(this.state.review_rating > 0){
+  submitReview = () => {
+    if (this.state.review_rating > 0) {
       var url = helper.prefix + "review";
       var data = {
         book_id: this.props.book.book.id,
@@ -472,27 +525,29 @@ class Productz extends Component {
       };
 
       fetch(url, {
-        method: "POST", 
+        method: "POST",
         body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization : 'Bearer '+ this.props.token,
+          Authorization: "Bearer " + this.props.token
         }
       })
         .then(res => res.json())
         .then(response => this.handleReview(response))
         .catch(error => console.error("Error:", error));
     }
-  }
+  };
 
-  handleReview = (response) =>{
-    if(response.success){
-      alert('Success submiting review')
-      this.setState({review_rating: 0, review_text: null})
-      this.props.fetchReviews( helper.prefix + "book/reviews/" + this.props.book.book.id)
+  handleReview = response => {
+    if (response.success) {
+      alert("Success submiting review");
+      this.setState({ review_rating: 0, review_text: null });
+      this.props.fetchReviews(
+        helper.prefix + "book/reviews/" + this.props.book.book.id
+      );
     }
-  }
+  };
 
   checkRating = () => {
     if (Object.keys(this.props.token).length > 0) {
@@ -556,7 +611,7 @@ class Productz extends Component {
     }
   };
 
-  fetchReviewBar=()=>{
+  fetchReviewBar = () => {
     var arr = {};
     arr["fivestar"] = this.props.reviews.fivestar;
     arr["fourstar"] = this.props.reviews.fourstar;
@@ -564,22 +619,57 @@ class Productz extends Component {
     arr["twostar"] = this.props.reviews.twostar;
     arr["onestar"] = this.props.reviews.onestar;
 
-    let sum = Object.keys(arr).reduce((s,k) => s += arr[k], 0);
+    let sum = Object.keys(arr).reduce((s, k) => (s += arr[k]), 0);
 
-    var result = Object.keys(arr).map(k => ({[k] : (arr[k]/sum * 100).toFixed(2)+"%"}));
+    var result = Object.keys(arr).map(k => ({
+      [k]: ((arr[k] / sum) * 100).toFixed(2) + "%"
+    }));
 
-    console.log("asdasd asd asd",result[0].fivestar.toString())
-    this.setState({fivestar: result[0].fivestar.toString(), 
-      fourstar: result[1].fourstar.toString(), 
-      threestar: result[2].threestar.toString(), 
-      twostar: result[3].twostar.toString(), 
-      onestar: result[4].onestar.toString(), 
-    })
+    console.log("asdasd asd asd", result[0].fivestar.toString());
+    this.setState({
+      fivestar: result[0].fivestar.toString(),
+      fourstar: result[1].fourstar.toString(),
+      threestar: result[2].threestar.toString(),
+      twostar: result[3].twostar.toString(),
+      onestar: result[4].onestar.toString()
+    });
+  };
+
+  readBook = () =>{
+    if(this.state.bookPages != null){
+      return(
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <div  class="row m-0 p-2 pt-0">
+          <FontAwesome name="times" onClick={this.closeModal} style={{fontSize: 25, color: "red", marginLeft: 'auto'}} />
+          </div>
+          <div
+            style={{
+              height: 570,
+              overflowY: "scroll",
+              border: "10px solid gray"
+            }}
+          >
+            {this.state.bookPages.map((item, index) =>{
+              return(
+                <img src={item.image} style={{width: '100%'}}/>
+              )
+            })}
+          </div>
+        </Modal>
+      )
+    }
   }
 
   render() {
     return (
       <React.Fragment>
+        {this.readBook()}
         <div class="maincontent bg--white pt--40 pb--55">
           <div class="container">
             <div class="row">
@@ -592,7 +682,9 @@ class Productz extends Component {
                           class="readsome_badge"
                           src="images/badges/lookInside.png"
                         />
-                        <div class="book-bg">
+                        <div class="book-bg" onClick={() => {this.openModal();
+                        this.fetchBookImages() 
+                        }}>
                           <div
                             class="book-cover"
                             style={{
@@ -669,30 +761,29 @@ class Productz extends Component {
                           </button>
                           <div class="addtocart__actions">
                             <BrowserView>
-                            <button
-                              class="tocart"
-                              type="submit"
-                              title="Add to Cart"
-                              onClick={() => {
-                                this.addtoCart();
-                              }}
-                            >
-                              Add to Cart
-                            </button>
+                              <button
+                                class="tocart"
+                                type="submit"
+                                title="Add to Cart"
+                                onClick={() => {
+                                  this.addtoCart();
+                                }}
+                              >
+                                Add to Cart
+                              </button>
                             </BrowserView>
                             <MobileView>
-                            <button
-                              class="tocart"
-                              type="submit"
-                              title="Add to Cart"
-                              onClick={() => {
-                                this.addtoCart();
-                              }}
-                            >
-                              Add Cart
-                            </button>
+                              <button
+                                class="tocart"
+                                type="submit"
+                                title="Add to Cart"
+                                onClick={() => {
+                                  this.addtoCart();
+                                }}
+                              >
+                                Add Cart
+                              </button>
                             </MobileView>
-                            
                           </div>
                         </div>
                         <div class="product_meta">
@@ -883,7 +974,7 @@ class Productz extends Component {
 
                             <div class="media-body ml-4 mb-3">
                               <p class="text-secondary">
-                                {this.props.reviews.reviews.length
+                                {this.props.reviews.reviews.length > 0
                                   ? this.props.reviews.reviews.length
                                   : 0}{" "}
                                 Ratings Reviews
@@ -898,7 +989,10 @@ class Productz extends Component {
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col-sm-5 text-warning pl-4" style={{width: '50%'}}>
+                            <div
+                              class="col-sm-5 text-warning pl-4"
+                              style={{ width: "50%" }}
+                            >
                               <div>
                                 <StarRatings
                                   rating={parseFloat(5)}
@@ -945,17 +1039,26 @@ class Productz extends Component {
                                 />
                               </div>
                             </div>
-                            <div class="col-sm-5" id="ratingChart" style={{width: '50%'}}>
+                            <div
+                              class="col-sm-5"
+                              id="ratingChart"
+                              style={{ width: "50%" }}
+                            >
                               <div class="row">
-                                <div style={{width: '10%'}}>
+                                <div style={{ width: "10%" }}>
                                   [{this.props.reviews.fivestar}]
                                 </div>
-                                <div style={{width: '90%'}}>
+                                <div style={{ width: "90%" }}>
                                   <div class="progress rating-bar mt-2">
                                     <div
                                       class="progress-bar bg-warning"
                                       role="progressbar"
-                                      style={{ width: this.state.fivestar != null ?this.state.fivestar:"0%"  }}
+                                      style={{
+                                        width:
+                                          this.state.fivestar != null
+                                            ? this.state.fivestar
+                                            : "0%"
+                                      }}
                                       aria-valuemin="0"
                                       aria-valuemax="100"
                                     ></div>
@@ -963,22 +1066,10 @@ class Productz extends Component {
                                 </div>
                               </div>
                               <div class="row">
-                                <div style={{width: '10%'}}>[{this.props.reviews.fourstar}]</div>
-                                <div style={{width: '90%'}}>
-                                  <div class="progress rating-bar mt-2">
-                                    <div
-                                      class="progress-bar bg-warning"
-                                      role="progressbar"
-                                      style={{ width: "0%" }}
-                                      aria-valuemin="0"
-                                      aria-valuemax="100"
-                                    ></div>
-                                  </div>
+                                <div style={{ width: "10%" }}>
+                                  [{this.props.reviews.fourstar}]
                                 </div>
-                              </div>
-                              <div class="row">
-                                <div style={{width: '10%'}}>[{this.props.reviews.threestar}]</div>
-                                <div style={{width: '90%'}}>
+                                <div style={{ width: "90%" }}>
                                   <div class="progress rating-bar mt-2">
                                     <div
                                       class="progress-bar bg-warning"
@@ -991,8 +1082,10 @@ class Productz extends Component {
                                 </div>
                               </div>
                               <div class="row">
-                                <div style={{width: '10%'}}>[{this.props.reviews.twostar}]</div>
-                                <div style={{width: '90%'}}>
+                                <div style={{ width: "10%" }}>
+                                  [{this.props.reviews.threestar}]
+                                </div>
+                                <div style={{ width: "90%" }}>
                                   <div class="progress rating-bar mt-2">
                                     <div
                                       class="progress-bar bg-warning"
@@ -1005,8 +1098,26 @@ class Productz extends Component {
                                 </div>
                               </div>
                               <div class="row">
-                                <div style={{width: '15%'}}>[{this.props.reviews.onestar}]</div>
-                                <div style={{width: '85%'}}>
+                                <div style={{ width: "10%" }}>
+                                  [{this.props.reviews.twostar}]
+                                </div>
+                                <div style={{ width: "90%" }}>
+                                  <div class="progress rating-bar mt-2">
+                                    <div
+                                      class="progress-bar bg-warning"
+                                      role="progressbar"
+                                      style={{ width: "0%" }}
+                                      aria-valuemin="0"
+                                      aria-valuemax="100"
+                                    ></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div style={{ width: "15%" }}>
+                                  [{this.props.reviews.onestar}]
+                                </div>
+                                <div style={{ width: "85%" }}>
                                   <div class="progress rating-bar mt-2">
                                     <div
                                       class="progress-bar bg-warning"
@@ -1058,5 +1169,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchBook, fetchBooks, addtoCart, fetchReviews}
+  { fetchBook, fetchBooks, addtoCart, fetchReviews }
 )(Productz);

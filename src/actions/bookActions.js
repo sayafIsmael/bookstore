@@ -8,7 +8,8 @@ import {
   FETCH_REVIEWS,
   SORT_BOOKS,
   SELECT_AUTHOR,
-  SELECT_PUBLISHER
+  SELECT_PUBLISHER,
+  FETCH_BOOK_PAGES
 } from './types';
 
 export const fetchBooks = (url) => dispatch => {
@@ -29,6 +30,17 @@ export const fetchBook = (url) => dispatch => {
       dispatch({
         type: FETCH_BOOK,
         payload: book
+      })
+    );
+};
+
+export const fetchBookPages = (url) => dispatch => {
+  fetch(url)
+    .then(res => res.json())
+    .then(data =>
+      dispatch({
+        type: FETCH_BOOK_PAGES,
+        payload: data
       })
     );
 };

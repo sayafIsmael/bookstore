@@ -8,7 +8,8 @@
     FETCH_REVIEWS,
     SORT_BOOKS,
     SELECT_AUTHOR,
-    SELECT_PUBLISHER
+    SELECT_PUBLISHER,
+    FETCH_BOOK_PAGES
   } from '../actions/types';
 
   const initialState = {
@@ -16,6 +17,7 @@
     item: {},
     cart: [],
     reviews: [],
+    bookPages: null,
     selectedOption: null,
     selectedAuthor: null,
     selectedPublisher: null
@@ -27,19 +29,25 @@
         return {
           ...state,
           items: action.payload,
-          selectedOption: null,
+            selectedOption: null,
         };
       case FETCH_BOOK:
         return {
           ...state,
           item: action.payload
         };
-        case SELECT_AUTHOR:
+      case FETCH_BOOK_PAGES:
+        console.log('asssssss', action.payload)
+        return {
+          ...state,
+          bookPages: action.payload
+        };
+      case SELECT_AUTHOR:
         return {
           ...state,
           selectedAuthor: action.payload
         };
-        case SELECT_PUBLISHER:
+      case SELECT_PUBLISHER:
         return {
           ...state,
           selectedPublisher: action.payload
@@ -60,18 +68,18 @@
               ...state.cart.slice(action.payload + 1)
             ]
           };
-        
+
         case SORT_BOOKS:
           return {
             ...state,
             items: action.payload,
-            selectedOption: action.selectedOption
+              selectedOption: action.selectedOption
           }
 
-        case UPDATE_CART_QUANTITY:
+          case UPDATE_CART_QUANTITY:
             let books = [...state.cart];
             if (action.quantity >= 1) {
-            books.find(book => book.id == action.payload).quantity = action.quantity;
+              books.find(book => book.id == action.payload).quantity = action.quantity;
             }
             return {
               ...state,
