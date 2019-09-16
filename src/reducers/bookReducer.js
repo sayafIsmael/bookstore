@@ -9,7 +9,6 @@
     SORT_BOOKS,
     SELECT_AUTHOR,
     SELECT_PUBLISHER,
-    FETCH_BOOK_PAGES
   } from '../actions/types';
 
   const initialState = {
@@ -35,12 +34,6 @@
         return {
           ...state,
           item: action.payload
-        };
-      case FETCH_BOOK_PAGES:
-        console.log('asssssss', action.payload)
-        return {
-          ...state,
-          bookPages: action.payload
         };
       case SELECT_AUTHOR:
         return {

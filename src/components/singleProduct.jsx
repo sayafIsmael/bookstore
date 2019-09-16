@@ -99,20 +99,9 @@ class Productz extends Component {
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.fetchBookImages()
   }
 
-  fetchBookImages = () =>{
-    fetch(helper.prefix + 'book/singlebook/pages/' + this.props.book.book.id)
-    .then((res => res.json()))
-    .then((data) => {
-      if(data.success && data.book.length > 0){
-        this.setState({bookPages: data.book})
-      }else{
-        this.setState({bookPages: null})
-      }
-    })
-  }
+  
 
   changeRating = newRating => {
     this.setState({
@@ -122,7 +111,6 @@ class Productz extends Component {
 
   componentWillMount() {
     // this.props.fetchBook();
-    this.fetchBookImages()
   }
   
 
@@ -636,7 +624,7 @@ class Productz extends Component {
   };
 
   readBook = () =>{
-    if(this.state.bookPages != null){
+    if(this.props.book.pages != null && this.props.book.pages != []){
       return(
         <Modal
           isOpen={this.state.modalIsOpen}
@@ -655,7 +643,7 @@ class Productz extends Component {
               border: "10px solid gray"
             }}
           >
-            {this.state.bookPages.map((item, index) =>{
+            {this.props.book.pages.map((item, index) =>{
               return(
                 <img src={item.image} style={{width: '100%'}}/>
               )
@@ -683,7 +671,6 @@ class Productz extends Component {
                           src="images/badges/lookInside.png"
                         />
                         <div class="book-bg" onClick={() => {this.openModal();
-                        this.fetchBookImages() 
                         }}>
                           <div
                             class="book-cover"
