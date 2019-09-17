@@ -16,7 +16,14 @@ import {
 } from "react-device-detect";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchBooks, fetchBook, deleteFromCart, selectAuthor, selectPublisher} from "../actions/bookActions";
+import {
+  fetchBooks,
+  fetchBook,
+  deleteFromCart,
+  selectAuthor,
+  selectPublisher,
+  seeMore
+} from "../actions/bookActions";
 import { deleteToken } from "../actions/authActions";
 
 import ReactTyped from "react-typed";
@@ -48,15 +55,20 @@ class navbar extends Component {
       authors: null,
       mAuthors: null,
       publishers: null,
+      categories: null,
+      mCategories: null,
       search: false,
       searchText: null,
       bookSuggestions: null,
       mAuthorclicked: false,
       mPublishers: null,
-      mPublisherclicked: false
+      mPublisherclicked: false,
+      mouseOverCategory: false,
+      mouseClickedCategory: false
     };
     this.fetch_authors();
     this.fetch_publishers();
+    this.fetch_categories();
     console.log("Cart from state ", this.props.cart);
     console.log("Fucking user ", this.props.user);
   }
@@ -156,8 +168,8 @@ class navbar extends Component {
                               this.props.fetchBook(
                                 helper.prefix + "book/singlebook/" + book.id
                               );
-                              this.props.selectAuthor(null)
-                              this.props.selectPublisher(null)
+                              this.props.selectAuthor(null);
+                              this.props.selectPublisher(null);
                             }}
                           >
                             <object
@@ -177,8 +189,8 @@ class navbar extends Component {
                                 this.props.fetchBook(
                                   helper.prefix + "book/singlebook/" + book.id
                                 );
-                                this.props.selectAuthor(null)
-                                this.props.selectPublisher(null)
+                                this.props.selectAuthor(null);
+                                this.props.selectPublisher(null);
                               }}
                             >
                               {book.title}
@@ -259,6 +271,7 @@ class navbar extends Component {
                 this.setState({
                   mouseClickedAuthor: !this.state.mouseClickedAuthor,
                   mouseClickedPublisher: false,
+                  mouseClickedCategory: false,
                   cart: false,
                   setting: false
                 });
@@ -294,6 +307,7 @@ class navbar extends Component {
                 this.setState({
                   mouseClickedPublisher: !this.state.mouseClickedPublisher,
                   mouseClickedAuthor: false,
+                  mouseClickedCategory: false,
                   cart: false,
                   setting: false
                 });
@@ -310,6 +324,42 @@ class navbar extends Component {
                   style={{
                     color:
                       this.state.mouseOverPublisher == true
+                        ? "#C67935"
+                        : "black",
+                    fontSize: 14
+                  }}
+                />
+              </p>
+            </li>
+            <li
+              class="nav-item"
+              onMouseOver={() => {
+                this.setState({ mouseOverCategory: true });
+              }}
+              onMouseOut={() => {
+                this.setState({ mouseOverCategory: false });
+              }}
+              onClick={() => {
+                this.setState({
+                  mouseClickedCategory: !this.state.mouseClickedCategory,
+                  mouseClickedAuthor: false,
+                  mouseOverPublisher: false,
+                  cart: false,
+                  setting: false
+                });
+              }}
+            >
+              <p class={"nav-link"}>
+                ক্যাটাগরী{" "}
+                <FontAwesome
+                  name={
+                    this.state.mouseClickedCategory == true
+                      ? "angle-up"
+                      : "angle-down"
+                  }
+                  style={{
+                    color:
+                      this.state.mouseOverCategory == true
                         ? "#C67935"
                         : "black",
                     fontSize: 14
@@ -355,11 +405,6 @@ class navbar extends Component {
             <li class="nav-item">
               <Link class="nav-link" to="/shopGrid">
                 মুক্তিযুদ্ধ
-              </Link>
-            </li>
-            <li class="nav-item">
-              <Link class="nav-link" to="/shopGrid">
-                পশিম বঙ্গের বই
               </Link>
             </li>
             <li class="nav-item">
@@ -429,6 +474,33 @@ class navbar extends Component {
         console.log(error);
       });
   };
+  fetch_categories = () => {
+    fetch(helper.prefix + "categories", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+        // 'Authorization': 'Bearer ' + user.success.token,
+      }
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        if (responseJson.success) {
+          let categories = helper
+            .breakArrayIntoGroups(responseJson.categories, 8)
+            .slice(0, 4);
+          console.log(categories);
+          this.setState({
+            categories: categories,
+            mCategories: responseJson.categories
+          });
+        }
+      })
+      .catch(error => {
+        //this.setState({loading:false})
+        console.log(error);
+      });
+  };
   authors = () => {
     if (this.state.mouseClickedAuthor == true && this.state.authors != null) {
       return (
@@ -447,8 +519,8 @@ class navbar extends Component {
                             this.props.fetchBooks(
                               helper.prefix + "author/books/" + author.id
                             );
-                            this.props.selectAuthor(null)
-                            this.props.selectPublisher(null)
+                            this.props.selectAuthor(null);
+                            this.props.selectPublisher(null);
                           }}
                         >
                           <FontAwesome
@@ -468,6 +540,85 @@ class navbar extends Component {
               </div>
             );
           })}
+          <div
+            class="col-md-3 ml-auto pt-2"
+            style={{ position: "relative", bottom: 22 }}
+          >
+            <Link
+              to="/seemore"
+              onClick={() => {
+                this.setState({ mouseClickedAuthor: false });
+                this.props.selectAuthor(null);
+                this.props.selectPublisher(null);
+                this.props.seeMore('author')
+              }}
+            >
+              see more...
+            </Link>
+          </div>
+        </div>
+      );
+    }
+  };
+
+  categories = () => {
+    if (
+      this.state.mouseClickedCategory == true &&
+      this.state.categories != null
+    ) {
+      return (
+        <div class="row ml-5 mr-5 mega-menu">
+          {this.state.categories.map((group, i) => {
+            return (
+              <div class="col-md-3 " key={i}>
+                <ul>
+                  {group.map((category, index) => {
+                    return (
+                      <li class="mt-2 mb-2" key={index}>
+                        <Link
+                          to="/shopGrid"
+                          onClick={() => {
+                            this.setState({ mouseClickedCategory: false });
+                            this.props.fetchBooks(
+                              helper.prefix + "category/" + category.id
+                            );
+                            this.props.selectAuthor(null);
+                            this.props.selectPublisher(null);
+                          }}
+                        >
+                          <FontAwesome
+                            name="circle"
+                            style={{
+                              color: "black",
+                              marginRight: 10,
+                              fontSize: 7
+                            }}
+                          />{" "}
+                          {category.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            );
+          })}
+          <div
+            class="col-md-3 ml-auto pt-2"
+            style={{ position: "relative", bottom: 22 }}
+          >
+            <Link
+              to="/seemore"
+              onClick={() => {
+                this.setState({ mouseClickedCategory: false });
+                this.props.selectAuthor(null);
+                this.props.selectPublisher(null);
+                this.props.seeMore('category')
+              }}
+            >
+              see more...
+            </Link>
+          </div>
         </div>
       );
     }
@@ -494,8 +645,8 @@ class navbar extends Component {
                             this.props.fetchBooks(
                               helper.prefix + "publisher/books/" + publisher.id
                             );
-                            this.props.selectAuthor(null)
-                            this.props.selectPublisher(null)
+                            this.props.selectAuthor(null);
+                            this.props.selectPublisher(null);
                           }}
                         >
                           <FontAwesome
@@ -515,6 +666,22 @@ class navbar extends Component {
               </div>
             );
           })}
+          <div
+            class="col-md-3 ml-auto pt-2"
+            style={{ position: "relative", bottom: 22 }}
+          >
+            <Link
+              to="/seemore"
+              onClick={() => {
+                this.setState({ mouseClickedPublisher: false });
+                this.props.selectAuthor(null);
+                this.props.selectPublisher(null);
+                this.props.seeMore('publisher')
+              }}
+            >
+              see more...
+            </Link>
+          </div>
         </div>
       );
     }
@@ -571,8 +738,8 @@ class navbar extends Component {
                     helper.prefix + "book/singlebook/" + book.id
                   );
                   this.setState({ search: false });
-                  this.props.selectAuthor(null)
-                  this.props.selectPublisher(null)
+                  this.props.selectAuthor(null);
+                  this.props.selectPublisher(null);
                 }}
                 style={{ width: "100%" }}
               >
@@ -637,9 +804,9 @@ class navbar extends Component {
                   this.props.fetchBook(
                     helper.prefix + "book/singlebook/" + book.id
                   );
-                  this.setState({ search: false});
-                  this.props.selectAuthor(null)
-                  this.props.selectPublisher(null)
+                  this.setState({ search: false });
+                  this.props.selectAuthor(null);
+                  this.props.selectPublisher(null);
                 }}
                 style={{ width: "100%" }}
               >
@@ -693,8 +860,8 @@ class navbar extends Component {
       this.props.fetchBooks(
         helper.prefix + "book/search?data=" + this.state.searchText
       );
-      this.props.selectAuthor(null)
-      this.props.selectPublisher(null)
+      this.props.selectAuthor(null);
+      this.props.selectPublisher(null);
     }
     fetch(helper.prefix + "book/search?data=" + e.target.value, {
       method: "GET",
@@ -767,7 +934,10 @@ class navbar extends Component {
 
   allAuthor = () => {
     try {
-      if (this.state.mAuthorclicked === true && this.state.mAuthors.length > 0) {
+      if (
+        this.state.mAuthorclicked === true &&
+        this.state.mAuthors.length > 0
+      ) {
         return this.state.mAuthors.map((author, index) => {
           if (index < 20) {
             return (
@@ -782,8 +952,8 @@ class navbar extends Component {
                   this.props.fetchBooks(
                     helper.prefix + "author/books/" + author.id
                   );
-                  this.props.selectAuthor(null)
-                  this.props.selectPublisher(null)
+                  this.props.selectAuthor(null);
+                  this.props.selectPublisher(null);
                 }}
                 style={{ fontSize: 16 }}
               >
@@ -794,7 +964,7 @@ class navbar extends Component {
         });
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -818,8 +988,8 @@ class navbar extends Component {
                   this.props.fetchBooks(
                     helper.prefix + "publisher/books/" + publisher.id
                   );
-                  this.props.selectAuthor(null)
-                  this.props.selectPublisher(null)
+                  this.props.selectAuthor(null);
+                  this.props.selectPublisher(null);
                 }}
                 style={{ fontSize: 16 }}
               >
@@ -830,7 +1000,7 @@ class navbar extends Component {
         });
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -854,7 +1024,7 @@ class navbar extends Component {
                   </div>
                 </div>
 
-                <div class="col-md-5" style={{ zIndex: 1000 }}>
+                <div class="col-md-5" style={{ zIndex: 10000 }}>
                   <ul class="header__sidebar__right d-flex align-items-center mt-auto mb-auto">
                     <form
                       class="form-inline searchAll"
@@ -878,7 +1048,11 @@ class navbar extends Component {
                           startDelay={0}
                           backSpeed={20}
                           backDelay={2}
-                          strings={["পছন্দের বইয়ের নাম লিখুন", "পছন্দের পাঠকের নাম লেখুন", "পছন্দের প্রকাশনীর নাম লেখুন"]}
+                          strings={[
+                            "পছন্দের বইয়ের নাম লিখুন",
+                            "পছন্দের পাঠকের নাম লেখুন",
+                            "পছন্দের প্রকাশনীর নাম লেখুন"
+                          ]}
                           stopped={null}
                           smartBackspace
                           shuffle={false}
@@ -902,14 +1076,14 @@ class navbar extends Component {
                         <Link
                           to="shopGrid"
                           onClick={() => {
-                            this.setState({ search: false});
+                            this.setState({ search: false });
                             this.props.fetchBooks(
                               helper.prefix +
                                 "book/search?data=" +
                                 this.state.searchText
                             );
-                            this.props.selectAuthor(null)
-                            this.props.selectPublisher(null)
+                            this.props.selectAuthor(null);
+                            this.props.selectPublisher(null);
                           }}
                         >
                           <button
@@ -1023,7 +1197,7 @@ class navbar extends Component {
                   }
                 >
                   <p class="nav-link" href="/">
-                    বিষয়<span class="sr-only">(current)</span>
+                    বই<span class="sr-only">(current)</span>
                   </p>
                 </li>
 
@@ -1101,6 +1275,7 @@ class navbar extends Component {
           {this.category()}
           {this.authors()}
           {this.publishers()}
+          {this.categories()}
         </BrowserView>
         <MobileView>
           {/* {this.authors()} */}
@@ -1127,7 +1302,7 @@ class navbar extends Component {
                 })
               }
             >
-              <Link to="#">বিষয় </Link>
+              <Link to="#">বই </Link>
               <FontAwesome
                 name={this.state.catclicked ? "angle-down" : "angle-right"}
                 size="2x"
@@ -1299,14 +1474,12 @@ class navbar extends Component {
               class="btn my-2 my-sm-0 search-btn-mb"
               style={{ top: 0, position: "relative", right: 10 }}
               onClick={() => {
-                this.setState({ search: false,});
+                this.setState({ search: false });
                 this.props.fetchBooks(
-                  helper.prefix +
-                    "book/search?data=" +
-                    this.state.searchText
+                  helper.prefix + "book/search?data=" + this.state.searchText
                 );
-                this.props.selectAuthor(null)
-                this.props.selectPublisher(null)
+                this.props.selectAuthor(null);
+                this.props.selectPublisher(null);
               }}
             >
               <FontAwesome name="search" style={{ color: "white" }} />
@@ -1325,6 +1498,7 @@ navbar.propTypes = {
   selectPublisher: PropTypes.func.isRequired,
   fetchBook: PropTypes.func.isRequired,
   deleteFromCart: PropTypes.func.isRequired,
+  seeMore: PropTypes.func.isRequired,
   deleteToken: PropTypes.func.isRequired
 };
 
@@ -1336,5 +1510,13 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchBooks, fetchBook, deleteFromCart, deleteToken, selectAuthor, selectPublisher}
+  {
+    fetchBooks,
+    fetchBook,
+    deleteFromCart,
+    deleteToken,
+    selectAuthor,
+    selectPublisher,
+    seeMore
+  }
 )(navbar);

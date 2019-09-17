@@ -229,8 +229,7 @@ class shopGrid extends Component {
             key={index}
             cart_book={item}
             image={item.cover}
-            price={item.new_price}
-            oldprice={item.old_price}
+            price={item.old_price}
             discount={item.discount}
             name={item.title}
             author={
@@ -324,7 +323,9 @@ class shopGrid extends Component {
         <div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
           <div class="container">
             <div class="row m-0">
+              
               <div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
+              <BrowserView>
                 <div class="shop__sidebar">
                   <aside class="wedget__categories poroduct--cat">
                     <form>
@@ -911,7 +912,9 @@ class shopGrid extends Component {
                     </ul>
                   </aside>
                 </div>
+                </BrowserView>
               </div>
+              
               <div class="col-lg-9 col-12 order-1 order-lg-2">
                 <div class="tab__container">
                   <div

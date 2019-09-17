@@ -21,6 +21,7 @@ import Shopingcart from "./components/shopingcart";
 import Shipping from "./components/shipping";
 import Orders from "./components/orders";
 import Account from "./components/account";
+import Seemore from "./components/seemore";
 
 // import { Style } from "react-style-tag";
 import {Provider} from 'react-redux'
@@ -123,6 +124,14 @@ class App extends Component {
             exact
             strict
             render={props => <Account {...props}/>}
+          />
+
+          <Route
+            exact
+            path="/seemore"
+            exact
+            strict
+            render={props => <Seemore {...props}/>}
           />
 
           <Footer />

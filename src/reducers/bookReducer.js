@@ -9,6 +9,7 @@
     SORT_BOOKS,
     SELECT_AUTHOR,
     SELECT_PUBLISHER,
+    SEE_MORE
   } from '../actions/types';
 
   const initialState = {
@@ -19,7 +20,8 @@
     bookPages: null,
     selectedOption: null,
     selectedAuthor: null,
-    selectedPublisher: null
+    selectedPublisher: null,
+    seemore: null
   };
 
   export default function (state = initialState, action) {
@@ -88,6 +90,11 @@
               ...state,
               reviews: action.payload
             };
+            case SEE_MORE:
+              return {
+                ...state,
+                seemore: action.payload,
+              };
           default:
             return state;
     }

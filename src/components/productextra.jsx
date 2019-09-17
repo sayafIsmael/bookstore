@@ -148,7 +148,7 @@ class ProductExtra extends Component {
                   opacity: this.state.mouseOver ? 0.3 : 1
                 }}
               >
-                মূল্য : {this.props.price} Tk.
+                মূল্য : {helper.getNewPrice(this.props.price, this.props.discount)} Tk.
               </p>
             </div>
             <Link to="/product">
@@ -185,7 +185,7 @@ class ProductExtra extends Component {
             <div style={{ overflow: "hidden" }}>
               <p style={{ color: "black", marginTop: 10 }}>{this.props.name}</p>
               <p style={{ color: "black" }}>{this.props.writer}</p>
-              <p style={{ color: "black" }}>মূল্য : {this.props.price}</p>
+              <p style={{ color: "black" }}>মূল্য : {helper.getNewPrice(this.props.price, this.props.discount)}</p>
             </div>
           </div>
         </MobileView>

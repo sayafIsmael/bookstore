@@ -184,8 +184,7 @@ class Home extends Component {
                     name={item.title}
                     cart_book={item}
                     id={item.id}
-                    price={item.new_price}
-                    oldPrice={item.old_price}
+                    price={item.old_price}
                     discount={item.discount}
                     image={item.cover}
                     writer={item.author}
@@ -213,8 +212,7 @@ class Home extends Component {
                   name={item.title}
                   cart_book={item}
                   id={item.id}
-                  price={item.new_price}
-                  oldPrice={item.old_price}
+                  price={item.old_price}
                   discount={item.discount}
                   image={item.cover}
                   writer={item.author}

@@ -9,6 +9,7 @@ import {
   SORT_BOOKS,
   SELECT_AUTHOR,
   SELECT_PUBLISHER,
+  SEE_MORE
 } from './types';
 
 export const fetchBooks = (url) => dispatch => {
@@ -20,6 +21,13 @@ export const fetchBooks = (url) => dispatch => {
         payload: books
       })
     );
+};
+
+export const seeMore = (type) => dispatch => {
+      dispatch({
+        type: SEE_MORE,
+        payload: type
+      })
 };
 
 export const fetchBook = (url) => dispatch => {
@@ -65,9 +73,9 @@ export const sortBooks = (item, option) => dispatch => {
   if (item != undefined) {
     let sorted = []; 
       if(option == 'plowToHigh'){
-        sorted = item.books.sort((a, b) => parseFloat(a.new_price) - parseFloat(b.new_price));
+        sorted = item.books.sort((a, b) => parseFloat(a.old_price) - parseFloat(b.old_price));
       }else if(option == 'phighToLow'){
-        sorted = item.books.sort((a, b) => parseFloat(b.new_price) - parseFloat(a.new_price));
+        sorted = item.books.sort((a, b) => parseFloat(b.old_price) - parseFloat(a.old_price));
       }else if(option == 'dlowToHigh'){
         sorted = item.books.sort((a, b) => parseFloat(a.discount) - parseFloat(b.discount));
       }else if(option == 'dhighToLow'){
