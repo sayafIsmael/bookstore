@@ -196,7 +196,8 @@ class navbar extends Component {
                               {book.title}
                             </Link>
                           </h6>
-                          <span class="prize">{book.new_price} Tk.</span>
+                          <span class="prize">{parseInt(book.old_price) *
+                                  parseInt(book.quantity)}Tk.</span>
                           <div class="product_prize d-flex justify-content-between">
                             <span class="qun">Qty: {book.quantity}</span>
                             <ul class="d-flex justify-content-end">
@@ -226,7 +227,7 @@ class navbar extends Component {
             <div class="total_amount text-right">
               <span>
                 {parseFloat(
-                  this.props.cart.sum("new_price", "quantity")
+                  this.props.cart.sum("old_price", "quantity")
                 ).toFixed(2)}{" "}
                 Tk.
               </span>
@@ -343,6 +344,7 @@ class navbar extends Component {
                 this.setState({
                   mouseClickedCategory: !this.state.mouseClickedCategory,
                   mouseClickedAuthor: false,
+                  mouseClickedPublisher: false,
                   mouseOverPublisher: false,
                   cart: false,
                   setting: false
@@ -1107,7 +1109,7 @@ class navbar extends Component {
                       <a href="#">
                         <img
                           src="images/icons/wish.png"
-                          style={{ width: 40, height: 40 }}
+                          style={{ width: 22, height: 22 }}
                         />
                       </a>
                     </li>
@@ -1123,6 +1125,10 @@ class navbar extends Component {
                       }
                     >
                       <div class="cartIcon" to="">
+                          <img
+                          src="images/icons/cart.png"
+                          style={{ width: 26, height: 26, position: 'absolute', top: 3}}
+                        />
                         <span class="product_qun">{this.cart_total()}</span>
                       </div>
 
@@ -1139,11 +1145,10 @@ class navbar extends Component {
                         })
                       }
                     >
-                      <FontAwesome
-                        name="fas fa-user"
-                        // size="2x"
-                        style={{ color: "black", fontSize: 24 }}
-                      />
+                      <img
+                          src="images/icons/SIGNIN.png"
+                          style={{ width: 20, height: 20,     position: 'relative', top: 2}}
+                        />
                       <div
                         class={
                           this.state.setting === true
@@ -1394,42 +1399,42 @@ class navbar extends Component {
               </span>
             </div>
             <div class="logo d-flex align-items-center">
-              <a href="/">
+              <Link to="/">
                 <img
                   class="siteLogomb"
                   src="images/logo/logoText.png"
                   alt="Gronthik"
                   id="siteLogo"
                 />
-              </a>
+              </Link>
             </div>
             <div class="row d-flex align-items-center ml-2">
               <img
                 class="ml-5"
                 src="images/icons/wish.png"
-                style={{ width: 35, height: 35 }}
+                style={{width: 22, height: 22, marginRight: 16, marginTop: 4,}}
               />
 
-              <a href="/cart">
+              <Link to="/cart">
                 <img
-                  style={{ width: 24, height: 24 }}
+                  style={{ width: 24, height: 24, marginRight: 8, }}
                   src="images/icons/cart.png"
                 />
                 <span
                   class="badge badge-danger"
-                  style={{ position: "relative", right: 8 }}
+                  style={{ position: "relative", right: 17 }}
                 >
                   {this.cart_total()}
                 </span>
-              </a>
+              </Link>
 
-              <FontAwesome
-                name="fas fa-user"
-                style={{ fontSize: 24 }}
-                onClick={() =>
-                  this.setState({ pmenuOpend: !this.state.pmenuOpend })
-                }
-              />
+              <img
+              onClick={() =>
+                this.setState({ pmenuOpend: !this.state.pmenuOpend })
+              }
+                          src="images/icons/SIGNIN.png"
+                          style={{ width: 20, height: 20,     position: 'relative', top: 2}}
+                        />
             </div>
           </div>
           <div

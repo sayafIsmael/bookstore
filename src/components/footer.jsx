@@ -14,22 +14,6 @@ class Footer extends Component {
     super(props);
   }
 
-  // componentWillMount() {
-  //   loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
-  //     loadjs("js/vendor/jquery-3.2.1.min.js", function() {
-  //       loadjs("js/popper.min.js", function() {
-  //         loadjs("js/plugins.js", function() {
-  //           loadjs("js/bootstrap.min.js", function() {
-  //             loadjs("js/active.js", function() {
-  //               loadjs("js/main.js");
-  //             });
-  //           });
-  //         });
-  //       });
-  //     });
-  //   });
-  // }
-
   render() {
     return (
       <footer
@@ -49,11 +33,11 @@ class Footer extends Component {
                 <h6 class="text-uppercase font-weight-bold">গ্রন্থিক.কম</h6>
 
                 <div class="row m-0">
-                  <div class="d-flex justify-content-center align-items-center" style={{ width: "20%" }}>
-                  <FontAwesome
-                    name="fas fa-phone-square"
-                    style={{ fontSize: 30}}
-                  />
+                  <div
+                    class="d-flex justify-content-center align-items-center"
+                    style={{ width: "20%" }}
+                  >
+                    <img style={{ width: 25 }} src="images/icons/mobile.png" />
                   </div>
                   <div style={{ width: "80%" }}>
                     <p>হেল্প লাইন</p>
@@ -62,37 +46,56 @@ class Footer extends Component {
                   </div>
                 </div>
                 <div class="row m-0">
-                <div class="d-flex justify-content-center align-items-center" style={{ width: "20%" }}>
-                  <FontAwesome
-                    name="far fa-envelope-open"
-                    style={{ fontSize: 25}}
-                  />
+                  <div
+                    class="d-flex justify-content-center align-items-center"
+                    style={{ width: "20%" }}
+                  >
+                    <img style={{ width: 25 }} src="images/icons/email.png" />
                   </div>
                   <div style={{ width: "80%" }}>
                     <p>info@gronthik.com</p>
                   </div>
                 </div>
                 <div class="row m-0 mt-2">
-                <div class="d-flex justify-content-center align-items-center" style={{ width: "20%" }}>
-                  <FontAwesome
-                    name="fas fa-map-marker"
-                    style={{ fontSize: 30}}
-                  />
+                  <div
+                    class="d-flex justify-content-center align-items-center"
+                    style={{ width: "20%" }}
+                  >
+                    <img style={{ width: 20 }} src="images/icons/Address.png" />
                   </div>
                   <div style={{ width: "80%" }}>
                     <p>১১০ আলিজা টাওয়ার (৪র্থ তলা)</p>
                     <p>ফকিরাপুল, ঢাকা-১০০০</p>
                   </div>
                 </div>
-                <div class="row m-0 ml-4 mt-2">
-                    <img class="social_icon" src="images/icons/wapp.png"/>
-                    <img class="social_icon" src="images/icons/twitter.png"/>
-                    <img class="social_icon" src="images/icons/fb.png"/>
-                    <img class="social_icon" src="images/icons/instagram.png"/>
-                    <img class="social_icon" src="images/icons/linkedin.png"/>
-                    <img class="social_icon" src="images/icons/youtube.png"/>
-
-                </div>
+                <ul>
+                  <div class="row m-0 ml-4 mt-2">
+                    <li>
+                      <img
+                        class="social_icon"
+                        src="images/icons/HELPLINE_fb.png"
+                      />
+                    </li>
+                    <li>
+                      <img
+                        class="social_icon"
+                        src="images/icons/HELPLINE_tube.png"
+                      />
+                    </li>
+                    <li>
+                      <img
+                        class="social_icon"
+                        src="images/icons/HELPLINE_inst.png"
+                      />
+                    </li>
+                    <li>
+                      <img
+                        class="social_icon"
+                        src="images/icons/HELPLINE_twt.png"
+                      />
+                    </li>
+                  </div>
+                </ul>
               </div>
 
               <div
@@ -177,179 +180,218 @@ class Footer extends Component {
               style={{ background: "#F1F2EE" }}
             >
               <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
-                <h6 class="text-uppercase font-weight-bold mb-2">গ্রন্থিক.কম</h6>
+                <h6 class="text-uppercase font-weight-bold mb-2">
+                  গ্রন্থিক.কম
+                </h6>
 
                 <div class="row m-0">
-                <div class="d-flex justify-content-center align-items-center" style={{ width: "30%" }}>
-                  <FontAwesome
-                    name="fas fa-phone-square"
-                    style={{ fontSize: 30}}
-                  />
+                  <div
+                    class="d-flex justify-content-center align-items-center"
+                    style={{ width: "30%" }}
+                  >
+                     <img style={{ width: 25 }} src="images/icons/mobile.png" />
                   </div>
-                  <div style={{ width: "70%", textAlign: 'start'}}>
+                  <div style={{ width: "70%", textAlign: "start" }}>
                     <p>হেল্প লাইন</p>
                     <p>+৮৮ ০২ ৭১৯ ১৭৪৭</p>
                     <p>০১৬১৬ ৩১৩ ৯৫৭</p>
                   </div>
                 </div>
                 <div class="row m-0">
-                <div class="d-flex justify-content-center align-items-center" style={{ width: "30%" }}>
-                  <FontAwesome
-                    name="far fa-envelope-open"
-                    style={{ fontSize: 25}}
-                  />
+                  <div
+                    class="d-flex justify-content-center align-items-center"
+                    style={{ width: "30%" }}
+                  >
+                   <img style={{ width: 25 }} src="images/icons/email.png" />
                   </div>
-                  <div style={{ width: "70%", textAlign: 'start'}}>
+                  <div style={{ width: "70%", textAlign: "start" }}>
                     <p>info@gronthik.com</p>
                   </div>
                 </div>
                 <div class="row m-0 mt-2">
-                <div class="d-flex justify-content-center align-items-center" style={{ width: "30%" }}>
-                  <FontAwesome
-                    name="fas fa-map-marker"
-                    style={{ fontSize: 30}}
-                  />
+                  <div
+                    class="d-flex justify-content-center align-items-center"
+                    style={{ width: "30%" }}
+                  >
+                    <img style={{ width: 20 }} src="images/icons/Address.png" />
                   </div>
-                  <div style={{ width: "70%", textAlign: 'start'}}>
+                  <div style={{ width: "70%", textAlign: "start" }}>
                     <p>১১০ আলিজা টাওয়ার (৪র্থ তলা)</p>
                     <p>ফকিরাপুল, ঢাকা-১০০০</p>
                   </div>
                 </div>
+                <ul>
                 <div class="row d-flex justify-content-center mt-2">
-                    <img class="social_icon" src="images/icons/wapp.png"/>
-                    <img class="social_icon" src="images/icons/twitter.png"/>
-                    <img class="social_icon" src="images/icons/fb.png"/>
-                    <img class="social_icon" src="images/icons/instagram.png"/>
-                    <img class="social_icon" src="images/icons/linkedin.png"/>
-                    <img class="social_icon" src="images/icons/youtube.png"/>
-
-                </div>
+                            <li>
+                              <img class="social_icon" src="images/icons/HELPLINE_fb.png"/>  
+                            </li>
+                            <li>
+                              <img class="social_icon" src="images/icons/HELPLINE_tube.png"/>  
+                            </li>
+                            <li>
+                            <img class="social_icon" src="images/icons/HELPLINE_inst.png"/>
+                            </li>
+                            <li>
+                            <img class="social_icon" src="images/icons/HELPLINE_twt.png"/>
+                            </li>
+                            </div>
+                </ul>
               </div>
             </div>
           </div>
         </MobileView>
         <BrowserView>
-        <div class="container mt-3">
-        <div style={{ background: "#F1F2EE", width: '100%', height: 150, borderRadius: 12}}>
-        <div >
-          <p class="payment-text" style={{textAlign: 'center'}}>We accept payment via</p>
-        </div>
-        <div
-            class="row m-0 pl-3 pb-2"
-          >
-            <div class="payment-box col">
-              <img class="payment-img" src="images/icons/visa.png" />
-            </div>
-            <div class="payment-box col">
-              <img class="payment-img" src="images/icons/master_card.png" />
-            </div>
-            <div class="payment-box col">
-              <img class="payment-img" src="images/icons/american_ex.png" />
-            </div>
-            <div class="payment-box col">
-              <img class="payment-img" src="images/icons/brac_bank.jpg" />
-            </div>
-            <div class="payment-box col">
-              <img class="payment-img" src="images/icons/dbbl-nexus.png" />
-            </div>
-            <div class="payment-box col">
-              <img class="payment-img" src="images/icons/city-bank.png" />
-            </div>
-            <div class="payment-box col">
-              <img class="payment-img" src="images/icons/bkash.png" />
+          <div class="container mt-3">
+            <div
+              style={{
+                background: "#F1F2EE",
+                width: "100%",
+                height: 150,
+                borderRadius: 12
+              }}
+            >
+              <div>
+                <p class="payment-text" style={{ textAlign: "center" }}>
+                  We accept payment via
+                </p>
+              </div>
+              <div class="row m-0 pl-3 pb-2">
+                <div class="payment-box col">
+                  <img class="payment-img" src="images/icons/visa.png" />
+                </div>
+                <div class="payment-box col">
+                  <img class="payment-img" src="images/icons/master_card.png" />
+                </div>
+                <div class="payment-box col">
+                  <img class="payment-img" src="images/icons/american_ex.png" />
+                </div>
+                <div class="payment-box col">
+                  <img class="payment-img" src="images/icons/brac_bank.jpg" />
+                </div>
+                <div class="payment-box col">
+                  <img class="payment-img" src="images/icons/dbbl-nexus.png" />
+                </div>
+                <div class="payment-box col">
+                  <img class="payment-img" src="images/icons/city-bank.png" />
+                </div>
+                <div class="payment-box col">
+                  <img class="payment-img" src="images/icons/bkash.png" />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        </div>
-        <div class="container">
-          <div class="row d-flex justify-content-center align-items-center pt-4 pb-4">
-            <p style={{ fontSize: 14, fontWeight: 'bold', width: '100%', textAlign: 'center'}}> 
+          <div class="container">
+            <div class="row d-flex justify-content-center align-items-center pt-4 pb-4">
+              <p
+                style={{
+                  fontSize: 14,
+                  fontWeight: "bold",
+                  width: "100%",
+                  textAlign: "center"
+                }}
+              >
                 গ্রন্থিক.কম বাংলাদেশের অনলাইন ভিত্তিক বুক শপগুলোর মধ্যে অন্যতম ।
-            </p>
-            <p>
-            বইয়ের এক ভিন্নধর্মী প্লাটফর্ম গড়ে তুলতে আমাদের এই যাত্রা।                                            
-            </p>
-            <p>
-              দেশের সকল প্রান্তের পাঠকের কাছে সবচেয়ে সহজ, নিরাপদ ও দ্রুত বই পৌছে
-              দেবার লক্ষ্য নিয়ে আমরা আমাদের পথচলা শুরু করছি ।
-            </p>
-            <p>
-              পাঠকের জন্য নানারকম সৃজনশীল ও সময়োপযোগী আয়োজনের মাধ্যমে সহসাই আমরা
-              দেশের
-            </p>
-            <p>
-              সকল প্রান্তে নিজেদের অবস্থান তৈরী করে নিতে পারবো বলে আশা করছি ।{" "}
-            </p>
+              </p>
+              <p>বইয়ের এক ভিন্নধর্মী প্লাটফর্ম গড়ে তুলতে আমাদের এই যাত্রা।</p>
+              <p>
+                দেশের সকল প্রান্তের পাঠকের কাছে সবচেয়ে সহজ, নিরাপদ ও দ্রুত বই
+                পৌছে দেবার লক্ষ্য নিয়ে আমরা আমাদের পথচলা শুরু করছি ।
+              </p>
+              <p>
+                পাঠকের জন্য নানারকম সৃজনশীল ও সময়োপযোগী আয়োজনের মাধ্যমে সহসাই
+                আমরা দেশের
+              </p>
+              <p>
+                সকল প্রান্তে নিজেদের অবস্থান তৈরী করে নিতে পারবো বলে আশা করছি ।{" "}
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="container">
-          <div
-            class="footer-copyright text-center text-black-50 py-2"
-            style={{ background: "#C67935" }}
-          >
-            gronthik.com
-            <a class="dark-grey-text" href="#">
-              {" "}
-              © 2019 Copyright
-            </a>
+          <div class="container">
+            <div
+              class="footer-copyright text-center text-black-50 py-2"
+              style={{ background: "#C67935" }}
+            >
+              gronthik.com
+              <a class="dark-grey-text" href="#">
+                {" "}
+                © 2019 Copyright
+              </a>
+            </div>
           </div>
-        </div>
         </BrowserView>
         <MobileView>
-        <div class="container mt-3">
-          <div
-            style={{ background: "#F1F2EE", height: 170, borderRadius: 12 }}
-          >
-            <div>
-              <p class="payment-text mt-3" style={{textAlign: 'center'}}>We accept payment via</p>
-            </div>
-            <div class="row m-0 d-flex justify-content-center">
-            <div class="payment-box-mb">
-              <img class="payment-img-mb" src="images/icons/visa.png" />
-            </div>
-            <div class="payment-box-mb">
-              <img class="payment-img-mb" src="images/icons/master_card.png" />
-            </div>
-            <div class="payment-box-mb">
-              <img class="payment-img-mb" src="images/icons/american_ex.png" />
-            </div>
-            <div class="payment-box-mb">
-              <img class="payment-img-mb" src="images/icons/brac_bank.jpg" />
-            </div>
-            <div class="payment-box-mb">
-              <img class="payment-img-mb" src="images/icons/dbbl-nexus.png" />
-            </div>
-            <div class="payment-box-mb">
-              <img class="payment-img-mb" src="images/icons/city-bank.png" />
-            </div>
-            <div class="payment-box-mb">
-              <img class="payment-img-mb" src="images/icons/bkash.png" />
-            </div>
+          <div class="container mt-3">
+            <div
+              style={{ background: "#F1F2EE", height: 170, borderRadius: 12 }}
+            >
+              <div>
+                <p class="payment-text mt-3" style={{ textAlign: "center" }}>
+                  We accept payment via
+                </p>
+              </div>
+              <div class="row m-0 d-flex justify-content-center">
+                <div class="payment-box-mb">
+                  <img class="payment-img-mb" src="images/icons/visa.png" />
+                </div>
+                <div class="payment-box-mb">
+                  <img
+                    class="payment-img-mb"
+                    src="images/icons/master_card.png"
+                  />
+                </div>
+                <div class="payment-box-mb">
+                  <img
+                    class="payment-img-mb"
+                    src="images/icons/american_ex.png"
+                  />
+                </div>
+                <div class="payment-box-mb">
+                  <img
+                    class="payment-img-mb"
+                    src="images/icons/brac_bank.jpg"
+                  />
+                </div>
+                <div class="payment-box-mb">
+                  <img
+                    class="payment-img-mb"
+                    src="images/icons/dbbl-nexus.png"
+                  />
+                </div>
+                <div class="payment-box-mb">
+                  <img
+                    class="payment-img-mb"
+                    src="images/icons/city-bank.png"
+                  />
+                </div>
+                <div class="payment-box-mb">
+                  <img class="payment-img-mb" src="images/icons/bkash.png" />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="container">
-          <div class="row d-flex justify-content-center align-items-center p-4">
-            <p style={{ fontSize: 18, textAlign: 'center'}}>
-              <span class="font-weight-bold">
-                গ্রন্থিক.কম বাংলাদেশের অনলাইন ভিত্তিক বুক শপগুলোর মধ্যে অন্যতম ।{" "}
-              </span>
-              বইয়ের এক ভিন্নধর্মী প্লাটফর্ম গড়ে তুলতে আমাদের এই যাত্রা।{" "}
-            </p>
-            <p style={{ textAlign: 'center'}}>
-              দেশের সকল প্রান্তের পাঠকের কাছে সবচেয়ে সহজ, নিরাপদ ও দ্রুত বই পৌছে
-              দেবার লক্ষ্য নিয়ে আমরা আমাদের পথচলা শুরু করছি ।
-            </p>
-            <p style={{ textAlign: 'center'}}>
-              পাঠকের জন্য নানারকম সৃজনশীল ও সময়োপযোগী আয়োজনের মাধ্যমে সহসাই আমরা
-              দেশের
-            </p>
-            <p style={{ textAlign: 'center'}}>
-              সকল প্রান্তে নিজেদের অবস্থান তৈরী করে নিতে পারবো বলে আশা করছি ।{" "}
-            </p>
+          <div class="container">
+            <div class="row d-flex justify-content-center align-items-center p-4">
+              <p style={{ fontSize: 18, textAlign: "center" }}>
+                <span class="font-weight-bold">
+                  গ্রন্থিক.কম বাংলাদেশের অনলাইন ভিত্তিক বুক শপগুলোর মধ্যে অন্যতম
+                  ।{" "}
+                </span>
+                বইয়ের এক ভিন্নধর্মী প্লাটফর্ম গড়ে তুলতে আমাদের এই যাত্রা।{" "}
+              </p>
+              <p style={{ textAlign: "center" }}>
+                দেশের সকল প্রান্তের পাঠকের কাছে সবচেয়ে সহজ, নিরাপদ ও দ্রুত বই
+                পৌছে দেবার লক্ষ্য নিয়ে আমরা আমাদের পথচলা শুরু করছি ।
+              </p>
+              <p style={{ textAlign: "center" }}>
+                পাঠকের জন্য নানারকম সৃজনশীল ও সময়োপযোগী আয়োজনের মাধ্যমে সহসাই
+                আমরা দেশের
+              </p>
+              <p style={{ textAlign: "center" }}>
+                সকল প্রান্তে নিজেদের অবস্থান তৈরী করে নিতে পারবো বলে আশা করছি ।{" "}
+              </p>
+            </div>
           </div>
-        </div>
-      
+
           <div
             class="footer-copyright text-center text-black-50 py-2"
             style={{ background: "#C67935" }}
@@ -360,9 +402,7 @@ class Footer extends Component {
               © 2019 Copyright
             </a>
           </div>
-
         </MobileView>
-        
       </footer>
     );
   }

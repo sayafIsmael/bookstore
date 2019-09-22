@@ -107,6 +107,21 @@ class Product extends Component {
               <p style={{ color: "black" }}>{this.props.writer}</p>
               <p style={{ color: "black" }}>মূল্য : {this.props.price}</p>
             </div>
+            <button
+                type="button"
+                class="btn btn-outline-warning"
+                style={{ zIndex: 1, color: '#FFC107', fontSize: 12}}
+                onClick={e => {
+                  e.stopPropagation();
+                  this.props.addtoCart(this.props.cart_book);
+                }}
+              >
+                <FontAwesome
+                  name="fas fa-shopping-cart"
+                  style={{ color: "#FFC107", marginRight: 10}}
+                />
+                Add to Cart
+              </button>
           </div>
         </MobileView>
       </React.Fragment>

@@ -9,17 +9,14 @@ import publishers from "./../dummyData/publishers";
 import FontAwesome from "react-fontawesome";
 import loadjs from "loadjs";
 import * as helper from "./../helper";
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { fetchBooks} from '../actions/bookActions';
-import {
-  Link
-} from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { fetchBooks } from "../actions/bookActions";
+import { Link } from "react-router-dom";
 
 import Slider from "react-slick";
 
 import { Style } from "react-style-tag";
-
 
 import {
   BrowserView,
@@ -70,7 +67,7 @@ function SampleNextArrow(props) {
         ...style,
         display: "block",
         borderTopLeftRadius: 10,
-        borderBottomLeftRadius: 10
+        borderBottomLeftRadius: 10,
       }}
       onClick={onClick}
     >
@@ -90,7 +87,47 @@ function SamplePrevArrow(props) {
         left: 0,
         zIndex: 10,
         borderTopRightRadius: 10,
-        borderBottomRightRadius: 10
+        borderBottomRightRadius: 10,
+      }}
+      onClick={onClick}
+    >
+      <img class="mr-auto" src="images/icons/prevIcon.png" />
+    </div>
+  );
+}
+
+function SampleNextArrow1(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
+        top: 165
+      }}
+      onClick={onClick}
+    >
+      <img class="mr-auto" src="images/icons/nextIcon.png" />
+    </div>
+  );
+}
+
+function SamplePrevArrow1(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        left: 0,
+        zIndex: 10,
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10,
+        top: 165
       }}
       onClick={onClick}
     >
@@ -132,19 +169,18 @@ class Home extends Component {
 
   componentDidMount() {
     // Jquery here $(...)...
-   
   }
 
-  fecthTopAuthors = () =>{
+  fecthTopAuthors = () => {
     fetch(helper.prefix + "authors/top")
-    .then(res => res.json())
-    .then(data => {
-      this.setState({top_authors: data.authors})
-      console.log("Weekly top authors", data.authors)
-    })
-  }
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ top_authors: data.authors });
+        console.log("Weekly top authors", data.authors);
+      });
+  };
 
-  firstRow = (title, books) => {
+  firstRow = (title, books, category_id) => {
     var settings = {
       dots: false,
       infinite: true,
@@ -152,8 +188,8 @@ class Home extends Component {
       slidesToScroll: 6,
       slidesToShow: 6,
       variableWidth: true,
-      nextArrow: <SampleNextArrow />,
-      prevArrow: <SamplePrevArrow />
+      nextArrow: <SampleNextArrow1/>,
+      prevArrow: <SamplePrevArrow1/>
     };
     var settings2 = {
       dots: false,
@@ -166,60 +202,107 @@ class Home extends Component {
     };
     return (
       <React.Fragment>
-        <BrowserView>
-        <div class="row m-0 mt-3">
-          <h4 class="">
-            {title}
-          </h4>
-        </div>
-        <div style={{ background: "#F1F2EE", paddingRight: 25, height: 340, marginBottom: 30}}>
-          <div>
-            {console.log("Screen width", window.innerWidth)}
-            <Slider {...settings}>
-              {books !== []?books.map((item, index) => {
-                console.log("Items found from data: ", item);
-                return (
-                  <Product
-                    key={index}
-                    name={item.title}
-                    cart_book={item}
-                    id={item.id}
-                    price={item.old_price}
-                    discount={item.discount}
-                    image={item.cover}
-                    writer={item.author}
-                    history={this.props.history}
-                  />
+        <BrowserView style={{ boxShadow: "0 4px 6px -3px #9c9c9c",  
+        paddingBottom: 10,
+         background: '#F1F2EE' }}>
+          <div
+            class="row m-0 mt-3 justify-content-between"
+            style={{
+              position: "absolute",
+              padding: 10,
+              paddingBottom: 0,
+              zIndex: 20
+            }}
+          >
+            <h4 class="mr-2" style={{width: 1032}}>{title}</h4>
+            <Link
+              to="/shopGrid"
+              onClick={() => {
+                this.props.fetchBooks(
+                  helper.prefix + "category/" + category_id
                 );
-              }):null}
-            </Slider>
+              }}
+            >
+              <button type="button" class="btn btn-outline-primary view_dp">
+                View All
+              </button>
+            </Link>
           </div>
+          <div
+            style={{
+              background: "#F1F2EE",
+              paddingRight: 25,
+              height: 340,
+              marginBottom: 30
+            }}
+          >
+            <div>
+              {console.log("Screen width", window.innerWidth)}
+              <Slider {...settings}>
+                {books !== []
+                  ? books.map((item, index) => {
+                      console.log("Items found from data: ", item);
+                      return (
+                        <Product
+                          key={index}
+                          name={item.title}
+                          cart_book={item}
+                          id={item.id}
+                          price={item.old_price}
+                          discount={item.discount}
+                          image={item.cover}
+                          writer={item.author}
+                          history={this.props.history}
+                        />
+                      );
+                    })
+                  : null}
+              </Slider>
+            </div>
           </div>
         </BrowserView>
-        <MobileView>
-        <div class="row m-0 mt-3">
-          <h4 class="">
-            {title}
-          </h4>
-        </div>
-          <div style={{ background: "#F1F2EE",}}>
-            <Slider {...settings2}>
-              {books !== []? books.map((item, index) => {
-                // console.log("Items found from dummy: ", item);
-                return (
-                  <Product
-                  key={index}
-                  name={item.title}
-                  cart_book={item}
-                  id={item.id}
-                  price={item.old_price}
-                  discount={item.discount}
-                  image={item.cover}
-                  writer={item.author}
-                  history={this.props.history}
-                  />
+        <MobileView style={{ boxShadow: "0 4px 6px -3px #9c9c9c" }}>
+          <div class="row m-0" style={{ position: "absolute", padding: 10 }}>
+            <h4 style={{ fontSize: 13, width: 207 }}>{title}</h4>
+            <Link
+              to="/shopGrid"
+              onClick={() => {
+                this.props.fetchBooks(
+                  helper.prefix + "category/" + category_id
                 );
-              }):null}
+              }}
+            >
+              <button type="button" class="btn btn-outline-primary view_mb">
+                View All
+              </button>
+            </Link>
+          </div>
+          <div
+            style={{
+              background: "#F1F2EE",
+              overflow: "auto",
+              marginBottom: 30
+            }}
+          >
+            <Slider {...settings2}>
+              {books !== []
+                ? books.map((item, index) => {
+                    // console.log("Items found from dummy: ", item);
+                    return (
+                      <Product
+                        key={index}
+                        name={item.title}
+                        cart_book={item}
+                        id={item.id}
+                        price={item.old_price}
+                        discount={item.discount}
+                        image={item.cover}
+                        writer={item.author}
+                        history={this.props.history}
+                      />
+                    );
+                  })
+                : null}
             </Slider>
           </div>
         </MobileView>
@@ -275,29 +358,28 @@ class Home extends Component {
           </Slider>
         </BrowserView>
         <MobileView>
-        <div style={{height: 100}}>
-        <Slider {...settings2}>
-            <div>
-              <img class="ad-banner" src="images/ad/1.png" />
-            </div>
-            <div>
-              <img class="ad-banner" src="images/ad/2.png" />
-            </div>
-            <div>
-              <img class="ad-banner" src="images/ad/3.png" />
-            </div>
-            <div>
-              <img class="ad-banner" src="images/ad/1.png" />
-            </div>
-            <div>
-              <img class="ad-banner" src="images/ad/2.png" />
-            </div>
-            <div>
-              <img class="ad-banner" src="images/ad/3.png" />
-            </div>
-          </Slider>
-</div>
-        
+          <div style={{ height: 100 }}>
+            <Slider {...settings2}>
+              <div>
+                <img class="ad-banner" src="images/ad/1.png" />
+              </div>
+              <div>
+                <img class="ad-banner" src="images/ad/2.png" />
+              </div>
+              <div>
+                <img class="ad-banner" src="images/ad/3.png" />
+              </div>
+              <div>
+                <img class="ad-banner" src="images/ad/1.png" />
+              </div>
+              <div>
+                <img class="ad-banner" src="images/ad/2.png" />
+              </div>
+              <div>
+                <img class="ad-banner" src="images/ad/3.png" />
+              </div>
+            </Slider>
+          </div>
         </MobileView>
       </React.Fragment>
     );
@@ -322,77 +404,98 @@ class Home extends Component {
       slidesToScroll: 2,
       slidesToShow: 2,
       variableWidth: true,
-      arrows: false,
+      arrows: false
     };
     return (
       <div class="container mt-2">
         <div class="row m-0 mt-4">
-          <h4 class="">
-            প্রকাশনী সমূহ
-          </h4>
+          <h4 class="">প্রকাশনী সমূহ</h4>
         </div>
-          <BrowserView>
-          <div style={{ background: "#F1F2EE", paddingRight: 25 }}>
+        <BrowserView style={{ boxShadow: "0 4px 6px -3px #9c9c9c" }}>
+          <div class="mb-3" style={{ background: "#F1F2EE", paddingRight: 25 }}>
             <div>
               {console.log("Screen width", window.innerWidth)}
               <Slider {...settings}>
-                { console.log("Got all publisher ",this.state.publishers)}
-                {this.state.publishers !== null ? this.state.publishers.map((item, index) => {
-                  return (
-                    <Link  to="/shopGrid"
-                    onClick={() => {
-                      this.props.fetchBooks(
-                        helper.prefix + "publisher/books/" + item.id
+                {console.log("Got all publisher ", this.state.publishers)}
+                {this.state.publishers !== null
+                  ? this.state.publishers.map((item, index) => {
+                      return (
+                        <Link
+                          to="/shopGrid"
+                          onClick={() => {
+                            this.props.fetchBooks(
+                              helper.prefix + "publisher/books/" + item.id
+                            );
+                            console.log(item.id);
+                          }}
+                        >
+                          <div class="crp-item">
+                            <object
+                              data="images/default/publisher.png"
+                              style={{ width: 80, height: 80 }}
+                              type="image/png"
+                            >
+                              <img
+                                class="m-pubp-img"
+                                src={item.image}
+                                style={{
+                                  borderRadius: "100%",
+                                  width: 80,
+                                  height: 80
+                                }}
+                              />
+                            </object>
+                          </div>
+                        </Link>
                       );
-                      console.log(item.id)
-                    }}>
-                      <div class="crp-item">
-                      <object data="images/default/publisher.png" style={{width: 80, height: 80}} type="image/png">
-                      <img                            
-                          class="m-pubp-img"
-                          src={item.image}
-                          style={{ borderRadius: "100%", width: 80, height: 80}}
-                        />
-                      </object>
-                        
-                      </div>
-                    </Link>
-                  );
-                }):null}
+                    })
+                  : null}
               </Slider>
             </div>
-            </div>
-          </BrowserView>
-          <MobileView>
-          <div style={{ background: "#F1F2EE"}}>
+          </div>
+        </BrowserView>
+        <MobileView style={{ boxShadow: "0 4px 6px -3px #9c9c9c" }}>
+          <div class="mb-2" style={{ background: "#F1F2EE" }}>
             <div style={{ background: "#F1F2EE" }}>
               {console.log("Screen width", window.innerWidth)}
               <Slider {...settings2}>
-                {this.state.publishers !== null ? this.state.publishers.map((item, index) => {
-                  return (
-                    <Link  to="/shopGrid"
-                    onClick={() => {
-                      this.props.fetchBooks(
-                        helper.prefix + "publisher/books/" + item.id
+                {this.state.publishers !== null
+                  ? this.state.publishers.map((item, index) => {
+                      return (
+                        <Link
+                          to="/shopGrid"
+                          onClick={() => {
+                            this.props.fetchBooks(
+                              helper.prefix + "publisher/books/" + item.id
+                            );
+                            console.log(item.id);
+                          }}
+                        >
+                          <div class="cr-item-mb" style={{ width: 97 }}>
+                            <object
+                              data="images/default/publisher.png"
+                              style={{ width: 97, height: 97 }}
+                              type="image/png"
+                            >
+                              <img
+                                class="m-pub-img"
+                                src={item.image}
+                                style={{
+                                  borderRadius: "100%",
+                                  width: 97,
+                                  height: 97
+                                }}
+                              />
+                            </object>
+                          </div>
+                        </Link>
                       );
-                      console.log(item.id)
-                    }}>
-                      <div class="cr-item-mb" style={{width: 97}}>
-                      <object data="images/default/publisher.png" style={{width: 97, height: 97}} type="image/png">
-                      <img
-                          class="m-pub-img"
-                          src={item.image}
-                          style={{ borderRadius: "100%", width: 97, height: 97}}
-                        />
-                      </object>
-                      </div>
-                    </Link>
-                  );
-                }):null}
+                    })
+                  : null}
               </Slider>
             </div>
-            </div>
-          </MobileView>
+          </div>
+        </MobileView>
       </div>
     );
   };
@@ -418,7 +521,7 @@ class Home extends Component {
       autoplay: true,
       pauseOnHover: true,
       arrows: false,
-      variableWidth: true,
+      variableWidth: true
     };
     return (
       <div class="container">
@@ -427,26 +530,28 @@ class Home extends Component {
         <BrowserView>
           <div style={{ background: "#F1F2EE", paddingRight: 25 }}>
             <Slider {...settings}>
-             {this.state.top_authors?this.state.top_authors.map((item, index) =>{
-                 return(
-                  <Link to="/shopGrid"
-                      onClick={() => {
-                        this.props.fetchBooks(
-                          helper.prefix + "author/books/" + item.id
-                        );
-                      }}>
-                  <div class="crw-item">
-                    <img
-                      class="mw-pub-img"
-                      src={item.image}
-                      style={{ borderRadius: "100%" }}
-                    />
-                  </div>
-                </Link>
-                 )
-               }):null
-             }
-              
+              {this.state.top_authors
+                ? this.state.top_authors.map((item, index) => {
+                    return (
+                      <Link
+                        to="/shopGrid"
+                        onClick={() => {
+                          this.props.fetchBooks(
+                            helper.prefix + "author/books/" + item.id
+                          );
+                        }}
+                      >
+                        <div class="crw-item">
+                          <img
+                            class="mw-pub-img"
+                            src={item.image}
+                            style={{ borderRadius: "100%" }}
+                          />
+                        </div>
+                      </Link>
+                    );
+                  })
+                : null}
             </Slider>
           </div>
         </BrowserView>
@@ -454,25 +559,28 @@ class Home extends Component {
         <MobileView>
           <div style={{ background: "#F1F2EE" }}>
             <Slider {...settings2}>
-            {this.state.top_authors?this.state.top_authors.map((item, index) =>{
-                 return(
-                  <Link to="/shopGrid"
-                      onClick={() => {
-                        this.props.fetchBooks(
-                          helper.prefix + "author/books/" + item.id
-                        );
-                      }}>
-                    <div class="crw-item">
-                      <img
-                        class="mw-pub-img"
-                        src={item.image}
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </div>
-                  </Link>
-                  )
-                }):null
-              }
+              {this.state.top_authors
+                ? this.state.top_authors.map((item, index) => {
+                    return (
+                      <Link
+                        to="/shopGrid"
+                        onClick={() => {
+                          this.props.fetchBooks(
+                            helper.prefix + "author/books/" + item.id
+                          );
+                        }}
+                      >
+                        <div class="crw-item">
+                          <img
+                            class="mw-pub-img"
+                            src={item.image}
+                            style={{ borderRadius: "100%" }}
+                          />
+                        </div>
+                      </Link>
+                    );
+                  })
+                : null}
             </Slider>
           </div>
         </MobileView>
@@ -484,56 +592,69 @@ class Home extends Component {
     return (
       <React.Fragment>
         <BrowserView>
-      <div class="container">
-        <div class="" style={{ background: "#EED7C2" }}>
-          <div class="row d-flex justify-content-center mt-3">
-            <h4 class="c-black " style={{ fontSize: 18 }}>
-              সাবস্ক্রাইব করে জিতে নিন আকর্ষনীয়{" "}
-              <span style={{ color: "#02A868", fontSize: 25 }}>অফার</span>
-            </h4>
-          </div>
-          <div class="row d-flex justify-content-center mt-2 pb-3">
-            <input
-              class="col-md-5 subs-input pl-2 pr-2"
-              placeholder="ইমেইল/মোবাইল নম্বর"
-              style={{ height: 55 }}
-            />
-            <div class="row mt-auto mb-auto ml-0">
-              <button class="btn btn-primary ml-2 mr-2">পুরুষ</button>
-              <button class="btn btn-success mr-2">মহিলা</button>
-              <button class="btn btn-warning">অন্যান্য</button>
+          <div class="container">
+            <div class="" style={{ background: "#EED7C2" }}>
+              <div class="row d-flex justify-content-center mt-3">
+                <h4 class="c-black " style={{ fontSize: 18 }}>
+                  সাবস্ক্রাইব করে জিতে নিন আকর্ষনীয়{" "}
+                  <span style={{ color: "#02A868", fontSize: 25 }}>অফার</span>
+                </h4>
+              </div>
+              <div class="row d-flex justify-content-center mt-2 pb-3">
+                <input
+                  class="col-md-5 subs-input pl-2 pr-2"
+                  placeholder="ইমেইল/মোবাইল নম্বর"
+                  style={{ height: 55 }}
+                />
+                <div class="row mt-auto mb-auto ml-0">
+                  <button class="btn btn-primary ml-2 mr-2">পুরুষ</button>
+                  <button class="btn btn-success mr-2">মহিলা</button>
+                  <button class="btn btn-warning">অন্যান্য</button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      </BrowserView>
-      <MobileView>
-        <div class="container">
-        <div class="" style={{ background: "#EED7C2" }}>
-          <div class="row d-flex justify-content-center pt-2">
-            <h4 class="c-black " style={{ fontSize: 18, fontWeight: 'normal'}}>
-              সাবস্ক্রাইব করে জিতে নিন 
-            </h4>
-            <h4 class="c-black " style={{ fontSize: 18, fontWeight: 'normal'}}>
-              <span style={{ color: "#02A868", fontSize: 22 }}>আকর্ষনীয় অফার</span>
-            </h4>
-          </div>
-          <div class="row d-flex justify-content-center mt-2 pb-3">
-            <input
-              class="col-md-5 subs-input "
-              placeholder="ইমেইল/মোবাইল নম্বর"
-              style={{ height: 55, marginLeft: 29, marginRight: 28}}
-            />
-            <div class="row mt-2 ml-0">
-            <button type="button" class="btn btn-primary mr-2">পুরুষ</button>
-            <button type="button" class="btn btn-success mr-2">মহিলা</button>
-            <button type="button" class="btn btn-warning mr-2">অন্যান্য</button>
-
+        </BrowserView>
+        <MobileView>
+          <div class="container">
+            <div class="" style={{ background: "#EED7C2" }}>
+              <div class="row d-flex justify-content-center pt-2">
+                <h4
+                  class="c-black "
+                  style={{ fontSize: 18, fontWeight: "normal" }}
+                >
+                  সাবস্ক্রাইব করে জিতে নিন
+                </h4>
+                <h4
+                  class="c-black "
+                  style={{ fontSize: 18, fontWeight: "normal" }}
+                >
+                  <span style={{ color: "#02A868", fontSize: 22 }}>
+                    আকর্ষনীয় অফার
+                  </span>
+                </h4>
+              </div>
+              <div class="row d-flex justify-content-center mt-2 pb-3">
+                <input
+                  class="col-md-5 subs-input "
+                  placeholder="ইমেইল/মোবাইল নম্বর"
+                  style={{ height: 55, marginLeft: 29, marginRight: 28 }}
+                />
+                <div class="row mt-2 ml-0">
+                  <button type="button" class="btn btn-primary mr-2">
+                    পুরুষ
+                  </button>
+                  <button type="button" class="btn btn-success mr-2">
+                    মহিলা
+                  </button>
+                  <button type="button" class="btn btn-warning mr-2">
+                    অন্যান্য
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      </MobileView>
+        </MobileView>
       </React.Fragment>
     );
   };
@@ -541,117 +662,129 @@ class Home extends Component {
   services = () => {
     return (
       <div class="container">
-      <BrowserView>
-      <div class="pt-3 pb-3 mb-3" style={{ background: "#F1F2EE" }}>
-          <div class="row">
-            <div className="row col-sm-3">
-              <img
-                class="mr-auto ml-auto"
-                src="images/icons/phone.png"
-                style={{ height: 76 }}
-              />
-              <div class="mt-auto mb-auto">
-                <p class="service-text">হেল্প লাইন</p>
-                <p class="service-text">+৮৮ ০২ ৭১৯ ১৭৪৭</p>
-                <p class="service-text">০১৬১৬ ৩১৩ ৯৫৭</p>
+        <BrowserView>
+          <div class="pt-3 pb-3 mb-3" style={{ background: "#F1F2EE" }}>
+            <div class="row">
+              <div className="row col-sm-3">
+                <img
+                  class="mr-auto ml-auto"
+                  src="images/icons/phone.png"
+                  style={{ height: 76 }}
+                />
+                <div class="mt-auto mb-auto">
+                  <p class="service-text">হেল্প লাইন</p>
+                  <p class="service-text">+৮৮ ০২ ৭১৯ ১৭৪৭</p>
+                  <p class="service-text">০১৬১৬ ৩১৩ ৯৫৭</p>
+                </div>
               </div>
-            </div>
-            <div className="row col-sm-3">
-              <img
-                class="mr-auto ml-auto"
-                src="images/icons/cash_on.png"
-                style={{ height: 76 }}
-              />
-              <div class="mt-auto mb-auto">
-                <p class="service-text">কেশ অন</p>
-                <p class="service-text">ডেলিভারি</p>
+              <div className="row col-sm-3">
+                <img
+                  class="mr-auto ml-auto"
+                  src="images/icons/cash_on.png"
+                  style={{ height: 76 }}
+                />
+                <div class="mt-auto mb-auto">
+                  <p class="service-text">কেশ অন</p>
+                  <p class="service-text">ডেলিভারি</p>
+                </div>
               </div>
-            </div>
-            <div className="row col-sm-3">
-              <img
-                class="mr-auto ml-auto"
-                src="images/icons/delivery_cycle.png"
-                style={{ height: 76 }}
-              />
-              <div class="mt-auto mb-auto">
-                <p class="service-text">ঢাকায়</p>
-                <p class="service-text">হোম ডেলিভারি</p>
+              <div className="row col-sm-3">
+                <img
+                  class="mr-auto ml-auto"
+                  src="images/icons/delivery_cycle.png"
+                  style={{ height: 76 }}
+                />
+                <div class="mt-auto mb-auto">
+                  <p class="service-text">ঢাকায়</p>
+                  <p class="service-text">হোম ডেলিভারি</p>
+                </div>
               </div>
-            </div>
-            <div className="row col-sm-3">
-              <img
-                class="mr-auto ml-auto"
-                src="images/icons/delivery.png"
-                style={{ height: 90 }}
-              />
-              <div class="mt-auto mb-auto">
-                <p class="service-text">সেবা</p>
-                <p class="service-text">সারা বাংলাদেশ</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </BrowserView>
-      <MobileView>
-      <div class="pt-3 pb-3 mb-3" style={{ background: "#F1F2EE" }}>
-          <div class="row">
-            <div className="row col-sm-3 mb-2">
-              <div class="d-flex justify-content-center" style={{width: '40%'}}>
-              <img
-                class=""
-                src="images/icons/phone.png"
-                style={{ height: 76 }}
-              />
-              </div>
-              <div class="mt-auto mb-auto">
-                <p class="service-text">হেল্প লাইন</p>
-                <p class="service-text">+৮৮ ০২ ৭১৯ ১৭৪৭</p>
-                <p class="service-text">০১৬১৬ ৩১৩ ৯৫৭</p>
-              </div>
-            </div>
-            <div className="row col-sm-3 mb-2">
-            <div class="d-flex justify-content-center" style={{width: '40%'}}>
-            <img
-                class=""
-                src="images/icons/cash_on.png"
-                style={{ height: 76 }}
-              />
-            </div>
-              
-              <div class="mt-auto mb-auto">
-                <p class="service-text">কেশ অন</p>
-                <p class="service-text">ডেলিভারি</p>
-              </div>
-            </div>
-            <div className="row col-sm-3 mb-2">
-            <div class="d-flex justify-content-center" style={{width: '40%'}}>
-              <img
-                class=""
-                src="images/icons/delivery_cycle.png"
-                style={{ height: 76 }}
-              />
-              </div>
-              <div class="mt-auto mb-auto">
-                <p class="service-text">ঢাকায়</p>
-                <p class="service-text">হোম ডেলিভারি</p>
-              </div>
-            </div>
-            <div className="row col-sm-3 mb-2">
-            <div class="d-flex justify-content-center" style={{width: '40%'}}>
-              <img
-                class=""
-                src="images/icons/delivery.png"
-                style={{ height: 90 }}
-              />
-              </div>
-              <div class="mt-auto mb-auto">
-                <p class="service-text">সেবা</p>
-                <p class="service-text">সারা বাংলাদেশ</p>
+              <div className="row col-sm-3">
+                <img
+                  class="mr-auto ml-auto"
+                  src="images/icons/delivery.png"
+                  style={{ height: 90 }}
+                />
+                <div class="mt-auto mb-auto">
+                  <p class="service-text">সেবা</p>
+                  <p class="service-text">সারা বাংলাদেশ</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </MobileView>
+        </BrowserView>
+        <MobileView>
+          <div class="pt-3 pb-3 mb-3" style={{ background: "#F1F2EE" }}>
+            <div class="row">
+              <div className="row col-sm-3 mb-2">
+                <div
+                  class="d-flex justify-content-center"
+                  style={{ width: "40%" }}
+                >
+                  <img
+                    class=""
+                    src="images/icons/phone.png"
+                    style={{ height: 76 }}
+                  />
+                </div>
+                <div class="mt-auto mb-auto">
+                  <p class="service-text">হেল্প লাইন</p>
+                  <p class="service-text">+৮৮ ০২ ৭১৯ ১৭৪৭</p>
+                  <p class="service-text">০১৬১৬ ৩১৩ ৯৫৭</p>
+                </div>
+              </div>
+              <div className="row col-sm-3 mb-2">
+                <div
+                  class="d-flex justify-content-center"
+                  style={{ width: "40%" }}
+                >
+                  <img
+                    class=""
+                    src="images/icons/cash_on.png"
+                    style={{ height: 76 }}
+                  />
+                </div>
+
+                <div class="mt-auto mb-auto">
+                  <p class="service-text">কেশ অন</p>
+                  <p class="service-text">ডেলিভারি</p>
+                </div>
+              </div>
+              <div className="row col-sm-3 mb-2">
+                <div
+                  class="d-flex justify-content-center"
+                  style={{ width: "40%" }}
+                >
+                  <img
+                    class=""
+                    src="images/icons/delivery_cycle.png"
+                    style={{ height: 76 }}
+                  />
+                </div>
+                <div class="mt-auto mb-auto">
+                  <p class="service-text">ঢাকায়</p>
+                  <p class="service-text">হোম ডেলিভারি</p>
+                </div>
+              </div>
+              <div className="row col-sm-3 mb-2">
+                <div
+                  class="d-flex justify-content-center"
+                  style={{ width: "40%" }}
+                >
+                  <img
+                    class=""
+                    src="images/icons/delivery.png"
+                    style={{ height: 90 }}
+                  />
+                </div>
+                <div class="mt-auto mb-auto">
+                  <p class="service-text">সেবা</p>
+                  <p class="service-text">সারা বাংলাদেশ</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </MobileView>
       </div>
     );
   };
@@ -665,48 +798,43 @@ class Home extends Component {
     );
   };
 
+  fetchBooks = () => {
+    fetch(helper.prefix + "book/book_order")
+      .then(res => res.json())
+      .then(book => {
+        console.log("Order by books", book.cat_orders);
+        this.setState({ cat_orders: book.cat_orders });
+      });
+  };
 
-  fetchBooks = () =>{
-    fetch(helper.prefix+'book/book_order')
-            .then(res => res.json())
-            .then(book => {
-              console.log("Order by books", book.cat_orders)
-                this.setState({cat_orders: book.cat_orders})
-            })
-  }
-  
   fetchPublishers = () => {
-    fetch(helper.prefix+'publishers')
-    .then(res => res.json())
-    .then(data => {
-      console.log("Fetched publishers", data.publishers)
-        this.setState({publishers: data.publishers})
-    })
-  }
+    fetch(helper.prefix + "publishers")
+      .then(res => res.json())
+      .then(data => {
+        console.log("Fetched publishers", data.publishers);
+        this.setState({ publishers: data.publishers });
+      });
+  };
 
-  fetchBooksRow = () =>{
-    if(this.state.cat_orders){
-      return this.state.cat_orders.map((data, index) =>{
-        console.log("Books to show",data.books)
-        if(data.books.length > 6){
-          return this.firstRow(data.category, data.books)
-                // <div>{this.adRow()}</div>
+  fetchBooksRow = () => {
+    if (this.state.cat_orders) {
+      return this.state.cat_orders.map((data, index) => {
+        console.log("Books to show", data.books);
+        if (data.books.length > 6) {
+          return this.firstRow(data.category, data.books, data.category_id);
+          // <div>{this.adRow()}</div>
         }
-      })
+      });
     }
-  }
+  };
 
   render() {
     return (
       <React.Fragment>
         <MainSlider />
-        <div class="container">
-          {this.adRow()}
-        </div>
+        <div class="container">{this.adRow()}</div>
         <section class="wn__product__area brown--color pt--20  pb--20">
-          <div class="container">
-            {this.fetchBooksRow()}
-          </div>
+          <div class="container">{this.fetchBooksRow()}</div>
         </section>
 
         {this.bestWrtiters()}
@@ -873,10 +1001,10 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  fetchBooks: PropTypes.func.isRequired,
+  fetchBooks: PropTypes.func.isRequired
 };
 
-
-
-
-export default connect(null, { fetchBooks })(Home);
+export default connect(
+  null,
+  { fetchBooks }
+)(Home);

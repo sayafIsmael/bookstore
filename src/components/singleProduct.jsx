@@ -795,26 +795,18 @@ class Productz extends Component {
                         </div>
                         <div class="product-share">
                           <ul>
-                            <li class="categories-title">Share :</li>
+                            <li class="categories-title mr-2">Share :</li>
                             <li>
-                              <a href="#">
-                                <i class="icon-social-twitter icons" />
-                              </a>
+                              <img class="social_icon" src="images/icons/HELPLINE_fb.png"/>  
                             </li>
                             <li>
-                              <a href="#">
-                                <i class="icon-social-tumblr icons" />
-                              </a>
+                              <img class="social_icon" src="images/icons/HELPLINE_tube.png"/>  
                             </li>
                             <li>
-                              <a href="#">
-                                <i class="icon-social-facebook icons" />
-                              </a>
+                            <img class="social_icon" src="images/icons/HELPLINE_inst.png"/>
                             </li>
                             <li>
-                              <a href="#">
-                                <i class="icon-social-linkedin icons" />
-                              </a>
+                            <img class="social_icon" src="images/icons/HELPLINE_twt.png"/>
                             </li>
                           </ul>
                         </div>

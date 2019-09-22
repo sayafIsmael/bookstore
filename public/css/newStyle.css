@@ -572,3 +572,18 @@ input[type=number]:focus,
     margin: 4px;
 }
 
+.social_icon{
+    width: 31px;
+    cursor: pointer;
+}
+
+.view_mb{
+    width: 64px;
+    height: 29px;
+    font-size: 11px;
+}
+
+.view_dp{
+    cursor: pointer;
+    z-index: 10;
+}

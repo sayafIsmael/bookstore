@@ -83,7 +83,7 @@ class Shipping extends Component {
                 shiping_address: this.state.address,
                 order_type: 0,
                 location: this.state.location ? this.state.location : 'Dhaka',
-                total_price: parseInt(book.new_price) * parseInt(book.quantity),
+                total_price: parseInt(book.old_price) * parseInt(book.quantity),
                 user_id: null,
                 transection_id: this.state.transection_id ? this.state.transection_id : 'null'
             };
@@ -254,7 +254,7 @@ class Shipping extends Component {
                               <tr>
                                 <td>Subtotal</td>
                                 <td class="text-right" id="subtotal">
-                                {parseFloat(this.props.cart.sum("new_price", "quantity")).toFixed(2)} TK.
+                                {parseFloat(this.props.cart.sum("old_price", "quantity")).toFixed(2)} TK.
                                 </td>
                               </tr>
 
@@ -268,14 +268,14 @@ class Shipping extends Component {
                               <tr>
                                 <td>Total</td>
                                 <td class="text-right" id="total">
-                                  {parseFloat(this.props.cart.sum("new_price", "quantity")).toFixed(2)} TK.
+                                  {parseFloat(this.props.cart.sum("old_price", "quantity")).toFixed(2)} TK.
                                 </td>
                               </tr>
 
                               <tr>
                                 <td>Payable Total</td>
                                 <td class="text-right" id="payable">
-                                  {parseFloat(this.props.cart.sum("new_price", "quantity")).toFixed(2)} TK.
+                                  {parseFloat(this.props.cart.sum("old_price", "quantity")).toFixed(2)} TK.
                                 </td>
                               </tr>
                             </tbody>

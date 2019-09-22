@@ -91,7 +91,7 @@
   border: 0
 }
 .slick-slider {
-  margin: 30px auto 50px;
+  margin: 30px auto 0px;
   /* overflow: hidden; */
 }
 .slick-dots {
@@ -209,6 +209,3 @@
   height: 113px;
 }
 
-.slick-slider{
-  max-height: 241px;
-}

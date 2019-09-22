@@ -85,7 +85,7 @@ checkCart = () => {
                                 }>{book.title}</Link>
                               </td>
                               <td class="product-price">
-                                <span class="amount">Tk.{book.new_price}</span>
+                                <span class="amount">Tk.{book.old_price}</span>
                               </td>
                               <td class="product-quantity">
                               <span
@@ -117,7 +117,7 @@ checkCart = () => {
                               </td>
                               <td class="product-subtotal">
                                 Tk.
-                                {parseInt(book.new_price) *
+                                {parseInt(book.old_price) *
                                   parseInt(book.quantity)}
                               </td>
                               <td class="product-remove">
@@ -164,13 +164,13 @@ checkCart = () => {
                       <li>Sub Total</li>
                     </ul>
                     <ul class="cart__total__tk">
-                      <li>Tk.{parseFloat(this.props.cart.sum("new_price", "quantity")).toFixed(2)}</li>
-                      <li>Tk.{parseFloat(this.props.cart.sum("new_price", "quantity")).toFixed(2)}</li>
+                      <li>Tk.{parseFloat(this.props.cart.sum("old_price", "quantity")).toFixed(2)}</li>
+                      <li>Tk.{parseFloat(this.props.cart.sum("old_price", "quantity")).toFixed(2)}</li>
                     </ul>
                   </div>
                   <div class="cart__total__amount">
                     <span>Grand Total</span>
-                    <span>Tk.{parseFloat(this.props.cart.sum("new_price", "quantity")).toFixed(2)}</span>
+                    <span>Tk.{parseFloat(this.props.cart.sum("old_price", "quantity")).toFixed(2)}</span>
                   </div>
                 </div>
               </div>
