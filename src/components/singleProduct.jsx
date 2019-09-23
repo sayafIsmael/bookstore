@@ -115,7 +115,9 @@ class Productz extends Component {
   
 
   openModal() {
-    this.setState({ modalIsOpen: true });
+    if(this.props.book.pages.length > 0){
+      this.setState({ modalIsOpen: true });
+    }
   }
 
   afterOpenModal() {
