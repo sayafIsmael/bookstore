@@ -9,7 +9,12 @@ import { Checkbox } from "react-bootstrap";
 import * as helper from "./../helper";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchBooks, sortBooks, selectAuthor, selectPublisher} from "../actions/bookActions";
+import {
+  fetchBooks,
+  sortBooks,
+  selectAuthor,
+  selectPublisher
+} from "../actions/bookActions";
 import {
   BrowserView,
   MobileView,
@@ -34,7 +39,7 @@ class shopGrid extends Component {
       authors: null,
       authorFilterTxt: null,
       publishers: null,
-      publisherFilterTxt: null,
+      publisherFilterTxt: null
     };
     window.scrollTo(0, 0);
     this.fetchAuthors();
@@ -74,37 +79,39 @@ class shopGrid extends Component {
     // }
   }
 
-  filterAuthor = e =>{
-    this.setState({authorFilterTxt: e.target.value})
+  filterAuthor = e => {
+    this.setState({ authorFilterTxt: e.target.value });
     fetch(helper.prefix + "filter/author/?data=" + e.target.value, {
       method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       }
-    }).then(res => res.json())
-    .then((data) => {
-      if(data.success){
-        this.setState({authors: data.authors})
-      }
     })
-  }
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          this.setState({ authors: data.authors });
+        }
+      });
+  };
 
-  filterPublisher = e =>{
-    this.setState({publisherFilterTxt: e.target.value})
+  filterPublisher = e => {
+    this.setState({ publisherFilterTxt: e.target.value });
     fetch(helper.prefix + "filter/publisher/?data=" + e.target.value, {
       method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       }
-    }).then(res => res.json())
-    .then((data) => {
-      if(data.success){
-        this.setState({publishers: data.publishers})
-      }
     })
-  }
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          this.setState({ publishers: data.publishers });
+        }
+      });
+  };
 
   booksTitle = () => {
     if (this.props.books.author) {
@@ -219,9 +226,12 @@ class shopGrid extends Component {
   };
 
   showBooks = () => {
-    if (this.props.books.books != null || this.props.books.books != []) {
-      let books = this.props.books.books;
-      console.log("Fuck pussy ", books);
+    if (
+      this.props.books.books.data != null ||
+      this.props.books.books.data != []
+    ) {
+      let books = this.props.books.books.data;
+      console.log("Fuck pussy ", this.props.books);
       return books.map((item, index) => {
         console.log("Fuck ass ", item.title);
         return (
@@ -251,9 +261,9 @@ class shopGrid extends Component {
 
   handleAuthorChange = event => {
     let author = JSON.parse(event.target.value);
-    this.props.fetchBooks( helper.prefix + "author/books/" + author.id);
+    this.props.fetchBooks(helper.prefix + "author/books/" + author.id);
     this.props.selectAuthor(author.name);
-    this.props.selectPublisher(null)
+    this.props.selectPublisher(null);
     console.log("mother fucking ", this.props.selectedAuthor);
   };
 
@@ -284,12 +294,11 @@ class shopGrid extends Component {
 
   handlePublisherChange = event => {
     let publisher = JSON.parse(event.target.value);
-    this.props.fetchBooks( helper.prefix + "publisher/books/" + publisher.id);
+    this.props.fetchBooks(helper.prefix + "publisher/books/" + publisher.id);
     this.props.selectPublisher(publisher.name);
-    this.props.selectAuthor(null)
+    this.props.selectAuthor(null);
     console.log("mother fucking ", this.props.selectedPublisher);
   };
-
 
   publisherSort = () => {
     if (this.state.publishers != null) {
@@ -316,6 +325,39 @@ class shopGrid extends Component {
     }
   };
 
+  pagination = () => {
+    if (
+      this.props.books.books.data != null ||
+      this.props.books.books.data != []
+    ) {
+      return (
+        <React.Fragment>
+          <li style={{display: this.props.books.books.prev_page_url != null ? 'inline' : 'none'}}>
+            <Link onClick={()=> 
+            this.props.fetchBooks(this.props.books.books.prev_page_url)}>Previous</Link>
+          </li>
+          <li class="active">
+            page{" "}
+            <Link
+              style={{
+                borderColor: "#363636",
+                color: "white",
+                backgroundColor: "#363636"
+              }}
+            >
+              {this.props.books.books.current_page}
+            </Link>{" "}
+            of <span style={{fontWeight: 'bold', fontSize: 18}}>{this.props.books.books.last_page}</span>
+          </li>
+          <li style={{display: this.props.books.books.next_page_url != null ? 'inline' : 'none'}}>
+            <Link onClick={()=> 
+            this.props.fetchBooks(this.props.books.books.next_page_url)}>Next</Link>
+          </li>
+        </React.Fragment>
+      );
+    }
+  };
+
   render() {
     console.log(this.props.books);
     return (
@@ -323,104 +365,103 @@ class shopGrid extends Component {
         <div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
           <div class="container">
             <div class="row m-0">
-              
               <div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
-              <BrowserView>
-                <div class="shop__sidebar">
-                  <aside class="wedget__categories poroduct--cat">
-                    <form>
-                      <div
-                        class="row m-0 d-flex justify-content-between"
-                        style={{ borderBottom: "1px solid #2e2e2e" }}
-                      >
-                        <div class="row m-0">
-                          <FontAwesome
-                            name="fas fa-sort"
-                            style={{
-                              color: "black",
-                              marginRight: 10,
-                              fontSize: 15,
-                              marginTop: 3
-                            }}
-                          />
-                          <h3 class="wedget__title">Sort</h3>
-                        </div>
-                        <p
-                          class="text-primary"
-                          style={{ cursor: "pointer", fontSize: 15 }}
+                <BrowserView>
+                  <div class="shop__sidebar">
+                    <aside class="wedget__categories poroduct--cat">
+                      <form>
+                        <div
+                          class="row m-0 d-flex justify-content-between"
+                          style={{ borderBottom: "1px solid #2e2e2e" }}
                         >
-                          RESET
-                        </p>
-                      </div>
-                      <ul>
-                        <li>
-                          <div className="radio">
-                            <label>
-                              <input
-                                type="radio"
-                                class="mr-2"
-                                value="plowToHigh"
-                                checked={
-                                  this.props.selectedOption === "plowToHigh"
-                                }
-                                onChange={this.handleOptionChange}
-                              />
-                              Price - Low to High
-                            </label>
+                          <div class="row m-0">
+                            <FontAwesome
+                              name="fas fa-sort"
+                              style={{
+                                color: "black",
+                                marginRight: 10,
+                                fontSize: 15,
+                                marginTop: 3
+                              }}
+                            />
+                            <h3 class="wedget__title">Sort</h3>
                           </div>
-                        </li>
-                        <li>
-                          <div className="radio">
-                            <label>
-                              <input
-                                type="radio"
-                                class="mr-2"
-                                value="phighToLow"
-                                checked={
-                                  this.props.selectedOption === "phighToLow"
-                                }
-                                onChange={this.handleOptionChange}
-                              />
-                              Price - High to Low
-                            </label>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="radio">
-                            <label>
-                              <input
-                                type="radio"
-                                class="mr-2"
-                                value="dlowToHigh"
-                                checked={
-                                  this.props.selectedOption === "dlowToHigh"
-                                }
-                                onChange={this.handleOptionChange}
-                              />
-                              Discount - Low to High
-                            </label>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="radio">
-                            <label>
-                              <input
-                                type="radio"
-                                class="mr-2"
-                                value="dhighToLow"
-                                checked={
-                                  this.props.selectedOption === "dhighToLow"
-                                }
-                                onChange={this.handleOptionChange}
-                              />
-                              Discount - High to Low
-                            </label>
-                          </div>
-                        </li>
-                      </ul>
-                    </form>
-                  </aside>
-                  {/* <aside class="wedget__categories poroduct--cat">
+                          <p
+                            class="text-primary"
+                            style={{ cursor: "pointer", fontSize: 15 }}
+                          >
+                            RESET
+                          </p>
+                        </div>
+                        <ul>
+                          <li>
+                            <div className="radio">
+                              <label>
+                                <input
+                                  type="radio"
+                                  class="mr-2"
+                                  value="plowToHigh"
+                                  checked={
+                                    this.props.selectedOption === "plowToHigh"
+                                  }
+                                  onChange={this.handleOptionChange}
+                                />
+                                Price - Low to High
+                              </label>
+                            </div>
+                          </li>
+                          <li>
+                            <div className="radio">
+                              <label>
+                                <input
+                                  type="radio"
+                                  class="mr-2"
+                                  value="phighToLow"
+                                  checked={
+                                    this.props.selectedOption === "phighToLow"
+                                  }
+                                  onChange={this.handleOptionChange}
+                                />
+                                Price - High to Low
+                              </label>
+                            </div>
+                          </li>
+                          <li>
+                            <div className="radio">
+                              <label>
+                                <input
+                                  type="radio"
+                                  class="mr-2"
+                                  value="dlowToHigh"
+                                  checked={
+                                    this.props.selectedOption === "dlowToHigh"
+                                  }
+                                  onChange={this.handleOptionChange}
+                                />
+                                Discount - Low to High
+                              </label>
+                            </div>
+                          </li>
+                          <li>
+                            <div className="radio">
+                              <label>
+                                <input
+                                  type="radio"
+                                  class="mr-2"
+                                  value="dhighToLow"
+                                  checked={
+                                    this.props.selectedOption === "dhighToLow"
+                                  }
+                                  onChange={this.handleOptionChange}
+                                />
+                                Discount - High to Low
+                              </label>
+                            </div>
+                          </li>
+                        </ul>
+                      </form>
+                    </aside>
+                    {/* <aside class="wedget__categories poroduct--cat">
                   <div
                     class="row m-0 d-flex justify-content-between"
                     style={{ borderBottom: "1px solid #2e2e2e" }}
@@ -520,80 +561,80 @@ class shopGrid extends Component {
                     </li>
                   </ul>
                 </aside> */}
-                  <aside class="wedget__categories poroduct--cat">
-                    <form>
-                      <div>
-                        <h3
-                          class="wedget__title"
-                          style={{ borderBottom: "1px solid #2e2e2e" }}
-                        >
-                          Authors
-                        </h3>
-                      </div>
-                      <div class="input-group input-group-sm filter-search mt-1 mb-2">
-                        <input
-                          type="search"
-                          class="form-control js--client_search"
-                          placeholder="&#9906;"
-                          aria-label="Small"
-                          aria-describedby="inputGroup-sizing-sm"
-                          value={this.state.authorFilterTxt}
-                          onChange={e => this.filterAuthor(e)}
-                        />
-                      </div>
-                      <ul style={{ height: 300, overflowY: "scroll" }}>
-                        {this.authorSort()}
-                      </ul>
-                    </form>
-                  </aside>
-                  <aside class="wedget__categories poroduct--cat">
-                    <form>
-                      <div>
-                        <h3
-                          class="wedget__title"
-                          style={{ borderBottom: "1px solid #2e2e2e" }}
-                        >
-                          Publishers
-                        </h3>
-                      </div>
-                      <div class="input-group input-group-sm filter-search mt-1 mb-2">
-                        <input
-                          type="search"
-                          class="form-control js--client_search"
-                          placeholder="&#9906;"
-                          aria-label="Small"
-                          aria-describedby="inputGroup-sizing-sm"
-                          value={this.state.publisherFilterTxt}
-                          onChange={e => this.filterPublisher(e)}
-                        />
-                      </div>
-                      <ul style={{ height: 300, overflowY: "scroll" }}>
-                        {this.publisherSort()}
-                      </ul>
-                    </form>
-                  </aside>
-                  <aside class="wedget__categories pro--range">
-                    <h3 class="wedget__title">Filter by price</h3>
-                    <div class="content-shopby">
-                      <div class="price_filter s-filter clear">
-                        <form action="#" method="GET">
-                          <div id="slider-range" />
-                          <div class="slider__range--output">
-                            <div class="price__output--wrap">
-                              <div class="price--output">
-                                <span>Price :</span>
-                                <input type="text" id="amount" readonly="" />
-                              </div>
-                              <div class="price--filter">
-                                <a href="#">Filter</a>
+                    <aside class="wedget__categories poroduct--cat">
+                      <form>
+                        <div>
+                          <h3
+                            class="wedget__title"
+                            style={{ borderBottom: "1px solid #2e2e2e" }}
+                          >
+                            Authors
+                          </h3>
+                        </div>
+                        <div class="input-group input-group-sm filter-search mt-1 mb-2">
+                          <input
+                            type="search"
+                            class="form-control js--client_search"
+                            placeholder="&#9906;"
+                            aria-label="Small"
+                            aria-describedby="inputGroup-sizing-sm"
+                            value={this.state.authorFilterTxt}
+                            onChange={e => this.filterAuthor(e)}
+                          />
+                        </div>
+                        <ul style={{ height: 300, overflowY: "scroll" }}>
+                          {this.authorSort()}
+                        </ul>
+                      </form>
+                    </aside>
+                    <aside class="wedget__categories poroduct--cat">
+                      <form>
+                        <div>
+                          <h3
+                            class="wedget__title"
+                            style={{ borderBottom: "1px solid #2e2e2e" }}
+                          >
+                            Publishers
+                          </h3>
+                        </div>
+                        <div class="input-group input-group-sm filter-search mt-1 mb-2">
+                          <input
+                            type="search"
+                            class="form-control js--client_search"
+                            placeholder="&#9906;"
+                            aria-label="Small"
+                            aria-describedby="inputGroup-sizing-sm"
+                            value={this.state.publisherFilterTxt}
+                            onChange={e => this.filterPublisher(e)}
+                          />
+                        </div>
+                        <ul style={{ height: 300, overflowY: "scroll" }}>
+                          {this.publisherSort()}
+                        </ul>
+                      </form>
+                    </aside>
+                    <aside class="wedget__categories pro--range">
+                      <h3 class="wedget__title">Filter by price</h3>
+                      <div class="content-shopby">
+                        <div class="price_filter s-filter clear">
+                          <form action="#" method="GET">
+                            <div id="slider-range" />
+                            <div class="slider__range--output">
+                              <div class="price__output--wrap">
+                                <div class="price--output">
+                                  <span>Price :</span>
+                                  <input type="text" id="amount" readonly="" />
+                                </div>
+                                <div class="price--filter">
+                                  <a href="#">Filter</a>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </form>
+                          </form>
+                        </div>
                       </div>
-                    </div>
-                  </aside>
-                  {/* <aside class="wedget__categories poroduct--cat">
+                    </aside>
+                    {/* <aside class="wedget__categories poroduct--cat">
                   <form>
                     <div>
                       <h3
@@ -722,199 +763,199 @@ class shopGrid extends Component {
                     </ul>
                   </form>
                 </aside> */}
-                  <aside class="wedget__categories pro--range">
-                    <div>
-                      <h3
-                        class="wedget__title"
-                        style={{ borderBottom: "1px solid #2e2e2e" }}
-                      >
-                        Ratings
-                      </h3>
-                    </div>
-                    <ul>
-                      <li>
-                        <div className="radio">
-                          <label for="exampleCheck25">
-                            <input
-                              type="checkbox"
-                              class="mr-2"
-                              id="exampleCheck52"
-                              for="exampleCheck52"
-                            />
-                            <FontAwesome
-                              name="fas fa-star"
-                              style={{ fontSize: 18, color: "#FF9900" }}
-                            />
-                          </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="radio">
-                          <label for="exampleCheck24">
-                            <input
-                              type="checkbox"
-                              class="mr-2"
-                              id="exampleCheck24"
-                              for="exampleCheck24"
-                            />
-                            <FontAwesome
-                              name="fas fa-star"
-                              style={{
-                                fontSize: 18,
-                                color: "#FF9900",
-                                marginRight: 5
-                              }}
-                            />
-                            <FontAwesome
-                              name="fas fa-star"
-                              style={{
-                                fontSize: 18,
-                                color: "#FF9900",
-                                marginRight: 5
-                              }}
-                            />
-                          </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="radio">
-                          <label for="exampleCheck35">
-                            <input
-                              type="checkbox"
-                              class="mr-2"
-                              id="exampleCheck35"
-                              for="exampleCheck35"
-                            />
-                            <FontAwesome
-                              name="fas fa-star"
-                              style={{
-                                fontSize: 18,
-                                color: "#FF9900",
-                                marginRight: 5
-                              }}
-                            />
-                            <FontAwesome
-                              name="fas fa-star"
-                              style={{
-                                fontSize: 18,
-                                color: "#FF9900",
-                                marginRight: 5
-                              }}
-                            />
-                            <FontAwesome
-                              name="fas fa-star"
-                              style={{
-                                fontSize: 18,
-                                color: "#FF9900",
-                                marginRight: 5
-                              }}
-                            />
-                          </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="radio">
-                          <label for="exampleCheck44">
-                            <input
-                              type="checkbox"
-                              class="mr-2"
-                              id="exampleCheck44"
-                              for="exampleCheck44"
-                            />
-                            <FontAwesome
-                              name="fas fa-star"
-                              style={{
-                                fontSize: 18,
-                                color: "#FF9900",
-                                marginRight: 5
-                              }}
-                            />
-                            <FontAwesome
-                              name="fas fa-star"
-                              style={{
-                                fontSize: 18,
-                                color: "#FF9900",
-                                marginRight: 5
-                              }}
-                            />
-                            <FontAwesome
-                              name="fas fa-star"
-                              style={{
-                                fontSize: 18,
-                                color: "#FF9900",
-                                marginRight: 5
-                              }}
-                            />
-                            <FontAwesome
-                              name="fas fa-star"
-                              style={{
-                                fontSize: 18,
-                                color: "#FF9900",
-                                marginRight: 5
-                              }}
-                            />
-                          </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="radio">
-                          <label for="exampleCheck53">
-                            <input
-                              type="checkbox"
-                              class="mr-2"
-                              id="exampleCheck53"
-                              for="exampleCheck53"
-                            />
+                    <aside class="wedget__categories pro--range">
+                      <div>
+                        <h3
+                          class="wedget__title"
+                          style={{ borderBottom: "1px solid #2e2e2e" }}
+                        >
+                          Ratings
+                        </h3>
+                      </div>
+                      <ul>
+                        <li>
+                          <div className="radio">
+                            <label for="exampleCheck25">
+                              <input
+                                type="checkbox"
+                                class="mr-2"
+                                id="exampleCheck52"
+                                for="exampleCheck52"
+                              />
+                              <FontAwesome
+                                name="fas fa-star"
+                                style={{ fontSize: 18, color: "#FF9900" }}
+                              />
+                            </label>
+                          </div>
+                        </li>
+                        <li>
+                          <div className="radio">
+                            <label for="exampleCheck24">
+                              <input
+                                type="checkbox"
+                                class="mr-2"
+                                id="exampleCheck24"
+                                for="exampleCheck24"
+                              />
+                              <FontAwesome
+                                name="fas fa-star"
+                                style={{
+                                  fontSize: 18,
+                                  color: "#FF9900",
+                                  marginRight: 5
+                                }}
+                              />
+                              <FontAwesome
+                                name="fas fa-star"
+                                style={{
+                                  fontSize: 18,
+                                  color: "#FF9900",
+                                  marginRight: 5
+                                }}
+                              />
+                            </label>
+                          </div>
+                        </li>
+                        <li>
+                          <div className="radio">
+                            <label for="exampleCheck35">
+                              <input
+                                type="checkbox"
+                                class="mr-2"
+                                id="exampleCheck35"
+                                for="exampleCheck35"
+                              />
+                              <FontAwesome
+                                name="fas fa-star"
+                                style={{
+                                  fontSize: 18,
+                                  color: "#FF9900",
+                                  marginRight: 5
+                                }}
+                              />
+                              <FontAwesome
+                                name="fas fa-star"
+                                style={{
+                                  fontSize: 18,
+                                  color: "#FF9900",
+                                  marginRight: 5
+                                }}
+                              />
+                              <FontAwesome
+                                name="fas fa-star"
+                                style={{
+                                  fontSize: 18,
+                                  color: "#FF9900",
+                                  marginRight: 5
+                                }}
+                              />
+                            </label>
+                          </div>
+                        </li>
+                        <li>
+                          <div className="radio">
+                            <label for="exampleCheck44">
+                              <input
+                                type="checkbox"
+                                class="mr-2"
+                                id="exampleCheck44"
+                                for="exampleCheck44"
+                              />
+                              <FontAwesome
+                                name="fas fa-star"
+                                style={{
+                                  fontSize: 18,
+                                  color: "#FF9900",
+                                  marginRight: 5
+                                }}
+                              />
+                              <FontAwesome
+                                name="fas fa-star"
+                                style={{
+                                  fontSize: 18,
+                                  color: "#FF9900",
+                                  marginRight: 5
+                                }}
+                              />
+                              <FontAwesome
+                                name="fas fa-star"
+                                style={{
+                                  fontSize: 18,
+                                  color: "#FF9900",
+                                  marginRight: 5
+                                }}
+                              />
+                              <FontAwesome
+                                name="fas fa-star"
+                                style={{
+                                  fontSize: 18,
+                                  color: "#FF9900",
+                                  marginRight: 5
+                                }}
+                              />
+                            </label>
+                          </div>
+                        </li>
+                        <li>
+                          <div className="radio">
+                            <label for="exampleCheck53">
+                              <input
+                                type="checkbox"
+                                class="mr-2"
+                                id="exampleCheck53"
+                                for="exampleCheck53"
+                              />
 
-                            <FontAwesome
-                              name="fas fa-star"
-                              style={{
-                                fontSize: 18,
-                                color: "#FF9900",
-                                marginRight: 5
-                              }}
-                            />
-                            <FontAwesome
-                              name="fas fa-star"
-                              style={{
-                                fontSize: 18,
-                                color: "#FF9900",
-                                marginRight: 5
-                              }}
-                            />
-                            <FontAwesome
-                              name="fas fa-star"
-                              style={{
-                                fontSize: 18,
-                                color: "#FF9900",
-                                marginRight: 5
-                              }}
-                            />
-                            <FontAwesome
-                              name="fas fa-star"
-                              style={{
-                                fontSize: 18,
-                                color: "#FF9900",
-                                marginRight: 5
-                              }}
-                            />
-                            <FontAwesome
-                              name="fas fa-star"
-                              style={{
-                                fontSize: 18,
-                                color: "#FF9900",
-                                marginRight: 5
-                              }}
-                            />
-                          </label>
-                        </div>
-                      </li>
-                    </ul>
-                  </aside>
-                </div>
+                              <FontAwesome
+                                name="fas fa-star"
+                                style={{
+                                  fontSize: 18,
+                                  color: "#FF9900",
+                                  marginRight: 5
+                                }}
+                              />
+                              <FontAwesome
+                                name="fas fa-star"
+                                style={{
+                                  fontSize: 18,
+                                  color: "#FF9900",
+                                  marginRight: 5
+                                }}
+                              />
+                              <FontAwesome
+                                name="fas fa-star"
+                                style={{
+                                  fontSize: 18,
+                                  color: "#FF9900",
+                                  marginRight: 5
+                                }}
+                              />
+                              <FontAwesome
+                                name="fas fa-star"
+                                style={{
+                                  fontSize: 18,
+                                  color: "#FF9900",
+                                  marginRight: 5
+                                }}
+                              />
+                              <FontAwesome
+                                name="fas fa-star"
+                                style={{
+                                  fontSize: 18,
+                                  color: "#FF9900",
+                                  marginRight: 5
+                                }}
+                              />
+                            </label>
+                          </div>
+                        </li>
+                      </ul>
+                    </aside>
+                  </div>
                 </BrowserView>
               </div>
-              
+
               <div class="col-lg-9 col-12 order-1 order-lg-2">
                 <div class="tab__container">
                   <div
@@ -952,7 +993,7 @@ class shopGrid extends Component {
                           {this.booksTitle()} এর বই সমূহ
                         </h1>
 
-                        <p>(Showing 1 to 60 of 20147 books)</p>
+                        {/* <p>(Showing 1 to 60 of 20147 books)</p> */}
                       </div>
                     </div>
                     <div class="row m-0">
@@ -960,25 +1001,7 @@ class shopGrid extends Component {
                         ? this.showBooks()
                         : console.log("no books found")}
                     </div>
-                    <ul class="wn__pagination mt-3">
-                      <li class="active">
-                        <a href="#">1</a>
-                      </li>
-                      <li>
-                        <a href="#">2</a>
-                      </li>
-                      <li>
-                        <a href="#">3</a>
-                      </li>
-                      <li>
-                        <a href="#">4</a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="zmdi zmdi-chevron-right" />
-                        </a>
-                      </li>
-                    </ul>
+                    <ul class="wn__pagination mt-3">{this.pagination()}</ul>
                   </div>
                   <div
                     class="shop-grid tab-pane fade"
@@ -1023,12 +1046,11 @@ const mapStateToProps = state => ({
   newBook: state.books.item,
   selectedOption: state.books.selectedOption,
   selectedAuthor: state.books.selectedAuthor,
-  selectedPublisher: state.books.selectedPublisher,
-
+  selectedPublisher: state.books.selectedPublisher
 });
 
 // export default shopGrid;
 export default connect(
   mapStateToProps,
-  { fetchBooks, sortBooks, selectAuthor, selectPublisher}
+  { fetchBooks, sortBooks, selectAuthor, selectPublisher }
 )(shopGrid);

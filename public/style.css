@@ -4647,14 +4647,18 @@ h3.widget-title-modal {
   margin-top: 30px;
 }
   .wn__pagination li {
-    display: inline-block; }
+    display: inline-block;
+    color: #363636;
+     
+  }
     .wn__pagination li.active a {
       border-color: #363636;
       color: #363636; }
     .wn__pagination li a {
       background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-      border-bottom: 2px solid transparent;
-      color: #777;
+      border: 2px solid transparent;
+      color: white;
+        background-color:  #363636;
       display: inline-block;
       font-size: 14px;
       font-weight: 600;
@@ -4662,9 +4666,11 @@ h3.widget-title-modal {
       margin: 0 5px;
       padding: 0 13px;
       text-align: center; }
-      .wn__pagination li a:hover {
+      .wn__pagination li p {
         border-color: #363636;
-        color: #363636; }
+        color: white;
+        background-color:  #363636;
+      }
 
 @media only screen and (max-width: 767px) {
   .blog-page .blog__post .content p {

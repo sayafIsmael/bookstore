@@ -151,6 +151,9 @@ class ProductExtra extends Component {
                 মূল্য : {helper.getNewPrice(this.props.price, this.props.discount)} Tk.
               </p>
             </div>
+            <Link style={{width: '100%', fontSize: 65, display: this.state.mouseOver ? "none" : "inline"}}>
+            &nbsp;
+            </Link>
             <Link to="/product">
               <button
                 type="button"
@@ -187,6 +190,21 @@ class ProductExtra extends Component {
               <p style={{ color: "black" }}>{this.props.writer}</p>
               <p style={{ color: "black" }}>মূল্য : {helper.getNewPrice(this.props.price, this.props.discount)}</p>
             </div>
+            <button
+                type="button"
+                class="btn btn-outline-warning"
+                style={{ zIndex: 1, color: '#FFC107', fontSize: 12}}
+                onClick={e => {
+                  e.stopPropagation();
+                  this.props.addtoCart(this.props.cart_book);
+                }}
+              >
+                <FontAwesome
+                  name="fas fa-shopping-cart"
+                  style={{ color: "#FFC107", marginRight: 10}}
+                />
+                Add to Cart
+              </button>
           </div>
         </MobileView>
       </React.Fragment>
