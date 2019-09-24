@@ -11,7 +11,7 @@ import loadjs from "loadjs";
 import * as helper from "./../helper";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchBooks } from "../actions/bookActions";
+import { fetchBooks, seeMore} from "../actions/bookActions";
 import { Link } from "react-router-dom";
 
 import Slider from "react-slick";
@@ -151,21 +151,6 @@ class Home extends Component {
     this.fecthTopAuthors();
   }
 
-  // componentWillMount() {
-  //   loadjs("js/vendor/modernizr-3.5.0.min.js", function() {
-  //     loadjs("js/vendor/jquery-3.2.1.min.js", function() {
-  //       loadjs("js/popper.min.js", function() {
-  //         loadjs("js/plugins.js", function() {
-  //           loadjs("js/bootstrap.min.js", function() {
-  //             loadjs("js/active.js", function() {
-  //               loadjs("js/main.js");
-  //             });
-  //           });
-  //         });
-  //       });
-  //     });
-  //   });
-  // }
 
   componentDidMount() {
     // Jquery here $(...)...
@@ -248,7 +233,7 @@ class Home extends Component {
                           name={item.title}
                           cart_book={item}
                           id={item.id}
-                          price={item.old_price}
+                          price={item.new_price}
                           discount={item.discount}
                           image={item.cover}
                           writer={item.author}
@@ -294,7 +279,7 @@ class Home extends Component {
                         name={item.title}
                         cart_book={item}
                         id={item.id}
-                        price={item.old_price}
+                        price={item.new_price}
                         discount={item.discount}
                         image={item.cover}
                         writer={item.author}
@@ -408,11 +393,22 @@ class Home extends Component {
     };
     return (
       <div class="container mt-2">
-        <div class="row m-0 mt-4">
-          <h4 class="">প্রকাশনী সমূহ</h4>
-        </div>
-        <BrowserView style={{ boxShadow: "0 4px 6px -3px #9c9c9c" }}>
-          <div class="mb-3" style={{ background: "#F1F2EE", paddingRight: 25 }}>
+        <BrowserView class="mb-3" style={{background: "#F1F2EE",boxShadow: "0 4px 6px -3px #9c9c9c", marginTop: 30}}>
+        <div class="row m-0 d-flex justify-content-between align-items-center" style={{height: 30}}>
+          <h4 class="mt-2 ml-3">প্রকাশনী সমূহ</h4>
+          <Link
+                to="/seemore"
+                onClick={() => {
+                  this.props.seeMore('publisher')
+                }}
+                class="p-3 pt-2"
+              >
+                  <button type="button" class="btn btn-outline-primary view_dp">
+                View All
+              </button>
+              </Link>
+          </div>
+          <div class="mb-3" style={{  paddingRight: 25 }}>
             <div>
               {console.log("Screen width", window.innerWidth)}
               <Slider {...settings}>
@@ -445,6 +441,7 @@ class Home extends Component {
                                 }}
                               />
                             </object>
+                            <p style={{color: 'black'}}>{item.name}</p>
                           </div>
                         </Link>
                       );
@@ -454,8 +451,22 @@ class Home extends Component {
             </div>
           </div>
         </BrowserView>
-        <MobileView style={{ boxShadow: "0 4px 6px -3px #9c9c9c" }}>
-          <div class="mb-2" style={{ background: "#F1F2EE" }}>
+        <MobileView class="mb-3" style={{ background: "#F1F2EE", boxShadow: "0 4px 6px -3px #9c9c9c", marginTop: 30}}>
+        <div class="row m-0 d-flex justify-content-between align-items-center" style={{height: 30}}>
+          <h4 class="mt-2 ml-3">প্রকাশনী সমূহ</h4>
+          <Link
+                to="/seemore"
+                onClick={() => {
+                  this.props.seeMore('publisher')
+                }}
+                class="p-3 pt-2"
+              >
+                  <button type="button" class="btn btn-outline-primary view_dp">
+                View All
+              </button>
+              </Link>
+          </div>
+          <div class="mb-2">
             <div style={{ background: "#F1F2EE" }}>
               {console.log("Screen width", window.innerWidth)}
               <Slider {...settings2}>
@@ -487,6 +498,7 @@ class Home extends Component {
                                 }}
                               />
                             </object>
+                            <p style={{color: 'black'}}>{item.name}</p>
                           </div>
                         </Link>
                       );
@@ -525,10 +537,24 @@ class Home extends Component {
     };
     return (
       <div class="container">
-        <h4 class="">সাপ্তাহিক সেরা লেখক</h4>
+        
+        <BrowserView class="mb-3" style={{background: "#F1F2EE", marginTop: 30}}>
+          <div class="row m-0 d-flex justify-content-between align-items-center" style={{height: 30}}>
+          <h4 class="mt-2 ml-3">সাপ্তাহিক সেরা লেখক</h4>
+          <Link
+                to="/seemore"
+                onClick={() => {
+                  this.props.seeMore('author')
+                }}
+                class="p-3 pt-2"
+              >
+                  <button type="button" class="btn btn-outline-primary view_dp">
+                View All
+              </button>
+              </Link>
+          </div>
 
-        <BrowserView>
-          <div style={{ background: "#F1F2EE", paddingRight: 25 }}>
+          <div style={{  paddingRight: 25 }}>
             <Slider {...settings}>
               {this.state.top_authors
                 ? this.state.top_authors.map((item, index) => {
@@ -542,11 +568,18 @@ class Home extends Component {
                         }}
                       >
                         <div class="crw-item">
+                        <object
+                              data="images/books/author.png"
+                              style={{ width: 100, height: 100, background: 'white', borderRadius: "100%"}}
+                              type="image/png"
+                            >
                           <img
                             class="mw-pub-img"
                             src={item.image}
-                            style={{ borderRadius: "100%" }}
+                            style={{ width: 100, height: 100, background: 'white', borderRadius: "100%" }}
                           />
+                        </object>
+                        <p style={{color: 'black'}}>{item.name}</p>
                         </div>
                       </Link>
                     );
@@ -556,8 +589,22 @@ class Home extends Component {
           </div>
         </BrowserView>
 
-        <MobileView>
-          <div style={{ background: "#F1F2EE" }}>
+        <MobileView class="mb-3" style={{background: "#F1F2EE", marginTop: 30}}>
+        <div class="row m-0 d-flex justify-content-between align-items-center" style={{height: 30}}>
+          <h4 class="mt-2 ml-3">সাপ্তাহিক সেরা লেখক</h4>
+          <Link
+                to="/seemore"
+                onClick={() => {
+                  this.props.seeMore('author')
+                }}
+                class="p-3 pt-2"
+              >
+                  <button type="button" class="btn btn-outline-primary view_dp">
+                View All
+              </button>
+              </Link>
+          </div>
+          <div >
             <Slider {...settings2}>
               {this.state.top_authors
                 ? this.state.top_authors.map((item, index) => {
@@ -571,11 +618,18 @@ class Home extends Component {
                         }}
                       >
                         <div class="crw-item">
+                        <object
+                              data="images/books/author.png"
+                              style={{ width: 100, height: 100, background: 'white', borderRadius: "100%"}}
+                              type="image/png"
+                            >
                           <img
                             class="mw-pub-img"
                             src={item.image}
-                            style={{ borderRadius: "100%" }}
+                            style={{ width: 100, height: 100, background: 'white', borderRadius: "100%" }}
                           />
+                        </object>
+                        <p style={{color: 'black'}}>{item.name}</p>
                         </div>
                       </Link>
                     );
@@ -593,7 +647,7 @@ class Home extends Component {
       <React.Fragment>
         <BrowserView>
           <div class="container">
-            <div class="" style={{ background: "#EED7C2" }}>
+            <div class="" style={{ background: "#EED7C2" , marginTop: 30}}>
               <div class="row d-flex justify-content-center mt-3">
                 <h4 class="c-black " style={{ fontSize: 18 }}>
                   সাবস্ক্রাইব করে জিতে নিন আকর্ষনীয়{" "}
@@ -663,7 +717,7 @@ class Home extends Component {
     return (
       <div class="container">
         <BrowserView>
-          <div class="pt-3 pb-3 mb-3" style={{ background: "#F1F2EE" }}>
+          <div class="pt-3 pb-3" style={{ background: "#F1F2EE", marginTop: 30 }}>
             <div class="row">
               <div className="row col-sm-3">
                 <img
@@ -714,7 +768,7 @@ class Home extends Component {
           </div>
         </BrowserView>
         <MobileView>
-          <div class="pt-3 pb-3 mb-3" style={{ background: "#F1F2EE" }}>
+          <div class="pt-3 pb-3 " style={{ background: "#F1F2EE" }}>
             <div class="row">
               <div className="row col-sm-3 mb-2">
                 <div
@@ -1001,10 +1055,11 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  fetchBooks: PropTypes.func.isRequired
+  fetchBooks: PropTypes.func.isRequired,
+  seeMore: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
-  { fetchBooks }
+  { fetchBooks, seeMore}
 )(Home);

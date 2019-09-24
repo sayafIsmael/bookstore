@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { createStore } from "redux";
-import { Link, Redirect} from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
@@ -32,21 +32,20 @@ class Orders extends Component {
     window.scrollTo(0, 0);
   }
 
-  
   checkAuth = () => {
     if (Object.keys(this.props.token).length <= 0) {
       return <Redirect to="/" />;
     }
   };
 
-  handleFetch = (response) =>{
-      console.log("fuuuuuuuuuuuuuck ",response)
-        if(response.success){
-            this.setState({orders: response.orders})
-        }
-  }
+  handleFetch = response => {
+    console.log("fuuuuuuuuuuuuuck ", response);
+    if (response.success) {
+      this.setState({ orders: response.orders });
+    }
+  };
 
-  fetchOrders=()=>{
+  fetchOrders = () => {
     var url = helper.prefix + "orders";
 
     fetch(url, {
@@ -60,68 +59,88 @@ class Orders extends Component {
       .then(res => res.json())
       .then(response => this.handleFetch(response))
       .catch(error => console.error("Error:", error));
-  }
+  };
 
-  renderOrders = () =>{
-      if(this.state.orders != null){
-          return this.state.orders.map((order, index) =>{
-              return(
-                <tr>
-                <th scope="row">{order.id}</th>
-                <td>
-                    <div>
-                        <img src={order.cover} style={{width: 100, height: 130}} />
-                        <p style={{fontSize: 16}}>{order.book_name}</p>
-                    </div>
-                </td>
-                <td>{order.quantity}</td>
-                <td>{order.total_price}</td>
-                <td><p style={{fontSize: 16}} class={order.is_seen_by_admin == 0 ? "text-danger" : "text-success"}>{order.is_seen_by_admin == 0 ? "Not seen yet" : "Seen by admin"}</p></td>
-                <td><p style={{fontSize: 16}} class={order.is_completed == 0 ? "text-danger" : "text-success"}>{order.is_completed == 0 ? "Not delivered yet" : "Delivered"}</p></td>
-                </tr>
-              )
-          })
-      }
-  }
+  renderOrders = () => {
+    if (this.state.orders != null) {
+      return this.state.orders.map((order, index) => {
+        return (
+          <tr>
+            <th scope="row">{order.id}</th>
+            <td>
+              <div>
+                <object
+                  data={order.cover}
+                  type="image/jpg"
+                  style={{ height: 130, width: 100 }}
+                >
+                  <img
+                    src="images/books/dummy.png"
+                    style={{ width: 100, height: 130 }}
+                  />
+                </object>
+                <p style={{ fontSize: 16 }}>{order.book_name}</p>
+              </div>
+            </td>
+            <td>{order.quantity}</td>
+            <td>{order.total_price}</td>
+            <td>
+              <p
+                style={{ fontSize: 16 }}
+                class={
+                  order.is_seen_by_admin == 0 ? "text-danger" : "text-success"
+                }
+              >
+                {order.is_seen_by_admin == 0 ? "Not seen yet" : "Seen by admin"}
+              </p>
+            </td>
+            <td>
+              <p
+                style={{ fontSize: 16 }}
+                class={order.is_completed == 0 ? "text-danger" : "text-success"}
+              >
+                {order.is_completed == 0 ? "Not delivered yet" : "Delivered"}
+              </p>
+            </td>
+          </tr>
+        );
+      });
+    }
+  };
 
-  
-  
   render() {
     return (
       <React.Fragment>
-          {this.checkAuth()}
-          {this.fetchOrders()}
-          <div class="container">
-          <p class="m-2 mb-3" style={{fontSize: 30,}}>Orders</p>
+        {this.checkAuth()}
+        {this.fetchOrders()}
+        <div class="container">
+          <p class="m-2 mb-3" style={{ fontSize: 30 }}>
+            Orders
+          </p>
           <div class="card">
-              <div class="table-responsive">
+            <div class="table-responsive">
               <table class="table">
                 <thead>
-                    <tr>
+                  <tr>
                     <th scope="col">order id</th>
                     <th scope="col">Book name</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Total cost</th>
                     <th scope="col">Is seen by admin</th>
                     <th scope="col">Delivery status</th>
-                    
-                    </tr>
+                  </tr>
                 </thead>
-                <tbody>
-                    {this.renderOrders()}
-                </tbody>
-                </table>
-              </div>
+                <tbody>{this.renderOrders()}</tbody>
+              </table>
+            </div>
           </div>
-          </div>
+        </div>
       </React.Fragment>
     );
   }
 }
 
-Orders.propTypes = {
-  
-};
+Orders.propTypes = {};
 
 const mapStateToProps = state => ({
   token: state.auth.token
