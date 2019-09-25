@@ -62,8 +62,44 @@ class seeMore extends Component {
       if (this.state.authors != null) {
         return this.state.authors.data.map((author, index) => {
           return (
-            <div class="col-md-3" key={index}>
-              <p class="seemore_txt">{author.name}</p>
+            <div class="col-md-3 mb-3" key={index}>
+              <Link
+                to="/shopGrid"
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "author/books/" + author.id
+                  );
+                  console.log(author.id);
+                }}
+              >
+                <div class="d-flex justify-content-center">
+                  <object
+                    data="images/books/author.png"
+                    style={{
+                      width: 120,
+                      height: 120,
+                      backgroundColor: "#F1F2EE",
+                      borderRadius: "100%"
+                    }}
+                    type="image/png"
+                  >
+                    <img
+                      class="m-pubp-img"
+                      src={author.image}
+                      style={{
+                        borderRadius: "100%",
+                        width: 120,
+                        height: 120,
+                        backgroundColor: "#F1F2EE",
+                        borderRadius: "100%"
+                      }}
+                    />
+                  </object>
+                </div>
+                <p style={{ color: "black", textAlign: "center" }}>
+                  {author.name}
+                </p>
+              </Link>
             </div>
           );
         });
@@ -72,8 +108,37 @@ class seeMore extends Component {
       if (this.state.publishers != null) {
         return this.state.publishers.data.map((publisher, index) => {
           return (
-            <div class="col-md-3" key={index}>
-              <p class="seemore_txt">{publisher.name}</p>
+            <div class="col-md-3 mb-3" key={index}>
+              <Link
+                to="/shopGrid"
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "publisher/books/" + publisher.id
+                  );
+                  console.log(publisher.id);
+                }}
+              >
+                <div class="d-flex justify-content-center">
+                  <object
+                    data="images/default/publisher.png"
+                    style={{ width: 120, height: 120 }}
+                    type="image/png"
+                  >
+                    <img
+                      class="m-pubp-img"
+                      src={publisher.image}
+                      style={{
+                        borderRadius: "100%",
+                        width: 120,
+                        height: 120
+                      }}
+                    />
+                  </object>
+                </div>
+                <p style={{ color: "black", textAlign: "center" }}>
+                  {publisher.name}
+                </p>
+              </Link>
             </div>
           );
         });
@@ -82,8 +147,34 @@ class seeMore extends Component {
       if (this.state.categories != null) {
         return this.state.categories.data.map((category, index) => {
           return (
-            <div class="col-md-3" key={index}>
-              <p class="seemore_txt">{category.name}</p>
+            <div class="col-md-3 mb-3" key={index}>
+               <Link
+                to="/shopGrid"
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "category/" + category.id
+                  );
+                  console.log(category  .id);
+                }}
+              >
+              <div
+                class="d-flex align-items-center seeMcat"
+                style={{
+                  background: "#F1F2EE",
+                  height: 150,
+                  width: "100%",
+                  borderRadius: 10,
+                  cursor: 'pointer'
+                }}
+              >
+                <p
+                  class="seeMcatP ml-auto mr-auto"
+                  style={{ textAlign: "center", width: '80%'}}
+                >
+                  {category.name}
+                </p>
+              </div>
+              </Link>
             </div>
           );
         });
@@ -96,7 +187,7 @@ class seeMore extends Component {
     return (
       <React.Fragment>
         <div class="container">
-          <div class="row d-flex justify-content-center mt-2">
+          <div class="row d-flex justify-content-center mt-4">
             <p class="search_fv ">Search your favorite {this.props.type}</p>
             <div class="col-md-6 input-group mb-3">
               <input
