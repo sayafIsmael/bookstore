@@ -101,7 +101,7 @@ class Productz extends Component {
     this.closeModal = this.closeModal.bind(this);
   }
 
-  
+
 
   changeRating = newRating => {
     this.setState({
@@ -112,10 +112,10 @@ class Productz extends Component {
   componentWillMount() {
     // this.props.fetchBook();
   }
-  
+
 
   openModal() {
-    if(this.props.book.pages.length > 0){
+    if (this.props.book.pages.length > 0) {
       this.setState({ modalIsOpen: true });
     }
   }
@@ -414,6 +414,8 @@ class Productz extends Component {
   };
 
   reviews = () => {
+    try {
+      
     if (this.props.reviews.reviews.length > 0) {
       return this.props.reviews.reviews.map((review, index) => {
         return (
@@ -455,6 +457,9 @@ class Productz extends Component {
           </div>
         );
       });
+    }
+    } catch (error) {
+      console.log(error)
     }
   };
 
@@ -625,9 +630,9 @@ class Productz extends Component {
     });
   };
 
-  readBook = () =>{
-    if(this.props.book.pages != null && this.props.book.pages != []){
-      return(
+  readBook = () => {
+    if (this.props.book.pages != null && this.props.book.pages != []) {
+      return (
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
@@ -635,8 +640,8 @@ class Productz extends Component {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <div  class="row m-0 p-2 pt-0">
-          <FontAwesome name="times" onClick={this.closeModal} style={{fontSize: 25, color: "red", marginLeft: 'auto'}} />
+          <div class="row m-0 p-2 pt-0">
+            <FontAwesome name="times" onClick={this.closeModal} style={{ fontSize: 25, color: "red", marginLeft: 'auto' }} />
           </div>
           <div
             style={{
@@ -645,14 +650,26 @@ class Productz extends Component {
               border: "10px solid gray"
             }}
           >
-            {this.props.book.pages.map((item, index) =>{
-              return(
-                <img src={item.image} style={{width: '100%'}}/>
+            {this.props.book.pages.map((item, index) => {
+              return (
+                <img src={item.image} style={{ width: '100%' }} />
               )
             })}
           </div>
         </Modal>
       )
+    }
+  }
+
+  reviewLength = () => {
+    try {
+      if(this.props.reviews.reviews.length > 0){
+        return this.props.reviews.reviews.length
+      }else{
+        return 0
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -672,7 +689,8 @@ class Productz extends Component {
                           class="readsome_badge"
                           src="images/badges/lookInside.png"
                         />
-                        <div class="book-bg" onClick={() => {this.openModal();
+                        <div class="book-bg" onClick={() => {
+                          this.openModal();
                         }}>
                           <div
                             class="book-cover"
@@ -703,8 +721,8 @@ class Productz extends Component {
                           onClick={() => {
                             this.props.fetchBooks(
                               helper.prefix +
-                                "author/books/" +
-                                this.publisher_id()
+                              "author/books/" +
+                              this.publisher_id()
                             );
                           }}
                         >
@@ -783,8 +801,8 @@ class Productz extends Component {
                               onClick={() => {
                                 this.props.fetchBooks(
                                   helper.prefix +
-                                    "category/" +
-                                    this.category_id()
+                                  "category/" +
+                                  this.category_id()
                                 );
                               }}
                             >
@@ -799,16 +817,16 @@ class Productz extends Component {
                           <ul>
                             <li class="categories-title mr-2">Share :</li>
                             <li>
-                              <img class="social_icon" src="images/icons/HELPLINE_fb.png"/>  
+                              <img class="social_icon" src="images/icons/HELPLINE_fb.png" />
                             </li>
                             <li>
-                              <img class="social_icon" src="images/icons/HELPLINE_tube.png"/>  
+                              <img class="social_icon" src="images/icons/HELPLINE_tube.png" />
                             </li>
                             <li>
-                            <img class="social_icon" src="images/icons/HELPLINE_inst.png"/>
+                              <img class="social_icon" src="images/icons/HELPLINE_inst.png" />
                             </li>
                             <li>
-                            <img class="social_icon" src="images/icons/HELPLINE_twt.png"/>
+                              <img class="social_icon" src="images/icons/HELPLINE_twt.png" />
                             </li>
                           </ul>
                         </div>
@@ -878,8 +896,8 @@ class Productz extends Component {
                                   onClick={() => {
                                     this.props.fetchBooks(
                                       helper.prefix +
-                                        "author/books/" +
-                                        this.publisher_id()
+                                      "author/books/" +
+                                      this.publisher_id()
                                     );
                                   }}
                                 >
@@ -897,8 +915,8 @@ class Productz extends Component {
                                   onClick={() => {
                                     this.props.fetchBooks(
                                       helper.prefix +
-                                        "publisher/books/" +
-                                        this.publisher_id()
+                                      "publisher/books/" +
+                                      this.publisher_id()
                                     );
                                   }}
                                 >
@@ -955,9 +973,7 @@ class Productz extends Component {
 
                             <div class="media-body ml-4 mb-3">
                               <p class="text-secondary">
-                                {this.props.reviews.reviews.length > 0
-                                  ? this.props.reviews.reviews.length
-                                  : 0}{" "}
+                                {this.reviewLength()}{" "}
                                 Ratings Reviews
                               </p>
                               <StarRatings

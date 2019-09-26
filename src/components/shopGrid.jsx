@@ -66,6 +66,7 @@ class shopGrid extends Component {
 
   handleOptionChange = changeEvent => {
     this.props.sortBooks(this.props.books, changeEvent.target.value);
+    window.scrollTo(0, 0);
     console.log("Fucking latest books, ", this.props.books);
   };
 
@@ -264,6 +265,7 @@ class shopGrid extends Component {
     this.props.fetchBooks(helper.prefix + "author/books/" + author.id);
     this.props.selectAuthor(author.name);
     this.props.selectPublisher(null);
+    window.scrollTo(0, 0);
     console.log("mother fucking ", this.props.selectedAuthor);
   };
 
@@ -297,6 +299,7 @@ class shopGrid extends Component {
     this.props.fetchBooks(helper.prefix + "publisher/books/" + publisher.id);
     this.props.selectPublisher(publisher.name);
     this.props.selectAuthor(null);
+    window.scrollTo(0, 0);
     console.log("mother fucking ", this.props.selectedPublisher);
   };
 

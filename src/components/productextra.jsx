@@ -151,7 +151,7 @@ class ProductExtra extends Component {
                 মূল্য : {helper.getNewPrice(this.props.price, this.props.discount)} Tk.
               </p>
             </div>
-            <Link style={{width: '100%', fontSize: 65, display: this.state.mouseOver ? "none" : "inline"}}>
+            <Link style={{width: '100%', fontSize: 80, display: this.state.mouseOver ? "none" : "inline"}}>
             &nbsp;
             </Link>
             <Link to="/product">

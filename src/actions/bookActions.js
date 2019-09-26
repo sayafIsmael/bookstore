@@ -73,13 +73,13 @@ export const sortBooks = (item, option) => dispatch => {
   if (item != undefined) {
     let sorted = []; 
       if(option == 'plowToHigh'){
-        sorted = item.books.sort((a, b) => parseFloat(a.old_price) - parseFloat(b.old_price));
+        sorted = item.books.data.sort((a, b) => parseFloat(a.old_price) - parseFloat(b.old_price));
       }else if(option == 'phighToLow'){
-        sorted = item.books.sort((a, b) => parseFloat(b.old_price) - parseFloat(a.old_price));
+        sorted = item.books.data.sort((a, b) => parseFloat(b.old_price) - parseFloat(a.old_price));
       }else if(option == 'dlowToHigh'){
-        sorted = item.books.sort((a, b) => parseFloat(a.discount) - parseFloat(b.discount));
+        sorted = item.books.data.sort((a, b) => parseFloat(a.discount) - parseFloat(b.discount));
       }else if(option == 'dhighToLow'){
-        sorted = item.books.sort((a, b) => parseFloat(b.discount) - parseFloat(a.discount));
+        sorted = item.books.data.sort((a, b) => parseFloat(b.discount) - parseFloat(a.discount));
       }
     
     dispatch({
@@ -89,7 +89,20 @@ export const sortBooks = (item, option) => dispatch => {
         author: item.author ? item.author : null,
         publisher: item.publisher ? item.publisher : null,
         category: item.category ? item.category : null,
-        books: sorted,
+        books: {
+          current_page: item.books.current_page,
+          data: sorted,
+          first_page_url: item.books.first_page_url,
+          from: item.books.from,
+          last_page: item.books.last_page,
+          last_page_url: item.books.last_page_url,
+          next_page_url: item.books.next_page_url,
+          path: item.books.path,
+          per_page: item.books.per_page,
+          prev_page_url: item.books.prev_page_url,
+          to: item.books.to,
+          total: item.books.total,
+        },
       },
       selectedOption: option
     });
