@@ -111,6 +111,7 @@ class Productz extends Component {
 
   componentWillMount() {
     // this.props.fetchBook();
+    console.log("aa ddd f  fggg ",this.props.book.book)
   }
 
 
