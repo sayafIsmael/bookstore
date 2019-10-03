@@ -66,7 +66,7 @@ class shopGrid extends Component {
 
   handleOptionChange = changeEvent => {
     this.props.sortBooks(this.props.books, changeEvent.target.value);
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
     console.log("Fucking latest books, ", this.props.books);
   };
 
@@ -237,7 +237,6 @@ class shopGrid extends Component {
         console.log("Fuck ass ", item.title);
         return (
           <ProductExtra
-            key={index}
             cart_book={item}
             image={item.cover}
             price={item.old_price}
@@ -265,12 +264,12 @@ class shopGrid extends Component {
     this.props.fetchBooks(helper.prefix + "author/books/" + author.id);
     this.props.selectAuthor(author.name);
     this.props.selectPublisher(null);
-    window.scrollTo(0, 0);
     console.log("mother fucking ", this.props.selectedAuthor);
   };
 
   authorSort = () => {
     if (this.state.authors != null) {
+      window.scrollTo(0, 0)
       return this.state.authors.map((author, index) => {
         return (
           <li>
@@ -299,12 +298,12 @@ class shopGrid extends Component {
     this.props.fetchBooks(helper.prefix + "publisher/books/" + publisher.id);
     this.props.selectPublisher(publisher.name);
     this.props.selectAuthor(null);
-    window.scrollTo(0, 0);
     console.log("mother fucking ", this.props.selectedPublisher);
   };
 
   publisherSort = () => {
     if (this.state.publishers != null) {
+      window.scrollTo(0, 0)
       return this.state.publishers.map((publisher, index) => {
         return (
           <li>
@@ -329,35 +328,43 @@ class shopGrid extends Component {
   };
 
   pagination = () => {
-    if (
-      this.props.books.books.data != null ||
-      this.props.books.books.data != []
-    ) {
-      return (
-        <React.Fragment>
-          <li style={{display: this.props.books.books.prev_page_url != null ? 'inline' : 'none'}}>
-            <Link onClick={()=> 
-            this.props.fetchBooks(this.props.books.books.prev_page_url)}>Previous</Link>
-          </li>
-          <li class="active">
-            page{" "}
-            <Link
-              style={{
-                borderColor: "#363636",
-                color: "white",
-                backgroundColor: "#363636"
-              }}
-            >
-              {this.props.books.books.current_page}
-            </Link>{" "}
-            of <span style={{fontWeight: 'bold', fontSize: 18}}>{this.props.books.books.last_page}</span>
-          </li>
-          <li style={{display: this.props.books.books.next_page_url != null ? 'inline' : 'none'}}>
-            <Link onClick={()=> 
-            this.props.fetchBooks(this.props.books.books.next_page_url)}>Next</Link>
-          </li>
-        </React.Fragment>
-      );
+    try {
+      if (
+        this.props.books.books.data != null ||
+        this.props.books.books.data != []
+      ) {
+        return (
+          <React.Fragment>
+            <li style={{display: this.props.books.books.prev_page_url != null ? 'inline' : 'none'}}>
+              <Link onClick={()=> 
+              {this.props.fetchBooks(this.props.books.books.prev_page_url)
+                window.scrollTo(0, 0);
+              }}>Previous</Link>
+            </li>
+            <li class="active">
+              page{" "}
+              <Link
+                style={{
+                  borderColor: "#363636",
+                  color: "white",
+                  backgroundColor: "#363636"
+                }}
+              >
+                {this.props.books.books.current_page}
+              </Link>{" "}
+              of <span style={{fontWeight: 'bold', fontSize: 18}}>{this.props.books.books.last_page}</span>
+            </li>
+            <li style={{display: this.props.books.books.next_page_url != null ? 'inline' : 'none'}}>
+              <Link onClick={()=> 
+              {this.props.fetchBooks(this.props.books.books.next_page_url)
+                window.scrollTo(0, 0);
+              }}>Next</Link>
+            </li>
+          </React.Fragment>
+        );
+      }
+    } catch (error) {
+      console.log(error)
     }
   };
 

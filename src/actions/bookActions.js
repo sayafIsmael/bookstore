@@ -24,10 +24,10 @@ export const fetchBooks = (url) => dispatch => {
 };
 
 export const seeMore = (type) => dispatch => {
-      dispatch({
-        type: SEE_MORE,
-        payload: type
-      })
+  dispatch({
+    type: SEE_MORE,
+    payload: type
+  })
 };
 
 export const fetchBook = (url) => dispatch => {
@@ -71,17 +71,18 @@ export const emptyCart = () => dispatch => {
 
 export const sortBooks = (item, option) => dispatch => {
   if (item != undefined) {
-    let sorted = []; 
-      if(option == 'plowToHigh'){
-        sorted = item.books.data.sort((a, b) => parseFloat(a.old_price) - parseFloat(b.old_price));
-      }else if(option == 'phighToLow'){
-        sorted = item.books.data.sort((a, b) => parseFloat(b.old_price) - parseFloat(a.old_price));
-      }else if(option == 'dlowToHigh'){
-        sorted = item.books.data.sort((a, b) => parseFloat(a.discount) - parseFloat(b.discount));
-      }else if(option == 'dhighToLow'){
-        sorted = item.books.data.sort((a, b) => parseFloat(b.discount) - parseFloat(a.discount));
-      }
-    
+    console.log("dddd vvv ccc xx : ", item)
+    let sorted = [];
+    if (option == 'plowToHigh') {
+      sorted = item.books.data.sort((a, b) => parseFloat(a.old_price) - parseFloat(b.old_price));
+    } else if (option == 'phighToLow') {
+      sorted = item.books.data.sort((a, b) => parseFloat(b.old_price) - parseFloat(a.old_price));
+    } else if (option == 'dlowToHigh') {
+      sorted = item.books.data.sort((a, b) => parseFloat(a.discount) - parseFloat(b.discount));
+    } else if (option == 'dhighToLow') {
+      sorted = item.books.data.sort((a, b) => parseFloat(b.discount) - parseFloat(a.discount));
+    }
+
     dispatch({
       type: SORT_BOOKS,
       payload: {
@@ -96,7 +97,6 @@ export const sortBooks = (item, option) => dispatch => {
           from: item.books.from,
           last_page: item.books.last_page,
           last_page_url: item.books.last_page_url,
-          next_page_url: item.books.next_page_url,
           path: item.books.path,
           per_page: item.books.per_page,
           prev_page_url: item.books.prev_page_url,
