@@ -849,7 +849,7 @@ class Productz extends Component {
                     role="tablist"
                   >
                     <a
-                      class="nav-item nav-link active"
+                      class="nav-item nav-link"
                       data-toggle="tab"
                       href="#nav-details"
                       role="tab"
@@ -857,7 +857,7 @@ class Productz extends Component {
                       Summary
                     </a>
                     <a
-                      class="nav-item nav-link"
+                      class="nav-item nav-link active"
                       data-toggle="tab"
                       href="#nav-specification"
                       role="tab"
@@ -875,7 +875,7 @@ class Productz extends Component {
                   </div>
                   <div class="tab__container">
                     <div
-                      class="pro__tab_label tab-pane fade show active"
+                      class="pro__tab_label tab-pane fade"
                       id="nav-details"
                       role="tabpanel"
                     >
@@ -884,7 +884,7 @@ class Productz extends Component {
                       </div>
                     </div>
                     <div
-                      class="pro__tab_label tab-pane fade"
+                      class="pro__tab_label tab-pane fade show active"
                       id="nav-specification"
                       role="tabpanel"
                     >
@@ -906,7 +906,7 @@ class Productz extends Component {
                                     this.props.fetchBooks(
                                       helper.prefix +
                                         "author/books/" +
-                                        this.publisher_id()
+                                        this.author_id()
                                     );
                                   }}
                                 >

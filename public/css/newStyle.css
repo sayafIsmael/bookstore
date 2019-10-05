@@ -588,3 +588,18 @@ input[type=number]:focus,
     z-index: 10;
 }
 
+.mobile-sort-header{
+    text-align: center;
+    font-weight: normal;
+    font-size: 27px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid gray;
+    margin-bottom: 20px;
+}
+
+@media (min-width: 1200px){
+    .books_container {
+        max-width: 1270px;
+    }
+}
+

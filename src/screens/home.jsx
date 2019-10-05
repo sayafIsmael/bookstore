@@ -591,7 +591,7 @@ class Home extends Component {
 
         <MobileView class="mb-3" style={{background: "#F1F2EE", marginTop: 30}}>
         <div class="row m-0 d-flex justify-content-between align-items-center" style={{height: 30}}>
-          <h4 class="mt-2 ml-3">সাপ্তাহিক সেরা লেখক</h4>
+          <h6 class="mt-2 ml-3">সাপ্তাহিক সেরা লেখক</h6>
           <Link
                 to="/seemore"
                 onClick={() => {
@@ -670,7 +670,7 @@ class Home extends Component {
           </div>
         </BrowserView>
         <MobileView>
-          <div class="container">
+          <div class="container mt-4">
             <div class="" style={{ background: "#EED7C2" }}>
               <div class="row d-flex justify-content-center pt-2">
                 <h4

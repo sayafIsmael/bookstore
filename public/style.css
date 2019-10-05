@@ -4184,6 +4184,10 @@ h3.widget-title-modal {
     padding: 0; }
     .product__info__detailed .pro_details_nav a.nav-item + .nav-item {
       margin-left: 38px; }
+      @media only screen and (max-width: 320px) {
+        .product__info__detailed .pro_details_nav a.nav-item + .nav-item {
+          margin-left: 10px; } 
+        }
     .product__info__detailed .pro_details_nav a.nav-item::after {
       background: #2e2e2e none repeat scroll 0 0;
       bottom: -2px;

@@ -9,6 +9,8 @@ import { Checkbox } from "react-bootstrap";
 import * as helper from "./../helper";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import Modal from "react-modal";
+
 import {
   fetchBooks,
   sortBooks,
@@ -30,6 +32,42 @@ import {
   // Prompt
 } from "react-router-dom";
 
+const customStyles = {
+  content: {
+    top: "20%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginTop: 80,
+    marginLeft: 10,
+    marginRight: 10,
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)"
+  }
+};
+
+const customStyles2 = {
+  content: {
+    position: 'absolute',
+    top: '39%',
+    left: '47%',
+    right: 'auto',
+    bottom: 'auto',
+    border: '1px solid rgb(204, 204, 204)',
+    background: 'rgb(255, 255, 255)',
+    overflow: 'auto',
+    borderRadius: 4,
+    outline: 'none',
+    padding: 20,
+    marginTop: 61,
+    marginLeft: 10,
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    width: '100%',
+    height: '100%',
+  }
+};
+
 class shopGrid extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +77,11 @@ class shopGrid extends Component {
       authors: null,
       authorFilterTxt: null,
       publishers: null,
-      publisherFilterTxt: null
+      publisherFilterTxt: null,
+      sortMobile: false,
+      filterMobile: false,
+      filterAuthor: true,
+      filterPublisher: false
     };
     window.scrollTo(0, 0);
     this.fetchAuthors();
@@ -66,7 +108,8 @@ class shopGrid extends Component {
 
   handleOptionChange = changeEvent => {
     this.props.sortBooks(this.props.books, changeEvent.target.value);
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
+    this.setState({ sortMobile: false });
     console.log("Fucking latest books, ", this.props.books);
   };
 
@@ -92,7 +135,7 @@ class shopGrid extends Component {
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          this.setState({ authors: data.authors });
+          this.setState({ authors: data.authors});
         }
       });
   };
@@ -166,7 +209,7 @@ class shopGrid extends Component {
             </MobileView>
           </div>
           <div class="col-10">
-            <h4 class="browse__meta--title">{this.props.books.author.name}</h4>
+            <h4 class="browse__meta--title" style={{paddingTop: 14, paddingLeft: 10}}>{this.props.books.author.name}</h4>
             <p class="browse__meta--description js--browse__meta--description">
               {this.props.books.author.description}
             </p>
@@ -214,7 +257,7 @@ class shopGrid extends Component {
             </MobileView>
           </div>
           <div class="col-10">
-            <h4 class="browse__meta--title">
+            <h4 class="browse__meta--title" style={{paddingTop: 14, paddingLeft: 10}}>
               {this.props.books.publisher.name}
             </h4>
             <p class="browse__meta--description js--browse__meta--description">
@@ -264,12 +307,13 @@ class shopGrid extends Component {
     this.props.fetchBooks(helper.prefix + "author/books/" + author.id);
     this.props.selectAuthor(author.name);
     this.props.selectPublisher(null);
+    this.setState({filterMobile: false})
     console.log("mother fucking ", this.props.selectedAuthor);
   };
 
   authorSort = () => {
     if (this.state.authors != null) {
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
       return this.state.authors.map((author, index) => {
         return (
           <li>
@@ -298,12 +342,13 @@ class shopGrid extends Component {
     this.props.fetchBooks(helper.prefix + "publisher/books/" + publisher.id);
     this.props.selectPublisher(publisher.name);
     this.props.selectAuthor(null);
+    this.setState({filterMobile: false})
     console.log("mother fucking ", this.props.selectedPublisher);
   };
 
   publisherSort = () => {
     if (this.state.publishers != null) {
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
       return this.state.publishers.map((publisher, index) => {
         return (
           <li>
@@ -335,11 +380,22 @@ class shopGrid extends Component {
       ) {
         return (
           <React.Fragment>
-            <li style={{display: this.props.books.books.prev_page_url != null ? 'inline' : 'none'}}>
-              <Link onClick={()=> 
-              {this.props.fetchBooks(this.props.books.books.prev_page_url)
-                window.scrollTo(0, 0);
-              }}>Previous</Link>
+            <li
+              style={{
+                display:
+                  this.props.books.books.prev_page_url != null
+                    ? "inline"
+                    : "none"
+              }}
+            >
+              <Link
+                onClick={() => {
+                  this.props.fetchBooks(this.props.books.books.prev_page_url);
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Previous
+              </Link>
             </li>
             <li class="active">
               page{" "}
@@ -352,20 +408,183 @@ class shopGrid extends Component {
               >
                 {this.props.books.books.current_page}
               </Link>{" "}
-              of <span style={{fontWeight: 'bold', fontSize: 18}}>{this.props.books.books.last_page}</span>
+              of{" "}
+              <span style={{ fontWeight: "bold", fontSize: 18 }}>
+                {this.props.books.books.last_page}
+              </span>
             </li>
-            <li style={{display: this.props.books.books.next_page_url != null ? 'inline' : 'none'}}>
-              <Link onClick={()=> 
-              {this.props.fetchBooks(this.props.books.books.next_page_url)
-                window.scrollTo(0, 0);
-              }}>Next</Link>
+            <li
+              style={{
+                display:
+                  this.props.books.books.next_page_url != null
+                    ? "inline"
+                    : "none"
+              }}
+            >
+              <Link
+                onClick={() => {
+                  this.props.fetchBooks(this.props.books.books.next_page_url);
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Next
+              </Link>
             </li>
           </React.Fragment>
         );
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
+  };
+
+  closeModal = () => {
+    this.setState({ sortMobile: false });
+    this.setState({ filterMobile: false });
+  };
+
+  mobileSorting = () => {
+    return (
+      <Modal
+        isOpen={this.state.sortMobile}
+        // onAfterOpen={this.afterOpenModal}
+        onRequestClose={() => this.closeModal()}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <h1 class="mobile-sort-header">Sort by</h1>
+        <ul>
+          <li>
+            <div className="radio">
+              <label>
+                <input
+                  type="radio"
+                  class="mr-2"
+                  value="plowToHigh"
+                  checked={this.props.selectedOption === "plowToHigh"}
+                  onChange={this.handleOptionChange}
+                />
+                Price - Low to High
+              </label>
+            </div>
+          </li>
+          <li>
+            <div className="radio">
+              <label>
+                <input
+                  type="radio"
+                  class="mr-2"
+                  value="phighToLow"
+                  checked={this.props.selectedOption === "phighToLow"}
+                  onChange={this.handleOptionChange}
+                />
+                Price - High to Low
+              </label>
+            </div>
+          </li>
+          <li>
+            <div className="radio">
+              <label>
+                <input
+                  type="radio"
+                  class="mr-2"
+                  value="dlowToHigh"
+                  checked={this.props.selectedOption === "dlowToHigh"}
+                  onChange={this.handleOptionChange}
+                />
+                Discount - Low to High
+              </label>
+            </div>
+          </li>
+          <li>
+            <div className="radio">
+              <label>
+                <input
+                  type="radio"
+                  class="mr-2"
+                  value="dhighToLow"
+                  checked={this.props.selectedOption === "dhighToLow"}
+                  onChange={this.handleOptionChange}
+                />
+                Discount - High to Low
+              </label>
+            </div>
+          </li>
+        </ul>
+      </Modal>
+    );
+  };
+
+  mobileFilterCat = () =>{
+    if(this.state.filterAuthor){
+      return(
+        <React.Fragment>
+                        <div class="input-group input-group-sm filter-search mt-1 mb-2">
+                          <input
+                            type="search"
+                            class="form-control js--client_search"
+                            placeholder="&#9906;"
+                            aria-label="Small"
+                            aria-describedby="inputGroup-sizing-sm"
+                            value={this.state.authorFilterTxt}
+                            onChange={e => this.filterAuthor(e)}
+                          />
+                        </div>
+                        <ul style={{ height: '75%', overflowY: "scroll" }}>
+                          {this.authorSort()}
+                        </ul>
+        </React.Fragment>
+      )
+    }else if(this.state.filterPublisher){
+      return(
+        <React.Fragment>
+          <div class="input-group input-group-sm filter-search mt-1 mb-2">
+                          <input
+                            type="search"
+                            class="form-control js--client_search"
+                            placeholder="&#9906;"
+                            aria-label="Small"
+                            aria-describedby="inputGroup-sizing-sm"
+                            value={this.state.publisherFilterTxt}
+                            onChange={e => this.filterPublisher(e)}
+                          />
+                        </div>
+                        <ul style={{  height: '75%', overflowY: "scroll" }}>
+                          {this.publisherSort()}
+                        </ul>
+        </React.Fragment>
+      )
+    }
+  }
+
+  mobileFilter = () => {
+    return (
+      <Modal
+        isOpen={this.state.filterMobile}
+        // onAfterOpen={this.afterOpenModal}
+        onRequestClose={() => this.closeModal()}
+        style={customStyles2}
+        contentLabel="Example Modal"
+      >
+        <div class="row d-flex justify-content-flex-between">
+          <div class="col">
+          <button type="button" class="btn btn-danger" onClick={() => this.setState({filterMobile: false})}>Close</button>
+          </div>
+          <div class="col">
+          <h1 class="">Filter</h1>
+          </div>
+        </div>
+        <div class="btn-group mt-2" role="group" aria-label="Basic example"  style={{width: '100%'}}>
+          <button type="button" class="btn btn-secondary"  style={{width: '50%', background: this.state.filterAuthor ? "gray":' '}}
+          onClick={() => this.setState({filterAuthor: true, filterPublisher: false})}
+          >Author</button>
+          <button type="button" class="btn btn-secondary" style={{width: '50%', background: this.state.filterPublisher ? "gray":' '}}
+          onClick={() => this.setState({filterPublisher: true, filterAuthor: false,})}
+          >Publisher</button>
+        </div>
+        {this.mobileFilterCat()}
+      </Modal>
+    );
   };
 
   render() {
@@ -373,7 +592,7 @@ class shopGrid extends Component {
     return (
       <React.Fragment>
         <div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
-          <div class="container">
+          <div class="container books_container">
             <div class="row m-0">
               <div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
                 <BrowserView>
@@ -974,29 +1193,64 @@ class shopGrid extends Component {
                     role="tabpanel"
                   >
                     {this.authordetails()}
-                    <nav aria-label="breadcrumb">
-                      <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                          <Link to="/">Home</Link>
-                        </li>
+                    <MobileView>
+                      {this.mobileSorting()}
+                      {this.mobileFilter()}
+                      <div
+                        class="row pt-3 pl-2 pr-3 mb-3"
+                        style={{ borderBottom: "1px solid gray" }}
+                      >
+                        <div
+                          class="col"
+                          style={{ borderRight: "1px solid gray" }}
+                          onClick={() => {
+                            console.log("fuck");
+                            this.setState({ sortMobile: true });
+                          }}
+                        >
+                          <button class="btn" style={{ background: "none" }}>
+                            <i class="fa fa-sort"></i> Sort
+                          </button>
+                        </div>
+                        <div class="col"
+                        onClick={() => {
+                          this.setState({ filterMobile: true });
+                        }}
+                        >
+                          <button class="btn" style={{ background: "none" }}>
+                            <i class="fa fa-filter"></i> Filter
+                          </button>
+                        </div>
+                      </div>
+                    </MobileView>
+                    <BrowserView>
+                      <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item">
+                            <Link to="/">Home</Link>
+                          </li>
 
-                        <li class="breadcrumb-item">
-                          <Link to="/">Books</Link>
-                        </li>
-                        <li class="breadcrumb-item">
-                          <Link>
-                            {this.props.books.author
-                              ? "author"
-                              : this.props.books.publisher
-                              ? "publisher"
-                              : "category"}
-                          </Link>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                          {this.booksTitle()}
-                        </li>
-                      </ol>
-                    </nav>
+                          <li class="breadcrumb-item">
+                            <Link to="/">Books</Link>
+                          </li>
+                          <li class="breadcrumb-item">
+                            <Link>
+                              {this.props.books.author
+                                ? "author"
+                                : this.props.books.publisher
+                                ? "publisher"
+                                : "category"}
+                            </Link>
+                          </li>
+                          <li
+                            class="breadcrumb-item active"
+                            aria-current="page"
+                          >
+                            {this.booksTitle()}
+                          </li>
+                        </ol>
+                      </nav>
+                    </BrowserView>
                     <div class="row m-0">
                       <div class="col-lg-12">
                         <h1 style={{ fontSize: "150%", fontWeight: 400 }}>
