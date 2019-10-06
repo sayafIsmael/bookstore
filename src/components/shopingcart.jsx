@@ -67,16 +67,12 @@ checkCart = () => {
                                     this.props.fetchBook(helper.prefix + "book/singlebook/" + book.id)
                                 }
                                 >
-                                  <object
-                                    data={book.cover}
-                                    type="image/jpg"
-                                    style={{ height: 100, width: 70 }}
-                                  >
+                                  
                                     <img
                                       style={{ height: 100, width: 70 }}
-                                      src="images/books/dummy.png"
+                                      src={book.cover == null ? "images/books/dummy.png" : book.cover}
                                     />
-                                  </object>
+                              
                                 </Link>
                               </td>
                               <td class="product-name">
@@ -138,8 +134,8 @@ checkCart = () => {
                   </div>
                 </form>
                 <div class="cartbox__btn">
-                  <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
-                    <li>
+                  <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-end">
+                    {/* <li>
                       <Link to={"#"}>Coupon Code</Link>
                     </li>
                     <li>
@@ -147,7 +143,7 @@ checkCart = () => {
                     </li>
                     <li>
                       <Link style={{background: '#138496', color: 'white'}} to={"#"}>Order as a gift</Link>
-                    </li>
+                    </li> */}
                     <li>
                       {this.gotoShipping()}
                     </li>

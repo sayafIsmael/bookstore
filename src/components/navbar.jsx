@@ -172,13 +172,7 @@ class navbar extends Component {
                               this.props.selectPublisher(null);
                             }}
                           >
-                            <object
-                              data={book.cover}
-                              type="image/jpg"
-                              style={{ height: 100, width: 70 }}
-                            >
-                              <img src="images/books/dummy.png" />
-                            </object>
+                              <img src={book.cover == null ? "images/books/dummy.png" : book.cover} />
                           </Link>
                         </div>
                         <div class="content">

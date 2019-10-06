@@ -73,7 +73,7 @@ class Product extends Component {
                 Add to Cart
               </button>
               <img class="read_some" src="images/badges/read_some.png" style={{ opacity: this.state.mouseOver ? 0.3 : 1 }}/>
-              <img class="m-item-img ml-auto mr-auto" src={this.props.image} style={{ opacity: this.state.mouseOver ? 0.3 : 1 }}/>
+              <img class="m-item-img ml-auto mr-auto" src={this.props.image == null ? "images/books/dummy.png" : this.props.image} style={{ opacity: this.state.mouseOver ? 0.3 : 1 }}/>
             </div>
             <div style={{overflow: 'hidden'}}>
               <p style={{ color: "black", marginTop: 10, opacity: this.state.mouseOver ? 0.3 : 1}}>{this.props.name}</p>
@@ -100,7 +100,7 @@ class Product extends Component {
                 <p class="mobile-discount">{this.props.discount}%</p>
               </div>
               <img class="read_some_mb" src="images/badges/read_some.png" />
-              <img class="m-item-img ml-auto mr-auto" src={this.props.image} />
+              <img class="m-item-img ml-auto mr-auto" src={this.props.image == null ? "images/books/dummy.png" : this.props.image} />
             </div>
             <div style={{overflow: 'hidden'}}>
               <p style={{ color: "black", marginTop: 10 }}>{this.props.name}</p>

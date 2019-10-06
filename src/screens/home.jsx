@@ -426,21 +426,15 @@ class Home extends Component {
                           }}
                         >
                           <div class="crp-item">
-                            <object
-                              data="images/default/publisher.png"
-                              style={{ width: 80, height: 80 }}
-                              type="image/png"
-                            >
                               <img
                                 class="m-pubp-img"
-                                src={item.image}
+                                src={item.image == null ? "images/default/publisher.png" : item.image}
                                 style={{
                                   borderRadius: "100%",
                                   width: 80,
                                   height: 80
                                 }}
                               />
-                            </object>
                             <p style={{color: 'black'}}>{item.name}</p>
                           </div>
                         </Link>
@@ -483,21 +477,15 @@ class Home extends Component {
                           }}
                         >
                           <div class="cr-item-mb" style={{ width: 97 }}>
-                            <object
-                              data="images/default/publisher.png"
-                              style={{ width: 97, height: 97 }}
-                              type="image/png"
-                            >
                               <img
                                 class="m-pub-img"
-                                src={item.image}
+                                src={item.image == null ? "images/default/publisher.png" : item.image}
                                 style={{
                                   borderRadius: "100%",
                                   width: 97,
                                   height: 97
                                 }}
                               />
-                            </object>
                             <p style={{color: 'black'}}>{item.name}</p>
                           </div>
                         </Link>
@@ -568,17 +556,11 @@ class Home extends Component {
                         }}
                       >
                         <div class="crw-item">
-                        <object
-                              data="images/books/author.png"
-                              style={{ width: 100, height: 100, background: 'white', borderRadius: "100%"}}
-                              type="image/png"
-                            >
                           <img
                             class="mw-pub-img"
-                            src={item.image}
+                            src={item.image == null ? "images/books/author.png" : item.image}
                             style={{ width: 100, height: 100, background: 'white', borderRadius: "100%" }}
                           />
-                        </object>
                         <p style={{color: 'black'}}>{item.name}</p>
                         </div>
                       </Link>
@@ -618,17 +600,11 @@ class Home extends Component {
                         }}
                       >
                         <div class="crw-item">
-                        <object
-                              data="images/books/author.png"
-                              style={{ width: 100, height: 100, background: 'white', borderRadius: "100%"}}
-                              type="image/png"
-                            >
                           <img
                             class="mw-pub-img"
-                            src={item.image}
+                            src={item.image == null ? "images/books/author.png" : item.image}
                             style={{ width: 100, height: 100, background: 'white', borderRadius: "100%" }}
                           />
-                        </object>
                         <p style={{color: 'black'}}>{item.name}</p>
                         </div>
                       </Link>

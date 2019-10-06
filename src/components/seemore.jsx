@@ -73,19 +73,10 @@ class seeMore extends Component {
                 }}
               >
                 <div class="d-flex justify-content-center">
-                  <object
-                    data="images/books/author.png"
-                    style={{
-                      width: 120,
-                      height: 120,
-                      backgroundColor: "#F1F2EE",
-                      borderRadius: "100%"
-                    }}
-                    type="image/png"
-                  >
+                  
                     <img
                       class="m-pubp-img"
-                      src={author.image}
+                      src={author.image == null ? "images/default/default-avatar.png" : author.image}
                       style={{
                         borderRadius: "100%",
                         width: 120,
@@ -94,7 +85,7 @@ class seeMore extends Component {
                         borderRadius: "100%"
                       }}
                     />
-                  </object>
+        
                 </div>
                 <p style={{ color: "black", textAlign: "center" }}>
                   {author.name}
@@ -119,21 +110,15 @@ class seeMore extends Component {
                 }}
               >
                 <div class="d-flex justify-content-center">
-                  <object
-                    data="images/default/publisher.png"
-                    style={{ width: 120, height: 120 }}
-                    type="image/png"
-                  >
                     <img
                       class="m-pubp-img"
-                      src={publisher.image}
+                      src={publisher.image == null ? "images/default/publisher.png" : publisher.image}
                       style={{
                         borderRadius: "100%",
                         width: 120,
                         height: 120
                       }}
                     />
-                  </object>
                 </div>
                 <p style={{ color: "black", textAlign: "center" }}>
                   {publisher.name}

@@ -105,7 +105,7 @@ class ProductExtra extends Component {
 
               <img
                 class="m-item-img ml-auto mr-auto"
-                src={this.props.image}
+                src={this.props.image == null ? "images/books/dummy.png" : this.props.image}
                 style={{
                   width: 130,
                   height: 188,
@@ -183,7 +183,7 @@ class ProductExtra extends Component {
                 <p class="mobile-discount">{this.props.discount}%</p>
               </div>
               <img class="read_some_mb" src="images/badges/read_some.png" />
-              <img class="m-item-img ml-auto mr-auto" src={this.props.image} />
+              <img class="m-item-img ml-auto mr-auto" src={this.props.image == null ? "images/books/dummy.png" : this.props.image} />
             </div>
             <div style={{ overflow: "hidden" }}>
               <p style={{ color: "black", marginTop: 10 }}>{this.props.name}</p>

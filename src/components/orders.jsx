@@ -30,6 +30,7 @@ class Orders extends Component {
       orders: null
     };
     window.scrollTo(0, 0);
+    this.fetchOrders()
   }
 
   checkAuth = () => {
@@ -69,16 +70,10 @@ class Orders extends Component {
             <th scope="row">{order.id}</th>
             <td>
               <div>
-                <object
-                  data={order.cover}
-                  type="image/jpg"
-                  style={{ height: 130, width: 100 }}
-                >
                   <img
-                    src="images/books/dummy.png"
+                    src={order.cover == null ? "images/books/dummy.png" : order.cover}
                     style={{ width: 100, height: 130 }}
                   />
-                </object>
                 <p style={{ fontSize: 16 }}>{order.book_name}</p>
               </div>
             </td>
@@ -112,7 +107,6 @@ class Orders extends Component {
     return (
       <React.Fragment>
         {this.checkAuth()}
-        {this.fetchOrders()}
         <div class="container">
           <p class="m-2 mb-3" style={{ fontSize: 30 }}>
             Orders

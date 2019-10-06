@@ -204,8 +204,8 @@ footer, .h6 , .dark-grey-text{
     padding-bottom: 30px;
 }
 .payment-img{
-    height: 80px;
-    width: 100px;
+    height: 60px;
+    width: 80px;
     margin-top: 5px;
 }
 .payment-img-mb {
@@ -214,10 +214,10 @@ footer, .h6 , .dark-grey-text{
     width: 90%;
 }
 .payment-box{
-    height: 100px;
+    height: 81px;
     background-color: #fff;
-    width: 120px;
-    margin-right: 26px;
+    width: 44px;
+    margin-right: 50px;
     margin-top: 10px;
     border-radius: 10px;
     border: 2px solid #838384;
