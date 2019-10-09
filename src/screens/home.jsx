@@ -13,6 +13,13 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchBooks, seeMore} from "../actions/bookActions";
 import { Link } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { Growl } from 'primereact/growl';
+import { Button } from 'primereact/button';
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
 
 import Slider from "react-slick";
 
@@ -143,12 +150,60 @@ class Home extends Component {
       // books: discountProduct,
       cat_orders: null,
       publishers: null,
-      top_authors: null
+      top_authors: null,
+      subscribedUser: null,
     };
     window.scrollTo(0, 0);
     this.fetchBooks();
     this.fetchPublishers();
     this.fecthTopAuthors();
+    this.showSuccess = this.showSuccess.bind(this);
+    this.showInfo = this.showInfo.bind(this);
+    this.showWarn = this.showWarn.bind(this);
+    this.showError = this.showError.bind(this);
+    this.showMultiple = this.showMultiple.bind(this);
+    this.showSticky = this.showSticky.bind(this);
+    this.showCustom = this.showCustom.bind(this);
+    this.clear = this.clear.bind(this);
+  }
+
+  showSuccess(message, detail) {
+    this.growl.show({ severity: 'success', summary: message, detail: detail });
+  }
+
+  showInfo() {
+    this.growl.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
+  }
+
+  showWarn() {
+    this.growl.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
+  }
+
+  showError(message, detail) {
+    this.growl.show({ severity: 'error', summary: message, detail: detail });
+  }
+
+  showSticky() {
+    this.growl.show({ severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true });
+  }
+
+  showCustom() {
+    const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
+    const detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px" />
+
+    this.growl.show({ severity: 'info', summary: summary, detail: detail, sticky: true });
+  }
+
+  showMultiple() {
+    this.growl.show([
+      { severity: 'info', summary: 'Message 1', detail: 'PrimeReact rocks' },
+      { severity: 'info', summary: 'Message 2', detail: 'PrimeReact rocks' },
+      { severity: 'info', summary: 'Message 3', detail: 'PrimeFaces rocks' }
+    ]);
+  }
+
+  clear() {
+    this.growl.clear();
   }
 
 
@@ -618,6 +673,46 @@ class Home extends Component {
     );
   };
 
+
+  subscribeUser = (type) =>{
+    let url = helper.prefix + 'subscribe'
+
+    let data = {
+      user: this.state.subscribedUser,
+      type: '1'
+    }
+
+    fetch(helper.prefix + 'subscribe', {
+      method: "POST", // or 'PUT'
+      body: JSON.stringify(data), // data can be `string` or {object}!
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+        // 'Authorization' : 'Bearer',
+      }
+    })
+      .then(res => res.json())
+      .then(response => {
+        if(response.success){
+          this.showSuccess("Subscribed successfully", "Thank you")
+        } 
+        if(response.message){
+          this.showError(response.message, "Please fix this..")
+        }else{
+          this.showError("Something went wrong", "Please fix..")
+        }
+        
+        if(response.errors.type){
+          this.showError(response.errors.type[0], "Please fix..")
+        }
+        if(response.errors.user){
+          this.showError(response.errors.user[0], "Please fix..")
+        }
+      })
+      .catch(error => console.error("Error:", error));
+ 
+  }
+
   subscribe = () => {
     return (
       <React.Fragment>
@@ -635,11 +730,20 @@ class Home extends Component {
                   class="col-md-5 subs-input pl-2 pr-2"
                   placeholder="ইমেইল/মোবাইল নম্বর"
                   style={{ height: 55 }}
+                  // value={this.state.subscribeUser}
+                  onChange={(e) => this.setState({subscribedUser: e.target.value})}
                 />
+                <Growl ref={(el) => this.growl = el} />
                 <div class="row mt-auto mb-auto ml-0">
-                  <button class="btn btn-primary ml-2 mr-2">পুরুষ</button>
-                  <button class="btn btn-success mr-2">মহিলা</button>
-                  <button class="btn btn-warning">অন্যান্য</button>
+                  <button class="btn btn-primary ml-2 mr-2"
+                  onClick={() => this.subscribeUser('1')}
+                  >পুরুষ</button>
+                  <button class="btn btn-success mr-2"
+                  onClick={() => this.subscribeUser('2')}
+                  >মহিলা</button>
+                  <button class="btn btn-warning"
+                  onClick={() => this.subscribeUser('3')}
+                  >অন্যান্য</button>
                 </div>
               </div>
             </div>

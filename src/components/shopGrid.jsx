@@ -10,6 +10,13 @@ import * as helper from "./../helper";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Modal from "react-modal";
+import { makeStyles } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { Growl } from 'primereact/growl';
+import { Button } from 'primereact/button';
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
 
 import {
   fetchBooks,
@@ -68,6 +75,13 @@ const customStyles2 = {
   }
 };
 
+const useStyles = makeStyles({
+  root: {
+    flexGrow: 1,
+  },
+});
+
+
 class shopGrid extends Component {
   constructor(props) {
     super(props);
@@ -86,7 +100,56 @@ class shopGrid extends Component {
     window.scrollTo(0, 0);
     this.fetchAuthors();
     this.fetchPublishers();
+    this.showSuccess = this.showSuccess.bind(this);
+    this.showInfo = this.showInfo.bind(this);
+    this.showWarn = this.showWarn.bind(this);
+    this.showError = this.showError.bind(this);
+    this.showMultiple = this.showMultiple.bind(this);
+    this.showSticky = this.showSticky.bind(this);
+    this.showCustom = this.showCustom.bind(this);
+    this.clear = this.clear.bind(this);
   }
+
+  showSuccess() {
+    this.growl.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
+  }
+
+  showInfo() {
+    this.growl.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
+  }
+
+  showWarn() {
+    this.growl.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
+  }
+
+  showError() {
+    this.growl.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+  }
+
+  showSticky() {
+    this.growl.show({ severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true });
+  }
+
+  showCustom() {
+    const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
+    const detail = <img alt="PrimeReact" src="showcase/resources/images/primereact-logo.png" width="250px" />
+
+    this.growl.show({ severity: 'info', summary: summary, detail: detail, sticky: true });
+  }
+
+  showMultiple() {
+    this.growl.show([
+      { severity: 'info', summary: 'Message 1', detail: 'PrimeReact rocks' },
+      { severity: 'info', summary: 'Message 2', detail: 'PrimeReact rocks' },
+      { severity: 'info', summary: 'Message 3', detail: 'PrimeFaces rocks' }
+    ]);
+  }
+
+  clear() {
+    this.growl.clear();
+  }
+
+
 
   fetchAuthors = () => {
     fetch(helper.prefix + "authors")
@@ -135,7 +198,7 @@ class shopGrid extends Component {
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          this.setState({ authors: data.authors});
+          this.setState({ authors: data.authors });
         }
       });
   };
@@ -174,11 +237,11 @@ class shopGrid extends Component {
           <div class="col-2">
             <BrowserView>
               <div class="browse__meta--thumbnail">
-                  <img
-                    class="img-fluid rounded-circle"
-                    src={this.props.books.author.image == null ? "images/default/default-avatar.png" : this.props.books.author.image}
-                    style={{ width: 100, height: 100 }}
-                  />
+                <img
+                  class="img-fluid rounded-circle"
+                  src={this.props.books.author.image == null ? "images/default/default-avatar.png" : this.props.books.author.image}
+                  style={{ width: 100, height: 100 }}
+                />
               </div>
             </BrowserView>
             <MobileView>
@@ -186,16 +249,16 @@ class shopGrid extends Component {
                 class="browse__meta--thumbnail"
                 style={{ width: 54, paddingRight: 10 }}
               >
-                  <img
-                    style={{ width: 54, height: 54 }}
-                    class="img-fluid rounded-circle"
-                    src={this.props.books.author.image == null ? "images/default/default-avatar.png" : this.props.books.author.image}
-                  />
+                <img
+                  style={{ width: 54, height: 54 }}
+                  class="img-fluid rounded-circle"
+                  src={this.props.books.author.image == null ? "images/default/default-avatar.png" : this.props.books.author.image}
+                />
               </div>
             </MobileView>
           </div>
           <div class="col-10">
-            <h4 class="browse__meta--title" style={{paddingTop: 14, paddingLeft: 10}}>{this.props.books.author.name}</h4>
+            <h4 class="browse__meta--title" style={{ paddingTop: 14, paddingLeft: 10 }}>{this.props.books.author.name}</h4>
             <p class="browse__meta--description js--browse__meta--description">
               {this.props.books.author.description}
             </p>
@@ -208,11 +271,11 @@ class shopGrid extends Component {
           <div class="col-2">
             <BrowserView>
               <div class="browse__meta--thumbnail">
-                  <img
-                    style={{ width: 100, height: 100 }}
-                    class="img-fluid rounded-circle"
-                    src={this.props.books.publisher.image == null ? "images/default/publisher.png" : this.props.books.publisher.image}
-                  />
+                <img
+                  style={{ width: 100, height: 100 }}
+                  class="img-fluid rounded-circle"
+                  src={this.props.books.publisher.image == null ? "images/default/publisher.png" : this.props.books.publisher.image}
+                />
               </div>
             </BrowserView>
             <MobileView>
@@ -220,16 +283,16 @@ class shopGrid extends Component {
                 class="browse__meta--thumbnail"
                 style={{ width: 54, paddingRight: 10 }}
               >
-                  <img
-                    style={{ width: 54, height: 54 }}
-                    class="img-fluid rounded-circle"
-                    src={this.props.books.publisher.image == null ? "images/default/publisher.png" : this.props.books.publisher.image}
-                  />
+                <img
+                  style={{ width: 54, height: 54 }}
+                  class="img-fluid rounded-circle"
+                  src={this.props.books.publisher.image == null ? "images/default/publisher.png" : this.props.books.publisher.image}
+                />
               </div>
             </MobileView>
           </div>
           <div class="col-10">
-            <h4 class="browse__meta--title" style={{paddingTop: 14, paddingLeft: 10}}>
+            <h4 class="browse__meta--title" style={{ paddingTop: 14, paddingLeft: 10 }}>
               {this.props.books.publisher.name}
             </h4>
             <p class="browse__meta--description js--browse__meta--description">
@@ -261,8 +324,8 @@ class shopGrid extends Component {
               item.author
                 ? null
                 : this.props.books.author != null
-                ? this.props.books.author.name
-                : null
+                  ? this.props.books.author.name
+                  : null
             }
             writer={item.author}
             stock={item.stock}
@@ -279,7 +342,7 @@ class shopGrid extends Component {
     this.props.fetchBooks(helper.prefix + "author/books/" + author.id);
     this.props.selectAuthor(author.name);
     this.props.selectPublisher(null);
-    this.setState({filterMobile: false})
+    this.setState({ filterMobile: false })
     console.log("mother fucking ", this.props.selectedAuthor);
   };
 
@@ -314,7 +377,7 @@ class shopGrid extends Component {
     this.props.fetchBooks(helper.prefix + "publisher/books/" + publisher.id);
     this.props.selectPublisher(publisher.name);
     this.props.selectAuthor(null);
-    this.setState({filterMobile: false})
+    this.setState({ filterMobile: false })
     console.log("mother fucking ", this.props.selectedPublisher);
   };
 
@@ -487,43 +550,43 @@ class shopGrid extends Component {
     );
   };
 
-  mobileFilterCat = () =>{
-    if(this.state.filterAuthor){
-      return(
-        <React.Fragment>
-                        <div class="input-group input-group-sm filter-search mt-1 mb-2">
-                          <input
-                            type="search"
-                            class="form-control js--client_search"
-                            placeholder="&#9906;"
-                            aria-label="Small"
-                            aria-describedby="inputGroup-sizing-sm"
-                            value={this.state.authorFilterTxt}
-                            onChange={e => this.filterAuthor(e)}
-                          />
-                        </div>
-                        <ul style={{ height: '75%', overflowY: "scroll" }}>
-                          {this.authorSort()}
-                        </ul>
-        </React.Fragment>
-      )
-    }else if(this.state.filterPublisher){
-      return(
+  mobileFilterCat = () => {
+    if (this.state.filterAuthor) {
+      return (
         <React.Fragment>
           <div class="input-group input-group-sm filter-search mt-1 mb-2">
-                          <input
-                            type="search"
-                            class="form-control js--client_search"
-                            placeholder="&#9906;"
-                            aria-label="Small"
-                            aria-describedby="inputGroup-sizing-sm"
-                            value={this.state.publisherFilterTxt}
-                            onChange={e => this.filterPublisher(e)}
-                          />
-                        </div>
-                        <ul style={{  height: '75%', overflowY: "scroll" }}>
-                          {this.publisherSort()}
-                        </ul>
+            <input
+              type="search"
+              class="form-control js--client_search"
+              placeholder="&#9906;"
+              aria-label="Small"
+              aria-describedby="inputGroup-sizing-sm"
+              value={this.state.authorFilterTxt}
+              onChange={e => this.filterAuthor(e)}
+            />
+          </div>
+          <ul style={{ height: '75%', overflowY: "scroll" }}>
+            {this.authorSort()}
+          </ul>
+        </React.Fragment>
+      )
+    } else if (this.state.filterPublisher) {
+      return (
+        <React.Fragment>
+          <div class="input-group input-group-sm filter-search mt-1 mb-2">
+            <input
+              type="search"
+              class="form-control js--client_search"
+              placeholder="&#9906;"
+              aria-label="Small"
+              aria-describedby="inputGroup-sizing-sm"
+              value={this.state.publisherFilterTxt}
+              onChange={e => this.filterPublisher(e)}
+            />
+          </div>
+          <ul style={{ height: '75%', overflowY: "scroll" }}>
+            {this.publisherSort()}
+          </ul>
         </React.Fragment>
       )
     }
@@ -540,24 +603,33 @@ class shopGrid extends Component {
       >
         <div class="row d-flex justify-content-flex-between">
           <div class="col">
-          <button type="button" class="btn btn-danger" onClick={() => this.setState({filterMobile: false})}>Close</button>
+            <button type="button" class="btn btn-danger" onClick={() => this.setState({ filterMobile: false })}>Close</button>
           </div>
           <div class="col">
-          <h1 class="">Filter</h1>
+            <h1 class="">Filter</h1>
           </div>
         </div>
-        <div class="btn-group mt-2" role="group" aria-label="Basic example"  style={{width: '100%'}}>
-          <button type="button" class="btn btn-secondary"  style={{width: '50%', background: this.state.filterAuthor ? "gray":' '}}
-          onClick={() => this.setState({filterAuthor: true, filterPublisher: false})}
+        <div class="btn-group mt-2" role="group" aria-label="Basic example" style={{ width: '100%' }}>
+          <button type="button" class="btn btn-secondary" style={{ width: '50%', background: this.state.filterAuthor ? "gray" : ' ' }}
+            onClick={() => this.setState({ filterAuthor: true, filterPublisher: false })}
           >Author</button>
-          <button type="button" class="btn btn-secondary" style={{width: '50%', background: this.state.filterPublisher ? "gray":' '}}
-          onClick={() => this.setState({filterPublisher: true, filterAuthor: false,})}
+          <button type="button" class="btn btn-secondary" style={{ width: '50%', background: this.state.filterPublisher ? "gray" : ' ' }}
+            onClick={() => this.setState({ filterPublisher: true, filterAuthor: false, })}
           >Publisher</button>
         </div>
         {this.mobileFilterCat()}
       </Modal>
     );
   };
+
+  loadingProgress = () => {
+    return (
+      <div className={useStyles.root}>
+        <LinearProgress />
+        <br />
+      </div>
+    )
+  }
 
   render() {
     console.log(this.props.books);
@@ -1158,6 +1230,7 @@ class shopGrid extends Component {
               </div>
 
               <div class="col-lg-9 col-12 order-1 order-lg-2">
+                {/* {this.loadingProgress()} */}
                 <div class="tab__container">
                   <div
                     class="shop-grid tab-pane fade show active"
@@ -1185,9 +1258,9 @@ class shopGrid extends Component {
                           </button>
                         </div>
                         <div class="col"
-                        onClick={() => {
-                          this.setState({ filterMobile: true });
-                        }}
+                          onClick={() => {
+                            this.setState({ filterMobile: true });
+                          }}
                         >
                           <button class="btn" style={{ background: "none" }}>
                             <i class="fa fa-filter"></i> Filter
@@ -1210,8 +1283,8 @@ class shopGrid extends Component {
                               {this.props.books.author
                                 ? "author"
                                 : this.props.books.publisher
-                                ? "publisher"
-                                : "category"}
+                                  ? "publisher"
+                                  : "category"}
                             </Link>
                           </li>
                           <li
