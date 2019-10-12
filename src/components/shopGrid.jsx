@@ -10,8 +10,8 @@ import * as helper from "./../helper";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Modal from "react-modal";
-import { makeStyles } from '@material-ui/core/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
+// import { makeStyles } from '@material-ui/core/styles';
+// import LinearProgress from '@material-ui/core/LinearProgress';
 import { Growl } from 'primereact/growl';
 import { Button } from 'primereact/button';
 import 'primereact/resources/themes/nova-light/theme.css';
@@ -75,11 +75,11 @@ const customStyles2 = {
   }
 };
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
-});
+// const useStyles = makeStyles({
+//   root: {
+//     flexGrow: 1,
+//   },
+// });
 
 
 class shopGrid extends Component {
@@ -622,14 +622,14 @@ class shopGrid extends Component {
     );
   };
 
-  loadingProgress = () => {
-    return (
-      <div className={useStyles.root}>
-        <LinearProgress />
-        <br />
-      </div>
-    )
-  }
+  // loadingProgress = () => {
+  //   return (
+  //     <div className={useStyles.root}>
+  //       <LinearProgress />
+  //       <br />
+  //     </div>
+  //   )
+  // }
 
   render() {
     console.log(this.props.books);

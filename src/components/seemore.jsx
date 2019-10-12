@@ -57,6 +57,108 @@ class seeMore extends Component {
     // }
   };
 
+  changePage = (url) =>{
+    if (this.props.type === "author"){
+      fetch( url)
+      .then(res => res.json())
+      .then(response => {
+        if (response.success) {
+          this.setState({ authors: response.authors });
+        }
+      });
+    }else if(this.props.type === "publisher"){
+      fetch( url)
+      .then(res => res.json())
+      .then(response => {
+        if (response.success) {
+          this.setState({ publishers: response.publishers });
+        }
+      });
+    }else if(this.props.type === "category"){
+      fetch( url)
+      .then(res => res.json())
+      .then(response => {
+        if (response.success) {
+          this.setState({ categories: response.categories });
+        }
+      });
+    }
+  }
+
+  pagination = () => {
+    let data = null;
+    if (this.props.type === "author"){
+      data = this.state.authors
+    }else if(this.props.type === "publisher"){
+      data = this.state.publishers
+    }else if(this.props.type === "category"){
+      data = this.state.categories
+    }
+    try {
+      if (
+        data != null ||
+        data != []
+      ) {
+        return (
+          <React.Fragment>
+            <li
+              style={{
+                display:
+                  data.prev_page_url != null
+                    ? "inline"
+                    : "none"
+              }}
+            >
+              <Link
+                onClick={() => {
+                  this.changePage(data.prev_page_url);
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Previous
+              </Link>
+            </li>
+            <li class="active">
+              page{" "}
+              <Link
+                style={{
+                  borderColor: "#363636",
+                  color: "white",
+                  backgroundColor: "#363636"
+                }}
+              >
+                {data.current_page}
+              </Link>{" "}
+              of{" "}
+              <span style={{ fontWeight: "bold", fontSize: 18 }}>
+                {data.last_page}
+              </span>
+            </li>
+            <li
+              style={{
+                display:
+                  data.next_page_url != null
+                    ? "inline"
+                    : "none"
+              }}
+            >
+              <Link
+                onClick={() => {
+                  this.changePage(data.next_page_url);
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Next
+              </Link>
+            </li>
+          </React.Fragment>
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   fetchItems = () => {
     if (this.props.type === "author") {
       if (this.state.authors != null) {
@@ -192,6 +294,7 @@ class seeMore extends Component {
             </div>
           </div>
           <div class="row mt-3">{this.fetchItems()}</div>
+          <ul class="wn__pagination mt-3">{this.pagination()}</ul>
         </div>
       </React.Fragment>
     );

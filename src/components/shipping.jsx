@@ -83,7 +83,7 @@ class Shipping extends Component {
                 shiping_address: this.state.address,
                 order_type: 0,
                 location: this.state.location ? this.state.location : 'Dhaka',
-                total_price: parseInt(book.old_price) * parseInt(book.quantity),
+                total_price: parseInt(helper.getNewPrice(book.old_price, book.discount)) * parseInt(book.quantity),
                 user_id: null,
                 transection_id: this.state.transection_id ? this.state.transection_id : 'null'
             };
