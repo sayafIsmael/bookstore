@@ -30,7 +30,7 @@ import ReactTyped from "react-typed";
 import FontAwesome from "react-fontawesome";
 import * as helper from "./../helper";
 
-Array.prototype.sum = function(prop, quantity) {
+Array.prototype.sum = function (prop, quantity) {
   var total = 0;
   for (var i = 0, _len = this.length; i < _len; i++) {
     total += parseInt(this[i][prop]) * parseInt(this[i][quantity]);
@@ -172,7 +172,7 @@ class navbar extends Component {
                               this.props.selectPublisher(null);
                             }}
                           >
-                              <img src={book.cover == null ? "images/books/dummy.png" : book.cover} />
+                            <img src={book.cover == null ? "images/books/dummy.png" : book.cover} />
                           </Link>
                         </div>
                         <div class="content">
@@ -191,7 +191,7 @@ class navbar extends Component {
                             </Link>
                           </h6>
                           <span class="prize">{parseInt(book.old_price) *
-                                  parseInt(book.quantity)}Tk.</span>
+                            parseInt(book.quantity)}Tk.</span>
                           <div class="product_prize d-flex justify-content-between">
                             <span class="qun">Qty: {book.quantity}</span>
                             <ul class="d-flex justify-content-end">
@@ -363,53 +363,123 @@ class navbar extends Component {
                 />
               </p>
             </li>
-            <li class="nav-item">
+            {/* <li class="nav-item">
               <Link class={"nav-link"} to="/shopGrid">
                 নতুন বই
               </Link>
-            </li>
-            <li class="nav-item">
+            </li> */}
+            {/* <li class="nav-item">
               <Link class="nav-link" to="/shopGrid">
                 ধ্রূপদী সাহিত্য
               </Link>
-            </li>
+            </li> */}
             <li class="nav-item">
-              <Link class="nav-link" to="/shopGrid">
+              <Link
+                to="/shopGrid"
+                class="nav-link"
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "category/" + 320
+                  );
+                  this.props.selectAuthor(null);
+                  this.props.selectPublisher(null);
+                }}
+              >
                 শিশুতোষ
               </Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link" to="/shopGrid">
+            <Link
+                to="/shopGrid"
+                class="nav-link"
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "category/" + 300
+                  );
+                  this.props.selectAuthor(null);
+                  this.props.selectPublisher(null);
+                }}
+              >
                 বিজ্ঞান
               </Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link" to="/shopGrid">
+            <Link
+                to="/shopGrid"
+                class="nav-link"
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "category/" + 57
+                  );
+                  this.props.selectAuthor(null);
+                  this.props.selectPublisher(null);
+                }}
+              >
                 রাজনীতি
               </Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link" to="/shopGrid">
+            <Link
+                to="/shopGrid"
+                class="nav-link"
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "category/" + 36
+                  );
+                  this.props.selectAuthor(null);
+                  this.props.selectPublisher(null);
+                }}
+              >
                 কিশোর সাহিত্য
               </Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link" to="/shopGrid">
+            <Link
+                to="/shopGrid"
+                class="nav-link"
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "category/" + 437
+                  );
+                  this.props.selectAuthor(null);
+                  this.props.selectPublisher(null);
+                }}
+              >
                 ধর্মীয় বই
               </Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link" to="/shopGrid">
+            <Link
+                to="/shopGrid"
+                class="nav-link"
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "category/" + 120
+                  );
+                  this.props.selectAuthor(null);
+                  this.props.selectPublisher(null);
+                }}
+              >
                 মুক্তিযুদ্ধ
               </Link>
             </li>
-            <li class="nav-item">
+            {/* <li class="nav-item">
               <Link class="nav-link" to="/shopGrid">
                 নিষিদ্ধ বই
               </Link>
-            </li>
+            </li> */}
             <li class="nav-item">
-              <Link class="nav-link" to="/shopGrid">
+            <Link
+                to="/shopGrid"
+                class="nav-link"
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "category/" + 615
+                  );
+                  this.props.selectAuthor(null);
+                  this.props.selectPublisher(null);
+                }}
+              >
                 পাঠ্য বই
               </Link>
             </li>
@@ -687,17 +757,125 @@ class navbar extends Component {
     if (this.state.catclicked === true) {
       return (
         <div class="ml-4">
-          <a style={{ fontSize: 16 }}>নতুন বই</a>
-          <a style={{ fontSize: 16 }}>ধ্রূপদী সাহিত্য</a>
-          <a style={{ fontSize: 16 }}>শিশুতোষ</a>
-          <a style={{ fontSize: 16 }}>বিজ্ঞান</a>
-          <a style={{ fontSize: 16 }}>রাজনীতি</a>
-          <a style={{ fontSize: 16 }}>কিশোর সাহিত্য</a>
-          <a style={{ fontSize: 16 }}>ধর্মীয় বই</a>
-          <a style={{ fontSize: 16 }}>মুক্তিযুদ্ধ</a>
-          <a style={{ fontSize: 16 }}>পশিম বঙ্গের বই</a>
-          <a style={{ fontSize: 16 }}>নিষিদ্ধ বই</a>
-          <a style={{ fontSize: 16 }}>পাঠ্য বই</a>
+          {/* <a style={{ fontSize: 16 }}>নতুন বই</a> */}
+          {/* <a style={{ fontSize: 16 }}>ধ্রূপদী সাহিত্য</a> */}
+        
+              <Link
+                to="/shopGrid"
+               style={{ fontSize: 16 }}
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "category/" + 320
+                  );
+                  this.props.selectAuthor(null);
+                  this.setState({ menuOpend: !this.state.menuOpend })
+                  this.props.selectPublisher(null);
+                }}
+              >
+                শিশুতোষ
+              </Link>
+            
+          
+            <Link
+                to="/shopGrid"
+               style={{ fontSize: 16 }}
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "category/" + 300
+                  );
+                  this.props.selectAuthor(null);
+                  this.setState({ menuOpend: !this.state.menuOpend })
+                  this.props.selectPublisher(null);
+                }}
+              >
+                বিজ্ঞান
+              </Link>
+            
+          
+            <Link
+                to="/shopGrid"
+               style={{ fontSize: 16 }}
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "category/" + 57
+                  );
+                  this.props.selectAuthor(null);
+                  this.setState({ menuOpend: !this.state.menuOpend })
+                  this.props.selectPublisher(null);
+                }}
+              >
+                রাজনীতি
+              </Link>
+            
+          
+            <Link
+                to="/shopGrid"
+               style={{ fontSize: 16 }}
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "category/" + 36
+                  );
+                  this.props.selectAuthor(null);
+                  this.setState({ menuOpend: !this.state.menuOpend })
+                  this.props.selectPublisher(null);
+                }}
+              >
+                কিশোর সাহিত্য
+              </Link>
+            
+          
+            <Link
+                to="/shopGrid"
+               style={{ fontSize: 16 }}
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "category/" + 437
+                  );
+                  this.props.selectAuthor(null);
+                  this.setState({ menuOpend: !this.state.menuOpend })
+                  this.props.selectPublisher(null);
+                }}
+              >
+                ধর্মীয় বই
+              </Link>
+            
+          
+            <Link
+                to="/shopGrid"
+               style={{ fontSize: 16 }}
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "category/" + 120
+                  );
+                  this.props.selectAuthor(null);
+                  this.setState({ menuOpend: !this.state.menuOpend })
+                  this.props.selectPublisher(null);
+                }}
+              >
+                মুক্তিযুদ্ধ
+              </Link>
+            
+            {/*
+              <Linkstyle={{ fontSize: 16 }} to="/shopGrid">
+                নিষিদ্ধ বই
+              </Link>
+             */}
+          
+            <Link
+                to="/shopGrid"
+               style={{ fontSize: 16 }}
+                onClick={() => {
+                  this.props.fetchBooks(
+                    helper.prefix + "category/" + 615
+                  );
+                  this.props.selectAuthor(null);
+                  this.setState({ menuOpend: !this.state.menuOpend })
+                  this.props.selectPublisher(null);
+                }}
+              >
+                পাঠ্য বই
+              </Link>
+            
         </div>
       );
     }
@@ -956,6 +1134,20 @@ class navbar extends Component {
                 {author.name}
               </Link>
             );
+          }else if(index > 20 && index < 22){
+            return (
+              <Link
+              to="/seemore"
+              onClick={() => {
+                this.setState({ menuOpend: !this.state.menuOpend })
+                this.props.selectAuthor(null);
+                this.props.selectPublisher(null);
+                this.props.seeMore('author')
+              }}
+            >
+              see more...
+            </Link>
+            )
           }
         });
       }
@@ -992,6 +1184,20 @@ class navbar extends Component {
                 {publisher.name}
               </Link>
             );
+          }else if(index > 20 && index < 22){
+            return (
+              <Link
+              to="/seemore"
+              onClick={() => {
+                this.setState({ menuOpend: !this.state.menuOpend })
+                this.props.selectAuthor(null);
+                this.props.selectPublisher(null);
+                this.props.seeMore('publisher')
+              }}
+            >
+              see more...
+            </Link>
+            )
           }
         });
       }
@@ -1075,8 +1281,8 @@ class navbar extends Component {
                             this.setState({ search: false });
                             this.props.fetchBooks(
                               helper.prefix +
-                                "book/search?data=" +
-                                this.state.searchText
+                              "book/search?data=" +
+                              this.state.searchText
                             );
                             this.props.selectAuthor(null);
                             this.props.selectPublisher(null);
@@ -1119,9 +1325,9 @@ class navbar extends Component {
                       }
                     >
                       <div class="cartIcon" to="">
-                          <img
+                        <img
                           src="images/icons/cart.png"
-                          style={{ width: 26, height: 26, position: 'absolute', top: 3}}
+                          style={{ width: 26, height: 26, position: 'absolute', top: 3 }}
                         />
                         <span class="product_qun">{this.cart_total()}</span>
                       </div>
@@ -1140,9 +1346,9 @@ class navbar extends Component {
                       }
                     >
                       <img
-                          src="images/icons/SIGNIN.png"
-                          style={{ width: 20, height: 20,     position: 'relative', top: 2}}
-                        />
+                        src="images/icons/SIGNIN.png"
+                        style={{ width: 20, height: 20, position: 'relative', top: 2 }}
+                      />
                       <div
                         class={
                           this.state.setting === true
@@ -1406,7 +1612,7 @@ class navbar extends Component {
               <img
                 class="ml-5"
                 src="images/icons/wish.png"
-                style={{width: 22, height: 22, marginRight: 16, marginTop: 4,}}
+                style={{ width: 22, height: 22, marginRight: 16, marginTop: 4, }}
               />
 
               <Link to="/cart">
@@ -1423,12 +1629,12 @@ class navbar extends Component {
               </Link>
 
               <img
-              onClick={() =>
-                this.setState({ pmenuOpend: !this.state.pmenuOpend })
-              }
-                          src="images/icons/SIGNIN.png"
-                          style={{ width: 20, height: 20,     position: 'relative', top: 2}}
-                        />
+                onClick={() =>
+                  this.setState({ pmenuOpend: !this.state.pmenuOpend })
+                }
+                src="images/icons/SIGNIN.png"
+                style={{ width: 20, height: 20, position: 'relative', top: 2 }}
+              />
             </div>
           </div>
           <div

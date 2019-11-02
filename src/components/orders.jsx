@@ -47,6 +47,7 @@ class Orders extends Component {
   };
 
   fetchOrders = () => {
+    console.log("asd a     ssss   ",this.props.token)
     var url = helper.prefix + "orders";
 
     fetch(url, {
@@ -137,7 +138,8 @@ class Orders extends Component {
 Orders.propTypes = {};
 
 const mapStateToProps = state => ({
-  token: state.auth.token
+  token: state.auth.token,
+  user: state.auth.user,
 });
 
 export default connect(

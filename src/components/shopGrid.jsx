@@ -886,7 +886,7 @@ class shopGrid extends Component {
                         </ul>
                       </form>
                     </aside>
-                    <aside class="wedget__categories pro--range">
+                    {/* <aside class="wedget__categories pro--range">
                       <h3 class="wedget__title">Filter by price</h3>
                       <div class="content-shopby">
                         <div class="price_filter s-filter clear">
@@ -906,7 +906,7 @@ class shopGrid extends Component {
                           </form>
                         </div>
                       </div>
-                    </aside>
+                    </aside> */}
                     {/* <aside class="wedget__categories poroduct--cat">
                   <form>
                     <div>
@@ -1036,7 +1036,7 @@ class shopGrid extends Component {
                     </ul>
                   </form>
                 </aside> */}
-                    <aside class="wedget__categories pro--range">
+                    {/* <aside class="wedget__categories pro--range">
                       <div>
                         <h3
                           class="wedget__title"
@@ -1224,7 +1224,7 @@ class shopGrid extends Component {
                           </div>
                         </li>
                       </ul>
-                    </aside>
+                    </aside> */}
                   </div>
                 </BrowserView>
               </div>

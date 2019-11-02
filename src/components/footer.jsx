@@ -70,18 +70,18 @@ class Footer extends Component {
                 </div>
                 <ul>
                   <div class="row m-0 ml-4 mt-2">
-                    <li>
+                    <a target="_blank" href="https://www.facebook.com/gronthik.com19">
                       <img
                         class="social_icon"
                         src="images/icons/HELPLINE_fb.png"
                       />
-                    </li>
-                    <li>
+                    </a>
+                    <a target="_blank" href="https://www.youtube.com/channel/UCxTKi6rOVcYgmIjwRizB95w?fbclid=IwAR1VHkwi93u82l7b87zxBjmhkFQQUuzN4I2z6_5XtIN2Vxu4lBk9hP1QnPs">
                       <img
                         class="social_icon"
                         src="images/icons/HELPLINE_tube.png"
                       />
-                    </li>
+                    </a>
                     <li>
                       <img
                         class="social_icon"

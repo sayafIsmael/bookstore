@@ -1,4 +1,4 @@
-export const prefix = "http://gronthik.test/api/";
+export const prefix = "http://backend.gronthik.com/public/api/";
 
 export function breakArrayIntoGroups(data, maxPerGroup) {
     var groups = [];

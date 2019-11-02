@@ -697,8 +697,6 @@ class Home extends Component {
         } 
         if(response.message){
           this.showError(response.message, "Please fix this..")
-        }else{
-          this.showError("Something went wrong", "Please fix..")
         }
         
         if(response.errors.type){
@@ -965,7 +963,7 @@ class Home extends Component {
     return (
       <React.Fragment>
         <MainSlider />
-        <div class="container">{this.adRow()}</div>
+        {/* <div class="container">{this.adRow()}</div> */}
         <section class="wn__product__area brown--color pt--20  pb--20">
           <div class="container">{this.fetchBooksRow()}</div>
         </section>

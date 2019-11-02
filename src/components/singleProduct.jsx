@@ -129,77 +129,7 @@ class Productz extends Component {
     this.setState({ modalIsOpen: false });
   }
 
-  firstRow = () => {
-    var settings = {
-      dots: false,
-      infinite: true,
-      speed: 500,
-      slidesToScroll: 6,
-      slidesToShow: 6,
-      variableWidth: true,
-      nextArrow: <SampleNextArrow />,
-      prevArrow: <SamplePrevArrow />
-    };
-    var settings2 = {
-      dots: false,
-      infinite: true,
-      speed: 500,
-      // slidesToScroll: 1,
-      slidesToShow: 2,
-      variableWidth: true,
-      arrows: false
-    };
-    return (
-      <React.Fragment>
-        <BrowserView>
-          <div style={{ background: "#F1F2EE", paddingRight: 25, height: 340 }}>
-            <div>
-              {console.log("Screen width", window.innerWidth)}
-              <Slider {...settings}>
-                {this.state.books.map((item, index) => {
-                  // console.log("Items found from dummy: ", item);
-                  return (
-                    <Product
-                      key={index}
-                      name={item.name}
-                      price={item.price}
-                      oldPrice={item.oldPrice}
-                      discount={item.discount}
-                      image={item.image}
-                      image2={item.image2}
-                      writer={item.writer}
-                      history={this.props.history}
-                    />
-                  );
-                })}
-              </Slider>
-            </div>
-          </div>
-        </BrowserView>
-        <MobileView>
-          <div style={{ background: "#F1F2EE" }}>
-            <Slider {...settings2}>
-              {this.state.books.map((item, index) => {
-                // console.log("Items found from dummy: ", item);
-                return (
-                  <Product
-                    key={index}
-                    name={item.name}
-                    price={item.price}
-                    oldPrice={item.oldPrice}
-                    discount={item.discount}
-                    image={item.image}
-                    image2={item.image2}
-                    writer={item.writer}
-                  />
-                );
-              })}
-            </Slider>
-          </div>
-        </MobileView>
-      </React.Fragment>
-    );
-  };
+  
   title = () => {
     try {
       if (this.props.book.book) {
@@ -1143,13 +1073,7 @@ class Productz extends Component {
                     </div>
                   </div>
                 </div>
-                <div class="row m-0 mt-3">
-                  <h4 class="">
-                    সর্বোচ্চ ছাড়ের বই {/* <span class="color--theme"></span> */}
-                  </h4>
-                </div>
-
-                {this.firstRow()}
+                
               </div>
             </div>
           </div>
