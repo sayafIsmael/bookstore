@@ -49,7 +49,7 @@ class Product extends Component {
               );
               this.props.fetchReviews( helper.prefix + "book/reviews/" + this.props.id)
               console.log("fecth book id = ",this.props.id)
-              this.props.history.push(`/product`);
+              this.props.history.push(`/product/`+ this.props.id);
             }}
           >
             <div>
@@ -80,7 +80,7 @@ class Product extends Component {
               <p style={{ color: "black" , opacity: this.state.mouseOver ? 0.3 : 1}}>{this.props.writer}</p>
               <p style={{ color: "black" , opacity: this.state.mouseOver ? 0.3 : 1}}>মূল্য : {helper.getNewPrice(this.props.price, this.props.discount)}</p>
             </div>
-            <Link to="/product">
+            <Link to="/product/:bookName">
             <button type="button" class="btn btn-primary mt-2" style={{width: '100%', display: this.state.mouseOver?'inline':'none'}}>View Details</button>
             </Link>
           </div>
@@ -90,9 +90,10 @@ class Product extends Component {
               this.props.fetchBook(
                 helper.prefix + "book/singlebook/" + this.props.id
               );
+             
               this.props.fetchReviews( helper.prefix + "book/reviews/" + this.props.id)
               console.log("fecth book id = ",this.props.id)
-              this.props.history.push(`/product`);
+              this.props.history.push(`/product/`+this.props.id);
             }}>
             <div>
               <div>

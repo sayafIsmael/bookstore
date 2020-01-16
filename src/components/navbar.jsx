@@ -163,7 +163,7 @@ class navbar extends Component {
                       <div class="item01 d-flex">
                         <div class="thumb">
                           <Link
-                            to="/product"
+                            to="/product/:bookName"
                             onClick={() => {
                               this.props.fetchBook(
                                 helper.prefix + "book/singlebook/" + book.id
@@ -178,7 +178,7 @@ class navbar extends Component {
                         <div class="content">
                           <h6>
                             <Link
-                              to="/product"
+                              to="/product/:bookName"
                               onClick={() => {
                                 this.props.fetchBook(
                                   helper.prefix + "book/singlebook/" + book.id

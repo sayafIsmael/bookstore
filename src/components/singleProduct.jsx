@@ -26,6 +26,7 @@ import {
   addtoCart,
   fetchReviews
 } from "../actions/bookActions";
+import { componentDidMount } from "react-style-tag/lib/Style";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -40,7 +41,7 @@ function SampleNextArrow(props) {
       }}
       onClick={onClick}
     >
-      <img class="mr-auto" src="images/icons/nextIcon.png" />
+      <img class="mr-auto" src="images/icons/nextIcon.png" alt="" />
     </div>
   );
 }
@@ -60,7 +61,7 @@ function SamplePrevArrow(props) {
       }}
       onClick={onClick}
     >
-      <img class="mr-auto" src="images/icons/prevIcon.png" />
+      <img class="mr-auto" src="images/icons/prevIcon.png"  alt=""/>
     </div>
   );
 }
@@ -95,10 +96,11 @@ class Productz extends Component {
       bookPages: null
     };
     window.scrollTo(0, 0);
-    this.fetchReviewBar();
+    this.fetchReviewBar=this.fetchReviewBar.bind(this);
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.cover=this.cover.bind(this)
   }
 
   
@@ -110,10 +112,19 @@ class Productz extends Component {
   };
 
   componentWillMount() {
-    // this.props.fetchBook();
+   
     console.log("aa ddd f  fggg ",this.props.book.book)
   }
+  componentDidMount(){
+    const { bookName } = this.props.match.params
+   
+    this.props.fetchBook(
+      helper.prefix + "book/singlebook/" + bookName
+    );
+    this.props.fetchReviews( helper.prefix + "book/reviews/" + bookName)
+    console.log("Miaaa",this.props.book.book)
   
+  }
 
   openModal() {
     if(this.props.book.pages.length > 0){
@@ -366,6 +377,7 @@ class Productz extends Component {
                     class="align-items-center rounded-circle"
                     src="http://conferenceoeh.com/wp-content/uploads/profile-pic-dummy.png"
                     style={{ width: 80, height: 80 }}
+                    alt=""
                   />
                   <br />
                   <span class="ml-auto mr-auto"> {review.username} </span>
@@ -560,7 +572,7 @@ class Productz extends Component {
       [k]: ((arr[k] / sum) * 100).toFixed(2) + "%"
     }));
 
-    console.log("asdasd asd asd", result[0].fivestar.toString());
+    // console.log("asdasd asd asd", result[0].fivestar.toString());
     this.setState({
       fivestar: result[0].fivestar.toString(),
       fourstar: result[1].fourstar.toString(),
@@ -592,7 +604,7 @@ class Productz extends Component {
           >
             {this.props.book.pages.map((item, index) =>{
               return(
-                <img src={item.image} style={{width: '100%'}}/>
+                <img src={item.image} style={{width: '100%'}} alt=""/>
               )
             })}
           </div>
@@ -628,6 +640,7 @@ class Productz extends Component {
                         <img
                           class="readsome_badge"
                           src="images/badges/lookInside.png"
+                          alt=""
                         />
                         <div class="book-bg" onClick={() => {this.openModal();
                         }}>
@@ -644,6 +657,7 @@ class Productz extends Component {
                               class="bookCover"
                               src={this.cover()}
                               style={{ height: 344, width: 238 }}
+                              alt=""
                             />
                           </div>
                         </div>
@@ -756,16 +770,16 @@ class Productz extends Component {
                           <ul>
                             <li class="categories-title mr-2">Share :</li>
                             <li>
-                              <img class="social_icon" src="images/icons/HELPLINE_fb.png"/>  
+                              <img class="social_icon" src="images/icons/HELPLINE_fb.png" alt=""/>  
                             </li>
                             <li>
-                              <img class="social_icon" src="images/icons/HELPLINE_tube.png"/>  
+                              <img class="social_icon" src="images/icons/HELPLINE_tube.png" alt=""/>  
                             </li>
                             <li>
-                            <img class="social_icon" src="images/icons/HELPLINE_inst.png"/>
+                            <img class="social_icon" src="images/icons/HELPLINE_inst.png" alt=""/>
                             </li>
                             <li>
-                            <img class="social_icon" src="images/icons/HELPLINE_twt.png"/>
+                            <img class="social_icon" src="images/icons/HELPLINE_twt.png" alt=""/>
                             </li>
                           </ul>
                         </div>

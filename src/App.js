@@ -24,7 +24,7 @@ import Account from "./components/account";
 import Seemore from "./components/seemore";
 
 // import { Style } from "react-style-tag";
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import {
   BrowserView,
   MobileView,
@@ -51,94 +51,94 @@ class App extends Component {
     //   });
     // });
   }
-  
+
   render() {
     return (
       <Provider store={store}>
         <BrowserRouter>
-        <div class="wrapper" id="wrapper">
+          <div class="wrapper" id="wrapper">
 
-          <Navbar   />
+            <Navbar />
 
-          <Route
-            exact
-            path="/"
-            exact
-            strict
-            render={props => <Home {...props} />}
-          />
+            <Route
+              exact
+              path="/"
+              exact
+              strict
+              render={props => <Home {...props} />}
+            />
+         
+            <Route
+              exact
+              path="/product/:bookName"
+              exact
+              strict
+              render={props => <SingleProduct {...props} />}
+            />
 
-          <Route
-            exact
-            path="/product"
-            exact
-            strict
-            render={props => <SingleProduct {...props}/>}
-          />
+            <Route
+              // exact
+              strict
+              path="/shopGrid"
+              // exact
 
-          <Route
-            // exact
-            strict
-            path="/shopGrid"
-            // exact
-            
-            handler={ShopGrid}
-            render={props => <ShopGrid {...props}/>}
-          />
+              handler={ShopGrid}
+              render={props => <ShopGrid {...props} />}
+            />
 
-          <Route
-            exact
-            path="/signin"
-            exact
-            strict
-            render={props => <Signin {...props}/>}
-          />
+            <Route
+              exact
+              path="/signin"
+              exact
+              strict
+              render={props => <Signin {...props} />}
+            />
 
-          <Route
-            exact
-            path="/cart"
-            exact
-            strict
-            render={props => <Shopingcart {...props}/>}
-          />
+            <Route
+              exact
+              path="/cart"
+              exact
+              strict
+              render={props => <Shopingcart {...props} />}
+            />
 
-          <Route
-            exact
-            path="/shipping"
-            exact
-            strict
-            render={props => <Shipping {...props}/>}
-          />
+            <Route
+              exact
+              path="/shipping"
+              exact
+              strict
+              render={props => <Shipping {...props} />}
+            />
 
-          <Route
-            exact
-            path="/myorders"
-            exact
-            strict
-            render={props => <Orders {...props}/>}
-          />
+            <Route
+              exact
+              path="/myorders"
+              exact
+              strict
+              render={props => <Orders {...props} />}
+            />
 
-          <Route
-            exact
-            path="/myaccount"
-            exact
-            strict
-            render={props => <Account {...props}/>}
-          />
+            <Route
+              exact
+              path="/myaccount"
+              exact
+              strict
+              render={props => <Account {...props} />}
+            />
 
-          <Route
-            exact
-            path="/seemore"
-            exact
-            strict
-            render={props => <Seemore {...props}/>}
-          />
+            <Route
+              exact
+              path="/seemore"
+              exact
+              strict
+              render={props => <Seemore {...props} />}
+            />
 
-          <Footer />
-        </div>
-      </BrowserRouter>
+            <Footer />
+          </div>
+        </BrowserRouter>
       </Provider>
-      
+
     );
   }
 }
